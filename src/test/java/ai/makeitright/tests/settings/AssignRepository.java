@@ -23,9 +23,11 @@ public class AssignRepository extends DriverConfig {
     }
 
     @Test
-    public void readTitleOfPage() {
+    public void assignRepository() {
         driver.get(URL);
         driver.manage().window().maximize();
+
+//        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(URL);
         String pageTitle = driver.getTitle();
         System.setProperty("output", String.format("{\"result\":{\"url\":\"%s\",\"title_of_page\":\"%s\"}}",URL,pageTitle));
     }
