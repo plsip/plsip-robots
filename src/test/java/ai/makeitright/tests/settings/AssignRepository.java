@@ -9,13 +9,13 @@ public class AssignRepository extends DriverConfig {
     private String URL;
     private String URLGITLAB;
 
-    @BeforeClass
-    public static void beforeClass() {
-        System.setProperty("inputParameters.url","http://development.powerfarm.ai");
-        System.setProperty("inputParameters.urlgitlab","https://gitlab.com/");
-        System.setProperty("inputParameters.usergitlab","kraczkowska");
-        System.setProperty("inputParameters.passwordgitlab","https://gitlab.com/");
-    }
+//    @BeforeClass
+//    public static void beforeClass() {
+//        System.setProperty("inputParameters.url","http://development.powerfarm.ai");
+//        System.setProperty("inputParameters.urlgitlab","https://gitlab.com/");
+//        System.setProperty("inputParameters.usergitlab","kraczkowska");
+//        System.setProperty("inputParameters.passwordgitlab","https://gitlab.com/");
+//    }
 
     @Before
     public void before() {
