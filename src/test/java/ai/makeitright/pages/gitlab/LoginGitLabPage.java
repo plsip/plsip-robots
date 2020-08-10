@@ -1,17 +1,16 @@
-package ai.makeitright.pages.login;
+package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
-import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.utilities.Main;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage {
+public class LoginGitLabPage extends BasePage {
 
-    public LoginPage(WebDriver driver, String url) {
-        super(driver,url);
+    public LoginGitLabPage(WebDriver driver, String url) {
+        super(driver, url);
     }
 
     @Override
@@ -24,25 +23,28 @@ public class LoginPage extends BasePage {
         return true;
     }
 
-    @FindBy(xpath = "//button[contains(@class,'primary')]")
+    @FindBy(xpath = "//*[@value='Sign in']")
     private WebElement btnSignIn;
 
-    @FindBy(xpath = "//input[@name='email']")
-    private WebElement inpEmail;
+    @FindBy(id = "user_login")
+    private WebElement inpUsername;
 
-    @FindBy(xpath = "//input[@name='password']")
+    @FindBy(id = "user_password")
     private WebElement inpPassword;
 
-    public LeftMenu clickButtonSignIn() {
+    public ProjectsPage clickButtonSignIn() {
         click(btnSignIn, "button 'Sign in'");
-        return new LeftMenu(driver);
-    }
-
-    public void setEmail(String email) {
-        sendText(inpEmail, email, "input element 'E-mail'");
+        return new ProjectsPage(driver);
     }
 
     public void setPassword(String password) {
         sendSecretlyText(inpPassword, password, "input element 'Password'");
     }
+
+    public void setUsername(String username)  {
+        waitForVisibilityOf(inpUsername);
+        sendText(inpUsername, username, "input element 'Username or email'");
+    }
+
+
 }

@@ -95,12 +95,12 @@ public class Reporter extends DriverConfig {
     public String logFail(String msg) {
         if (loggingOn) {
             listResult.add("[FAIL]" + clearHtml(msg));
+            logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             if (reporter != null)
                 reporter.log(LogStatus.FAIL, msg);
             writeTechnicalLog("[FAIL] :  " + msg);
         }
-//        logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
-        //logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+        logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return msg;
     }
 

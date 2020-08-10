@@ -1,0 +1,107 @@
+package ai.makeitright.utilities;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+
+public class Action {
+
+	private Actions actions;
+	private WebDriver driver;
+	private WebDriverWait wait;
+	private WebDriverWait waitShort;
+	
+	
+	public Action(WebDriver driver) {
+		this.driver = driver;
+		actions = new Actions(this.driver);
+		wait = new WebDriverWait(driver, 15);
+		waitShort = new WebDriverWait(driver, 3);
+	}
+	
+	
+	public WebElement getItemFromTable(List<WebElement> menu, String option) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Main.report.logInfo("Search option '" + option + "'");
+		if(menu.size() == 0) {
+			throw new InterruptedException("No options");
+		}
+		for (WebElement item : menu) {
+			if(item.getText().equals(option)) {
+				Main.report.logPass("The option '" + item.getText() + "' was found");
+				return item;
+			}
+		}
+		Main.report.logFail("The option '" + option + "' doesn't exist");
+		throw new InterruptedException("The option '" + option + "' doesn't exist");
+	}
+
+	public WebElement getItemFromTable(List<WebElement> menu, int option) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Main.report.logInfo("Search option '" + option + "'");
+		if(menu.size() == 0) {
+			throw new InterruptedException("No options");
+		}
+		return menu.get(option - 1);
+	}
+
+	public WebElement getItemFromDropdown(WebElement dropdown, List<WebElement> results, int option) {
+		wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+		Main.report.logInfo("Click dropdown");
+		dropdown.click();
+		Main.report.logPass("Dropdown was clicked");
+		waitShort.until(ExpectedConditions.visibilityOf(results.get(0)));
+		try {
+			return results.get(option - 1);
+		} catch (Exception e) {
+			Main.report.logFail("The option number '" + option + "' doesn't exist in dropdown");
+		}
+		return results.get(option - 1);
+	}
+
+	public WebElement getItemFromDropdownXpathResults(WebElement dropdown, String resultsString, int option) {
+		wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+		Main.report.logInfo("Click dropdown");
+		dropdown.click();
+		Main.report.logPass("Dropdown was clicked");
+		wait.until(ExpectedConditions.visibilityOfAllElements(dropdown.findElements(By.xpath(resultsString))));
+		List<WebElement> results = dropdown.findElements(By.xpath(resultsString));
+		try {
+			return results.get(option - 1);
+		} catch (Exception e) {
+			Main.report.logFail("The option number '" + option + "' doesn't exist in dropdown");
+		}
+		return results.get(option - 1);
+	}
+
+	public WebElement getItemFromDropdown(WebElement dropdown, List<WebElement> results, String option) throws InterruptedException {
+		wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+		Main.report.logInfo("Click dropdown");
+		dropdown.click();
+		Main.report.logPass("Dropdown was clicked");
+		waitShort.until(ExpectedConditions.visibilityOf(results.get(0)));
+		for (WebElement item : results) {
+			Main.report.logInfo("#Check option '" + item.getText()+"'");
+			if (item.getText().trim().equals(option)) {
+				Main.report.logInfo("+The option '" + option + "' was found");
+				return item;
+			}
+		}
+		Main.report.logFail("The option '" + option + "' doesn't exist in dropdown");
+		throw new InterruptedException("The option '" + option + "' doesn't exist in dropdown");
+	}
+
+	public void hoverMouseOver(WebElement element) {
+		Main.report.logInfo("Move mouse to element");
+		actions.moveToElement(element).perform();
+		Main.report.logPass("Mouse was moved to element");
+	}
+	
+}
