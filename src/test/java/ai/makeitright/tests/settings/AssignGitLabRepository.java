@@ -23,25 +23,13 @@ public class AssignGitLabRepository extends DriverConfig {
     private String URLGITLAB;
     private String USERNAMEGITLAB;
 
-    @BeforeClass
-    public static void beforeClass() {
-        System.setProperty("inputParameters.accesstoken","ZGLhP-UKdkjETYmQr-iB");
-        System.setProperty("inputParameters.email","katarzyna.raczkowska@makeitright.ai");
-        System.setProperty("inputParameters.password","TestyAutomatyczne");
-        System.setProperty("inputParameters.passwordgitlab","jWpxghw4Re/+@/A");
-        System.setProperty("inputParameters.projectname","nottouchautomated");
-        System.setProperty("inputParameters.repositorytocopy","https://gitlab.com/kraczkowska/mirtodoist.git");
-        System.setProperty("inputParameters.url","http://development.powerfarm.ai/signin");
-        System.setProperty("inputParameters.urlgitlab","https://gitlab.com/users/sign_in");
-        System.setProperty("inputParameters.usernamegitlab","kraczkowska");
-    }
 
     @Before
     public void before() {
-        ACCESSTOKEN = System.getProperty("inputParameters.accesstoken");
+        ACCESSTOKEN = System.getProperty("inputParameters.accesstoken2");
         EMAIL = System.getProperty("inputParameters.email");
-        PASSWORD = System.getProperty("inputParameters.password");
-        PASSWORDGITLAB = System.getProperty("inputParameters.passwordgitlab");
+        PASSWORD = System.getProperty("inputParameters.password2");
+        PASSWORDGITLAB = System.getProperty("inputParameters.passwordgitlab2");
         PROJECTNAME = System.getProperty("inputParameters.projectname");
         REPOSITORYTOCOPY = System.getProperty("inputParameters.repositorytocopy");
         URL = System.getProperty("inputParameters.url");
