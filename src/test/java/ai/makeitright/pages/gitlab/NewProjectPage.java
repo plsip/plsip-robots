@@ -2,7 +2,7 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +20,7 @@ public class NewProjectPage extends BasePage {
         if(!waitForVisibilityOf(txtNewProject) || !waitForVisibilityOf(txtCreateNewProject)) {
             Main.report.logFail("There is no visible particular element with text 'New Project' or 'Create new project'");
         }
-        Assert.assertTrue("There is no visible particular element with text 'New Project' or 'Create new project'", (waitForVisibilityOf(txtNewProject) || waitForVisibilityOf(txtCreateNewProject)));
+        Assertions.assertTrue((waitForVisibilityOf(txtNewProject) || waitForVisibilityOf(txtCreateNewProject)), "There is no visible particular element with text 'New Project' or 'Create new project'");
         return true;
     }
 

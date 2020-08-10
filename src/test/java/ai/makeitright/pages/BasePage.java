@@ -2,7 +2,7 @@ package ai.makeitright.pages;
 
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Action;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public abstract class BasePage {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
-        Assert.assertTrue(isAt());
+        Assertions.assertTrue(isAt());
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 
@@ -32,7 +32,7 @@ public abstract class BasePage {
         this.url = url;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
-        Assert.assertTrue(isAt());
+        Assertions.assertTrue(isAt());
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 

@@ -2,7 +2,7 @@ package ai.makeitright.pages.common;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +18,7 @@ public class LeftMenu extends BasePage {
         if(!waitForVisibilityOf(leftMenu)) {
             Main.report.logFail("There is no visible left menu element");
         }
-        Assert.assertTrue("There is no visible left menu element", waitForVisibilityOf(leftMenu));
+        Assertions.assertTrue(waitForVisibilityOf(leftMenu), "There is no visible left menu element");
         return leftMenu.isDisplayed();
     }
 

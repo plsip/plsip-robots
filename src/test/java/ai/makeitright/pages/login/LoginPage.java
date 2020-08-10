@@ -3,7 +3,7 @@ package ai.makeitright.pages.login;
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.utilities.Main;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +20,8 @@ public class LoginPage extends BasePage {
         if(!url.equals(driver.getCurrentUrl())) {
             Main.report.logFail("Current URL is not like expected " + url);
         }
-        Assert.assertEquals("Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'",url,driver.getCurrentUrl());
+        Assertions.assertEquals(url, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }
 

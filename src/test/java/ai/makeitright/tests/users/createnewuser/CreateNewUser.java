@@ -1,21 +1,21 @@
 package ai.makeitright.tests.users.createnewuser;
 
 import ai.makeitright.utilities.DriverConfig;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CreateNewUser extends DriverConfig {
 
     private String URL;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         System.setProperty("inputParameters.url","http://frontend-mvp-dev.s3-website-us-east-1.amazonaws.com/signin");
 
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         URL = System.getProperty("inputParameters.url");
     }

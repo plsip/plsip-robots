@@ -1,8 +1,7 @@
 package ai.makeitright.utilities;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,8 +10,8 @@ public class DriverConfig extends Main {
 
     public static WebDriver driver;
 
-    @Before
-    public void setupTest() {
+    @BeforeAll
+    public static void setupTest() {
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--no-sandbox");
 //        options.addArguments("--disable-dev-shm-usage");
@@ -24,8 +23,8 @@ public class DriverConfig extends Main {
         driver = new ChromeDriver(options);
     }
 
-    @After
-    public void teardown() {
+    @AfterAll
+    public static void teardown() {
         if (driver != null) {
             driver.quit();
         }

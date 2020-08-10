@@ -1,7 +1,7 @@
 package ai.makeitright.utilities;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class Main {
     public static Reporter report;
@@ -10,13 +10,13 @@ public class Main {
     public static String serviceName = "";
     public String finalMsg = "";
 
-    @Before
+    @BeforeEach
     public void tearUp() {
         report = new Reporter(workspacePath + System.getProperty("file.separator") + reportName);
         report.startTest(serviceName);
     }
 
-    @After
+    @AfterEach
     public void afterMethod() {
         report.closeRaport();
     }
