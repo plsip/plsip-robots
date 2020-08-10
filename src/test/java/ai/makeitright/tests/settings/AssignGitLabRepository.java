@@ -8,9 +8,9 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settigns.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AssignGitLabRepository extends DriverConfig {
     private String ACCESSTOKEN;
@@ -23,7 +23,7 @@ public class AssignGitLabRepository extends DriverConfig {
     private String URLGITLAB;
     private String USERNAMEGITLAB;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         System.setProperty("inputParameters.accesstoken","ZGLhP-UKdkjETYmQr-iB");
         System.setProperty("inputParameters.email","katarzyna.raczkowska@makeitright.ai");
@@ -36,7 +36,7 @@ public class AssignGitLabRepository extends DriverConfig {
         System.setProperty("inputParameters.usernamegitlab","kraczkowska");
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         ACCESSTOKEN = System.getProperty("inputParameters.accesstoken");
         EMAIL = System.getProperty("inputParameters.email");
