@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverConfig extends Main {
 
-    //protected WebDriver driver;
     public static WebDriver driver;
 
     @Before

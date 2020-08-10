@@ -37,12 +37,10 @@ public class TableAllInbox extends BasePage {
                     allInbox = new AllInbox()
                             .setChboxTask(rowChboxTask)
                             .setTaskName(rowTaskName.getText());
-//                    Main.report.logPass("Task with name '" + taskName + "' was found in the Inbox table");
                     return allInbox;
                 }
             }
         } else {
-//            Main.report.logInfo("There was no task with name '" + taskName + "' in the Inbox table");
             return null;
         }
         return null;

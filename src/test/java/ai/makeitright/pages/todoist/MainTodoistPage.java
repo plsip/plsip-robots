@@ -16,8 +16,8 @@ public class MainTodoistPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-//        Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
-        Assert.assertEquals("Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'",url,driver.getCurrentUrl());
+        Assertions.assertEquals(url, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }
 
@@ -57,9 +57,8 @@ public class MainTodoistPage extends BasePage {
 
     public boolean markTaskDone(String taskName) {
         AllInbox allInbox = getTableAllInbox().getAllInboxRowData(taskName);
-        if(allInbox == null) {
-//            Main.report.logFail("There is no task with name '" + taskName + "' on the Inbox table");
-                    return false;
+        if (allInbox == null) {
+            return false;
         }
         allInbox.clickChboxTask();
         return true;

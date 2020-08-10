@@ -8,8 +8,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import java.io.*;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +21,7 @@ public class Reporter extends DriverConfig {
     private static List<String> listResult = new ArrayList<String>();
 
     public Reporter(String reportPathFileName, String workspacePath, String serviceFileName) {
-//        if (reportPathFileName != null && !reportPathFileName.isEmpty())
-            this.extent = new ExtentReports(reportPathFileName, true);
+        this.extent = new ExtentReports(reportPathFileName, true);
         loggingOn = true;
         logFailAndErrorOnly = false;
         fileName = (new StringBuilder())
@@ -67,8 +64,7 @@ public class Reporter extends DriverConfig {
     }
 
     public void loadConfig(String fileName) {
-//        if (Files.exists(Paths.get(fileName)))
-            this.extent.loadConfig(new File(fileName));
+        this.extent.loadConfig(new File(fileName));
     }
 
     public String logInfo(String msg) {
