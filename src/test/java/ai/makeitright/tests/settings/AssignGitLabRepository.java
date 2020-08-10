@@ -43,40 +43,40 @@ public class AssignGitLabRepository extends DriverConfig {
         driver.get(URLGITLAB);
         driver.manage().window().maximize();
 
-        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver,URLGITLAB);
-        loginGitLabPage.setUsername(USERNAMEGITLAB);
-        loginGitLabPage.setPassword(PASSWORDGITLAB);
-        ProjectsPage projectsPage = loginGitLabPage.clickButtonSignIn();
-
-        NewProjectPage newProjectPage = projectsPage.clickButtonNewProject();
-
-        newProjectPage.chooseOption("CI/CD for external repo");
-        newProjectPage.clickButtonRepoByURL();
-        newProjectPage.setGitRepositoryURL(REPOSITORYTOCOPY);
-        String projectName = newProjectPage.setProjectName(PROJECTNAME);
-        String repositoryAddress = "https://gitlab.com/" + USERNAMEGITLAB + "/" + projectName;
-        Main.report.logPass("Created project '" + projectName + "'");
-        newProjectPage.clickCheckboxPublic();
-        newProjectPage.clickButtonCreateProject();
-
-        newProjectPage.clickUserPanel();
-        newProjectPage.clickOptionSignOut();
-
-        driver.get(URL);
-        LoginPage loginPage = new LoginPage(driver,URL);
-        loginPage.setEmail(EMAIL);
-        loginPage.setPassword(PASSWORD);
-        LeftMenu leftMenu = loginPage.clickButtonSignIn();
-        leftMenu.openPageBy("Settings");
-
-        RepositoryPage repositoryPage = new RepositoryPage(driver,URL);
-        repositoryPage.clickButtonAssignRepository();
-        repositoryPage.clickButtonAssignGitLabRepository();
-        repositoryPage.setAccessToken(ACCESSTOKEN);
-        repositoryPage.clickButtonSave();
-        repositoryPage.selectYourMainScriptRepository(projectName);
-        repositoryPage.clickButtonSave();
-        repositoryPage.existRepositoryAddress(repositoryAddress);
+//        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver,URLGITLAB);
+//        loginGitLabPage.setUsername(USERNAMEGITLAB);
+//        loginGitLabPage.setPassword(PASSWORDGITLAB);
+//        ProjectsPage projectsPage = loginGitLabPage.clickButtonSignIn();
+//
+//        NewProjectPage newProjectPage = projectsPage.clickButtonNewProject();
+//
+//        newProjectPage.chooseOption("CI/CD for external repo");
+//        newProjectPage.clickButtonRepoByURL();
+//        newProjectPage.setGitRepositoryURL(REPOSITORYTOCOPY);
+//        String projectName = newProjectPage.setProjectName(PROJECTNAME);
+//        String repositoryAddress = "https://gitlab.com/" + USERNAMEGITLAB + "/" + projectName;
+//        Main.report.logPass("Created project '" + projectName + "'");
+//        newProjectPage.clickCheckboxPublic();
+//        newProjectPage.clickButtonCreateProject();
+//
+//        newProjectPage.clickUserPanel();
+//        newProjectPage.clickOptionSignOut();
+//
+//        driver.get(URL);
+//        LoginPage loginPage = new LoginPage(driver,URL);
+//        loginPage.setEmail(EMAIL);
+//        loginPage.setPassword(PASSWORD);
+//        LeftMenu leftMenu = loginPage.clickButtonSignIn();
+//        leftMenu.openPageBy("Settings");
+//
+//        RepositoryPage repositoryPage = new RepositoryPage(driver,URL);
+//        repositoryPage.clickButtonAssignRepository();
+//        repositoryPage.clickButtonAssignGitLabRepository();
+//        repositoryPage.setAccessToken(ACCESSTOKEN);
+//        repositoryPage.clickButtonSave();
+//        repositoryPage.selectYourMainScriptRepository(projectName);
+//        repositoryPage.clickButtonSave();
+//        repositoryPage.existRepositoryAddress(repositoryAddress);
 
 //        JSONObject obj = new JSONObject();
 //        obj.put("repositoryaddress", repositoryAddress);
