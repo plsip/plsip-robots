@@ -32,7 +32,7 @@ public class MainTodoistPage extends BasePage {
     }
 
     public void clickButtonPlus_Header() {
-        click(btnPlus_Header,"button '+' on header");
+        click(btnPlus_Header, "button '+' on header");
     }
 
     public TableAllInbox getTableAllInbox() {
@@ -47,7 +47,7 @@ public class MainTodoistPage extends BasePage {
     }
 
     public void clickButtonAddTask() {
-        click(btnAddTask,"button 'Add Task'");
+        click(btnAddTask, "button 'Add Task'");
     }
 
     public boolean isTaskAtInbox(String taskName) {

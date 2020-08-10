@@ -71,7 +71,7 @@ public class RepositoryPage extends BasePage {
 
     public void selectYourMainScriptRepository(String projectName) {
         waitForBlueCircleDisappear();
-        click(getItemFromDropdown(dropdownSelectYourMainScriptRepository, dropdownSelectYourMainScriptRepositoryOptions, projectName),"option '" + projectName + "' of dropdown 'Select your main scripts repository'");
+        click(getItemFromDropdown(dropdownSelectYourMainScriptRepository, dropdownSelectYourMainScriptRepositoryOptions, projectName), "option '" + projectName + "' of dropdown 'Select your main scripts repository'");
     }
 
     public boolean existRepositoryAddress(String repositoryAddress) {

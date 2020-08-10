@@ -42,7 +42,7 @@ public class LoginGitLabPage extends BasePage {
         sendSecretlyText(inpPassword, password, "input element 'Password'");
     }
 
-    public void setUsername(String username)  {
+    public void setUsername(String username) {
         waitForVisibilityOf(inpUsername);
         sendText(inpUsername, username, "input element 'Username or email'");
     }

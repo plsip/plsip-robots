@@ -119,7 +119,7 @@ public class Reporter extends DriverConfig {
     }
 
     public String writeTechnicalLog(String msg) {
-        BufferedWriter writer ;
+        BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.append(Methods.getDateTime("yyyy-MM-dd HH:mm:ss  ") + clearHtml(msg));
