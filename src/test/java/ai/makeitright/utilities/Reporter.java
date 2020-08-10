@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reporter extends DriverConfig {
-    protected ExtentReports extent = null;
+    protected ExtentReports extent;
     protected ExtentTest reporter = null;
 
     private final String fileName;
@@ -24,7 +24,8 @@ public class Reporter extends DriverConfig {
         fileName = (new StringBuilder())
                 .append(workspacePath)
                 .append(System.getProperty("file.separator"))
-                .append(serviceFileName).toString();
+                .append(serviceFileName)
+                .toString();
     }
 
     public Reporter(String reportPathFileName, String workspacePath) {
@@ -37,8 +38,11 @@ public class Reporter extends DriverConfig {
 
     public String clearHtml(String msg) {
         if (msg != null)
-            return msg.replaceAll("<br>|<p (.*?)>|<div(.*?)", "\n").
-                    replaceAll("</p>|</div>|<font(.*?)>|</font>|<i>|</i>|<b>|</b>|<strong>|</strong>|<pre>|</pre>", "");
+            return msg
+                    .replaceAll("<br>|<p (.*?)>|<div(.*?)",
+                            "\n")
+                    .replaceAll("</p>|</div>|<font(.*?)>|</font>|<i>|</i>|<b>|</b>|<strong>|</strong>|<pre>|</pre>",
+                            "");
         return msg;
     }
 
@@ -98,7 +102,7 @@ public class Reporter extends DriverConfig {
     }
 
     public void logInfoWithScreenCapture(String Base64) {
-        reporter.log(LogStatus.INFO, reporter.addBase64ScreenShot("data:image/png;base64,"+Base64));
+        reporter.log(LogStatus.INFO, reporter.addBase64ScreenShot("data:image/png;base64," + Base64));
     }
 
     public void logScreenCapture(String imgDataB64, LogStatus status) {
@@ -124,7 +128,8 @@ public class Reporter extends DriverConfig {
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally { }
+        } finally {
+        }
         return msg;
     }
 }
