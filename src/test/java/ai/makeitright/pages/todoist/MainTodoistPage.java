@@ -10,16 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class MainTodoistPage extends BasePage {
-    public MainTodoistPage(WebDriver driver, String url) {
-        super(driver,url);
-    }
-
-    @Override
-    protected boolean isAt() {
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
-        return true;
-    }
 
     @FindBy(xpath = "//button[@data-testid='add-task']")
     private WebElement btnAddTask;
@@ -29,6 +19,17 @@ public class MainTodoistPage extends BasePage {
 
     @FindBy(xpath = "//input[@data-testid='add-task-content']")
     private WebElement inp_NameOfTask;
+
+    public MainTodoistPage(WebDriver driver, String url) {
+        super(driver, url);
+    }
+
+    @Override
+    protected boolean isAt() {
+        Assertions.assertEquals(url, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
+        return true;
+    }
 
     public void clickButtonPlus_Header() {
         click(btnPlus_Header,"button '+' on header");

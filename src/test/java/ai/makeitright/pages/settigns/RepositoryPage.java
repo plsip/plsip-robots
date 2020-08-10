@@ -11,21 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class RepositoryPage extends BasePage {
-    public RepositoryPage(WebDriver driver, String url) {
-        super(driver,url);
-    }
-
-    @Override
-    protected boolean isAt() {
-        Main.report.logInfo("Current URL address: "+driver.getCurrentUrl());
-        url = url.substring(0,url.lastIndexOf("/signin")) + "/mir-mvp/settings/repository";
-        if(!url.equals(driver.getCurrentUrl())) {
-            Main.report.logFail("Current URL is not like expected " + url);
-        }
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
-        return true;
-    }
 
     @FindBy(xpath = "//button[@class='Polaris-Button']//span[text()='Assign Gitlab Repository']")
     private WebElement btnAssignGitLabRepository;
@@ -46,6 +31,22 @@ public class RepositoryPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='token']")
     private WebElement inpAccessToken;
+
+    public RepositoryPage(WebDriver driver, String url) {
+        super(driver, url);
+    }
+
+    @Override
+    protected boolean isAt() {
+        Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
+        url = url.substring(0, url.lastIndexOf("/signin")) + "/mir-mvp/settings/repository";
+        if (!url.equals(driver.getCurrentUrl())) {
+            Main.report.logFail("Current URL is not like expected " + url);
+        }
+        Assertions.assertEquals(url, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
+        return true;
+    }
 
     public void clickButtonAssignRepository() {
         click(btnAssingRepository, "button 'Assing Repository'");

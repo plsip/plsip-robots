@@ -10,21 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver, String url) {
-        super(driver,url);
-    }
-
-    @Override
-    protected boolean isAt() {
-        Main.report.logInfo("Current URL address: "+driver.getCurrentUrl());
-        if(!url.equals(driver.getCurrentUrl())) {
-            Main.report.logFail("Current URL is not like expected " + url);
-        }
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
-        return true;
-    }
-
     @FindBy(xpath = "//button[contains(@class,'primary')]")
     private WebElement btnSignIn;
 
@@ -33,6 +18,21 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='password']")
     private WebElement inpPassword;
+
+    public LoginPage(WebDriver driver, String url) {
+        super(driver, url);
+    }
+
+    @Override
+    protected boolean isAt() {
+        Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
+        if (!url.equals(driver.getCurrentUrl())) {
+            Main.report.logFail("Current URL is not like expected " + url);
+        }
+        Assertions.assertEquals(url, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
+        return true;
+    }
 
     public LeftMenu clickButtonSignIn() {
         click(btnSignIn, "button 'Sign in'");
