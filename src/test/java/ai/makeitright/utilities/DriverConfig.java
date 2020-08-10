@@ -15,13 +15,13 @@ public class DriverConfig extends Main {
     @Before
     public void setupTest() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--headless");
-//        options.addArguments("--disable-gpu");
-//        options.addArguments("--single-process");
-//        options.addArguments("--use-gl=swiftshader");
-//        options.addArguments("--no-zygote");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--single-process");
+        options.addArguments("--use-gl=swiftshader");
+        options.addArguments("--no-zygote");
         driver = new ChromeDriver(options);
     }
 
