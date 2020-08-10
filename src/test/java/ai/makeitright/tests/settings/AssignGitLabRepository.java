@@ -78,9 +78,9 @@ public class AssignGitLabRepository extends DriverConfig {
         repositoryPage.clickButtonSave();
         repositoryPage.existRepositoryAddress(repositoryAddress);
 
-        JSONObject obj = new JSONObject();
-        obj.put("repositoryaddress", repositoryAddress);
-        System.setProperty("output", obj.toString());
+//        JSONObject obj = new JSONObject();
+//        obj.put("repositoryaddress", repositoryAddress);
+//        System.setProperty("output", obj.toString());
         driver.close();
 
 
