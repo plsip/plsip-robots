@@ -1,8 +1,5 @@
 package ai.makeitright.utilities;
 
-import ai.makeitright.utilities.DriverConfig;
-import ai.makeitright.utilities.Main;
-import ai.makeitright.utilities.Methods;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
