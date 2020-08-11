@@ -26,7 +26,7 @@ public class CreateNewUser extends DriverConfig {
     public void createNewUser() {
         driver.get(URL);
         driver.manage().window().maximize();
-        fail();
+        fail("writing of this automated test has not been finished");
     }
 
 }
