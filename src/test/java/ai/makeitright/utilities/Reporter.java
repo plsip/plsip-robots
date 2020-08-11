@@ -37,12 +37,13 @@ public class Reporter extends DriverConfig {
     }
 
     public String clearHtml(String msg) {
-        if (msg != null)
+        if (msg != null) {
             return msg
                     .replaceAll("<br>|<p (.*?)>|<div(.*?)",
                             "\n")
                     .replaceAll("</p>|</div>|<font(.*?)>|</font>|<i>|</i>|<b>|</b>|<strong>|</strong>|<pre>|</pre>",
                             "");
+        }
         return msg;
     }
 
@@ -71,8 +72,9 @@ public class Reporter extends DriverConfig {
     public String logInfo(String msg) {
         if (loggingOn && !logFailAndErrorOnly) {
             listResult.add(clearHtml(msg));
-            if (reporter != null)
+            if (reporter != null) {
                 reporter.log(LogStatus.INFO, msg);
+            }
             writeTechnicalLog("[INFO] :  " + msg);
         }
         return msg;
@@ -82,8 +84,9 @@ public class Reporter extends DriverConfig {
         if (loggingOn && !logFailAndErrorOnly) {
             listResult.add("[PASS]" + clearHtml(msg));
             logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
-            if (reporter != null)
+            if (reporter != null) {
                 reporter.log(LogStatus.PASS, msg);
+            }
             writeTechnicalLog("[PASS] :  " + msg);
         }
         return msg;
@@ -93,8 +96,9 @@ public class Reporter extends DriverConfig {
         if (loggingOn) {
             listResult.add("[FAIL]" + clearHtml(msg));
             logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
-            if (reporter != null)
+            if (reporter != null) {
                 reporter.log(LogStatus.FAIL, msg);
+            }
             writeTechnicalLog("[FAIL] :  " + msg);
         }
         logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
@@ -106,8 +110,9 @@ public class Reporter extends DriverConfig {
     }
 
     public void logScreenCapture(String imgDataB64, LogStatus status) {
-        if (reporter != null)
+        if (reporter != null) {
             reporter.log(status, reporter.addBase64ScreenShot("data:image/png;base64," + imgDataB64));
+        }
     }
 
     public void logScreenShot(String imagePath) {
@@ -115,8 +120,9 @@ public class Reporter extends DriverConfig {
     }
 
     public void logScreenShot(String imagePath, LogStatus status) {
-        if (reporter != null)
+        if (reporter != null) {
             reporter.log(status, reporter.addScreenCapture(imagePath));
+        }
     }
 
     public String writeTechnicalLog(String msg) {
