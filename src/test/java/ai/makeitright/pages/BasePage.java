@@ -18,7 +18,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected String url;
 
-    public BasePage(WebDriver driver) {
+    public BasePage(final WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
@@ -27,7 +27,7 @@ public abstract class BasePage {
     }
 
 
-    public BasePage(WebDriver driver, String url) {
+    public BasePage(final WebDriver driver, final String url) {
         this.driver = driver;
         this.url = url;
         PageFactory.initElements(this.driver, this);
@@ -38,19 +38,19 @@ public abstract class BasePage {
 
     protected abstract boolean isAt();
 
-    public void click(WebElement element, String elementDescription) {
+    public void click(final WebElement element, final String elementDescription) {
         Main.report.logInfo("Click " + elementDescription);
         element.click();
         Main.report.logPass("Element was clicked");
     }
 
-    public void sendSecretlyText(WebElement element, String text, String elementDescription) {
+    public void sendSecretlyText(final WebElement element, final String text, final String elementDescription) {
         Main.report.logInfo("Enter password to " + element.getTagName());
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
     }
 
-    public WebElement getItemFromDropdown(WebElement dropdown, List<WebElement> results, String option) {
+    public WebElement getItemFromDropdown(final WebElement dropdown, final List<WebElement> results, final String option) {
         try {
             return new Action(driver).getItemFromDropdown(dropdown, results, option);
         } catch (InterruptedException e) {
@@ -59,7 +59,7 @@ public abstract class BasePage {
         }
     }
 
-    public void sendText(WebElement element, String text, String elementDescription) {
+    public void sendText(final WebElement element, final String text, final String elementDescription) {
         Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
@@ -79,7 +79,7 @@ public abstract class BasePage {
         return true;
     }
 
-    public boolean waitForClickable(WebElement element) {
+    public boolean waitForClickable(final WebElement element) {
         try {
             new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(element));
             return true;
@@ -88,7 +88,7 @@ public abstract class BasePage {
         }
     }
 
-    public boolean waitForVisibilityOf(WebElement element) {
+    public boolean waitForVisibilityOf(final WebElement element) {
         try {
             new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(element));
             return true;

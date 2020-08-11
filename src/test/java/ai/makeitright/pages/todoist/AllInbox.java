@@ -19,12 +19,12 @@ public class AllInbox {
         return taskName;
     }
 
-    public AllInbox setTaskName(String taskName) {
+    public AllInbox setTaskName(final String taskName) {
         this.taskName = taskName;
         return this;
     }
 
-    public AllInbox setChboxTask(WebElement chboxTask) {
+    public AllInbox setChboxTask(final WebElement chboxTask) {
         this.chboxTask = chboxTask;
         return this;
     }

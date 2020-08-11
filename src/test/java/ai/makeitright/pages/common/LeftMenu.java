@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LeftMenu extends BasePage {
-    public LeftMenu(WebDriver driver) {
+    public LeftMenu(final WebDriver driver) {
         super(driver);
     }
 
@@ -25,11 +25,11 @@ public class LeftMenu extends BasePage {
     @FindBy(xpath = "//ul[1]/li[1]")
     private WebElement leftMenu;
 
-    private By getLeftMenuOption(String menuOption) {
+    private By getLeftMenuOption(final String menuOption) {
         return new By.ByXPath("//ul/li/div//span[contains(text(),'" + menuOption + "')]");
     }
 
-    public void openPageBy(String menuOption) {
+    public void openPageBy(final String menuOption) {
         waitForBlueCircleDisappear();
         waitForVisibilityOf(driver.findElement(getLeftMenuOption(menuOption)));
         click(driver.findElement(getLeftMenuOption(menuOption)),"option " + menuOption + " from left menu");

@@ -18,7 +18,7 @@ public class LoginGitLabPage extends BasePage {
     @FindBy(id = "user_password")
     private WebElement inpPassword;
 
-    public LoginGitLabPage(WebDriver driver, String url) {
+    public LoginGitLabPage(final WebDriver driver, final String url) {
         super(driver, url);
     }
 
@@ -33,13 +33,13 @@ public class LoginGitLabPage extends BasePage {
         return true;
     }
 
-    public LoginGitLabPage setUsernameField(String username) {
+    public LoginGitLabPage setUsernameField(final String username) {
         waitForVisibilityOf(inpUsername);
         sendText(inpUsername, username, "input element 'Username or email'");
         return this;
     }
 
-    public LoginGitLabPage setPasswordField(String password) {
+    public LoginGitLabPage setPasswordField(final String password) {
         sendSecretlyText(inpPassword, password, "input element 'Password'");
         return this;
     }

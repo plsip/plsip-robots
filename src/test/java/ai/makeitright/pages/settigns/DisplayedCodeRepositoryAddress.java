@@ -7,7 +7,7 @@ public class DisplayedCodeRepositoryAddress {
 
     private String address;
 
-    public DisplayedCodeRepositoryAddress setAddress(String address) {
+    public DisplayedCodeRepositoryAddress setAddress(final String address) {
         this.address = address;
         return this;
     }
