@@ -46,7 +46,6 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     @Test
     public void assignRepository() {
 
-        String repositoryAddress;
 
         driver.get(urlgitlab);
         driver.manage().window().maximize();
