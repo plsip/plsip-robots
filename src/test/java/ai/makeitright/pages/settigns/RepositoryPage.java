@@ -48,36 +48,41 @@ public class RepositoryPage extends BasePage {
         return true;
     }
 
-    public void clickButtonAssignRepository() {
+    public RepositoryPage clickAssignRepositoryButton() {
         click(btnAssingRepository, "button 'Assing Repository'");
+        return this;
     }
 
-    public void clickButtonAssignGitLabRepository() {
+    public RepositoryPage clickAssignGitLabRepositoryButton() {
         waitForVisibilityOf(btnAssignGitLabRepository);
         click(btnAssignGitLabRepository, "button 'Assing GitLab Repository'");
+        return this;
     }
 
-    public void setAccessToken(String accesstoken) {
+    public RepositoryPage setAccessTokenInput(String accesstoken) {
         sendSecretlyText(inpAccessToken, accesstoken, "input element 'Access Token'");
+        return this;
     }
 
-    public void clickButtonSave() {
+    public RepositoryPage clickSaveButton() {
         click(btnSave, "button 'Save'");
+        return this;
     }
 
-    public TableRepositoryAddresses getTableRepositoryAddresses() {
-        return new TableRepositoryAddresses(driver);
+    public RepositoriesAddressesTable getRepositoriesAddressesTable() {
+        return new RepositoriesAddressesTable(driver);
     }
 
-    public void selectYourMainScriptRepository(String projectName) {
+    public RepositoryPage selectYourMainScriptRepository(String projectName) {
         waitForBlueCircleDisappear();
         click(getItemFromDropdown(dropdownSelectYourMainScriptRepository, dropdownSelectYourMainScriptRepositoryOptions, projectName), "option '" + projectName + "' of dropdown 'Select your main scripts repository'");
+        return this;
     }
 
-    public boolean existRepositoryAddress(String repositoryAddress) {
+    public boolean CheckIfRepositoryAddressIsDisplayed(String repositoryAddress) {
         Main.report.logInfo("Check if repository with address " + repositoryAddress + "is on the list");
-        AllRepositoryAddresses allRepositoryAddresses = getTableRepositoryAddresses().getAllRepositoriesAddressesRowData(repositoryAddress);
-        Assertions.assertNotNull(allRepositoryAddresses);
-        return false;
+        DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
+        Assertions.assertNotNull(displayedCodeRepositoryAddress);
+        return true;
     }
 }

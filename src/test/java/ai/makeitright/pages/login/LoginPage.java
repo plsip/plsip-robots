@@ -34,16 +34,19 @@ public class LoginPage extends BasePage {
         return true;
     }
 
-    public LeftMenu clickButtonSignIn() {
+    public LoginPage setEmailInput(String email) {
+        sendText(inpEmail, email, "input element 'E-mail'");
+        return this;
+    }
+
+    public LoginPage setPasswordInput(String password) {
+        sendSecretlyText(inpPassword, password, "input element 'Password'");
+        return this;
+    }
+
+    public LeftMenu clickSignInButton() {
         click(btnSignIn, "button 'Sign in'");
         return new LeftMenu(driver);
     }
 
-    public void setEmail(String email) {
-        sendText(inpEmail, email, "input element 'E-mail'");
-    }
-
-    public void setPassword(String password) {
-        sendSecretlyText(inpPassword, password, "input element 'Password'");
-    }
 }

@@ -33,19 +33,20 @@ public class LoginGitLabPage extends BasePage {
         return true;
     }
 
-    public ProjectsPage clickButtonSignIn() {
+    public LoginGitLabPage setUsernameField(String username) {
+        waitForVisibilityOf(inpUsername);
+        sendText(inpUsername, username, "input element 'Username or email'");
+        return this;
+    }
+
+    public LoginGitLabPage setPasswordField(String password) {
+        sendSecretlyText(inpPassword, password, "input element 'Password'");
+        return this;
+    }
+
+    public ProjectsPage clickSignInButton() {
         click(btnSignIn, "button 'Sign in'");
         return new ProjectsPage(driver);
     }
-
-    public void setPassword(String password) {
-        sendSecretlyText(inpPassword, password, "input element 'Password'");
-    }
-
-    public void setUsername(String username) {
-        waitForVisibilityOf(inpUsername);
-        sendText(inpUsername, username, "input element 'Username or email'");
-    }
-
 
 }

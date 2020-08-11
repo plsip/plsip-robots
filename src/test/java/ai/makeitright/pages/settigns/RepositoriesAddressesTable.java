@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class TableRepositoryAddresses extends BasePage {
-    public TableRepositoryAddresses(WebDriver driver) {
+public class RepositoriesAddressesTable extends BasePage {
+    public RepositoriesAddressesTable(WebDriver driver) {
         super(driver);
     }
 
@@ -31,16 +31,16 @@ public class TableRepositoryAddresses extends BasePage {
     )
     private List<WebElement> tableRows;
 
-    public AllRepositoryAddresses getAllRepositoriesAddressesRowData(String repositoryAddress) {
-        AllRepositoryAddresses allRepositoryAddresses;
+    public DisplayedCodeRepositoryAddress getAllRepositoriesAddressesRowData(String repositoryAddress) {
+        DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress;
         waitForVisibilityOf(tableRows.get(0));
         for (WebElement row : tableRows) {
             String a = row.findElement(By.xpath(".//input")).getText();
             if(row.findElement(By.xpath(".//input")).getAttribute("value").equals(repositoryAddress)) {
-                allRepositoryAddresses = new AllRepositoryAddresses()
+                displayedCodeRepositoryAddress = new DisplayedCodeRepositoryAddress()
                         .setAddress(row.findElement(By.xpath(".//input")).getText());
                 Main.report.logPass("The repository address " + repositoryAddress + "was found in the table");
-                return allRepositoryAddresses;
+                return displayedCodeRepositoryAddress;
             }
 
         }

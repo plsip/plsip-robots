@@ -82,11 +82,11 @@ public class NewProjectPage extends BasePage {
         return projectName;
     }
 
-    public void clickCheckboxPublic() {
+    public void clickPublicCheckbox() {
         click(chboxPublic, "checkbox 'Public'");
     }
 
-    public void clickButtonCreateProject() {
+    public void clickCreateProjectButton() {
         click(btnCreateProject, "button 'Create project'");
     }
 
