@@ -13,10 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Action {
 
-	private Actions actions;
-	private WebDriver driver;
-	private WebDriverWait wait;
-	private WebDriverWait waitShort;
+	private final Actions actions;
+	private final WebDriver driver;
+	private final WebDriverWait wait;
+	private final WebDriverWait waitShort;
 	
 	
 	public Action(WebDriver driver) {
