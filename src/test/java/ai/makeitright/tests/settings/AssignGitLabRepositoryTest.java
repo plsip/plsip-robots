@@ -1,5 +1,6 @@
 package ai.makeitright.tests.settings;
 
+import org.json.JSONObject;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.gitlab.LoginGitLabPage;
 import ai.makeitright.pages.gitlab.NewProjectPage;
@@ -95,6 +96,10 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .selectYourMainScriptRepository(projectName)
                 .clickSaveButton();
         Assertions.assertTrue(repositoryPage.CheckIfRepositoryAddressIsDisplayed(repositoryAddress));
+        JSONObject obj = new JSONObject();
+        obj.put("repositoryaddress", repositoryAddress);
+        System.setProperty("output", obj.toString());
+        driver.close();
 
     }
 }
