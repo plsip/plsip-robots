@@ -39,13 +39,13 @@ public abstract class BasePage {
     protected abstract boolean isAt();
 
     public void click(WebElement element, String elementDescription) {
-        Main.report.logInfo("Click "+elementDescription+"");
+        Main.report.logInfo("Click " + elementDescription);
         element.click();
         Main.report.logPass("Element was clicked");
     }
 
     public void sendSecretlyText(WebElement element, String text, String elementDescription) {
-        Main.report.logInfo("Enter password to "+element.getTagName());
+        Main.report.logInfo("Enter password to " + element.getTagName());
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
     }
@@ -60,7 +60,7 @@ public abstract class BasePage {
     }
 
     public void sendText(WebElement element, String text, String elementDescription) {
-        Main.report.logInfo("Enter text '"+text+"' to "+elementDescription);
+        Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
     }
@@ -71,7 +71,7 @@ public abstract class BasePage {
         try {
             driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
             new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
-        } catch(Exception e) {
+        } catch (Exception e) {
             Main.report.logFail("Blue rounding circle was still displayed");
             return false;
         }
