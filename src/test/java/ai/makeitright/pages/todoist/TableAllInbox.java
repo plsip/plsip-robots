@@ -29,7 +29,9 @@ public class TableAllInbox extends BasePage {
 
     public AllInbox getAllInboxRowData(final String taskName) {
         AllInbox allInbox;
-        if (!tableRowsList.isEmpty()) {
+        if (tableRowsList.isEmpty()) {
+            return null;
+        } else {
             for (WebElement row : tableRowsList) {
                 WebElement rowChboxTask = row.findElement(By.xpath(".//div/span"));
                 WebElement rowTaskName = row.findElement(By.xpath("./span"));
@@ -40,8 +42,6 @@ public class TableAllInbox extends BasePage {
                     return allInbox;
                 }
             }
-        } else {
-            return null;
         }
         return null;
     }
