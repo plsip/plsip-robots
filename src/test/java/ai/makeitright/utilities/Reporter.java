@@ -21,7 +21,7 @@ public class Reporter extends DriverConfig {
         this.extent = new ExtentReports(reportPathFileName, true);
         loggingOn = true;
         logFailAndErrorOnly = false;
-        fileName = (new StringBuilder())
+        fileName = new StringBuilder()
                 .append(workspacePath)
                 .append(System.getProperty("file.separator"))
                 .append(serviceFileName)

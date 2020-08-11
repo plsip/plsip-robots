@@ -20,7 +20,9 @@ public class NewProjectPage extends BasePage {
         if(!waitForVisibilityOf(txtNewProject) || !waitForVisibilityOf(txtCreateNewProject)) {
             Main.report.logFail("There is no visible particular element with text 'New Project' or 'Create new project'");
         }
-        Assertions.assertTrue((waitForVisibilityOf(txtNewProject) || waitForVisibilityOf(txtCreateNewProject)), "There is no visible particular element with text 'New Project' or 'Create new project'");
+        Assertions.assertTrue(
+                waitForVisibilityOf(txtNewProject) || waitForVisibilityOf(txtCreateNewProject),
+                "There is no visible particular element with text 'New Project' or 'Create new project'");
         return true;
     }
 
