@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 public class CreateNewUser extends DriverConfig {
 
     private String URL;
@@ -24,6 +26,7 @@ public class CreateNewUser extends DriverConfig {
     public void createNewUser() {
         driver.get(URL);
         driver.manage().window().maximize();
+        fail();
     }
 
 }
