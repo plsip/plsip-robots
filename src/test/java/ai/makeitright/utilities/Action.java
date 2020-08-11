@@ -27,13 +27,13 @@ public class Action {
 	}
 	
 	
-	public WebElement getItemFromTable(List<WebElement> menu, String option) throws InterruptedException {
+	public WebElement getItemFromTable(List<WebElement> menuList, String option) throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Main.report.logInfo("Search option '" + option + "'");
-		if(menu.size() == 0) {
+		if(menuList.isEmpty()) {
 			throw new InterruptedException("No options");
 		}
-		for (WebElement item : menu) {
+		for (WebElement item : menuList) {
 			if(item.getText().equals(option)) {
 				Main.report.logPass("The option '" + item.getText() + "' was found");
 				return item;
@@ -43,13 +43,13 @@ public class Action {
 		throw new InterruptedException("The option '" + option + "' doesn't exist");
 	}
 
-	public WebElement getItemFromTable(List<WebElement> menu, int option) throws InterruptedException {
+	public WebElement getItemFromTable(List<WebElement> menuList, int option) throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Main.report.logInfo("Search option '" + option + "'");
-		if(menu.size() == 0) {
+		if(menuList.isEmpty()) {
 			throw new InterruptedException("No options");
 		}
-		return menu.get(option - 1);
+		return menuList.get(option - 1);
 	}
 
 	public WebElement getItemFromDropdown(WebElement dropdown, List<WebElement> results, int option) {

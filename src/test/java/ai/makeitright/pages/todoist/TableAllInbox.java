@@ -25,12 +25,12 @@ public class TableAllInbox extends BasePage {
     @FindAll(
             @FindBy(xpath = "//ul[@class='tasks__list']/li")
     )
-    private List<WebElement> tableRows;
+    private List<WebElement> tableRowsList;
 
     public AllInbox getAllInboxRowData(final String taskName) {
         AllInbox allInbox;
-        if (tableRows.size() > 0) {
-            for (WebElement row : tableRows) {
+        if (!tableRowsList.isEmpty()) {
+            for (WebElement row : tableRowsList) {
                 WebElement rowChboxTask = row.findElement(By.xpath(".//div/span"));
                 WebElement rowTaskName = row.findElement(By.xpath("./span"));
                 if (rowTaskName.getText().equals(taskName)) {
