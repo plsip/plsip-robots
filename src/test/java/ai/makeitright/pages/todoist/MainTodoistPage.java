@@ -20,7 +20,7 @@ public class MainTodoistPage extends BasePage {
     @FindBy(xpath = "//input[@data-testid='add-task-content']")
     private WebElement inp_NameOfTask;
 
-    public MainTodoistPage(WebDriver driver, String url) {
+    public MainTodoistPage(final WebDriver driver, final String url) {
         super(driver, url);
     }
 
@@ -50,13 +50,13 @@ public class MainTodoistPage extends BasePage {
         click(btnAddTask, "button 'Add Task'");
     }
 
-    public boolean isTaskAtInbox(String taskName) {
+    public boolean isTaskAtInbox(final String taskName) {
         AllInbox allInbox = getTableAllInbox().getAllInboxRowData(taskName);
         //            Main.report.logInfo("Task with name '" + taskName + "' is not visible on the Inbox list");
         return allInbox != null;
     }
 
-    public boolean markTaskDone(String taskName) {
+    public boolean markTaskDone(final String taskName) {
         AllInbox allInbox = getTableAllInbox().getAllInboxRowData(taskName);
         if (allInbox == null) {
             return false;

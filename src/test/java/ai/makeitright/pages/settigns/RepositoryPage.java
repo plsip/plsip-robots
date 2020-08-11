@@ -32,7 +32,7 @@ public class RepositoryPage extends BasePage {
     @FindBy(xpath = "//input[@name='token']")
     private WebElement inpAccessToken;
 
-    public RepositoryPage(WebDriver driver, String url) {
+    public RepositoryPage(final WebDriver driver, final String url) {
         super(driver, url);
     }
 
@@ -59,7 +59,7 @@ public class RepositoryPage extends BasePage {
         return this;
     }
 
-    public RepositoryPage setAccessTokenInput(String accesstoken) {
+    public RepositoryPage setAccessTokenInput(final String accesstoken) {
         sendSecretlyText(inpAccessToken, accesstoken, "input element 'Access Token'");
         return this;
     }
@@ -73,13 +73,13 @@ public class RepositoryPage extends BasePage {
         return new RepositoriesAddressesTable(driver);
     }
 
-    public RepositoryPage selectYourMainScriptRepository(String projectName) {
+    public RepositoryPage selectYourMainScriptRepository(final String projectName) {
         waitForBlueCircleDisappear();
         click(getItemFromDropdown(dropdownSelectYourMainScriptRepository, dropdownSelectYourMainScriptRepositoryOptions, projectName), "option '" + projectName + "' of dropdown 'Select your main scripts repository'");
         return this;
     }
 
-    public boolean CheckIfRepositoryAddressIsDisplayed(String repositoryAddress) {
+    public boolean CheckIfRepositoryAddressIsDisplayed(final String repositoryAddress) {
         Main.report.logInfo("Check if repository with address " + repositoryAddress + "is on the list");
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
         Assertions.assertNotNull(displayedCodeRepositoryAddress);

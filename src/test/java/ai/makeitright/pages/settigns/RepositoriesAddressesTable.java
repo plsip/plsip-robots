@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class RepositoriesAddressesTable extends BasePage {
-    public RepositoriesAddressesTable(WebDriver driver) {
+    public RepositoriesAddressesTable(final WebDriver driver) {
         super(driver);
     }
 
@@ -31,7 +31,7 @@ public class RepositoriesAddressesTable extends BasePage {
     )
     private List<WebElement> tableRows;
 
-    public DisplayedCodeRepositoryAddress getAllRepositoriesAddressesRowData(String repositoryAddress) {
+    public DisplayedCodeRepositoryAddress getAllRepositoriesAddressesRowData(final String repositoryAddress) {
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress;
         waitForVisibilityOf(tableRows.get(0));
         for (WebElement row : tableRows) {

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class TableAllInbox extends BasePage {
-    public TableAllInbox(WebDriver driver) {
+    public TableAllInbox(final WebDriver driver) {
         super(driver);
     }
 
@@ -27,7 +27,7 @@ public class TableAllInbox extends BasePage {
     )
     private List<WebElement> tableRows;
 
-    public AllInbox getAllInboxRowData(String taskName) {
+    public AllInbox getAllInboxRowData(final String taskName) {
         AllInbox allInbox;
         if (tableRows.size() > 0) {
             for (WebElement row : tableRows) {

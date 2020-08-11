@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ProjectsPage extends BasePage {
-    public ProjectsPage(WebDriver driver) {
+    public ProjectsPage(final WebDriver driver) {
         super(driver);
     }
 

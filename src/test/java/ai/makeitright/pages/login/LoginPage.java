@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@name='password']")
     private WebElement inpPassword;
 
-    public LoginPage(WebDriver driver, String url) {
+    public LoginPage(final WebDriver driver, final String url) {
         super(driver, url);
     }
 
@@ -34,12 +34,12 @@ public class LoginPage extends BasePage {
         return true;
     }
 
-    public LoginPage setEmailInput(String email) {
+    public LoginPage setEmailInput(final String email) {
         sendText(inpEmail, email, "input element 'E-mail'");
         return this;
     }
 
-    public LoginPage setPasswordInput(String password) {
+    public LoginPage setPasswordInput(final String password) {
         sendSecretlyText(inpPassword, password, "input element 'Password'");
         return this;
     }

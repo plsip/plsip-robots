@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class NewProjectPage extends BasePage {
-    public NewProjectPage(WebDriver driver) {
+    public NewProjectPage(final WebDriver driver) {
         super(driver);
     }
 
@@ -57,7 +57,7 @@ public class NewProjectPage extends BasePage {
     @FindBy(xpath = "//*[@class='gl-mt-0']")
     private WebElement txtNewProject;
 
-    public void chooseOption(String s) {
+    public void chooseOption(final String s) {
         if(waitForVisibilityOf(optionForExternalRepository)) {
             click(optionForExternalRepository, "option '" + s + "'");
         } else {
@@ -70,7 +70,7 @@ public class NewProjectPage extends BasePage {
         click(btnRepoByURL, "button 'Repo by URL'");
     }
 
-    public void setGitRepositoryURL(String repositoryToCopy) {
+    public void setGitRepositoryURL(final String repositoryToCopy) {
         waitForVisibilityOf(inpGitRepositoryURL);
         sendText(inpGitRepositoryURL,repositoryToCopy, " input element 'Git repository URL'");
     }
