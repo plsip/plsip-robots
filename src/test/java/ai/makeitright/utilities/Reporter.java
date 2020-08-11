@@ -134,7 +134,6 @@ public class Reporter extends DriverConfig {
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
         }
         return msg;
     }
