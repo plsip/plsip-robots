@@ -4,10 +4,6 @@ import org.openqa.selenium.WebElement;
 
 public class AllInbox {
 
-    public AllInbox() {
-
-    }
-
     private WebElement chboxTask;
     private String taskName;
 
