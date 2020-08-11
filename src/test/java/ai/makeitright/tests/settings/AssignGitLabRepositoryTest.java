@@ -9,11 +9,14 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settigns.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class AssignGitLabRepositoryTest extends DriverConfig {
+
+    //from configuration:
     private String accesstoken;
     private String email;
     private String password;
@@ -23,6 +26,9 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     private String repositorytocopy;
     private String urlgitlab;
     private String usernamegitlab;
+
+    //for reporting:
+    private String repositoryAddress;
 
     @Before
     public void before() {
@@ -82,10 +88,14 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .selectYourMainScriptRepository(projectName)
                 .clickSaveButton();
         Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
+    }
+
+    @After
+    public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("repositoryaddress", repositoryAddress);
         System.setProperty("output", obj.toString());
         driver.close();
-
     }
+
 }
