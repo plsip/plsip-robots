@@ -31,7 +31,7 @@ public class AssignGitLabRepository extends DriverConfig {
         System.setProperty("inputParameters.passwordgitlab","jWpxghw4Re/+@/A");
         System.setProperty("inputParameters.projectname","nottouchautomated");
         System.setProperty("inputParameters.repositorytocopy","https://gitlab.com/kraczkowska/mirtodoist.git");
-        System.setProperty("inputParameters.url","http://development.powerfarm.ai/signin");
+        System.setProperty("inputParameters.url","https://development.powerfarm.ai/signin");
         System.setProperty("inputParameters.urlgitlab","https://gitlab.com/users/sign_in");
         System.setProperty("inputParameters.usernamegitlab","kraczkowska");
     }
