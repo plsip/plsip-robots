@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Reporter extends DriverConfig {
     protected ExtentReports extent;
-    protected ExtentTest reporter = null;
+    protected ExtentTest reporter;
 
     private final String fileName;
     private boolean loggingOn;
     private boolean logFailAndErrorOnly;
-    private static List<String> listResult = new ArrayList<String>();
+    private static List<String> listResult = new ArrayList<>();
 
     public Reporter(String reportPathFileName, String workspacePath, String serviceFileName) {
         this.extent = new ExtentReports(reportPathFileName, true);
@@ -105,8 +105,8 @@ public class Reporter extends DriverConfig {
         return msg;
     }
 
-    public void logInfoWithScreenCapture(String Base64) {
-        reporter.log(LogStatus.INFO, reporter.addBase64ScreenShot("data:image/png;base64," + Base64));
+    public void logInfoWithScreenCapture(String base64) {
+        reporter.log(LogStatus.INFO, reporter.addBase64ScreenShot("data:image/png;base64," + base64));
     }
 
     public void logScreenCapture(String imgDataB64, LogStatus status) {

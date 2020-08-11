@@ -31,7 +31,7 @@ public class MainTodoistPage extends BasePage {
         return true;
     }
 
-    public void clickButtonPlus_Header() {
+    public void clickButtonPlusOnHeader() {
         click(btnPlus_Header, "button '+' on header");
     }
 
