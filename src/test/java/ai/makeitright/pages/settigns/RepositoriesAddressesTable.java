@@ -35,7 +35,6 @@ public class RepositoriesAddressesTable extends BasePage {
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress;
         waitForVisibilityOf(tableRows.get(0));
         for (WebElement row : tableRows) {
-            String a = row.findElement(By.xpath(".//input")).getText();
             if(row.findElement(By.xpath(".//input")).getAttribute("value").equals(repositoryAddress)) {
                 displayedCodeRepositoryAddress = new DisplayedCodeRepositoryAddress()
                         .setAddress(row.findElement(By.xpath(".//input")).getText());
