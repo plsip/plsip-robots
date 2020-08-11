@@ -27,7 +27,7 @@ public class ProjectsPage extends BasePage {
     @FindBy(xpath = "//*[@class='page-title']")
     private WebElement txtProject;
 
-    public NewProjectPage clickButtonNewProject() {
+    public NewProjectPage clickNewProjectButton() {
         click(btnNewProject, "button 'New Project'");
         return new NewProjectPage(driver);
     }
