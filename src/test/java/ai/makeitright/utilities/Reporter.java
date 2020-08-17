@@ -33,7 +33,7 @@ public class Reporter extends DriverConfig {
     }
 
     public Reporter(String reportPathFileName) {
-        this(reportPathFileName, Main.workspacePath);
+        this(reportPathFileName, Main.artifactsPath);
     }
 
     public String clearHtml(String msg) {
