@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RepositoryPage extends BasePage {
 
-    @FindBy(xpath = "//button[@class='Polaris-Button']//span[text()='Assign Gitlab Repository']")
+    @FindBy(xpath = "//button[@class='Polaris-Button']//span[text()='Assign GitLab Repository']")
     private WebElement btnAssignGitLabRepository;
 
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']")

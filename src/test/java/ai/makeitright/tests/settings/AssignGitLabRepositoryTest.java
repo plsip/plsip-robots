@@ -32,11 +32,11 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     @Before
     public void before() {
-        accesstoken = System.getProperty("inputParameters.accesstoken2");
+        accesstoken = System.getProperty("inputParameters.accesstoken");
         email = System.getProperty("inputParameters.email");
-        password = System.getProperty("inputParameters.password2");
-        passwordgitlab = System.getProperty("inputParameters.passwordgitlab2");
-        powerFarmUrl = System.getProperty("inputParameters.power_farm_url");
+        password = System.getProperty("inputParameters.password");
+        passwordgitlab = System.getProperty("inputParameters.passwordgitlab");
+        powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
         projectname = System.getProperty("inputParameters.projectname");
         repositorytocopy = System.getProperty("inputParameters.repositorytocopy");
         urlgitlab = System.getProperty("inputParameters.urlgitlab");
