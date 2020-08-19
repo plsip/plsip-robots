@@ -39,7 +39,7 @@ public class RepositoryPage extends BasePage {
     @Override
     protected boolean isAt() {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
-        url = url.substring(0, url.lastIndexOf("/signin")) + "/mir-mvp/settings/repositories";
+        url = url.substring(0, url.lastIndexOf("/signin")) + "/mir-mvp/settings/repository";
         if (!url.equals(driver.getCurrentUrl())) {
             Main.report.logFail("Current URL is not like expected " + url);
         }
