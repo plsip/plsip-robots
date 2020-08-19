@@ -38,7 +38,7 @@ public class RepositoriesAddressesTable extends BasePage {
             if(row.findElement(By.xpath(".//input")).getAttribute("value").equals(repositoryAddress)) {
                 displayedCodeRepositoryAddress = new DisplayedCodeRepositoryAddress()
                         .setAddress(row.findElement(By.xpath(".//input")).getText());
-                Main.report.logPass("The repository address " + repositoryAddress + "was found in the table");
+                Main.report.logPass("The repository address " + repositoryAddress + " was found in the table");
                 return displayedCodeRepositoryAddress;
             }
 

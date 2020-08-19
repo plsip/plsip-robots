@@ -1,5 +1,6 @@
 package ai.makeitright.tests.settings;
 
+import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import org.json.JSONObject;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.gitlab.LoginGitLabPage;
@@ -75,7 +76,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .setEmailInput(email)
                 .setPasswordInput(password);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Settings");
+        leftMenu.openPageBy("Repositories");
 
         RepositoryPage repositoryPage = new RepositoryPage(driver, powerFarmUrl);
         repositoryPage
@@ -85,6 +86,10 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .clickSaveButton()
                 .selectYourMainScriptRepository(projectName)
                 .clickSaveButton();
+        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
+        Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
+        Assertions.assertTrue(statusPopupWindow.isAlertMessage("The repository has been added successfully! <br> Let the adventure begin"));
         Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
     }
 
