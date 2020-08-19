@@ -2,11 +2,10 @@ package ai.makeitright.pages.common;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AlertStatusPopupWindow extends BasePage {
     public AlertStatusPopupWindow(final WebDriver driver) {
@@ -16,7 +15,7 @@ public class AlertStatusPopupWindow extends BasePage {
     @Override
     protected boolean isAt() {
         try {
-            waitForVisibilityOf(txtStatus);
+            Assertions.assertTrue(waitForVisibilityOf(txtStatus));
             return true;
         } catch(Exception e) {
             Main.report.logFail("There is no visible alert status on popup window");
@@ -27,10 +26,10 @@ public class AlertStatusPopupWindow extends BasePage {
     @FindBy(xpath = "//div[@class='Polaris-Banner__Ribbon']/span")
     private WebElement imgBanner;
 
-    @FindBy(xpath = "//div[@id='Banner2Content']/p/span")
+    @FindBy(xpath = "//div[@class='Polaris-Banner__Content']/p/span")
     private WebElement txtMessageAlert;
 
-    @FindBy(xpath = "//div[@id='Banner2Heading']/p")
+    @FindBy(xpath = "//p[@class='Polaris-Heading']")
     private WebElement txtStatus;
 
 
@@ -71,15 +70,15 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isAlertMessage(String message) {
         try {
             String messageAlert = txtMessageAlert.getText();
-            if (messageAlert.contains(message)) {
+            if (messageAlert.replaceAll("\\s+","").contains(message.replaceAll("\\s+",""))) {
                 Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
                 return true;
             } else {
-                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "' instead of '" + message + "'");
+                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "' which doesn't contains '" + message + "'");
                 return false;
             }
         } catch (Exception e) {
-            Main.report.logFail("There was no message on alert window");
+            Main.report.logFail("There was no message on alert window: " + e.getMessage());
             return false;
         }
     }
