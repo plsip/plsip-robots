@@ -1,26 +1,29 @@
 package ai.makeitright.tests.argumentscollections;
 
+import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;
 import com.github.javafaker.Faker;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class ArgumentsCollectionsTest extends DriverConfig {
 
     //from configuration:
-    private String pfUrl;
-    private String pfArgumentsCollectionsPagePartUrl;
+    private String pfSignInUrl;
+    private String pfUserEmail;
+    private String pfUserPassword;
 
     //for reporting:
     private String repositoryAddress;
 
     @Before
     public void before() {
-        pfUrl = System.getProperty("inputParameters.pfUrl");
-        pfArgumentsCollectionsPagePartUrl = System.getProperty("inputParameters.pfArgumentsCollectionsPagePartUrl");
+        pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
+        pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
+        pfUserPassword = System.getProperty("inputParameters.pfUserPassword");
     }
 
     @Test
@@ -31,13 +34,17 @@ public class ArgumentsCollectionsTest extends DriverConfig {
         String nameOfArgument = faker.funnyName().name();
         String devaultArgumentValue = faker.funnyName().name();
 
-
         driver.manage().window().maximize();
-        final String argumentsCollectionsPageUrl = pfUrl + pfArgumentsCollectionsPagePartUrl;
-        driver.get(argumentsCollectionsPageUrl);
+        driver.get(pfSignInUrl);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
+        loginPage
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
+        LeftMenu leftMenu = loginPage.clickSignInButton();
+        leftMenu.openPageBy("Global arguments");
 
         final ArgumentsCollectionsPage argumentsCollectionsPage =
-                new ArgumentsCollectionsPage(driver, argumentsCollectionsPageUrl);
+                new ArgumentsCollectionsPage(driver, pfSignInUrl);
         final ArgumentsCollectionsPage.CreateArgumentsCollectionModalWindow createArgumentsCollectionModalWindow =
                 argumentsCollectionsPage.clickCreateArgumentsCollectionButton();
         ArgumentsCollectionPage argumentsCollectionPage = createArgumentsCollectionModalWindow
