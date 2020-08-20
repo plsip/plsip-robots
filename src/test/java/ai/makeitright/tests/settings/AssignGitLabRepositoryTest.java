@@ -19,6 +19,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     //from configuration:
     private String accesstoken;
+    private String companyname;
     private String email;
     private String password;
     private String passwordgitlab;
@@ -34,6 +35,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     @Before
     public void before() {
         accesstoken = System.getProperty("inputParameters.accesstoken");
+        companyname = System.getProperty("inputParameters.companyname");
         email = System.getProperty("inputParameters.email");
         password = System.getProperty("inputParameters.password");
         passwordgitlab = System.getProperty("inputParameters.passwordgitlab");
@@ -79,7 +81,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Repositories");
 
-        RepositoryPage repositoryPage = new RepositoryPage(driver, powerFarmUrl);
+        RepositoryPage repositoryPage = new RepositoryPage(driver, powerFarmUrl, companyname);
         repositoryPage
                 .clickAssignRepositoryButton()
                 .clickAssignGitLabRepositoryButton()
