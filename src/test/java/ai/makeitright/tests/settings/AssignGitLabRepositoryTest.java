@@ -48,7 +48,10 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     @Test
     public void assignRepository() {
-
+        System.out.println(System.getProperty("secretParameters"));
+        System.out.println(System.getProperty("secretParameters.accesstoken"));
+        System.out.println(System.getProperty("secretParameters.passwordgitlab"));
+        System.out.println(System.getProperty("secretParameters.password"));
         driver.get(urlgitlab);
         driver.manage().window().maximize();
 
