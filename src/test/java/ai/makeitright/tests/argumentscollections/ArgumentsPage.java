@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 
-public class ArgumentsCollectionPage extends BasePage {
+public class ArgumentsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Add Argument']")
     WebElement addArgumentButton;
@@ -18,13 +18,13 @@ public class ArgumentsCollectionPage extends BasePage {
     WebElement itemsOfUnorderedList;
 
 
-    public ArgumentsCollectionPage(final WebDriver driver) {
+    public ArgumentsPage(final WebDriver driver) {
         super(driver);
     }
 
     @Override
     protected boolean isAt() {
-        return false;
+        return addArgumentButton.isDisplayed();
     }
 
     AddArgumentModalWindow clickAddArgumentButton() {
@@ -35,6 +35,9 @@ public class ArgumentsCollectionPage extends BasePage {
     Action action = new Action(driver);
 
     public class AddArgumentModalWindow extends BasePage {
+
+        @FindBy(xpath = "//h2")
+        private WebElement h2;
 
         @FindBy(xpath = "//input[@name='key']")
         private WebElement argumentNameInput;
@@ -54,7 +57,8 @@ public class ArgumentsCollectionPage extends BasePage {
 
         @Override
         protected boolean isAt() {
-            return false;
+            waitForVisibilityOf(h2);
+            return h2.getText().equals("Add argument");
         }
 
         AddArgumentModalWindow writeIntoArgumentNameInput(String argumentName) {
@@ -67,9 +71,9 @@ public class ArgumentsCollectionPage extends BasePage {
             return this;
         }
 
-        ArgumentsCollectionPage clickSaveButton() {
+        ArgumentsPage clickSaveButton() {
             saveButton.click();
-            return new ArgumentsCollectionPage(driver);
+            return new ArgumentsPage(driver);
         }
 
     }

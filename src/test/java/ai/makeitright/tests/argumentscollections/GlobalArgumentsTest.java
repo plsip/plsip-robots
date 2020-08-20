@@ -45,14 +45,14 @@ public class GlobalArgumentsTest extends DriverConfig {
 
         final GlobalArgumentsPage globalArgumentsPage =
                 new GlobalArgumentsPage(driver, pfSignInUrl);
-        final GlobalArgumentsPage.CreateArgumentsCollectionModalWindow createArgumentsCollectionModalWindow =
-                globalArgumentsPage.clickCreateArgumentsCollectionButton();
-        ArgumentsCollectionPage argumentsCollectionPage = createArgumentsCollectionModalWindow
+        final GlobalArgumentsPage.CreateGlobalArgumentModalWindow createGlobalArgumentModalWindow =
+                globalArgumentsPage.clickCreateGlobalArgumentsButton();
+        ArgumentsPage argumentsPage = createGlobalArgumentModalWindow
                 .writeIntoCollectionNameInput(nameOfArgumentsCollection)
                 .clickSaveButton();
-        final ArgumentsCollectionPage.AddArgumentModalWindow addArgumentModalWindow =
-                argumentsCollectionPage.clickAddArgumentButton();
-        argumentsCollectionPage = addArgumentModalWindow
+        final ArgumentsPage.AddArgumentModalWindow addArgumentModalWindow =
+                argumentsPage.clickAddArgumentButton();
+        argumentsPage = addArgumentModalWindow
                 .writeIntoArgumentNameInput(nameOfArgument)
                 .writeIntoDefaultValueinput(devaultArgumentValue)
                 .clickSaveButton();

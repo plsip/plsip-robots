@@ -7,8 +7,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class GlobalArgumentsPage extends BasePage {
 
-    @FindBy(xpath = "//button//span[text()='Create Arguments Collection']")
-    private WebElement createArgumentCollectionsButton;
+    @FindBy(xpath="//h1")
+    private WebElement h1;
+
+    @FindBy(xpath = "//button//span[text()='Create Global arguments']")
+    private WebElement createGlobalArgumentsButton;
 
     public GlobalArgumentsPage(final WebDriver driver, final String url) {
         super(driver, url);
@@ -16,15 +19,18 @@ public class GlobalArgumentsPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return false;
+        return h1.getText().equals("Global arguments");
     }
 
-    CreateArgumentsCollectionModalWindow clickCreateArgumentsCollectionButton() {
-        createArgumentCollectionsButton.click();
-        return new CreateArgumentsCollectionModalWindow(driver);
+    CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
+        createGlobalArgumentsButton.click();
+        return new CreateGlobalArgumentModalWindow(driver);
     }
 
-    public class CreateArgumentsCollectionModalWindow extends BasePage {
+    public class CreateGlobalArgumentModalWindow extends BasePage {
+
+        @FindBy(xpath="//h2")
+        private WebElement h2;
 
         @FindBy(xpath = "//input[@name='name']")
         private WebElement collectionNameInput;
@@ -35,23 +41,24 @@ public class GlobalArgumentsPage extends BasePage {
         @FindBy(xpath = "//button//span[text()='Save']")
         private WebElement saveButton;
 
-        public CreateArgumentsCollectionModalWindow(final WebDriver driver) {
+        public CreateGlobalArgumentModalWindow(final WebDriver driver) {
             super(driver);
         }
 
         @Override
         protected boolean isAt() {
-            return false;
+            waitForVisibilityOf(h2);
+            return h2.getText().equals("Create Global argument");
         }
 
-        CreateArgumentsCollectionModalWindow writeIntoCollectionNameInput(String collectionName) {
+        CreateGlobalArgumentModalWindow writeIntoCollectionNameInput(String collectionName) {
             collectionNameInput.sendKeys(collectionName);
             return this;
         }
 
-        ArgumentsCollectionPage clickSaveButton() {
+        ArgumentsPage clickSaveButton() {
             saveButton.click();
-            return new ArgumentsCollectionPage(driver);
+            return new ArgumentsPage(driver);
         }
 
     }
