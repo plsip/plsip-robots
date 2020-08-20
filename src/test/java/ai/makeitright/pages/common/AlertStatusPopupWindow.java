@@ -8,21 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AlertStatusPopupWindow extends BasePage {
-    public AlertStatusPopupWindow(final WebDriver driver) {
-        super(driver);
-    }
-
-    @Override
-    protected boolean isAt() {
-        try {
-            Assertions.assertTrue(waitForVisibilityOf(txtStatus));
-            return true;
-        } catch(Exception e) {
-            Main.report.logFail("There is no visible alert status on popup window");
-            return false;
-        }
-    }
-
     @FindBy(xpath = "//div[@class='Polaris-Banner__Ribbon']/span")
     private WebElement imgBanner;
 
@@ -32,6 +17,20 @@ public class AlertStatusPopupWindow extends BasePage {
     @FindBy(xpath = "//p[@class='Polaris-Heading']")
     private WebElement txtStatus;
 
+    public AlertStatusPopupWindow(final WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    protected boolean isAt() {
+        try {
+            Assertions.assertTrue(waitForVisibilityOf(txtStatus));
+            return true;
+        } catch (Exception e) {
+            Main.report.logFail("There is no visible alert status on popup window");
+            return false;
+        }
+    }
 
     public boolean isBannerRibbon(String banner) {
         try {
