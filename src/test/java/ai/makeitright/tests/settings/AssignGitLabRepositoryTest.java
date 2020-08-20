@@ -37,7 +37,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         accesstoken = System.getProperty("secretParameters.accesstoken");
         companyname = System.getProperty("inputParameters.companyname");
         email = System.getProperty("inputParameters.email");
-        password = System.getProperty("secretParameters.password");
+        password = System.getProperty("inputParameters.password");
         passwordgitlab = System.getProperty("secretParameters.passwordgitlab");
         powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
         projectname = System.getProperty("inputParameters.projectname");
@@ -48,10 +48,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     @Test
     public void assignRepository() {
-        System.out.println(System.getProperty("secretParameters"));
-        System.out.println(System.getProperty("secretParameters.accesstoken"));
-        System.out.println(System.getProperty("secretParameters.passwordgitlab"));
-        System.out.println(System.getProperty("secretParameters.password"));
+
         driver.get(urlgitlab);
         driver.manage().window().maximize();
 
