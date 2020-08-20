@@ -35,7 +35,7 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isBannerRibbon(String banner) {
         try {
             String bannerAttributeClass = imgBanner.getAttribute("class");
-            if(bannerAttributeClass.contains(banner)) {
+            if (bannerAttributeClass.contains(banner)) {
                 Main.report.logPass("Popup window has banner ribbon with color '" + banner + "'");
                 return true;
             } else {
@@ -43,7 +43,7 @@ public class AlertStatusPopupWindow extends BasePage {
                 return false;
             }
 
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             Main.report.logFail("There was no banner ribbon");
             return false;
         }
@@ -52,7 +52,7 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isAlertStatus(String expectedStatus) {
         try {
             String statusAlert = txtStatus.getText();
-            if(statusAlert.equals(expectedStatus)) {
+            if (statusAlert.equals(expectedStatus)) {
                 Main.report.logPass("Popup window has alert status: '" + statusAlert + "'");
                 return true;
             } else {
@@ -60,7 +60,7 @@ public class AlertStatusPopupWindow extends BasePage {
                 return false;
             }
 
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             Main.report.logFail("There was no alert status");
             return false;
         }
@@ -69,7 +69,7 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isAlertMessage(String message) {
         try {
             String messageAlert = txtMessageAlert.getText();
-            if (messageAlert.replaceAll("\\s+","").contains(message.replaceAll("\\s+",""))) {
+            if (messageAlert.replaceAll("\\s+", "").contains(message.replaceAll("\\s+", ""))) {
                 Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
                 return true;
             } else {
