@@ -115,8 +115,8 @@ public class Reporter extends DriverConfig {
         }
     }
 
-    public void logScreenShot(String imagePath) {
-        logScreenShot(imagePath, LogStatus.INFO);
+    public void logScreenShot() {
+        logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
     }
 
     public void logScreenShot(String imagePath, LogStatus status) {
