@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ArgumentsCollectionsPage extends BasePage {
+public class GlobalArgumentsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Create Arguments Collection']")
     private WebElement createArgumentCollectionsButton;
 
-    public ArgumentsCollectionsPage(final WebDriver driver, final String url) {
+    public GlobalArgumentsPage(final WebDriver driver, final String url) {
         super(driver, url);
     }
 

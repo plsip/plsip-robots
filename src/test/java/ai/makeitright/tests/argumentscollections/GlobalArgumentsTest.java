@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ArgumentsCollectionsTest extends DriverConfig {
+public class GlobalArgumentsTest extends DriverConfig {
 
     //from configuration:
     private String pfSignInUrl;
@@ -43,10 +43,10 @@ public class ArgumentsCollectionsTest extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Global arguments");
 
-        final ArgumentsCollectionsPage argumentsCollectionsPage =
-                new ArgumentsCollectionsPage(driver, pfSignInUrl);
-        final ArgumentsCollectionsPage.CreateArgumentsCollectionModalWindow createArgumentsCollectionModalWindow =
-                argumentsCollectionsPage.clickCreateArgumentsCollectionButton();
+        final GlobalArgumentsPage globalArgumentsPage =
+                new GlobalArgumentsPage(driver, pfSignInUrl);
+        final GlobalArgumentsPage.CreateArgumentsCollectionModalWindow createArgumentsCollectionModalWindow =
+                globalArgumentsPage.clickCreateArgumentsCollectionButton();
         ArgumentsCollectionPage argumentsCollectionPage = createArgumentsCollectionModalWindow
                 .writeIntoCollectionNameInput(nameOfArgumentsCollection)
                 .clickSaveButton();
