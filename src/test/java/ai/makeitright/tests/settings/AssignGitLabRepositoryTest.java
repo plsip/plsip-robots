@@ -34,7 +34,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     @Before
     public void before() {
-        accesstoken = System.getProperty("secretParameters.accesstoken");
+        accesstoken = System.getProperty("inputParameters.accesstoken");
         companyname = System.getProperty("inputParameters.companyname");
         email = System.getProperty("inputParameters.email");
         password = System.getProperty("inputParameters.password");
