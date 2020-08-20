@@ -2,13 +2,13 @@ package ai.makeitright.pages;
 
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Action;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ public abstract class BasePage {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
-        Assertions.assertTrue(isAt());
+        Assert.assertTrue(isAt());
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 
@@ -33,7 +33,7 @@ public abstract class BasePage {
         this.url = url;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
-        Assertions.assertTrue(isAt());
+        Assert.assertTrue(isAt());
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 
@@ -43,7 +43,7 @@ public abstract class BasePage {
         this.param = param;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
-        Assertions.assertTrue(isAt());
+        Assert.assertTrue(isAt());
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 

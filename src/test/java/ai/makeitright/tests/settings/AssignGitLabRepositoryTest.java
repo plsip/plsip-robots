@@ -10,10 +10,10 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settigns.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class AssignGitLabRepositoryTest extends DriverConfig {
 
@@ -32,7 +32,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     //for reporting:
     private String repositoryAddress;
 
-    @Before
+    @BeforeMethod
     public void before() {
         accesstoken = System.getProperty("inputParameters.accesstoken");
         companyname = System.getProperty("inputParameters.companyname");
@@ -89,13 +89,13 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .selectYourMainScriptRepository(projectName)
                 .clickSaveButton();
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
-        Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
-        Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assertions.assertTrue(statusPopupWindow.isAlertMessage("The repository has been added successfully! Let the adventure begin"));
-        Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage("The repository has been added successfully! Let the adventure begin"));
+        Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
     }
 
-    @After
+    @AfterMethod
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("repositoryaddress", repositoryAddress);

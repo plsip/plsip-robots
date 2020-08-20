@@ -1,10 +1,10 @@
 package ai.makeitright.pages.todoist;
 
 import ai.makeitright.pages.BasePage;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -26,7 +26,7 @@ public class MainTodoistPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
+        Assert.assertEquals(url, driver.getCurrentUrl(),
                 "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }

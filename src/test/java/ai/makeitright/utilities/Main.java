@@ -1,7 +1,8 @@
 package ai.makeitright.utilities;
 
-import org.junit.After;
-import org.junit.Before;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class Main {
     public static Reporter report;
@@ -10,13 +11,13 @@ public class Main {
     public static String serviceName = "";
     public String finalMsg = "";
 
-    @Before
+    @BeforeMethod
     public void tearUp() {
         report = new Reporter(artifactsPath + System.getProperty("file.separator") + reportName);
         report.startTest(serviceName);
     }
 
-    @After
+    @AfterMethod
     public void afterMethod() {
         report.closeRaport();
     }

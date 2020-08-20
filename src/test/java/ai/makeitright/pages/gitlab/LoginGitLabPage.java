@@ -2,10 +2,10 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class LoginGitLabPage extends BasePage {
 
@@ -28,7 +28,7 @@ public class LoginGitLabPage extends BasePage {
         if (!url.equals(driver.getCurrentUrl())) {
             Main.report.logFail("Current URL is not like expected " + url);
         }
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
+        Assert.assertEquals(url, driver.getCurrentUrl(),
                 "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }
