@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class GlobalArgumentsTest extends DriverConfig {
 
@@ -27,7 +28,7 @@ public class GlobalArgumentsTest extends DriverConfig {
     }
 
     @Test
-    public void createArgumentsCollection() {
+    public void createArgumentsCollection() throws InterruptedException {
 
         Faker faker = new Faker();
         String nameOfArgumentsCollection = faker.funnyName().name();
@@ -57,8 +58,8 @@ public class GlobalArgumentsTest extends DriverConfig {
                 .writeIntoDefaultValueinput(devaultArgumentValue)
                 .clickSaveButton();
 
-//        Assertions
-
+        Assertions.assertTrue(
+                argumentsPage.checkIfArgumentIsDisplayed(nameOfArgument));
 
     }
 

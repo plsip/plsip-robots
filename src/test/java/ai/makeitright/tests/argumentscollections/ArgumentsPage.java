@@ -7,15 +7,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class ArgumentsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Add Argument']")
-    WebElement addArgumentButton;
+    private WebElement addArgumentButton;
+
+    @FindBy(xpath = "//ul[@class='Polaris-ResourceList']")
+    private WebElement unorderedList;
 
     @FindAll(
-            {@FindBy(xpath = "//li[@class='Polaris-ResourceList__ItemWrapper']")}
+            {@FindBy(xpath = "//li[@class='Polaris-ResourceList__ItemWrapper']//div[@class='text-dotted']")}
     )
-    WebElement itemsOfUnorderedList;
+    private List<WebElement> itemsOfUnorderedList;
 
 
     public ArgumentsPage(final WebDriver driver) {
@@ -34,9 +39,14 @@ public class ArgumentsPage extends BasePage {
 
     Action action = new Action(driver);
 
+    boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
+        WebElement x = action.getItemFromUnorderedList(unorderedList, itemsOfUnorderedList, itemOfList);
+        return x != null;
+    }
+
     public class AddArgumentModalWindow extends BasePage {
 
-        @FindBy(xpath = "//h2")
+        @FindBy(xpath = "//div[@role='dialog']//h2")
         private WebElement h2;
 
         @FindBy(xpath = "//input[@name='key']")

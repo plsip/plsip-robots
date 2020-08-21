@@ -98,7 +98,21 @@ public class Action {
         throw new InterruptedException("The option '" + option + "' doesn't exist in dropdown");
     }
 
-
+    public WebElement getItemFromUnorderedList(WebElement unorderedList, List<WebElement> itemsOfUnorderedList, String itemOfList) throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Main.report.logInfo("Search listItem '" + itemOfList + "'");
+        if (itemsOfUnorderedList.isEmpty()) {
+            throw new InterruptedException("Unordered list is empty");
+        }
+        for (WebElement item : itemsOfUnorderedList) {
+            if (item.getText().equals(itemOfList)) {
+                Main.report.logPass("The item '" + item.getText() + "' was found in unordered list.");
+                return item;
+            }
+        }
+        Main.report.logFail("The list item '" + itemOfList + "' doesn't exist in unerdered list.");
+        throw new InterruptedException("The option '" + itemOfList + "' doesn't exist in underdered list.");
+    }
 
     public void hoverMouseOver(WebElement element) {
         Main.report.logInfo("Move mouse to element");
