@@ -38,14 +38,13 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         companyname = System.getProperty("inputParameters.companyname");
         email = System.getProperty("inputParameters.email");
         password = System.getProperty("inputParameters.password");
-        passwordgitlab = System.getProperty("secretParameters.passwordgitlab");
+        passwordgitlab = System.getProperty("inputParameters.passwordgitlab");
         powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
         projectname = System.getProperty("inputParameters.projectname");
         repositorytocopy = System.getProperty("inputParameters.repositorytocopy");
         urlgitlab = System.getProperty("inputParameters.urlgitlab");
         usernamegitlab = System.getProperty("inputParameters.usernamegitlab");
     }
-
 
     @Test
     public void assignRepository() {
