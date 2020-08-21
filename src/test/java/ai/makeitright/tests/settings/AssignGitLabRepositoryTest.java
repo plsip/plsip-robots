@@ -46,6 +46,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         usernamegitlab = System.getProperty("inputParameters.usernamegitlab");
     }
 
+
     @Test
     public void assignRepository() {
 
