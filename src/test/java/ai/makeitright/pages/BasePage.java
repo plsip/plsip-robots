@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
 
     protected WebDriver driver;
+    protected String param;
     protected String url;
 
     public BasePage(final WebDriver driver) {
@@ -31,6 +32,16 @@ public abstract class BasePage {
     public BasePage(final WebDriver driver, final String url) {
         this.driver = driver;
         this.url = url;
+        PageFactory.initElements(this.driver, this);
+        Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
+        Assertions.assertTrue(isAt());
+        Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
+    }
+
+    public BasePage(final WebDriver driver, final String url, final String param) {
+        this.driver = driver;
+        this.url = url;
+        this.param = param;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
         Assertions.assertTrue(isAt());
