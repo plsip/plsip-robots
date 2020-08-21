@@ -37,7 +37,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         accesstoken = System.getProperty("secretParameters.accesstoken");
         companyname = System.getProperty("inputParameters.companyname");
         email = System.getProperty("inputParameters.email");
-        password = System.getProperty("inputParameters.password");
+        password = System.getProperty("secretParameters.password");
         passwordgitlab = System.getProperty("secretParameters.passwordgitlab");
         powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
         projectname = System.getProperty("inputParameters.projectname");
