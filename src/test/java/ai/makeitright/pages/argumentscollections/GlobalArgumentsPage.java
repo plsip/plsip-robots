@@ -1,4 +1,4 @@
-package ai.makeitright.tests.argumentscollections;
+package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,7 @@ public class GlobalArgumentsPage extends BasePage {
         return h1.getText().equals("Global arguments");
     }
 
-    CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
+    public CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
         createGlobalArgumentsButton.click();
         return new CreateGlobalArgumentModalWindow(driver);
     }
@@ -51,12 +51,12 @@ public class GlobalArgumentsPage extends BasePage {
             return h2.getText().equals("Create Global argument");
         }
 
-        CreateGlobalArgumentModalWindow writeIntoCollectionNameInput(String collectionName) {
+        public CreateGlobalArgumentModalWindow writeIntoCollectionNameInput(String collectionName) {
             collectionNameInput.sendKeys(collectionName);
             return this;
         }
 
-        ArgumentsPage clickSaveButton() {
+        public ArgumentsPage clickSaveButton() {
             saveButton.click();
             return new ArgumentsPage(driver);
         }

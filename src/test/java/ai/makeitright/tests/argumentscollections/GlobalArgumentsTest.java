@@ -1,5 +1,7 @@
 package ai.makeitright.tests.argumentscollections;
 
+import ai.makeitright.pages.argumentscollections.ArgumentsPage;
+import ai.makeitright.pages.argumentscollections.GlobalArgumentsPage;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;

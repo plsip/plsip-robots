@@ -1,4 +1,4 @@
-package ai.makeitright.tests.argumentscollections;
+package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Action;
@@ -32,14 +32,14 @@ public class ArgumentsPage extends BasePage {
         return btnAddArgument.isDisplayed();
     }
 
-    AddArgumentModalWindow clickButtonAddArgument() {
+    public AddArgumentModalWindow clickButtonAddArgument() {
         btnAddArgument.click();
         return new AddArgumentModalWindow(driver);
     }
 
     Action action = new Action(driver);
 
-    boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
+    public boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
         WebElement x = action.getItemFromUnorderedList(lstUnordered, itemsOfUnorderedList, itemOfList);
         return x != null;
     }
@@ -71,17 +71,17 @@ public class ArgumentsPage extends BasePage {
             return h2.getText().equals("Add argument");
         }
 
-        AddArgumentModalWindow setNameInput(String argumentName) {
+        public AddArgumentModalWindow setNameInput(String argumentName) {
             argumentNameInput.sendKeys(argumentName);
             return this;
         }
 
-        AddArgumentModalWindow writeIntoDefaultValueInput(String defaultValue) {
+        public AddArgumentModalWindow writeIntoDefaultValueInput(String defaultValue) {
             argumentDefaultValueInput.sendKeys(defaultValue);
             return this;
         }
 
-        ArgumentsPage clickSaveButton() {
+        public ArgumentsPage clickSaveButton() {
             saveButton.click();
             return new ArgumentsPage(driver);
         }
