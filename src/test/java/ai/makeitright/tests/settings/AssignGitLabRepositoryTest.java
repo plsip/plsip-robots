@@ -18,75 +18,75 @@ import org.junit.jupiter.api.Assertions;
 public class AssignGitLabRepositoryTest extends DriverConfig {
 
     //from configuration:
-    private String accesstoken;
-    private String companyname;
-    private String email;
-    private String password;
-    private String passwordgitlab;
-    private String powerFarmUrl;
-    private String projectname;
-    private String repositorytocopy;
-    private String urlgitlab;
-    private String usernamegitlab;
+    private String gitLabAccessToken;
+    private String gitLabSignInUrl;
+    private String gitLabUsername;
+    private String gitLabUserPassword;
+    private String pfCompanyName;
+    private String pfSignInUrl;
+    private String pfUserEmail;
+    private String pfUserPassword;
+    private String projectName;
+    private String repositoryToCopy;
 
     //for reporting:
     private String repositoryAddress;
 
     @Before
     public void before() {
-        accesstoken = System.getProperty("secretParameters.accesstoken");
-        companyname = System.getProperty("inputParameters.companyname");
-        email = System.getProperty("inputParameters.email");
-        password = System.getProperty("secretParameters.password");
-        passwordgitlab = System.getProperty("secretParameters.passwordgitlab");
-        powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
-        projectname = System.getProperty("inputParameters.projectname");
-        repositorytocopy = System.getProperty("inputParameters.repositorytocopy");
-        urlgitlab = System.getProperty("inputParameters.urlgitlab");
-        usernamegitlab = System.getProperty("inputParameters.usernamegitlab");
+        gitLabAccessToken = System.getProperty("secretParameters.gitLabAccessToken");
+        gitLabSignInUrl = System.getProperty("inputParameters.gitLabSignInUrl");
+        gitLabUsername = System.getProperty("inputParameters.gitLabUsername");
+        gitLabUserPassword = System.getProperty("secretParameters.passwordgitlab");
+        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
+        pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
+        pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
+        projectName = System.getProperty("inputParameters.projectName");
+        repositoryToCopy = System.getProperty("inputParameters.repositoryToCopy");
     }
 
     @Test
     public void assignRepository() {
 
-        driver.get(urlgitlab);
+        driver.get(gitLabSignInUrl);
         driver.manage().window().maximize();
 
-        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver, urlgitlab);
+        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
         loginGitLabPage
-                .setUsernameField(usernamegitlab)
-                .setPasswordField(passwordgitlab);
+                .setUsernameField(gitLabUsername)
+                .setPasswordField(gitLabUserPassword);
         ProjectsPage projectsPage = loginGitLabPage.clickSignInButton();
 
         NewProjectPage newProjectPage = projectsPage.clickNewProjectButton();
 
         newProjectPage.chooseOption("CI/CD for external repo");
         newProjectPage.clickButtonRepoByURL();
-        newProjectPage.setGitRepositoryURL(repositorytocopy);
-        String projectName = newProjectPage.setProjectName(projectname);
-        repositoryAddress = "https://gitlab.com/" + usernamegitlab + "/" + projectName;
-        Main.report.logPass("Created project '" + projectName + "'");
+        newProjectPage.setGitRepositoryURL(repositoryToCopy);
+        String allProjectName = newProjectPage.setProjectName(projectName);
+        repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName;
+        Main.report.logPass("Created project '" + allProjectName + "'");
         newProjectPage.clickPublicCheckbox();
         newProjectPage.clickCreateProjectButton();
 
         newProjectPage.clickUserPanel();
         newProjectPage.clickOptionSignOut();
 
-        driver.get(powerFarmUrl);
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl);
+        driver.get(pfSignInUrl);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
         loginPage
-                .setEmailInput(email)
-                .setPasswordInput(password);
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Repositories");
 
-        RepositoryPage repositoryPage = new RepositoryPage(driver, powerFarmUrl, companyname);
+        RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfCompanyName);
         repositoryPage
                 .clickAssignRepositoryButton()
                 .clickAssignGitLabRepositoryButton()
-                .setAccessTokenInput(accesstoken)
+                .setAccessTokenInput(gitLabAccessToken)
                 .clickSaveButton()
-                .selectYourMainScriptRepository(projectName)
+                .selectYourMainScriptRepository(allProjectName)
                 .clickSaveButton();
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
         Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
