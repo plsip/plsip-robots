@@ -37,7 +37,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         gitLabAccessToken = System.getProperty("secretParameters.gitLabAccessToken");
         gitLabSignInUrl = System.getProperty("inputParameters.gitLabSignInUrl");
         gitLabUsername = System.getProperty("inputParameters.gitLabUsername");
-        gitLabUserPassword = System.getProperty("secretParameters.passwordgitlab");
+        gitLabUserPassword = System.getProperty("secretParameters.gitLabUserPassword");
         pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
