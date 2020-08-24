@@ -12,10 +12,10 @@ import java.util.List;
 public class ArgumentsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Add Argument']")
-    private WebElement addArgumentButton;
+    private WebElement btnAddArgument;
 
     @FindBy(xpath = "//ul[@class='Polaris-ResourceList']")
-    private WebElement unorderedList;
+    private WebElement lstUnordered;
 
     @FindAll(
             {@FindBy(xpath = "//li[@class='Polaris-ResourceList__ItemWrapper']//div[@class='text-dotted']")}
@@ -29,18 +29,18 @@ public class ArgumentsPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return addArgumentButton.isDisplayed();
+        return btnAddArgument.isDisplayed();
     }
 
-    AddArgumentModalWindow clickAddArgumentButton() {
-        addArgumentButton.click();
+    AddArgumentModalWindow clickButtonAddArgument() {
+        btnAddArgument.click();
         return new AddArgumentModalWindow(driver);
     }
 
     Action action = new Action(driver);
 
     boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
-        WebElement x = action.getItemFromUnorderedList(unorderedList, itemsOfUnorderedList, itemOfList);
+        WebElement x = action.getItemFromUnorderedList(lstUnordered, itemsOfUnorderedList, itemOfList);
         return x != null;
     }
 
@@ -56,7 +56,7 @@ public class ArgumentsPage extends BasePage {
         private WebElement argumentDefaultValueInput;
 
         @FindBy(xpath = "//input[@name='isSecret']")
-        private WebElement isEncryptedCheckbox;
+        private WebElement chboxEncrypted;
 
         @FindBy(xpath = "//button//span[text()='Save']")
         private WebElement saveButton;
@@ -71,12 +71,12 @@ public class ArgumentsPage extends BasePage {
             return h2.getText().equals("Add argument");
         }
 
-        AddArgumentModalWindow writeIntoArgumentNameInput(String argumentName) {
+        AddArgumentModalWindow setNameInput(String argumentName) {
             argumentNameInput.sendKeys(argumentName);
             return this;
         }
 
-        AddArgumentModalWindow writeIntoDefaultValueinput(String defaultValue) {
+        AddArgumentModalWindow writeIntoDefaultValueInput(String defaultValue) {
             argumentDefaultValueInput.sendKeys(defaultValue);
             return this;
         }

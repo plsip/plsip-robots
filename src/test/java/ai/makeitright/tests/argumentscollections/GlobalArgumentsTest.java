@@ -18,7 +18,7 @@ public class GlobalArgumentsTest extends DriverConfig {
     private String pfUserPassword;
 
     //for reporting:
-    private String repositoryAddress;
+    private String nameOfArgumentsCollection;
 
     @Before
     public void before() {
@@ -31,7 +31,7 @@ public class GlobalArgumentsTest extends DriverConfig {
     public void createArgumentsCollection() throws InterruptedException {
 
         Faker faker = new Faker();
-        String nameOfArgumentsCollection = faker.funnyName().name();
+        nameOfArgumentsCollection = faker.funnyName().name();
         String nameOfArgument = faker.funnyName().name();
         String devaultArgumentValue = faker.funnyName().name();
 
@@ -52,10 +52,10 @@ public class GlobalArgumentsTest extends DriverConfig {
                 .writeIntoCollectionNameInput(nameOfArgumentsCollection)
                 .clickSaveButton();
         final ArgumentsPage.AddArgumentModalWindow addArgumentModalWindow =
-                argumentsPage.clickAddArgumentButton();
+                argumentsPage.clickButtonAddArgument();
         argumentsPage = addArgumentModalWindow
-                .writeIntoArgumentNameInput(nameOfArgument)
-                .writeIntoDefaultValueinput(devaultArgumentValue)
+                .setNameInput(nameOfArgument)
+                .writeIntoDefaultValueInput(devaultArgumentValue)
                 .clickSaveButton();
 
         Assertions.assertTrue(
@@ -66,7 +66,7 @@ public class GlobalArgumentsTest extends DriverConfig {
     @After
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
-        obj.put("repositoryaddress", repositoryAddress);
+        obj.put("globalargumentscollection", nameOfArgumentsCollection);
         System.setProperty("output", obj.toString());
         driver.close();
     }
