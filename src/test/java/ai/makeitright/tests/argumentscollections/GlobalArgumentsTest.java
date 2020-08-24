@@ -20,13 +20,14 @@ public class GlobalArgumentsTest extends DriverConfig {
     private String pfUserPassword;
 
     //for reporting:
+
     private String nameOfArgumentsCollection;
 
     @Before
     public void before() {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
-        pfUserPassword = System.getProperty("inputParameters.pfUserPassword");
+        pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
     }
 
     @Test
