@@ -5,10 +5,7 @@ import ai.makeitright.utilities.Methods;
 import ai.makeitright.utilities.slack.*;
 import ai.makeitright.utilities.slack.attachment.Attachment;
 import ai.makeitright.utilities.slack.attachment.AttachmentBuilder;
-import org.json.JSONObject;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SendSlackMessageTest extends DriverConfig {
@@ -26,7 +23,6 @@ public class SendSlackMessageTest extends DriverConfig {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         previousResultString = System.getProperty("previousResult");
         taskName = System.getProperty("previousResult.taskname");
-
     }
 
     @Test
