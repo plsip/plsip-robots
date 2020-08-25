@@ -46,8 +46,9 @@ public class SendSlackMessageTest extends DriverConfig {
         Message message = new MessageBuilder()
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
-                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
-                .setText(previousResultString)
+                .setText("Ala ma kota")
+//                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
+//                .setText(previousResultString)
                 .build();
 //        for (int index = 1; index <= attachmentCount; index++) {
 //            String argName = jsonArray.getString(index);
@@ -63,7 +64,6 @@ public class SendSlackMessageTest extends DriverConfig {
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", taskName);
-        obj.put("result",previousResultString);
         System.setProperty("output", obj.toString());
         driver.close();
     }
