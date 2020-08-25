@@ -33,4 +33,14 @@ public class Methods extends Main {
         FileUtils.copyFile(srcFile, new File(filePath + fileName));
         return fileName;
     }
+
+    public static String returnEnvironment(String url) {
+        if (url.contains("development")) {
+            return "DEV";
+        } else if (url.contains("staging")) {
+            return "STAGING";
+        } else {
+            return null;
+        }
+    }
 }
