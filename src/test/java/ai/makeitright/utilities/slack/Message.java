@@ -1,8 +1,10 @@
 package ai.makeitright.utilities.slack;
 
+import ai.makeitright.utilities.slack.attachment.Attachment;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Message implements Serializable {
     private String channel;
@@ -12,6 +14,7 @@ public class Message implements Serializable {
     private String iconUrl;
     @SerializedName("icon_emoji")
     private String iconEmoji;
+    private List<Attachment> attachments;
 
     public Message() {
     }
@@ -22,6 +25,7 @@ public class Message implements Serializable {
         this.username = messageBuilder.getUsername();
         this.iconUrl = messageBuilder.getIconUrl();
         this.iconEmoji = messageBuilder.getIconEmoji();
+        this.attachments = messageBuilder.getAttachments();
     }
 
     public String getChannel() {
@@ -62,6 +66,14 @@ public class Message implements Serializable {
 
     public void setIconEmoji(String iconEmoji) {
         this.iconEmoji = iconEmoji;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
 }
