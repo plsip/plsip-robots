@@ -47,8 +47,8 @@ public class SendSlackMessageTest extends DriverConfig {
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
                 .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
-                .setText("Task: " + taskName)
-                .setText(previousResultString)
+//                .setText("Task: " + taskName)
+//                .setText(previousResultString)
                 .build();
         webhook.postMessage(message);
 //
