@@ -11,10 +11,12 @@ import org.junit.Test;
 public class SendSlackMessageTest extends DriverConfig {
 
     private String previousResultString;
+    private String taskName;
 
     @Before
     public void before() {
-        previousResultString = System.getProperty("previousResult");
+        previousResultString = System.getProperty("previousResult.result");
+        taskName = System.getProperty("previousResult.taskname");
     }
 
     @Test
@@ -30,6 +32,7 @@ public class SendSlackMessageTest extends DriverConfig {
         Message message = new MessageBuilder()
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
+                .setText("Task: " + taskName)
                 .setText(previousResultString)
                 .build();
         webhook.postMessage(message);
