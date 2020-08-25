@@ -98,10 +98,8 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        JSONObject objResult = new JSONObject();
         obj.put("taskname","Assign GitLab repository");
-        objResult.put("repositoryaddress", repositoryAddress);
-        obj.put("result",objResult);
+        obj.put("repositoryaddress", repositoryAddress);
         System.setProperty("output", obj.toString());
         driver.close();
     }

@@ -9,6 +9,7 @@ import com.slack.api.methods.MethodsClient;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class SendSlackMessageTest extends DriverConfig {
     @Before
     public void before() {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
-        previousResultString = System.getProperty("previousResult.result");
+        previousResultString = System.getProperty("previousResult");
         taskName = System.getProperty("previousResult.taskname");
 
     }
@@ -46,7 +47,7 @@ public class SendSlackMessageTest extends DriverConfig {
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
                 .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
-                .setText(taskName)
+                .setText(previousResultString)
                 .build();
 //        for (int index = 1; index <= attachmentCount; index++) {
 //            String argName = jsonArray.getString(index);
@@ -56,5 +57,14 @@ public class SendSlackMessageTest extends DriverConfig {
 //        }
 //                .build();
 //        webhook.postMessage(message);
+    }
+
+    @After
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("taskname", taskName);
+        obj.put("result",previousResultString);
+        System.setProperty("output", obj.toString());
+        driver.close();
     }
 }
