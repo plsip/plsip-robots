@@ -23,7 +23,7 @@ public class SendSlackMessageTest extends DriverConfig {
     @Before
     public void before() {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
-        previousResultString = System.getProperty("previousResult");
+        previousResultString = System.getProperty("previousResult.result");
         taskName = System.getProperty("previousResult.taskname");
 
     }
@@ -46,9 +46,12 @@ public class SendSlackMessageTest extends DriverConfig {
         Message message = new MessageBuilder()
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
-                .setText("Ala ma kota")
+                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
+                .setText("Task: " + taskName)
+                .setText(previousResultString)
                 .build();
-//                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
+        webhook.postMessage(message);
+//
 //                .setText(previousResultString)
 
 //        for (int index = 1; index <= attachmentCount; index++) {
@@ -61,11 +64,4 @@ public class SendSlackMessageTest extends DriverConfig {
 //        webhook.postMessage(message);
     }
 
-    @After
-    public void prepareJson() {
-        JSONObject obj = new JSONObject();
-        obj.put("taskname", taskName);
-        System.setProperty("output", obj.toString());
-        driver.close();
-    }
 }
