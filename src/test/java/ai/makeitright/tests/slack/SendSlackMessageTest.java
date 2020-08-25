@@ -42,18 +42,18 @@ public class SendSlackMessageTest extends DriverConfig {
 
 //        JsonObject jsonObject = new JsonParser().parse(previousResultString).getAsJsonObject();
 //        int attachmentCount = jsonObject.size();
-        JSONObject jsonObject = new JSONObject().getJSONObject(previousResultString);
-        JSONArray jsonArray = jsonObject.names();
-        int attachmentCount = jsonObject.length();
+//        JSONObject jsonObject = new JSONObject().getJSONObject(previousResultString);
+//        JSONArray jsonArray = jsonObject.names();
+//        int attachmentCount = jsonObject.length();
         MessageBuilder messageBuilder = new MessageBuilder()
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("Automation Tests Message")
                 .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl));
-//        messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
+        messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
 
-        for(int index = 1; index <= attachmentCount; index++) {
-            messageBuilder.addAttachment(generateMessageAttachment(jsonArray.getString(index),jsonArray.optString(index)));
-        }
+//        for(int index = 1; index <= attachmentCount; index++) {
+//            messageBuilder.addAttachment(generateMessageAttachment(jsonArray.getString(index),jsonArray.optString(index)));
+//        }
 //        AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
 //                .setTitle("Task: " + taskName)
 //                .setText(previousResultString)
@@ -88,15 +88,21 @@ public class SendSlackMessageTest extends DriverConfig {
 
     public static Attachment generateMessageAttachment(String taskName, String result) {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
-//                .setTitle("Task: " + taskName)
-//                .setText(result)
-                .setTitle("Task")
-                .setText("ferf")
+                .setTitle("Task: " + taskName)
+                .setText(result)
                 .setColor("#000000")
-                .addField(new AttachmentField(taskName,result))
                 .setFooter("Created by " + SendSlackMessageTest.class.getSimpleName());
 
         return attachmentBuilder.build();
+    }
+
+    @After
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("taskname",taskName);
+        obj.put("result",previousResultString);
+        System.setProperty("output", obj.toString());
+        driver.close();
     }
 
 }
