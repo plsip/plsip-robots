@@ -5,6 +5,7 @@ import ai.makeitright.utilities.slack.*;
 import com.slack.api.methods.MethodsClient;
 import org.json.JSONObject;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SendSlackMessageTest extends DriverConfig {
