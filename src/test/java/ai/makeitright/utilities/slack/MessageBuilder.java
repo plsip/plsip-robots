@@ -1,11 +1,17 @@
 package ai.makeitright.utilities.slack;
 
+import ai.makeitright.utilities.slack.attachment.Attachment;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MessageBuilder {
     private String channel;
     private String text;
     private String username;
     private String icon_url;
     private String icon_emoji;
+    private List<Attachment> attachments;
 
     public MessageBuilder() {
     }
@@ -68,4 +74,20 @@ public class MessageBuilder {
         return this;
     }
 
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public MessageBuilder setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+        return this;
+    }
+
+    public MessageBuilder addAttachment(Attachment attachment) {
+        if (attachments == null) {
+            attachments = new ArrayList<>();
+        }
+        attachments.add(attachment);
+        return this;
+    }
 }
