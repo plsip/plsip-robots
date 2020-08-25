@@ -47,9 +47,10 @@ public class SendSlackMessageTest extends DriverConfig {
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("AutomationTests")
                 .setText("Ala ma kota")
+                .build();
 //                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl))
 //                .setText(previousResultString)
-                .build();
+
 //        for (int index = 1; index <= attachmentCount; index++) {
 //            String argName = jsonArray.getString(index);
 //            message.getText(jsonObject.getString(argName));
