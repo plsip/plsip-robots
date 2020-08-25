@@ -28,7 +28,7 @@ public class SendSlackMessageTest extends DriverConfig {
     @Before
     public void before() {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
-        previousResultString = System.getProperty("previousResult.result");
+        previousResultString = System.getProperty("previousResult");
         taskName = System.getProperty("previousResult.taskname");
 
     }
