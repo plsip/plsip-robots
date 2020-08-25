@@ -42,15 +42,18 @@ public class SendSlackMessageTest extends DriverConfig {
 
 //        JsonObject jsonObject = new JsonParser().parse(previousResultString).getAsJsonObject();
 //        int attachmentCount = jsonObject.size();
-//        JSONObject jsonObject = new JSONObject().getJSONObject(previousResultString);
-//        JSONArray jsonArray = jsonObject.names();
-//        int attachmentCount = jsonObject.length();
+        JSONObject jsonObject = new JSONObject().getJSONObject(previousResultString);
+        JSONArray jsonArray = jsonObject.names();
+        int attachmentCount = jsonObject.length();
         MessageBuilder messageBuilder = new MessageBuilder()
                 .setChannel("@Katarzyna Raczkowska")
                 .setUsername("Automation Tests Message")
                 .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl));
-        messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
+//        messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
 
+        for(int index = 1; index <= attachmentCount; index++) {
+            messageBuilder.addAttachment(generateMessageAttachment(jsonArray.getString(index),jsonArray.optString(index)));
+        }
 //        AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
 //                .setTitle("Task: " + taskName)
 //                .setText(previousResultString)
@@ -85,9 +88,12 @@ public class SendSlackMessageTest extends DriverConfig {
 
     public static Attachment generateMessageAttachment(String taskName, String result) {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
-                .setTitle("Task: " + taskName)
-                .setText(result)
+//                .setTitle("Task: " + taskName)
+//                .setText(result)
+                .setTitle("Task")
+                .setText("ferf")
                 .setColor("#000000")
+                .addField(new AttachmentField(taskName,result))
                 .setFooter("Created by " + SendSlackMessageTest.class.getSimpleName());
 
         return attachmentBuilder.build();
