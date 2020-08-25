@@ -5,12 +5,6 @@ import ai.makeitright.utilities.Methods;
 import ai.makeitright.utilities.slack.*;
 import ai.makeitright.utilities.slack.attachment.Attachment;
 import ai.makeitright.utilities.slack.attachment.AttachmentBuilder;
-import ai.makeitright.utilities.slack.attachment.AttachmentField;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.slack.api.methods.MethodsClient;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +16,14 @@ public class SendSlackMessageTest extends DriverConfig {
     private String pfSignInUrl;
     private String previousResultString;
     private String taskName;
+
+//    @BeforeClass
+//    public static void beforeClass() {
+//        System.setProperty("inputParameters.pfSignInUrl","development");
+//        System.setProperty("previousResult.result","{\"repositoryaddress\": \"https://gitlab.com/kraczkowska/notusefortask_automated20200825203741\"" +
+//                "    }");
+//        System.setProperty("previousResult.taskname","Assign");
+//    }
 
     @Before
     public void before() {
