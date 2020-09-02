@@ -2,6 +2,7 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -78,8 +79,7 @@ public class NewProjectPage extends BasePage {
     }
 
     public String setProjectName(String projectName) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-        projectName = projectName + formatter.format(new GregorianCalendar().getTime());
+        projectName = projectName + Methods.getDateTime("yyyyMMddHHmmss");
         sendText(inpProjectName, projectName, "input element 'Project name'");
         return projectName;
     }

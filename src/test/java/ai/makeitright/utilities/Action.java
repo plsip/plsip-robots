@@ -103,5 +103,11 @@ public class Action {
 		actions.moveToElement(element).perform();
 		Main.report.logPass("Mouse was moved to element");
 	}
+
+	public void sendText(WebElement element, String text, String elementDescription) {
+		Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
+		actions.sendKeys(element, text).build().perform();
+		Main.report.logPass("Text was entered");
+	}
 	
 }

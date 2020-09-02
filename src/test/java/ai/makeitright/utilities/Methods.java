@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Methods extends Main {
+
     public static String getDateTime(String format) {
         return new SimpleDateFormat(format).format(new GregorianCalendar().getTime());
     }

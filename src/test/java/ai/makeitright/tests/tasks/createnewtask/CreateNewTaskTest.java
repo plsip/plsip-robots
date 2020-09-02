@@ -2,39 +2,38 @@ package ai.makeitright.tests.tasks.createnewtask;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.settigns.RepositoryPage;
 import ai.makeitright.pages.tasks.CreateTaskModalWindow;
+import ai.makeitright.pages.tasks.TaskDetailsPage;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
+import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class CreateNewTaskTest extends DriverConfig {
 
     //from configuration
-    private String companyname;
+    private String createdBy;
     private String email;
     private String password;
     private String powerFarmUrl;
-    private String taskname;
-
-    @BeforeClass
-    public static void beforeClass() {
-        System.setProperty("inputParameters.companyname","mir-mvp");
-        System.setProperty("inputParameters.email","katarzyna.raczkowska@makeitright.ai");
-        System.setProperty("secretParameters.password","TestyAutomatyczne");
-        System.setProperty("inputParameters.powerFarm_url","https://development.powerfarm.ai/signin");
-        System.setProperty("inputParameters.taskname","notuse_automated_task");
-    }
+    private String repository;
+    private String scriptDirectory;
+    private String taskName;
+    private String technology;
 
     @Before
     public void before() {
-        companyname = System.getProperty("inputParameters.companyname");
+        createdBy = System.getProperty("inputParameters.createdBy");
         email = System.getProperty("inputParameters.email");
         password = System.getProperty("secretParameters.password");
         powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
-        taskname = System.getProperty("inputParameters.taskname");
+        repository = System.getProperty("inputParameters.repository");
+        scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
+        taskName = System.getProperty("inputParameters.taskName");
+        technology = System.getProperty("inputParameters.technology");
     }
 
     @Test
@@ -51,7 +50,25 @@ public class CreateNewTaskTest extends DriverConfig {
 
         TasksPage tasksPage = new TasksPage(driver);
         CreateTaskModalWindow createTaskModalWindow = tasksPage.clickCreateNewTaskButton();
-        createTaskModalWindow.setName(taskname);
+        createTaskModalWindow.setName(taskName);
+        createTaskModalWindow.selectTechnology(technology);
+        createTaskModalWindow.selectScriptDirectory(repository);
+        createTaskModalWindow.setScriptDirectory(scriptDirectory);
+        TaskDetailsPage taskDetailsPage = createTaskModalWindow.clickCreateTaskButton();
 
+        Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
+
+        taskName = createTaskModalWindow.getName();
+    }
+
+    @After
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("taskName", taskName);
+        obj.put("createdBy", createdBy);
+        obj.put("technology",technology);
+        obj.put("scriptDirectory",repository+scriptDirectory);
+        System.setProperty("output", obj.toString());
+        driver.close();
     }
 }

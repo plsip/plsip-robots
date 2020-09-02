@@ -4,6 +4,7 @@ import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Action;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -76,12 +77,19 @@ public abstract class BasePage {
         Main.report.logPass("Text was entered");
     }
 
+    public void sendTextWithJavascriptExecutor(final WebElement element, final String text, final String elementDescription) {
+        Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].value='" + text + "';", element);
+        Main.report.logPass("Text was entered");
+    }
+
     public boolean waitForBlueCircleDisappear() {
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
         Main.report.logInfo("Wait max 60s until blue rounding circle disappears...");
         try {
             driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
+            new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
         } catch (Exception e) {
             Main.report.logFail("Blue rounding circle was still displayed");
             return false;
@@ -92,7 +100,7 @@ public abstract class BasePage {
 
     public boolean waitForClickable(final WebElement element) {
         try {
-            new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(element));
+            new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
             return false;
@@ -101,7 +109,7 @@ public abstract class BasePage {
 
     public boolean waitForVisibilityOf(final WebElement element) {
         try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(element));
+            new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (Exception e) {
             return false;
