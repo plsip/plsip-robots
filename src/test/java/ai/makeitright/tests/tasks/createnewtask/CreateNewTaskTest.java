@@ -27,9 +27,9 @@ public class CreateNewTaskTest extends DriverConfig {
     @Before
     public void before() {
         createdBy = System.getProperty("inputParameters.createdBy");
-        email = System.getProperty("inputParameters.email");
-        password = System.getProperty("secretParameters.password");
-        powerFarmUrl = System.getProperty("inputParameters.powerFarm_url");
+        email = System.getProperty("inputParameters.pfUserEmail");
+        password = System.getProperty("secretParameters.pfUserPassword");
+        powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         repository = System.getProperty("inputParameters.repository");
         scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
         taskName = System.getProperty("inputParameters.taskName");
