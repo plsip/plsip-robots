@@ -67,7 +67,7 @@ public class CreateNewTaskTest extends DriverConfig {
         obj.put("taskName", taskName);
         obj.put("createdBy", createdBy);
         obj.put("technology",technology);
-        obj.put("scriptDirectory",repository+scriptDirectory);
+        obj.put("scriptDirectory",repository + "tree/master/" + scriptDirectory);
         System.setProperty("output", obj.toString());
         driver.close();
     }
