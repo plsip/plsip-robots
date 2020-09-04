@@ -11,14 +11,12 @@ public class SendSlackMessageTest extends DriverConfig {
 
     private String channel;
     private String hookUrl;
-    private String previousResultString;
     private String taskName;
 
     @Before
     public void before() {
         channel = System.getProperty("inputParameters.channel");
         hookUrl = System.getProperty("secretParameters.hookUrl");
-        previousResultString = System.getProperty("previousResult");
         taskName = System.getProperty("previousResult.taskname");
     }
 
@@ -29,15 +27,14 @@ public class SendSlackMessageTest extends DriverConfig {
                 .setChannel(channel)
                 .setUsername("Automation Tests Message")
                 .setText("Success");
-        messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
+        messageBuilder.addAttachment(generateMessageAttachment(taskName));
         webhook.postMessageSynchronous(messageBuilder.build());
 
     }
 
-    public static Attachment generateMessageAttachment(String taskName, String result) {
+    public static Attachment generateMessageAttachment(String taskName) {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
                 .setTitle("Task: " + taskName)
-                .setText(result)
                 .setColor("#228b22")
                 .setFooter("Created by " + SendSlackMessageTest.class.getSimpleName());
 
