@@ -1,7 +1,6 @@
 package ai.makeitright.tests.slack;
 
 import ai.makeitright.utilities.DriverConfig;
-import ai.makeitright.utilities.Methods;
 import ai.makeitright.utilities.slack.*;
 import ai.makeitright.utilities.slack.attachment.Attachment;
 import ai.makeitright.utilities.slack.attachment.AttachmentBuilder;
@@ -12,7 +11,6 @@ public class SendSlackMessageTest extends DriverConfig {
 
     private String channel;
     private String hookUrl;
-    private String pfSignInUrl;
     private String previousResultString;
     private String taskName;
 
@@ -20,7 +18,6 @@ public class SendSlackMessageTest extends DriverConfig {
     public void before() {
         channel = System.getProperty("inputParameters.channel");
         hookUrl = System.getProperty("secretParameters.hookUrl");
-        pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         previousResultString = System.getProperty("previousResult");
         taskName = System.getProperty("previousResult.taskname");
     }
@@ -31,7 +28,7 @@ public class SendSlackMessageTest extends DriverConfig {
         MessageBuilder messageBuilder = new MessageBuilder()
                 .setChannel(channel)
                 .setUsername("Automation Tests Message")
-                .setText("Tests run on " + Methods.returnEnvironment(pfSignInUrl));
+                .setText("Success");
         messageBuilder.addAttachment(generateMessageAttachment(taskName,previousResultString));
         webhook.postMessageSynchronous(messageBuilder.build());
 
@@ -41,7 +38,7 @@ public class SendSlackMessageTest extends DriverConfig {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
                 .setTitle("Task: " + taskName)
                 .setText(result)
-                .setColor("#000000")
+                .setColor("#228b22")
                 .setFooter("Created by " + SendSlackMessageTest.class.getSimpleName());
 
         return attachmentBuilder.build();
