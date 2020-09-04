@@ -30,5 +30,4 @@ public class SendSlackNotificationAtTheBeginningTest extends DriverConfig {
         webhook.postMessageSynchronous(messageBuilder.build());
     }
 
-
 }

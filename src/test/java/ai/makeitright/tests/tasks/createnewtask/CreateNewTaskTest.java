@@ -72,4 +72,5 @@ public class CreateNewTaskTest extends DriverConfig {
         System.setProperty("output", obj.toString());
         driver.close();
     }
+
 }

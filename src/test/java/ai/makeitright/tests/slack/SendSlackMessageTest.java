@@ -43,5 +43,4 @@ public class SendSlackMessageTest extends DriverConfig {
 
         return attachmentBuilder.build();
     }
-
 }
