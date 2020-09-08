@@ -51,14 +51,14 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         TasksPage tasksPage = new TasksPage(driver);
         tasksPage.filterTask(taskName);
 
-//        DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
-//        Assertions.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
-//        Assertions.assertEquals(taskName,displayedTasks.getName(),"The name of task is not right");
-//        Main.report.logPass("Task has right value for 'Name'");
-//        Assertions.assertEquals(createdBy,displayedTasks.getCreatedBy(),"The value 'Created by' for task " + taskName + " is not like expected");
-//        Main.report.logPass("Task has right value for 'Created by'");
-//        Assertions.assertEquals(technology,displayedTasks.getTechnology(),"The value 'Technology' for task " + taskName + " is not like expected");
-//        Main.report.logPass("Task has right value for 'Technology'");
+        DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
+        Assertions.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
+        Assertions.assertEquals(taskName,displayedTasks.getName(),"The name of task is not right");
+        Main.report.logPass("Task has right value for 'Name'");
+        Assertions.assertEquals(createdBy,displayedTasks.getCreatedBy(),"The value 'Created by' for task " + taskName + " is not like expected");
+        Main.report.logPass("Task has right value for 'Created by'");
+        Assertions.assertEquals(technology,displayedTasks.getTechnology(),"The value 'Technology' for task " + taskName + " is not like expected");
+        Main.report.logPass("Task has right value for 'Technology'");
 //
 //        TaskDetailsPage taskDetailsPage = tasksPage.clickTaskNameLink(displayedTasks.getLnkName(), taskName);
 //        Assertions.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
