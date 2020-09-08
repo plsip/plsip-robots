@@ -38,7 +38,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     }
 
     @Test
-    public void checkDetailsOfTask() throws IOException, InterruptedException, UnsupportedFlavorException {
+    public void checkDetailsOfTask() {
         driver.get(pfSignInUrl);
         driver.manage().window().maximize();
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
@@ -68,8 +68,8 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         Assertions.assertEquals(taskDetailsPage.getTechnology(),technology,"The value for 'TECHNOLOGY' on Details page is not right");
         Main.report.logPass("Task has right value for 'TECHNOLOGY'");
         Assertions.assertEquals(taskDetailsPage.getAssignedFolderInRepository(),scriptDirectory,"The value for 'ASSIGNED FOLDER IN REPOSITORY' on Details page is not right");
-//        Main.report.logPass("Task has right value for 'ASSIGNED FOLDER IN REPOSITORY'");
-//        Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
+        Main.report.logPass("Task has right value for 'ASSIGNED FOLDER IN REPOSITORY'");
+        Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
 
     }
 

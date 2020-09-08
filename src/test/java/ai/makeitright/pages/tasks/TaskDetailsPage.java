@@ -20,6 +20,9 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//div[@id='processes-commits-panel']//div[@class='Polaris-Stack__Item']/div[@class='commits-list']")
     private WebElement lstCommits;
 
+    @FindBy(xpath = "PolarisTextField3")
+    private WebElement txtAssignedFolderInRepository;
+
     @FindBy(xpath = "//div[@class='Polaris-Stack Polaris-Stack--distributionFill']//span[text()='CREATED BY']//following-sibling::p")
     private WebElement txtCreatedBy;
 
@@ -53,16 +56,8 @@ public class TaskDetailsPage extends BasePage {
         }
     }
 
-    public String getAssignedFolderInRepository() throws IOException, InterruptedException, UnsupportedFlavorException {
-        click(btnCopy, "button 'Copy' to copy 'ASSIGNED FOLDER IN REPOSITORY' to clipboard");
-        String assignedFolderInRepository;
-        try {
-            assignedFolderInRepository = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        } catch (IllegalStateException e) {
-            TimeUnit.SECONDS.sleep(2);
-            assignedFolderInRepository = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        }
-        return assignedFolderInRepository;
+    public String getAssignedFolderInRepository() {
+        return txtAssignedFolderInRepository.getAttribute("value");
     }
 
     public String getCreatedBy() {
