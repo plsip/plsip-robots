@@ -76,7 +76,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
-        obj.put("taskname",taskname + "Check details of task");
+        obj.put("taskname",taskname + "|| Check details of task");
         System.setProperty("output", obj.toString());
         driver.close();
     }
