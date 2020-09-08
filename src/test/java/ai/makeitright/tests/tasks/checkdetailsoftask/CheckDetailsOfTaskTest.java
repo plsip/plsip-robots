@@ -23,6 +23,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     private String pfUserEmail;
     private String pfUserPassword;
     private String scriptDirectory;
+    private String taskname;
     private String taskName;
     private String technology;
 
@@ -33,6 +34,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         scriptDirectory = System.getProperty("previousResult.scriptDirectory");
+        taskname = System.getProperty("previousResult.taskname");
         taskName = System.getProperty("previousResult.taskName");
         technology = System.getProperty("previousResult.technology");
     }
@@ -77,7 +79,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
-        obj.put("taskname","Check details of task");
+        obj.put("taskname",taskname + "\nCheck details of task");
         System.setProperty("output", obj.toString());
         driver.close();
     }
