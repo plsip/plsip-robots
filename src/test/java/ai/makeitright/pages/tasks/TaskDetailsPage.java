@@ -14,7 +14,7 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//div[@id='processes-commits-panel']//div[@class='Polaris-Stack__Item']/div[@class='commits-list']")
     private WebElement lstCommits;
 
-    @FindBy(xpath = "PolarisTextField3")
+    @FindBy(xpath = "//input[@id='PolarisTextField3']")
     private WebElement txtAssignedFolderInRepository;
 
     @FindBy(xpath = "//div[@class='Polaris-Stack Polaris-Stack--distributionFill']//span[text()='CREATED BY']//following-sibling::p")
