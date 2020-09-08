@@ -39,18 +39,18 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
 
     @Test
     public void checkDetailsOfTask() {//throws IOException, InterruptedException, UnsupportedFlavorException {
-//        driver.get(pfSignInUrl);
-//        driver.manage().window().maximize();
-//        LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
-//        loginPage
-//                .setEmailInput(pfUserEmail)
-//                .setPasswordInput(pfUserPassword);
-//        LeftMenu leftMenu = loginPage.clickSignInButton();
-//        leftMenu.openPageBy("Tasks");
-//
-//        TasksPage tasksPage = new TasksPage(driver);
-//        tasksPage.filterTask(taskName);
-//
+        driver.get(pfSignInUrl);
+        driver.manage().window().maximize();
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
+        loginPage
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
+        LeftMenu leftMenu = loginPage.clickSignInButton();
+        leftMenu.openPageBy("Tasks");
+
+        TasksPage tasksPage = new TasksPage(driver);
+        tasksPage.filterTask(taskName);
+
 //        DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
 //        Assertions.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
 //        Assertions.assertEquals(taskName,displayedTasks.getName(),"The name of task is not right");
