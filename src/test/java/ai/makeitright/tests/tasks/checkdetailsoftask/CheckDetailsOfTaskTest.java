@@ -7,6 +7,8 @@ import ai.makeitright.pages.tasks.TaskDetailsPage;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -49,8 +51,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         TasksPage tasksPage = new TasksPage(driver);
         tasksPage.filterTask(taskName);
 
-        DisplayedTasks displayedTasks = null;
-        displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
+        DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
         Assertions.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
         Assertions.assertEquals(taskName,displayedTasks.getName(),"The name of task is not right");
         Main.report.logPass("Task has right value for 'Name'");
@@ -70,6 +71,15 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         Main.report.logPass("Task has right value for 'ASSIGNED FOLDER IN REPOSITORY'");
         Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
 
+    }
+
+    @After
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("taskName", taskName);
+        obj.put("taskname","Check details of task");
+        System.setProperty("output", obj.toString());
+        driver.close();
     }
 
 }
