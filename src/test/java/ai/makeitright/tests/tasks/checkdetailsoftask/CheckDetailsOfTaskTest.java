@@ -13,9 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-
 public class CheckDetailsOfTaskTest extends DriverConfig {
 
     private String createdBy;
@@ -79,7 +76,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
-        obj.put("taskname",taskname + "\nCheck details of task");
+        obj.put("taskname",taskname + "Check details of task");
         System.setProperty("output", obj.toString());
         driver.close();
     }
