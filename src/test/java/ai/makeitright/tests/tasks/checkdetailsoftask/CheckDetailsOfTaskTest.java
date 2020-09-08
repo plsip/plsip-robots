@@ -63,7 +63,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         TaskDetailsPage taskDetailsPage = tasksPage.clickTaskNameLink(displayedTasks.getLnkName(), taskName);
         Assertions.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
         Main.report.logPass("Task has right name");
-//        Assertions.assertEquals(taskDetailsPage.getCreatedBy(),createdBy,"The value for 'CREATED BY' on Details page is not right");
+        Assertions.assertEquals(taskDetailsPage.getCreatedBy(),createdBy,"The value for 'CREATED BY' on Details page is not right");
 //        Main.report.logPass("Task has right value for 'CREATED BY'");
 //        Assertions.assertEquals(taskDetailsPage.getTechnology(),technology,"The value for 'TECHNOLOGY' on Details page is not right");
 //        Main.report.logPass("Task has right value for 'TECHNOLOGY'");
