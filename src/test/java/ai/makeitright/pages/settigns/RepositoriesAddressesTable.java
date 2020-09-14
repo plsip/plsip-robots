@@ -19,31 +19,50 @@ public class RepositoriesAddressesTable extends BasePage {
 
     @Override
     protected boolean isAt() {
-        new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='Polaris-TextContainer Polaris-TextContainer--spacingLoose']")));
         return table.isDisplayed();
     }
 
-    @FindBy(xpath = "//div[@class='Polaris-TextContainer Polaris-TextContainer--spacingLoose']")
+    @FindBy(xpath = "//li[last()]/button")
+    private WebElement btnRightArrowPagination;
+
+    @FindBy(xpath = "//tbody")
     private WebElement table;
 
     @FindAll(
-            @FindBy(xpath = "//div[@class='Polaris-TextContainer Polaris-TextContainer--spacingLoose']/div")
+            @FindBy(xpath = "//tbody/tr")
     )
     private List<WebElement> tableRows;
 
+    private WebDriverWait wait = new WebDriverWait(driver, 5);
+
     public DisplayedCodeRepositoryAddress getAllRepositoriesAddressesRowData(final String repositoryAddress) {
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress;
-        waitForVisibilityOf(tableRows.get(0));
-        for (WebElement row : tableRows) {
-            if(row.findElement(By.xpath(".//input")).getAttribute("value").equals(repositoryAddress)) {
-                displayedCodeRepositoryAddress = new DisplayedCodeRepositoryAddress()
-                        .setAddress(row.findElement(By.xpath(".//input")).getText());
-                Main.report.logPass("The repository address " + repositoryAddress + " was found on the platform's 'Repository Addresses' list");
-                return displayedCodeRepositoryAddress;
-            }
+        do {
+//            waitForVisibilityOf(tableRows.get(0));
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//tbody/tr")));
+            if (tableRows.size() > 0) {
+                for (WebElement row : tableRows) {
+                    String address = row.findElement(By.xpath(".//td//div//input")).getAttribute("value");
+                    if (address.equals(repositoryAddress)) {
+                        displayedCodeRepositoryAddress = new DisplayedCodeRepositoryAddress()
+                                .setAddress(address);
+                        Main.report.logPass("The repository address " + repositoryAddress + " was found on the platform's 'Repository Addresses' list");
+                        return displayedCodeRepositoryAddress;
+                    }
 
-        }
-        Main.report.logFail("There was no repository address '" + repositoryAddress);
-        return null;
+                }
+                try {
+                    btnRightArrowPagination.isDisplayed();
+                    click(btnRightArrowPagination, "button with right arrow to go to the next page");
+                } catch (Exception e) {
+                    Main.report.logFail("There was no repository address '" + repositoryAddress + "'");
+                    return null;
+                }
+            }
+            else {
+                Main.report.logInfo("There was no repository address '" + repositoryAddress + "'");
+                return null;
+            }
+        } while(true);
     }
 }

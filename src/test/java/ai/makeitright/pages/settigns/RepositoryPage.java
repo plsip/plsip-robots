@@ -21,11 +21,11 @@ public class RepositoryPage extends BasePage {
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']//span[text()='Save']")
     private WebElement btnSave;
 
-    @FindBy(xpath = "//select[@id='PolarisSelect1']")
+    @FindBy(xpath = "//select[@name='repositoryName']")
     private WebElement dropdownSelectYourMainScriptRepository;
 
     @FindAll(
-            @FindBy(xpath = "//select[@id='PolarisSelect1']/option")
+            @FindBy(xpath = "//select[@name='repositoryName']/option")
     )
     private List<WebElement> dropdownSelectYourMainScriptRepositoryOptions;
 
@@ -40,11 +40,10 @@ public class RepositoryPage extends BasePage {
     protected boolean isAt() {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
         url = url.substring(0, url.lastIndexOf("/signin")) + "/" + param + "/settings/repositories";
-        if (!url.equals(driver.getCurrentUrl())) {
-            Main.report.logFail("Current URL is not like expected " + url);
+        if (!(driver.getCurrentUrl().contains(url))) {
+            Main.report.logFail("Current URL doesn't contain  " + url);
+            return false;
         }
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }
 
