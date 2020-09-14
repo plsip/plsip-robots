@@ -40,7 +40,7 @@ public class ArgumentsPage extends BasePage {
     Action action = new Action(driver);
 
     public boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
-        WebElement x = action.getItemFromUnorderedList(lstUnordered, itemsOfUnorderedList, itemOfList);
+        WebElement x = action.getItemFromUnorderedList(itemsOfUnorderedList, itemOfList);
         return x != null;
     }
 

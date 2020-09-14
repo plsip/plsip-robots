@@ -23,7 +23,7 @@ public class GlobalArgumentsPage extends BasePage {
     }
 
     public CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
-        createGlobalArgumentsButton.click();
+        click(createGlobalArgumentsButton,"button 'Create Global arguments'");
         return new CreateGlobalArgumentModalWindow(driver);
     }
 
@@ -33,13 +33,13 @@ public class GlobalArgumentsPage extends BasePage {
         private WebElement h2;
 
         @FindBy(xpath = "//input[@name='name']")
-        private WebElement collectionNameInput;
+        private WebElement inpCollectionName;
 
         @FindBy(xpath = "//button//span[text()='Close']")
-        private WebElement closeButton;
+        private WebElement btnClose;
 
         @FindBy(xpath = "//button//span[text()='Save']")
-        private WebElement saveButton;
+        private WebElement btnSave;
 
         public CreateGlobalArgumentModalWindow(final WebDriver driver) {
             super(driver);
@@ -52,12 +52,12 @@ public class GlobalArgumentsPage extends BasePage {
         }
 
         public CreateGlobalArgumentModalWindow writeIntoCollectionNameInput(String collectionName) {
-            collectionNameInput.sendKeys(collectionName);
+            sendText(inpCollectionName,collectionName,"input element 'Collection name'");
             return this;
         }
 
         public ArgumentsPage clickSaveButton() {
-            saveButton.click();
+            click(btnSave,"button 'Save'");
             return new ArgumentsPage(driver);
         }
 

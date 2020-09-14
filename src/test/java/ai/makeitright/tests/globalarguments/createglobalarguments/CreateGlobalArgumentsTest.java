@@ -1,4 +1,4 @@
-package ai.makeitright.tests.argumentscollections;
+package ai.makeitright.tests.globalarguments.createglobalarguments;
 
 import ai.makeitright.pages.argumentscollections.ArgumentsPage;
 import ai.makeitright.pages.argumentscollections.GlobalArgumentsPage;
@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class GlobalArgumentsTest extends DriverConfig {
+public class CreateGlobalArgumentsTest extends DriverConfig {
 
     //from configuration:
     private String pfSignInUrl;
@@ -31,12 +31,10 @@ public class GlobalArgumentsTest extends DriverConfig {
     }
 
     @Test
-    public void createArgumentsCollection() throws InterruptedException {
+    public void createAGlobalArguments() {
 
         Faker faker = new Faker();
         nameOfArgumentsCollection = faker.funnyName().name();
-        String nameOfArgument = faker.funnyName().name();
-        String devaultArgumentValue = faker.funnyName().name();
 
         driver.manage().window().maximize();
         driver.get(pfSignInUrl);
@@ -51,25 +49,18 @@ public class GlobalArgumentsTest extends DriverConfig {
                 new GlobalArgumentsPage(driver, pfSignInUrl);
         final GlobalArgumentsPage.CreateGlobalArgumentModalWindow createGlobalArgumentModalWindow =
                 globalArgumentsPage.clickCreateGlobalArgumentsButton();
-        ArgumentsPage argumentsPage = createGlobalArgumentModalWindow
+        createGlobalArgumentModalWindow
                 .writeIntoCollectionNameInput(nameOfArgumentsCollection)
                 .clickSaveButton();
-        final ArgumentsPage.AddArgumentModalWindow addArgumentModalWindow =
-                argumentsPage.clickButtonAddArgument();
-        argumentsPage = addArgumentModalWindow
-                .setNameInput(nameOfArgument)
-                .writeIntoDefaultValueInput(devaultArgumentValue)
-                .clickSaveButton();
 
-        Assertions.assertTrue(
-                argumentsPage.checkIfArgumentIsDisplayed(nameOfArgument));
 
     }
 
     @After
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
-        obj.put("globalargumentscollection", nameOfArgumentsCollection);
+        obj.put("globalArgumentsCollection", nameOfArgumentsCollection);
+        obj.put("taskname", "Create Global arguments");
         System.setProperty("output", obj.toString());
         driver.close();
     }

@@ -98,7 +98,7 @@ public class Action {
         throw new InterruptedException("The option '" + option + "' doesn't exist in dropdown");
     }
 
-    public WebElement getItemFromUnorderedList(WebElement unorderedList, List<WebElement> itemsOfUnorderedList, String itemOfList) throws InterruptedException {
+    public WebElement getItemFromUnorderedList(List<WebElement> itemsOfUnorderedList, String itemOfList) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Main.report.logInfo("Search listItem '" + itemOfList + "'");
         if (itemsOfUnorderedList.isEmpty()) {
