@@ -21,11 +21,11 @@ public class RepositoryPage extends BasePage {
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']//span[text()='Save']")
     private WebElement btnSave;
 
-    @FindBy(xpath = "//select[@id='PolarisSelect1']")
+    @FindBy(xpath = "//select[@name='repositoryName']")
     private WebElement dropdownSelectYourMainScriptRepository;
 
     @FindAll(
-            @FindBy(xpath = "//select[@id='PolarisSelect1']/option")
+            @FindBy(xpath = "//select[@name='repositoryName']/option")
     )
     private List<WebElement> dropdownSelectYourMainScriptRepositoryOptions;
 
