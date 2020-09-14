@@ -41,10 +41,9 @@ public class RepositoryPage extends BasePage {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
         url = url.substring(0, url.lastIndexOf("/signin")) + "/" + param + "/settings/repositories";
         if (!(driver.getCurrentUrl().contains(url))) {
-            Main.report.logFail("Current URL is not like expected " + url);
+            Main.report.logFail("Current URL doesn't contain  " + url);
+            return false;
         }
-        Assertions.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
         return true;
     }
 
