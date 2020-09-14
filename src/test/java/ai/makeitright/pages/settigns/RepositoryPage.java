@@ -40,7 +40,7 @@ public class RepositoryPage extends BasePage {
     protected boolean isAt() {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
         url = url.substring(0, url.lastIndexOf("/signin")) + "/" + param + "/settings/repositories";
-        if (!url.equals(driver.getCurrentUrl())) {
+        if (!(driver.getCurrentUrl().contains(url))) {
             Main.report.logFail("Current URL is not like expected " + url);
         }
         Assertions.assertEquals(url, driver.getCurrentUrl(),
