@@ -61,6 +61,10 @@ public class GlobalArgumentsPage extends BasePage {
             return new ArgumentsPage(driver);
         }
 
+        public GlobalArgumentsTable getGlobalArgumentsTable() {
+            return new GlobalArgumentsTable(driver);
+        }
+
     }
 
 
