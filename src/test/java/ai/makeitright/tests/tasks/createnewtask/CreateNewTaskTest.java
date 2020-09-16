@@ -18,6 +18,7 @@ public class CreateNewTaskTest extends DriverConfig {
     private String createdBy;
     private String email;
     private String password;
+    private String pfCompanyName;
     private String powerFarmUrl;
     private String repository;
     private String scriptDirectory;
@@ -29,6 +30,7 @@ public class CreateNewTaskTest extends DriverConfig {
         createdBy = System.getProperty("inputParameters.createdBy");
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
+        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
         powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         repository = System.getProperty("inputParameters.repository");
         scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
@@ -41,7 +43,7 @@ public class CreateNewTaskTest extends DriverConfig {
 
         driver.get(powerFarmUrl);
         driver.manage().window().maximize();
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl);
+        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
         loginPage
                 .setEmailInput(email)
                 .setPasswordInput(password);

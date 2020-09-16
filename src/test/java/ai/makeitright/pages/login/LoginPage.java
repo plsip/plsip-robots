@@ -19,8 +19,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@name='password']")
     private WebElement inpPassword;
 
-    public LoginPage(final WebDriver driver, final String url) {
-        super(driver, url);
+    public LoginPage(final WebDriver driver, final String url, final String param) {
+        super(driver, url, param);
     }
 
     @Override
@@ -46,6 +46,10 @@ public class LoginPage extends BasePage {
 
     public LeftMenu clickSignInButton() {
         click(btnSignIn, "button 'Sign in'");
+        if(url.contains("development")) {
+            OrganizationSelectionPage organizationSelectionPage = new OrganizationSelectionPage(driver);
+            organizationSelectionPage.clickSignInButton(param);
+        }
         return new LeftMenu(driver);
     }
 
