@@ -1,6 +1,7 @@
 package ai.makeitright.tests.settings;
 
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
+import ai.makeitright.pages.login.OrganizationSelectionPage;
 import org.json.JSONObject;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.gitlab.LoginGitLabPage;
@@ -73,11 +74,13 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         newProjectPage.clickOptionSignOut();
 
         driver.get(pfSignInUrl);
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
+
         LeftMenu leftMenu = loginPage.clickSignInButton();
+
         leftMenu.openPageBy("Repositories");
 
         RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfCompanyName);

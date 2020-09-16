@@ -22,7 +22,7 @@ public class LeftMenu extends BasePage {
         return leftMenu.isDisplayed();
     }
 
-    @FindBy(xpath = "//ul[1]/li[1]")
+    @FindBy(xpath = "//ul[@class='Polaris-Navigation__Section'][1]/li[1]")
     private WebElement leftMenu;
 
     private By getLeftMenuOption(final String menuOption) {
