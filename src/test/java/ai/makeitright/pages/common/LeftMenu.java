@@ -15,6 +15,7 @@ public class LeftMenu extends BasePage {
 
     @Override
     protected boolean isAt() {
+        waitForBlueCircleDisappear();
         if(!waitForVisibilityOf(leftMenu)) {
             Main.report.logFail("There is no visible left menu element");
         }

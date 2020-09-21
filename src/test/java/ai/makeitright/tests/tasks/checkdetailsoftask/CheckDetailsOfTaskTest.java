@@ -41,7 +41,6 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     @Test
     public void checkDetailsOfTask() {
         driver.get(pfSignInUrl);
-        driver.manage().window().maximize();
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
                 .setEmailInput(pfUserEmail)
@@ -78,7 +77,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
-        obj.put("taskname",taskname + "|| Check details of task");
+        obj.put("taskname",taskname + " || Check details of task");
         System.setProperty("output", obj.toString());
         driver.close();
     }

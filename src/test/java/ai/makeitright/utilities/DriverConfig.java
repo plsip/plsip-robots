@@ -21,6 +21,7 @@ public class DriverConfig extends Main {
         options.addArguments("--use-gl=swiftshader");
         options.addArguments("--no-zygote");
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
     }
 
     @AfterClass

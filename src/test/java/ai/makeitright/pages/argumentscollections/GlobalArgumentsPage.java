@@ -4,6 +4,7 @@ import ai.makeitright.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.junit.jupiter.api.Assertions;
 
 public class GlobalArgumentsPage extends BasePage {
 
@@ -12,6 +13,9 @@ public class GlobalArgumentsPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Create Global arguments']")
     private WebElement createGlobalArgumentsButton;
+
+    @FindBy(xpath = "//span[@class='Polaris-TopBar-UserMenu__Details']/p[1]")
+    private WebElement txtTopPanelCreatedBy_Value;
 
     public GlobalArgumentsPage(final WebDriver driver, final String url) {
         super(driver, url);
@@ -22,9 +26,23 @@ public class GlobalArgumentsPage extends BasePage {
         return h1.getText().equals("Global arguments");
     }
 
+    public boolean checkAuthor(String author) {
+        return txtTopPanelCreatedBy_Value.getText().equals(author);
+    }
+
     public CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
-        createGlobalArgumentsButton.click();
+        click(createGlobalArgumentsButton,"button 'Create Global arguments'");
         return new CreateGlobalArgumentModalWindow(driver);
+    }
+
+    public ArgumentsPage clickGlobalArgumentsCollectionNameButton(WebElement btnArgumentsCollectionName, String globalArgumentsCollectionName) {
+        Assertions.assertNotNull(btnArgumentsCollectionName, "Webelement for button with name of arguments collection name '" + globalArgumentsCollectionName + "' has value null");
+        click(btnArgumentsCollectionName, "button with collection named '" + globalArgumentsCollectionName + "'");
+        return new ArgumentsPage(driver);
+    }
+
+    public GlobalArgumentsTable getGlobalArgumentsTable() {
+        return new GlobalArgumentsTable(driver);
     }
 
     public class CreateGlobalArgumentModalWindow extends BasePage {
@@ -33,13 +51,15 @@ public class GlobalArgumentsPage extends BasePage {
         private WebElement h2;
 
         @FindBy(xpath = "//input[@name='name']")
-        private WebElement collectionNameInput;
+        private WebElement inpCollectionName;
 
         @FindBy(xpath = "//button//span[text()='Close']")
-        private WebElement closeButton;
+        private WebElement btnClose;
 
         @FindBy(xpath = "//button//span[text()='Save']")
-        private WebElement saveButton;
+        private WebElement btnSave;
+
+        private String collectionName;
 
         public CreateGlobalArgumentModalWindow(final WebDriver driver) {
             super(driver);
@@ -51,13 +71,18 @@ public class GlobalArgumentsPage extends BasePage {
             return h2.getText().equals("Create Global argument");
         }
 
-        public CreateGlobalArgumentModalWindow writeIntoCollectionNameInput(String collectionName) {
-            collectionNameInput.sendKeys(collectionName);
+        public String getCollectionName() {
+            return collectionName;
+        }
+
+        public CreateGlobalArgumentModalWindow setCollectionName(String collectionName) {
+            this.collectionName = "automated" + collectionName;
+            sendText(inpCollectionName, this.collectionName,"input element 'Collection name'");
             return this;
         }
 
         public ArgumentsPage clickSaveButton() {
-            saveButton.click();
+            click(btnSave,"button 'Save'");
             return new ArgumentsPage(driver);
         }
 

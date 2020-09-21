@@ -51,7 +51,6 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     public void assignRepository() {
 
         driver.get(gitLabSignInUrl);
-        driver.manage().window().maximize();
 
         LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
         loginGitLabPage
