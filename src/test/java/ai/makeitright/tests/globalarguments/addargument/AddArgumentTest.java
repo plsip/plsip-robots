@@ -70,6 +70,7 @@ public class AddArgumentTest extends DriverConfig {
         argumentsPage = addArgumentModalWindow.setName(argumentName)
             .setDefaultValue(defaultValue)
             .clickSaveButton();
+        argumentName = addArgumentModalWindow.getArgumentName();
 
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
         Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"),"Banner ribbon on popup window is not dark green");
@@ -78,7 +79,7 @@ public class AddArgumentTest extends DriverConfig {
 
         Assertions.assertTrue(argumentsPage.checkIfOneArgumentIsDisplayed(),"There is no only one argument displayed");
         Assertions.assertTrue(
-                argumentsPage.checkIfArgumentWithValueIsDisplayed(addArgumentModalWindow.getArgumentName(), defaultValue),
+                argumentsPage.checkIfArgumentWithValueIsDisplayed(argumentName, defaultValue),
                 "There is no visible argument with name '" + argumentName + "' and value '" + defaultValue + "'");
 
 
