@@ -92,7 +92,7 @@ public class AddArgumentTest extends DriverConfig {
         obj.put("argumentValue", defaultValue);
         obj.put("taskname",taskname + " || Add argument");
         System.setProperty("output", obj.toString());
-//        driver.close();
+        driver.close();
     }
 
 }
