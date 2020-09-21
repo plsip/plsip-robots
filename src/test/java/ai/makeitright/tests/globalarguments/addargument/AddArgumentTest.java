@@ -7,7 +7,6 @@ import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;
-import ai.makeitright.utilities.Main;
 import com.github.javafaker.Faker;
 import org.json.JSONObject;
 import org.junit.After;

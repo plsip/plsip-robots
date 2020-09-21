@@ -4,6 +4,7 @@ import ai.makeitright.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.junit.jupiter.api.Assertions;
 
 public class GlobalArgumentsPage extends BasePage {
 
@@ -35,6 +36,7 @@ public class GlobalArgumentsPage extends BasePage {
     }
 
     public ArgumentsPage clickGlobalArgumentsCollectionNameButton(WebElement btnArgumentsCollectionName, String globalArgumentsCollectionName) {
+        Assertions.assertNotNull(btnArgumentsCollectionName, "Webelement for button with name of arguments collection name '" + globalArgumentsCollectionName + "' has value null");
         click(btnArgumentsCollectionName, "button with collection named '" + globalArgumentsCollectionName + "'");
         return new ArgumentsPage(driver);
     }
