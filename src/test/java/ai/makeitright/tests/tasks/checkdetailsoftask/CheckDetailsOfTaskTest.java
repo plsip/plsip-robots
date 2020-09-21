@@ -41,7 +41,6 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     @Test
     public void checkDetailsOfTask() {
         driver.get(pfSignInUrl);
-        driver.manage().window().maximize();
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
                 .setEmailInput(pfUserEmail)

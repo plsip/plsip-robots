@@ -2,6 +2,8 @@ package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Action;
+import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -14,14 +16,29 @@ public class ArgumentsPage extends BasePage {
     @FindBy(xpath = "//button//span[text()='Add Argument']")
     private WebElement btnAddArgument;
 
-    @FindBy(xpath = "//ul[@class='Polaris-ResourceList']")
-    private WebElement lstUnordered;
+    @FindBy(xpath = "//span[text()='Go back']")
+    private WebElement lnkGoBack;
 
     @FindAll(
-            {@FindBy(xpath = "//li[@class='Polaris-ResourceList__ItemWrapper']//div[@class='text-dotted']")}
+        @FindBy(xpath="//li[@class='Polaris-ResourceList__ItemWrapper']")
     )
-    private List<WebElement> itemsOfUnorderedList;
+    private List<WebElement> lstArguments;
 
+    @FindAll(
+            {@FindBy(xpath = "//li[@class='Polaris-ResourceList__ItemWrapper']//span[@class='dotted']")}
+    )
+    private List<WebElement> lstArgumentsName;
+
+    @FindAll(
+            {@FindBy(xpath = "//form//input")}
+    )
+    private List<WebElement> lstArgumentsValue;
+
+    @FindBy(xpath = "//span[text()='CREATED BY']/following-sibling::p")
+    private WebElement txtCreatedBy_Value;
+
+    @FindBy(xpath = "//span[@class='Polaris-TopBar-UserMenu__Details']/p[1]")
+    private WebElement txtTopPanelCreatedBy_Value;
 
     public ArgumentsPage(final WebDriver driver) {
         super(driver);
@@ -32,16 +49,40 @@ public class ArgumentsPage extends BasePage {
         return btnAddArgument.isDisplayed();
     }
 
+    public boolean checkCreatedBy() {
+        return txtCreatedBy_Value.getText() == txtTopPanelCreatedBy_Value.getText();
+    }
+
     public AddArgumentModalWindow clickButtonAddArgument() {
-        btnAddArgument.click();
+        click(btnAddArgument,"button Add Argument");
         return new AddArgumentModalWindow(driver);
     }
 
     Action action = new Action(driver);
 
-    public boolean checkIfArgumentIsDisplayed(String itemOfList) throws InterruptedException {
-        WebElement x = action.getItemFromUnorderedList(itemsOfUnorderedList, itemOfList);
-        return x != null;
+    public boolean checkIfArgumentWithValueIsDisplayed(String argumentName, String argumentValue) throws InterruptedException {
+        Main.report.logInfo("Check if on the list is visible argument with name '" + argumentName + "' and value '" + argumentValue + "'");
+        WebElement x = action.getItemFromTable(lstArgumentsName, argumentName);
+        if (x == null) {
+            Main.report.logFail("Name of argument is not like expected: '" + argumentName + "'");
+            return false;
+        }
+        WebElement element = action.getItemFromTableAsAttributeValue(lstArgumentsValue, argumentValue);
+        if (element == null) {
+            Main.report.logFail("Value of argument is not like expected: '" + argumentValue + "'");
+            return false;
+        }
+        Main.report.logPass("Name and value of argument is right");
+        return true;
+    }
+
+    public boolean checkIfOneArgumentIsDisplayed() {
+        return lstArguments.size() == 1;
+    }
+
+    public ArgumentsPage clickGoBackLnk() {
+        click(lnkGoBack,"link 'Go back'");
+        return this;
     }
 
     public class AddArgumentModalWindow extends BasePage {
@@ -50,16 +91,19 @@ public class ArgumentsPage extends BasePage {
         private WebElement h2;
 
         @FindBy(xpath = "//input[@name='key']")
-        private WebElement argumentNameInput;
+        private WebElement inpArgumentName;
 
-        @FindBy(xpath = "//input[@name='defaultValue']")
-        private WebElement argumentDefaultValueInput;
+        @FindBy(xpath = "//input[@name='defaultValue' and not(@disabled)]")
+        private WebElement inpDefaultValue;
 
         @FindBy(xpath = "//input[@name='isSecret']")
         private WebElement chboxEncrypted;
 
         @FindBy(xpath = "//button//span[text()='Save']")
-        private WebElement saveButton;
+        private WebElement btnSave;
+
+        private String argumentName;
+        private String defaultValue;
 
         public AddArgumentModalWindow(final WebDriver driver) {
             super(driver);
@@ -71,20 +115,26 @@ public class ArgumentsPage extends BasePage {
             return h2.getText().equals("Add argument");
         }
 
-        public AddArgumentModalWindow setNameInput(String argumentName) {
-            argumentNameInput.sendKeys(argumentName);
-            return this;
-        }
-
-        public AddArgumentModalWindow writeIntoDefaultValueInput(String defaultValue) {
-            argumentDefaultValueInput.sendKeys(defaultValue);
-            return this;
-        }
-
         public ArgumentsPage clickSaveButton() {
-            saveButton.click();
+            click(btnSave, "button 'Save'");
             return new ArgumentsPage(driver);
         }
+
+        public String getArgumentName() {
+            return argumentName;
+        }
+
+        public AddArgumentModalWindow setDefaultValue(String defaultValue) {
+            sendText(inpDefaultValue, defaultValue, "input element 'Default Value'");
+            return this;
+        }
+
+        public AddArgumentModalWindow setName(String argumentName) {
+            this.argumentName = argumentName + Methods.getDateTime("yyyyMMddHHmmss");
+            sendText(inpArgumentName, this.argumentName, "input element 'Argument Name'");
+            return this;
+        }
+
 
     }
 

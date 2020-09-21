@@ -42,7 +42,6 @@ public class CreateNewTaskTest extends DriverConfig {
     public void createNewTask() {
 
         driver.get(powerFarmUrl);
-        driver.manage().window().maximize();
         LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
         loginPage
                 .setEmailInput(email)

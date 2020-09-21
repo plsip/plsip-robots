@@ -1,6 +1,7 @@
 package ai.makeitright.tests.globalarguments.createglobalarguments;
 
 import ai.makeitright.pages.argumentscollections.ArgumentsPage;
+import ai.makeitright.pages.argumentscollections.DisplayedGlobalArguments;
 import ai.makeitright.pages.argumentscollections.GlobalArgumentsPage;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
@@ -38,7 +39,6 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         Faker faker = new Faker();
         nameOfArgumentsCollection = faker.funnyName().name();
 
-        driver.manage().window().maximize();
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
@@ -51,18 +51,29 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
                 new GlobalArgumentsPage(driver, pfSignInUrl);
         final GlobalArgumentsPage.CreateGlobalArgumentModalWindow createGlobalArgumentModalWindow =
                 globalArgumentsPage.clickCreateGlobalArgumentsButton();
-        createGlobalArgumentModalWindow
-                .writeIntoCollectionNameInput(nameOfArgumentsCollection)
+
+        ArgumentsPage argumentsPage = createGlobalArgumentModalWindow
+                .setCollectionName(nameOfArgumentsCollection)
                 .clickSaveButton();
 
+        argumentsPage.checkCreatedBy();
+        argumentsPage.clickGoBackLnk();
 
+        nameOfArgumentsCollection = createGlobalArgumentModalWindow.getCollectionName();
+
+        DisplayedGlobalArguments displayedGlobalArguments =
+                globalArgumentsPage.getGlobalArgumentsTable()
+                        .getGlobalArgumentsRowData(nameOfArgumentsCollection);
+
+        Assertions.assertNotNull(displayedGlobalArguments, "There is not global arguments collection '" + nameOfArgumentsCollection + "' on the list");
+        Assertions.assertTrue(globalArgumentsPage.checkAuthor(displayedGlobalArguments.getAuthor()),"Author of global arguments collection is not right");
     }
 
     @After
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
         obj.put("globalArgumentsCollection", nameOfArgumentsCollection);
-        obj.put("taskname", "Create Global arguments");
+        obj.put("taskname", "Create Global arguments collection");
         System.setProperty("output", obj.toString());
         driver.close();
     }

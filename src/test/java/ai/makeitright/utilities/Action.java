@@ -43,6 +43,23 @@ public class Action {
         throw new InterruptedException("The option '" + option + "' doesn't exist");
     }
 
+    public WebElement getItemFromTableAsAttributeValue(List<WebElement> menuList, String option) throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Main.report.logInfo("Search option '" + option + "'");
+        if (menuList.isEmpty()) {
+            throw new InterruptedException("No options");
+        }
+        for (WebElement item : menuList) {
+            String a = item.getAttribute("value");
+            if (item.getAttribute("value").equals(option)) {
+                Main.report.logPass("The option '" + item.getText() + "' was found");
+                return item;
+            }
+        }
+        Main.report.logFail("The option '" + option + "' doesn't exist");
+        throw new InterruptedException("The option '" + option + "' doesn't exist");
+    }
+
     public WebElement getItemFromTable(List<WebElement> menuList, int option) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Main.report.logInfo("Search option '" + option + "'");
@@ -96,22 +113,6 @@ public class Action {
         }
         Main.report.logFail("The option '" + option + "' doesn't exist in dropdown");
         throw new InterruptedException("The option '" + option + "' doesn't exist in dropdown");
-    }
-
-    public WebElement getItemFromUnorderedList(List<WebElement> itemsOfUnorderedList, String itemOfList) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Main.report.logInfo("Search listItem '" + itemOfList + "'");
-        if (itemsOfUnorderedList.isEmpty()) {
-            throw new InterruptedException("Unordered list is empty");
-        }
-        for (WebElement item : itemsOfUnorderedList) {
-            if (item.getText().equals(itemOfList)) {
-                Main.report.logPass("The item '" + item.getText() + "' was found in unordered list.");
-                return item;
-            }
-        }
-        Main.report.logFail("The list item '" + itemOfList + "' doesn't exist in unerdered list.");
-        throw new InterruptedException("The option '" + itemOfList + "' doesn't exist in underdered list.");
     }
 
     public void hoverMouseOver(WebElement element) {
