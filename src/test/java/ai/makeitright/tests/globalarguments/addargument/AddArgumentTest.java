@@ -90,7 +90,7 @@ public class AddArgumentTest extends DriverConfig {
         final JSONObject obj = new JSONObject();
         obj.put("argumentName", argumentName);
         obj.put("argumentValue", defaultValue);
-        obj.put("taskname", "Add argument");
+        obj.put("taskname",taskname + " || Add argument");
         System.setProperty("output", obj.toString());
 //        driver.close();
     }
