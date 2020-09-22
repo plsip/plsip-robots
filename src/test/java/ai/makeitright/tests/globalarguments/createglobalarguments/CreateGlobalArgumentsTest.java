@@ -40,6 +40,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         nameOfArgumentsCollection = faker.funnyName().name();
 
         driver.get(pfSignInUrl);
+
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
                 .setEmailInput(pfUserEmail)

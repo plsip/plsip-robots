@@ -32,7 +32,7 @@ public class LeftMenu extends BasePage {
 
     public void openPageBy(final String menuOption) {
         waitForBlueCircleDisappear();
-        waitForClickable(leftMenu);
+        Assertions.assertTrue(waitForClickable(driver.findElement(getLeftMenuOption(menuOption))),"Waiting 5s for left menu to be clickable return false");
         click(driver.findElement(getLeftMenuOption(menuOption)),"option " + menuOption + " from left menu");
     }
 }

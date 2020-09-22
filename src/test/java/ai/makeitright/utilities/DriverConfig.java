@@ -13,6 +13,7 @@ public class DriverConfig extends Main {
     @BeforeClass
     public static void setupTest() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--window-size=1400,600");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
