@@ -22,7 +22,7 @@ public class RepositoriesAddressesTable extends BasePage {
         return table.isDisplayed();
     }
 
-    @FindBy(xpath = "//li[@title='Next Page']/button")
+    @FindBy(xpath = "//li[@title='Next Page']/button[not(@disabled)]")
     private WebElement btnRightArrowPagination;
 
     @FindBy(xpath = "//tbody")

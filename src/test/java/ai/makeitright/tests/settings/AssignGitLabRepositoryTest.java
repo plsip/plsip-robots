@@ -64,7 +64,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         newProjectPage.clickButtonRepoByURL();
         newProjectPage.setGitRepositoryURL(repositoryToCopy);
         String allProjectName = newProjectPage.setProjectName(projectName);
-        repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName;
+        repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName + "/";
         Main.report.logPass("Created project '" + allProjectName + "'");
         newProjectPage.clickPublicCheckbox();
         newProjectPage.clickCreateProjectButton();
