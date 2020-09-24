@@ -58,7 +58,9 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
                 .clickSaveButton();
 
         argumentsPage.checkCreatedBy();
-        argumentsPage.clickGoBackLnk();
+        argumentsPage.clickGlobalArgumentsLnk();
+
+        Assertions.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new gobal arguments collection shouldn't be visible");
 
         nameOfArgumentsCollection = createGlobalArgumentModalWindow.getCollectionName();
 

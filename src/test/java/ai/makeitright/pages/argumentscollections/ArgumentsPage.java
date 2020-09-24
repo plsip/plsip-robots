@@ -16,8 +16,8 @@ public class ArgumentsPage extends BasePage {
     @FindBy(xpath = "//button//span[text()='Add Argument']")
     private WebElement btnAddArgument;
 
-    @FindBy(xpath = "//span[text()='Go back']")
-    private WebElement lnkGoBack;
+    @FindBy(xpath = "//span[text()='Global Arguments']")
+    private WebElement lnkGlobalArguments;
 
     @FindAll(
         @FindBy(xpath="//li[@class='Polaris-ResourceList__ItemWrapper']")
@@ -80,8 +80,8 @@ public class ArgumentsPage extends BasePage {
         return lstArguments.size() == 1;
     }
 
-    public ArgumentsPage clickGoBackLnk() {
-        click(lnkGoBack,"link 'Go back'");
+    public ArgumentsPage clickGlobalArgumentsLnk() {
+        click(lnkGlobalArguments,"link 'Global Arguments'");
         return this;
     }
 

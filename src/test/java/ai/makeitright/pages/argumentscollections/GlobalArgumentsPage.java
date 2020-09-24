@@ -6,10 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.NoSuchElementException;
+
 public class GlobalArgumentsPage extends BasePage {
 
     @FindBy(xpath="//h1")
     private WebElement h1;
+
+    @FindBy(xpath = "//input[@name='name']")
+    private WebElement inpCollectionName;
 
     @FindBy(xpath = "//button//span[text()='Create Global arguments']")
     private WebElement createGlobalArgumentsButton;
@@ -43,6 +48,15 @@ public class GlobalArgumentsPage extends BasePage {
 
     public GlobalArgumentsTable getGlobalArgumentsTable() {
         return new GlobalArgumentsTable(driver);
+    }
+
+    public boolean isNotVisibleModalWindow() {
+        try {
+            inpCollectionName.isDisplayed();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public class CreateGlobalArgumentModalWindow extends BasePage {
