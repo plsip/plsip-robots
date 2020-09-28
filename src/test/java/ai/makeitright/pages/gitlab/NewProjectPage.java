@@ -93,6 +93,7 @@ public class NewProjectPage extends BasePage {
     }
 
     public void clickUserPanel() {
+        waitForClickable(img_GitLabUser);
         click(img_GitLabUser, "image for GitLab user");
     }
 
