@@ -32,6 +32,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
 
     //for reporting:
     private String repositoryAddress;
+    private String allProjectName;
 
     @Before
     public void before() {
@@ -63,7 +64,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         newProjectPage.chooseOption("CI/CD for external repo");
         newProjectPage.clickButtonRepoByURL();
         newProjectPage.setGitRepositoryURL(repositoryToCopy);
-        String allProjectName = newProjectPage.setProjectName(projectName);
+        allProjectName = newProjectPage.setProjectName(projectName);
         repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName + "/";
         Main.report.logPass("Created project '" + allProjectName + "'");
         newProjectPage.clickPublicCheckbox();
@@ -102,6 +103,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         JSONObject obj = new JSONObject();
         JSONObject objResult = new JSONObject();
         obj.put("taskname","Assign GitLab repository");
+        obj.put("projectName", allProjectName);
         objResult.put("repositoryaddress", repositoryAddress);
         obj.put("result",objResult);
         System.setProperty("output", obj.toString());

@@ -3,6 +3,7 @@ package ai.makeitright.pages.settigns;
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -31,6 +32,9 @@ public class RepositoryPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='token']")
     private WebElement inpAccessToken;
+
+    @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary Polaris-Button--destructive']")
+    private WebElement btnConfirmDetachRepo;
 
     public RepositoryPage(final WebDriver driver, final String url, final String param) {
         super(driver, url, param);
@@ -83,5 +87,17 @@ public class RepositoryPage extends BasePage {
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
         Assertions.assertNotNull(displayedCodeRepositoryAddress);
         return true;
+    }
+
+    public RepositoryPage clickDetachButton(final String repositoryAddress) {
+        WebElement btnDetach = getRepositoriesAddressesTable().getDesirableRow(repositoryAddress).findElement(By.xpath(".//td/a[contains(@href,'detach')]"));
+        click(btnDetach, "button 'Detach Repository'");
+        return this;
+    }
+
+    public RepositoryPage confirmDetachButton() {
+        waitForClickable(btnConfirmDetachRepo);
+        click(btnConfirmDetachRepo, "confirm button 'Detach repository'");
+        return this;
     }
 }

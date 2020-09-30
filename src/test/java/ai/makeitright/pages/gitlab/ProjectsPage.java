@@ -2,10 +2,14 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import com.sun.corba.se.impl.naming.cosnaming.NamingUtils;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class ProjectsPage extends BasePage {
     public ProjectsPage(final WebDriver driver) {
@@ -27,8 +31,44 @@ public class ProjectsPage extends BasePage {
     @FindBy(xpath = "//*[@class='page-title']")
     private WebElement txtProject;
 
+    @FindAll(
+            @FindBy(xpath = "//span[@class = 'project-name']")
+    )
+    private List<WebElement> projects;
+
+    @FindBy(xpath = "//img[@alt='Katarzyna Raczkowska']")
+    private WebElement img_GitLabUser;
+
+    @FindBy(xpath = "//a[@class='sign-out-link']")
+    private WebElement optionSignOut;
+
     public NewProjectPage clickNewProjectButton() {
         click(btnNewProject, "button 'New Project'");
         return new NewProjectPage(driver);
+    }
+
+    public ProjectDetailsPage chooseProjectToDelete(String name) {
+        try {
+            for (WebElement project : projects) {
+                if (project.getText().equals(name)) {
+                    click(project, "project: " + name + " to see details");
+                    break;
+                }
+            }
+            return new ProjectDetailsPage(driver);
+        }
+        catch (NullPointerException e) {
+            Main.report.logFail("There was no repository name: " + name);
+            return null;
+        }
+    }
+
+    public void clickUserPanel() {
+        waitForClickable(img_GitLabUser);
+        click(img_GitLabUser, "image for GitLab user");
+    }
+
+    public void clickOptionSignOut() {
+        click(optionSignOut, "option 'Sign out'");
     }
 }

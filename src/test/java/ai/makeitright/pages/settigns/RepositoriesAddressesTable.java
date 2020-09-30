@@ -65,4 +65,30 @@ public class RepositoriesAddressesTable extends BasePage {
             }
         } while(true);
     }
+
+    public WebElement getDesirableRow(final String repositoryAddress) {
+        do {
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//tbody/tr")));
+            if (tableRows.size() > 0) {
+                for (WebElement row : tableRows) {
+                    String address = row.findElement(By.xpath(".//td//div//input")).getAttribute("value");
+                    if (address.equals(repositoryAddress)) {
+                        Main.report.logPass("The repository address " + repositoryAddress + " was found on the platform's 'Repository Addresses' list");
+                        return row;
+                    }
+                }
+                try {
+                    btnRightArrowPagination.isDisplayed();
+                    click(btnRightArrowPagination, "button with right arrow to go to the next page");
+                } catch (Exception e) {
+                    Main.report.logFail("There was no repository address '" + repositoryAddress + "'");
+                    return null;
+                }
+            }
+            else {
+                Main.report.logInfo("There was no repository address '" + repositoryAddress + "'");
+                return null;
+            }
+        } while(true);
+    }
 }
