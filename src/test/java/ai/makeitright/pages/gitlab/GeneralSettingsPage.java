@@ -34,7 +34,7 @@ public class GeneralSettingsPage extends BasePage {
     private WebElement confirmationTextToPaste;
 
     @FindBy(xpath = "//input[@name='confirm_name_input' and @class='gl-form-input form-control']")
-    private WebElement inputToConfirm;
+    private WebElement inpToConfirm;
 
     @FindBy(xpath = "//button[@class='btn js-modal-action-primary btn-danger btn-md gl-button']")
     private WebElement confirmDeleteProject;

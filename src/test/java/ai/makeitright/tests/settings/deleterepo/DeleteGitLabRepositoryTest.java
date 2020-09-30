@@ -65,9 +65,8 @@ public class DeleteGitLabRepositoryTest extends DriverConfig {
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        JSONObject objResult = new JSONObject();
-        obj.put("taskname", taskname + " || Delete GitLab repository");
-        obj.put("taskName", taskname);
+        obj.put("taskname", taskname + " || Delete project repository on the GitLab platform");
+        obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
         driver.close();
     }
