@@ -30,7 +30,7 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        repositoryAddress = System.getProperty("previousResult.repositoryaddress");
+        repositoryAddress = System.getProperty("previousResult.result.repositoryaddress");
         taskname = System.getProperty("previousResult.taskname");
         projectName = System.getProperty("previousResult.projectName");
     }
