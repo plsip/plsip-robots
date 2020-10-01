@@ -58,7 +58,7 @@ public abstract class BasePage {
     }
 
     public void sendSecretlyText(final WebElement element, final String text, final String elementDescription) {
-        Main.report.logInfo("Enter password to " + element.getTagName());
+        Main.report.logInfo("Enter secret text to " + element.getTagName());
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
     }
@@ -110,11 +110,19 @@ public abstract class BasePage {
 
     public boolean waitForVisibilityOf(final WebElement element) {
         try {
-            new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(element));
+            new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    public boolean waitForVisibilityOf(final By locator) {
+        try {
+            new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

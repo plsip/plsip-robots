@@ -26,6 +26,7 @@ public class OrganizationSelectionPage extends BasePage {
     }
 
     private By getBtnSignIn(String pfCompanyName) {
+        waitForVisibilityOf(new By.ByXPath("//div[@class='organization-card-wrapper']//h2[text()='" + pfCompanyName + "']/parent::div/following-sibling::div//button"));
         return new By.ByXPath("//div[@class='organization-card-wrapper']//h2[text()='" + pfCompanyName + "']/parent::div/following-sibling::div//button");
     }
 }
