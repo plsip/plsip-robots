@@ -76,6 +76,7 @@ public class Reporter extends DriverConfig {
                 reporter.log(LogStatus.INFO, msg);
             }
             writeTechnicalLog("[INFO] :  " + msg);
+            System.out.println(msg);
         }
         return msg;
     }
@@ -88,6 +89,7 @@ public class Reporter extends DriverConfig {
                 reporter.log(LogStatus.PASS, msg);
             }
             writeTechnicalLog("[PASS] :  " + msg);
+            System.out.println(msg);
         }
         return msg;
     }
@@ -100,6 +102,7 @@ public class Reporter extends DriverConfig {
                 reporter.log(LogStatus.FAIL, msg);
             }
             writeTechnicalLog("[FAIL] :  " + msg);
+            System.out.println(msg);
         }
         logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return msg;

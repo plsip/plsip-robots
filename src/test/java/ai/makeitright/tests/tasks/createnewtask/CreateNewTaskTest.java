@@ -52,10 +52,11 @@ public class CreateNewTaskTest extends DriverConfig {
 
         TasksPage tasksPage = new TasksPage(driver);
         CreateTaskModalWindow createTaskModalWindow = tasksPage.clickCreateNewTaskButton();
-        createTaskModalWindow.setName(taskName);
-        createTaskModalWindow.selectTechnology(technology);
-        createTaskModalWindow.selectScriptDirectory(repository);
-        createTaskModalWindow.setScriptDirectory(scriptDirectory);
+        createTaskModalWindow
+                .setName(taskName)
+                .selectTechnology(technology)
+                .selectScriptDirectory(repository)
+                .setScriptDirectory(scriptDirectory);
         TaskDetailsPage taskDetailsPage = createTaskModalWindow.clickCreateTaskButton();
 
         Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");

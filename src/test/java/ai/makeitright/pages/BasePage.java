@@ -87,7 +87,7 @@ public abstract class BasePage {
 
     public boolean waitForBlueCircleDisappear() {
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-        Main.report.logInfo("Wait max 60s until blue rounding circle disappears...");
+        Main.report.logInfo("Wait max 10s until blue rounding circle disappears...");
         try {
             driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
             new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
