@@ -54,7 +54,7 @@ public class GeneralSettingsPage extends BasePage {
     public GeneralSettingsPage confirmDeleteRepo() {
         waitForVisibilityOf(confirmationTextToPaste);
         String confirmation = confirmationTextToPaste.getText();
-        sendText(inputToConfirm, confirmation, "input for deletion confirmation");
+        sendText(inpToConfirm, confirmation, "input for deletion confirmation");
         try {
             click(confirmDeleteProject, "'Yes, delete project' button");
             return this;
