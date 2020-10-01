@@ -83,7 +83,7 @@ public class Reporter extends DriverConfig {
     public String logPass(String msg) {
         if (loggingOn && !logFailAndErrorOnly) {
             listResult.add("[PASS]" + clearHtml(msg));
-            logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+//            logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             if (reporter != null) {
                 reporter.log(LogStatus.PASS, msg);
             }
