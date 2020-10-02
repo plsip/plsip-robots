@@ -35,6 +35,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage setEmailInput(final String email) {
+        waitForVisibilityOf(inpEmail);
         sendText(inpEmail, email, "input element 'E-mail'");
         return this;
     }

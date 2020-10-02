@@ -17,7 +17,7 @@ public class RepositoryPage extends BasePage {
     private WebElement btnAssignGitLabRepository;
 
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']")
-    private WebElement btnAssingRepository;
+    private WebElement btnAssignRepository;
 
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']//span[text()='Save']")
     private WebElement btnSave;
@@ -52,17 +52,18 @@ public class RepositoryPage extends BasePage {
     }
 
     public RepositoryPage clickAssignRepositoryButton() {
-        click(btnAssingRepository, "button 'Assing Repository'");
+        click(btnAssignRepository, "button 'Assign Repository'");
         return this;
     }
 
     public RepositoryPage clickAssignGitLabRepositoryButton() {
-        waitForVisibilityOf(btnAssignGitLabRepository);
-        click(btnAssignGitLabRepository, "button 'Assing GitLab Repository'");
+        waitForClickable(btnAssignGitLabRepository);
+        click(btnAssignGitLabRepository, "button 'Assign GitLab Repository'");
         return this;
     }
 
     public RepositoryPage setAccessTokenInput(final String accesstoken) {
+        waitForVisibilityOf(inpAccessToken);
         sendSecretlyText(inpAccessToken, accesstoken, "input element 'Access Token'");
         return this;
     }
@@ -91,13 +92,19 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage clickDetachButton(final String repositoryAddress) {
         WebElement btnDetach = getRepositoriesAddressesTable().getDesirableRow(repositoryAddress).findElement(By.xpath(".//td/a[contains(@href,'detach')]"));
-        click(btnDetach, "button 'Detach Repository'");
+        click(btnDetach, "'Detach Repository' button");
         return this;
     }
 
     public RepositoryPage confirmDetachButton() {
         waitForClickable(btnConfirmDetachRepo);
-        click(btnConfirmDetachRepo, "confirm button 'Detach repository'");
+        click(btnConfirmDetachRepo, "confirm 'Detach repository' button");
+        return this;
+    }
+
+    public RepositoryPage clickEditTokenButton(final String repositoryAddress) {
+        WebElement btnEdit = getRepositoriesAddressesTable().getDesirableRow(repositoryAddress).findElement(By.xpath(".//td/a[contains(@href,'edit')]"));
+        click(btnEdit, "'Edit Token' button");
         return this;
     }
 }
