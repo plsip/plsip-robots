@@ -71,9 +71,10 @@ public class CreateNewWorkflowTest extends DriverConfig {
 
     @After
     public void prepareJson() {
+        String taskname = "Create new " + workflowType + " workflow";
         JSONObject obj = new JSONObject();
         obj.put("workflowName", workflowName);
-        obj.put("taskname","Create new " + workflowType + " workflow");
+        obj.put("taskname", taskname);
         System.setProperty("output", obj.toString());
         driver.close();
     }
