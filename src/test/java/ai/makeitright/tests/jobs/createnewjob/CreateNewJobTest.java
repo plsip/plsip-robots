@@ -1,14 +1,17 @@
 package ai.makeitright.tests.jobs.createnewjob;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.jobs.JobDetailsPage;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
+import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class CreateNewJobTest extends DriverConfig {
 
@@ -21,7 +24,7 @@ public class CreateNewJobTest extends DriverConfig {
     private String argumentsCollection;
 
     //for reporting:
-    private String taskname;
+    private String jobID;
 
     @Before
     public void before() {
@@ -48,29 +51,38 @@ public class CreateNewJobTest extends DriverConfig {
         WorkflowsPage workflowsPage = new WorkflowsPage(driver);
 
         CreateJobModalWindow createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
-
         createJobModalWindow
                 .clickSaveAndGoToCollectionButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
-                .clickSaveAndGoToValuesButton()
+                .clickSaveAndGoToValuesButton();
+        Assertions.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
+                "An incorrect collection was selected.");
+        Main.report.logPass("The correct collection was chosen: " + argumentsCollection);
+
+        createJobModalWindow
                 .clickSaveAndGoToScheduleButton()
                 .clickCreateJobButton();
 
-        //Your job (ID:M1QQENMHAI) was successfully created!
+        jobID = createJobModalWindow.getCreatedJobID();
+        Assertions.assertTrue(createJobModalWindow.getPopUpValue().equals("Your job (ID: " + jobID + ") was successfully created!"),
+                "The popup has the wrong text: ");
+        Main.report.logPass("The popup after creating the job has the correct text: " + createJobModalWindow.getPopUpValue());
 
-        //div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span
+        JobDetailsPage jobDetailsPage = createJobModalWindow.clickGoToJobDetailsButton();
+        Assertions.assertTrue(jobDetailsPage.checkJobID(jobID), "The value of JOB ID is incorrect.");
+        Main.report.logPass("In the job details there is a correct job ID value displayed: " + jobID);
 
-        //div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span//parent::div
-
-        //h1[@class='Polaris-DisplayText Polaris-DisplayText--sizeLarge']
-        //Job M1QQENMHAI - Don't use - create new job test
-
+        Assertions.assertTrue(jobDetailsPage.checkJobHeader("Job " + jobID + " - " + workflowName),
+                "The job header is not correct.");
+        Main.report.logPass("In the job details there is a correct job header displayed: " + jobDetailsPage.getJobHeader());
     }
 
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        obj.put("taskname", "Create new job");
+        obj.put("taskname", "Create a new job");
+        obj.put("workflowName", workflowName);
+        obj.put("jobID", jobID);
         System.setProperty("output", obj.toString());
         driver.close();
     }

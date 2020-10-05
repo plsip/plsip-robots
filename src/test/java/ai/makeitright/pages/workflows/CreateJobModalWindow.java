@@ -33,6 +33,15 @@ public class CreateJobModalWindow extends BasePage {
     @FindBy(xpath = "//div[@class='Polaris-ResourceItem__Container']//span[@class='Polaris-Checkbox']")
     private WebElement collectionCheckbox;
 
+    @FindBy(xpath = "//div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span")
+    private WebElement jobID;
+
+    @FindBy(xpath = "//div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span//parent::div")
+    private WebElement alertMsg;
+
+    @FindBy(xpath = "//span[text()='Collection:']//following-sibling::span")
+    private WebElement collectionName;
+
     public CreateJobModalWindow(final WebDriver driver) {
         super(driver);
     }
@@ -58,13 +67,13 @@ public class CreateJobModalWindow extends BasePage {
             return this;
         }
         else {
-            Main.report.logFail("Filter doesn't work");
+            Main.report.logFail("The applied filter didn't find the collection: " + collection);
             return null;
         }
     }
 
-    public boolean checkIfCorrectCollectionIsDisplayed(String collectionName) {
-        return true;
+    public boolean checkIfCorrectCollectionIsDisplayed(String name) {
+        return collectionName.getText().equals(name);
     }
 
     public CreateJobModalWindow clickSaveAndGoToValuesButton() {
@@ -91,4 +100,11 @@ public class CreateJobModalWindow extends BasePage {
         return new JobDetailsPage(driver);
     }
 
+    public String getCreatedJobID() {
+        return jobID.getText();
+    }
+
+    public String getPopUpValue() {
+        return alertMsg.getText();
+    }
 }
