@@ -1,6 +1,7 @@
 package ai.makeitright.pages.workflows;
 
 import ai.makeitright.pages.BasePage;
+import ai.makeitright.pages.jobs.JobDetailsPage;
 import ai.makeitright.pages.settigns.RepositoriesAddressesTable;
 import ai.makeitright.pages.settigns.RepositoryPage;
 import ai.makeitright.utilities.Main;
@@ -78,6 +79,16 @@ public class CreateJobModalWindow extends BasePage {
         return this;
     }
 
+    public CreateJobModalWindow clickCreateJobButton() {
+        waitForVisibilityOf(btnSaveAndGo);
+        click(btnSaveAndGo, "'Create job' button");
+        return this;
+    }
 
+    public JobDetailsPage clickGoToJobDetailsButton() {
+        waitForVisibilityOf(btnSaveAndGo);
+        click(btnSaveAndGo, "'Go to the job details' button");
+        return new JobDetailsPage(driver);
+    }
 
 }

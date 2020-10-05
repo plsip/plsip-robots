@@ -52,7 +52,18 @@ public class CreateNewJobTest extends DriverConfig {
         createJobModalWindow
                 .clickSaveAndGoToCollectionButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
-                .clickSaveAndGoToValuesButton();
+                .clickSaveAndGoToValuesButton()
+                .clickSaveAndGoToScheduleButton()
+                .clickCreateJobButton();
+
+        //Your job (ID:M1QQENMHAI) was successfully created!
+
+        //div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span
+
+        //div[@class='Polaris-Stack__Item Polaris-Stack__Item--fill']/span//parent::div
+
+        //h1[@class='Polaris-DisplayText Polaris-DisplayText--sizeLarge']
+        //Job M1QQENMHAI - Don't use - create new job test
 
     }
 
