@@ -1,8 +1,9 @@
-package ai.makeitright.tests.workflows.createnewworkflow;
+package ai.makeitright.tests.workflows.checkdetailsofworkflow;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.workflows.CreateNewWorkflowModalWindow;
+import ai.makeitright.pages.workflows.DisplayedWorkflows;
 import ai.makeitright.pages.workflows.WorkflowDetailsPage;
 import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
@@ -13,49 +14,52 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class CreateNewWorkflowTest extends DriverConfig {
+public class CheckDetailsOfWorkflowTest extends DriverConfig {
 
-    //from configuration
-    private String email;
-    private String password;
     private String pfCompanyName;
-    private String powerFarmUrl;
+    private String pfSignInUrl;
+    private String pfUserEmail;
+    private String pfUserPassword;
+    private String technology;
+    private String taskname;
     private String workflowName;
     private String workflowType;
 
 
     @Before
     public void before() {
-        email = System.getProperty("inputParameters.pfUserEmail");
-        password = System.getProperty("secretParameters.pfUserPassword");
+        pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
+        pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
-        powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
-        workflowName = System.getProperty("inputParameters.workflowName");
-        workflowType = System.getProperty("inputParameters.workflowType");
+        pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
+        taskname = System.getProperty("previousResult.taskname");
+        workflowName = System.getProperty("previousResult.workflowName");
+        workflowType = System.getProperty("previousResult.workflowType");
     }
 
     @Test
-    public void createNewWorkflow() {
-
-        driver.get(powerFarmUrl);
-
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
+    public void checkDetailsOfWorkflow() {
+        driver.get(pfSignInUrl);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
-                .setEmailInput(email)
-                .setPasswordInput(password);
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Workflows");
 
         WorkflowsPage workflowsPage = new WorkflowsPage(driver);
-        CreateNewWorkflowModalWindow createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
+        workflowsPage.filterWorkflow(workflowName);
 
-        createNewWorkflowModalWindow
-                .setWorkflowName(workflowName)
-                .clickWorkflowTypeCheckbox(workflowType);
-        WorkflowDetailsPage workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton();
+        DisplayedWorkflows displayedWorkflows = workflowsPage.getWorkflowsTable().getWorkflowsFirstRowData();
+        Assertions.assertNotNull(displayedWorkflows, "There is no workflow with name: '" + workflowName + "'");
+        Assertions.assertEquals(workflowName, displayedWorkflows.getName(), "The name of workflow is not right");
+        Main.report.logPass("Workflow has right value for 'Name'");
+        Assertions.assertEquals(new TopPanel(driver).getCreatedBy(), displayedWorkflows.getCreatedBy(), "The value 'Created by' wor workflow " + workflowName + " is not like expected");
+        Main.report.logPass("Workflow has right value for 'Created by'");
+        Assertions.assertEquals(workflowType, displayedWorkflows.getType(), "The value 'Type' for workflow " + workflowName + " is not like expected");
+        Main.report.logPass("Worklfow has right value for 'Type'");
 
-        workflowName = createNewWorkflowModalWindow.getWorkflowName();
-
+        WorkflowDetailsPage workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName);
         Assertions.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
         Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
         Assertions.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
@@ -71,11 +75,10 @@ public class CreateNewWorkflowTest extends DriverConfig {
 
     @After
     public void prepareJson() {
-        String taskname = "Create new " + workflowType + " workflow";
         JSONObject obj = new JSONObject();
         obj.put("workflowName", workflowName);
         obj.put("workflowType", workflowType);
-        obj.put("taskname", taskname);
+        obj.put("taskname",taskname + " || Check details of workflow");
         System.setProperty("output", obj.toString());
         driver.close();
     }
