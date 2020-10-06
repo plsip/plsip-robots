@@ -30,7 +30,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return inpWorkflowName.isDisplayed();
+        return waitShortForVisibilityOf(inpWorkflowName);
     }
 
     public WorkflowDetailsPage clickCreateWorkflowButton() {
