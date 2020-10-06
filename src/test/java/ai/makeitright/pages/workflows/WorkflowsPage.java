@@ -2,6 +2,7 @@ package ai.makeitright.pages.workflows;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,5 +42,11 @@ public class WorkflowsPage extends BasePage {
 
     public WorkflowsTable getWorkflowsTable() {
         return new WorkflowsTable(driver);
+    }
+
+    public CreateJobModalWindow clickCreateJobButton(final String workflowName) {
+        WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button"));
+        click(btnCreateJob, "'Create job' button");
+        return new CreateJobModalWindow(driver);
     }
 }
