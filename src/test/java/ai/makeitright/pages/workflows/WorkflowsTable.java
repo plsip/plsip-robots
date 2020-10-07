@@ -52,8 +52,6 @@ public class WorkflowsTable extends BasePage {
     private int DATECREATED = 1;
     private int TYPE = 2;
 
-
-
     public WebElement getDesirableRow(final String workflowName) {
         do {
             waitForVisibilityOfAllElements(tableRows);
