@@ -9,12 +9,24 @@ import org.openqa.selenium.remote.Augmenter;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.GregorianCalendar;
 
 public class Methods extends Main {
 
     public static String getDateTime(String format) {
         return new SimpleDateFormat(format).format(new GregorianCalendar().getTime());
+    }
+
+    public static String getNextDayOfMonth() {
+        LocalDate currentDate = LocalDate.now();
+        return Integer.toString(currentDate.plusDays(1).getDayOfMonth());
+    }
+
+    public static String getCurrentTime() {
+        LocalTime currentTime = LocalTime.now();
+        return currentTime.getHour() + ":" + currentTime.plusMinutes(1).getMinute();
     }
 
     public static String getScreenShotAsBase64(WebDriver driver) {

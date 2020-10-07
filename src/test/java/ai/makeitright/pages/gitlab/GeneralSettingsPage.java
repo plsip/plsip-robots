@@ -61,7 +61,7 @@ public class GeneralSettingsPage extends BasePage {
         }
         catch (ElementNotInteractableException e) {
             Main.report.logFail("Couldn't click 'Yes, delete project' button. " + e.getMessage());
-            return null;
         }
+        return this;
     }
 }

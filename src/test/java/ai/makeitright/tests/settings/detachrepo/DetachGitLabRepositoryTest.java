@@ -4,7 +4,7 @@ import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import org.json.JSONObject;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.settigns.RepositoryPage;
+import ai.makeitright.pages.settings.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import org.junit.After;
 import org.junit.Before;
