@@ -133,15 +133,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
                 break;
             default:
-                Main.report.logInfo("No execution frequency has been selected, default 'Never' option is marked");
-                createJobModalWindow.clickCreateTriggerButton();
-                triggerID = createJobModalWindow.getCreatedJobID();
-                Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " workflow at " + Methods.getDateOfNextDay("dd/MM/YYYY") +
-                                " " + LocalTime.NOON.toString() + "."),
-                                "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
-                Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
-                break;
+                Assertions.fail("There is a wrong value of 'executionFrequency' parameter");
         }
 
         TriggerDetailsPage triggerDetailsPage = createJobModalWindow.clickGoToTriggerDetailsButton();
@@ -201,13 +193,6 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + triggerDetailsPage.getFinishDate());
                 break;
             case "never":
-                triggerDetails = "At "+ Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
-                Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
-                        "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
-                Main.report.logPass("The trigger details display the correct date: " + triggerDetailsPage.getTriggerDetails());
-                break;
-            default:
-                Main.report.logInfo("No execution frequency has been selected, default 'Never' option is marked");
                 triggerDetails = "At "+ Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
                 Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
                         "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
