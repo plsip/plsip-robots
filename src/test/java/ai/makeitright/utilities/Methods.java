@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 
 public class Methods extends Main {
@@ -19,14 +20,38 @@ public class Methods extends Main {
         return new SimpleDateFormat(format).format(new GregorianCalendar().getTime());
     }
 
+    public static String getFirstDayOfNextMonth() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        return formatter.format(currentDate.plusMonths(1).withDayOfMonth(1));
+    }
+
+    public static String getOrdinalIndicatorOfNextDay() {
+        String[] suffixes =
+                { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
+                        "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+                        "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
+                        "th", "st" };
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd");
+        int day = Integer.parseInt(formatter.format(currentDate.plusDays(1)));
+        return day + suffixes[day];
+    }
+
     public static String getNextDayOfMonth() {
         LocalDate currentDate = LocalDate.now();
         return Integer.toString(currentDate.plusDays(1).getDayOfMonth());
     }
 
-    public static String getCurrentTime() {
-        LocalTime currentTime = LocalTime.now();
-        return currentTime.getHour() + ":" + currentTime.plusMinutes(1).getMinute();
+    public static String getDateOfNextDay(String format) {
+        LocalDate currentDate = LocalDate.now();
+        return DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1));
+    }
+
+    public static String getNameOfNextDay() {
+        LocalDate currentDate = LocalDate.now();
+        String output = currentDate.plusDays(1).getDayOfWeek().toString();
+        return output.substring(0, 1) + output.substring(1).toLowerCase();
     }
 
     public static String getScreenShotAsBase64(WebDriver driver) {

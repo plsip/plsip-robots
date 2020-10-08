@@ -72,6 +72,9 @@ public class CreateJobModalWindow extends BasePage {
     @FindBy(xpath = "//button[contains(@aria-label, 'Show next month')]/span")
     private WebElement btnNextMonth;
 
+    @FindBy(xpath = "//div[@class='flex']")
+    private WebElement modalWindowHeader;
+
     public CreateJobModalWindow(final WebDriver driver) {
         super(driver);
     }
@@ -118,7 +121,7 @@ public class CreateJobModalWindow extends BasePage {
         return this;
     }
 
-    public CreateJobModalWindow clickRadioBtnToScheduleJob() {
+    public CreateJobModalWindow clickCreateTriggerRadioButton() {
         waitForVisibilityOf(radioBtnScheduled);
         click(radioBtnScheduled, "radio button to schedule a job");
         return this;
@@ -210,5 +213,13 @@ public class CreateJobModalWindow extends BasePage {
 
     public String getPopUpValue() {
         return alertMsg.getText();
+    }
+
+    public boolean checkPopUpValue(String msg) {
+        return alertMsg.getText().equals(msg);
+    }
+
+    public boolean checkModalWindowHeader(String msg) {
+        return modalWindowHeader.getText().equals(msg);
     }
 }
