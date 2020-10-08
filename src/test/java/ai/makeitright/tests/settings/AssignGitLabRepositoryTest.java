@@ -1,14 +1,13 @@
 package ai.makeitright.tests.settings;
 
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
-import ai.makeitright.pages.login.OrganizationSelectionPage;
 import org.json.JSONObject;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.gitlab.LoginGitLabPage;
 import ai.makeitright.pages.gitlab.NewProjectPage;
 import ai.makeitright.pages.gitlab.ProjectsPage;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.settigns.RepositoryPage;
+import ai.makeitright.pages.settings.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.junit.After;

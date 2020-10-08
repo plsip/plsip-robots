@@ -1,4 +1,4 @@
-package ai.makeitright.pages.settigns;
+package ai.makeitright.pages.settings;
 
 public class DisplayedCodeRepositoryAddress {
 

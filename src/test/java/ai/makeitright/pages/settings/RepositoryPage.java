@@ -1,4 +1,4 @@
-package ai.makeitright.pages.settigns;
+package ai.makeitright.pages.settings;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
