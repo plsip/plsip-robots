@@ -1,6 +1,7 @@
 package ai.makeitright.pages.settings;
 
 import ai.makeitright.pages.BasePage;
+import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.utilities.Main;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
@@ -71,6 +72,12 @@ public class RepositoryPage extends BasePage {
     public RepositoryPage clickSaveButton() {
         click(btnSave, "button 'Save'");
         return this;
+    }
+
+    public AlertStatusPopupWindow clickSaveButtonWhenEditingToken() {
+        click(btnSave, "button 'Save'");
+        waitForBlueCircleDisappearLong();
+        return new AlertStatusPopupWindow(driver);
     }
 
     public RepositoriesAddressesTable getRepositoriesAddressesTable() {

@@ -89,8 +89,20 @@ public abstract class BasePage {
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
         Main.report.logInfo("Wait max 10s until blue rounding circle disappears...");
         try {
-            driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
             new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
+        } catch (Exception e) {
+            Main.report.logFail("Blue rounding circle was still displayed");
+            return false;
+        }
+        Main.report.logPass("No blue rounding circle is displaying");
+        return true;
+    }
+
+    public boolean waitForBlueCircleDisappearLong() {
+        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        Main.report.logInfo("Wait max 20s until blue rounding circle disappears...");
+        try {
+            new WebDriverWait(driver, 20).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorHighlight Polaris-Spinner--sizeLarge']")));
         } catch (Exception e) {
             Main.report.logFail("Blue rounding circle was still displayed");
             return false;

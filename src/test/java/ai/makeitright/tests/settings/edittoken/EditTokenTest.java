@@ -56,10 +56,9 @@ public class EditTokenTest extends DriverConfig {
 
         repositoryPage
                 .clickEditTokenButton(repositoryAddress)
-                .setAccessTokenInput(newGitLabAccessToken)
-                .clickSaveButton();
+                .setAccessTokenInput(newGitLabAccessToken);
 
-        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
+        AlertStatusPopupWindow statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
         Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
         Assertions.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated! You can keep on rockin'\uD83D\uDE46\u200D"));
