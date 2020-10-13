@@ -25,6 +25,7 @@ public class CreateNewJobTest extends DriverConfig {
 
     //for reporting:
     private String jobID;
+    private String jobHeader;
 
     @Before
     public void before() {
@@ -64,25 +65,28 @@ public class CreateNewJobTest extends DriverConfig {
                 .clickCreateJobButton();
 
         jobID = createJobModalWindow.getCreatedJobID();
-        Assertions.assertTrue(createJobModalWindow.getPopUpValue().equals("Your job (ID: " + jobID + ") was successfully created!"),
-                "The popup has the wrong text: ");
+        Assertions.assertEquals("Your job (ID: " + jobID + ") was successfully created!", createJobModalWindow.getPopUpValue(),
+                "The popup has the wrong text: " + createJobModalWindow.getPopUpValue());
         Main.report.logPass("The popup after creating the job has the correct text: " + createJobModalWindow.getPopUpValue());
 
         JobDetailsPage jobDetailsPage = createJobModalWindow.clickGoToJobDetailsButton();
-        Assertions.assertTrue(jobDetailsPage.checkJobID(jobID), "The value of JOB ID is incorrect.");
+        Assertions.assertEquals(jobID, jobDetailsPage.getJobID(),
+                "The value of JOB ID is incorrect: " + jobDetailsPage.getJobID());
         Main.report.logPass("In the job details there is a correct job ID value displayed: " + jobID);
 
-        Assertions.assertTrue(jobDetailsPage.checkJobHeader("Job " + jobID + " - " + workflowName),
-                "The job header is not correct.");
-        Main.report.logPass("In the job details there is a correct job header displayed: " + jobDetailsPage.getJobHeader());
+        jobHeader = "Job " + jobID + " - " + workflowName;
+        Assertions.assertEquals(jobHeader, jobDetailsPage.getJobHeader(),
+                "The job header is not correct: " + jobDetailsPage.getJobHeader());
+        Main.report.logPass("In the job details there is a correct job header displayed: " + jobHeader);
     }
 
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", "Create a new job");
-        obj.put("workflowName", workflowName);
         obj.put("jobID", jobID);
+        obj.put("workflowName", workflowName);
+        obj.put("jobHeader", jobHeader);
         System.setProperty("output", obj.toString());
         driver.close();
     }
