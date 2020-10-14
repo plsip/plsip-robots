@@ -31,6 +31,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     private String triggerID;
     private String triggerDetails;
     private String nextRun;
+    private String finishDate;
 
     @Before
     public void before() {
@@ -136,67 +137,26 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 Assertions.fail("There is a wrong value of 'executionFrequency' parameter");
         }
 
-        TriggerDetailsPage triggerDetailsPage = createJobModalWindow.clickGoToTriggerDetailsButton();
-        Assertions.assertTrue(triggerDetailsPage.checkTriggerID(triggerID),
-                "The value of TRIGGER ID is incorrect: " + triggerID);
-        Main.report.logPass("In the trigger details there is a correct trigger ID value displayed: " + triggerID);
-
-        Assertions.assertTrue(triggerDetailsPage.checkTriggerHeader(workflowName),
-                "The trigger header is not correct: " + triggerDetailsPage.getTriggerHeader());
-        Main.report.logPass("In the trigger details there is a correct trigger header displayed: " + triggerDetailsPage.getTriggerHeader());
-
-        Assertions.assertTrue(triggerDetailsPage.checkCreatedBy(),
-                "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
-        Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel: " + triggerDetailsPage.getCreatedBy());
-
-        Assertions.assertTrue(triggerDetailsPage.checkButtonPauseTriggerIsEnabled(),
-                "Button 'Pause trigger' should be visible and enabled");
-        Main.report.logPass("Button 'Pause trigger' is visible and enabled");
-
+        createJobModalWindow.clickGoToTriggerDetailsButton();
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
-        Assertions.assertTrue(triggerDetailsPage.checkNextRun(nextRun),
-                "The 'Next run' section displays the wrong date: " + triggerDetailsPage.getNextRun());
-        Main.report.logPass("The 'NEXT RUN' section displays the correct date: " + triggerDetailsPage.getNextRun());
+        finishDate = Methods.getFirstDayOfNextMonth();
 
         switch (executionFrequency.toLowerCase()) {
             case "daily":
                 triggerDetails = "Everyday at " +
                         LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
-                        "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
-                Main.report.logPass("The trigger details display the correct date: " + triggerDetailsPage.getTriggerDetails());
-
-                Assertions.assertTrue(triggerDetailsPage.checkFinishDate(Methods.getFirstDayOfNextMonth() + " 23:59"),
-                        "The 'FINISH DATE' section displays the wrong date: " + triggerDetailsPage.getFinishDate());
-                Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + triggerDetailsPage.getFinishDate());
                 break;
             case "weekly":
                 triggerDetails = "Every " + Methods.getNameOfNextDay() + " at " +
                         LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
-                        "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
-                Main.report.logPass("The trigger details display the correct date: " + triggerDetailsPage.getTriggerDetails());
-
-                Assertions.assertTrue(triggerDetailsPage.checkFinishDate(Methods.getFirstDayOfNextMonth() + " 23:59"),
-                        "The 'FINISH DATE' section displays the wrong date: " + triggerDetailsPage.getFinishDate());
-                Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + triggerDetailsPage.getFinishDate());
                 break;
             case "monthly":
                 triggerDetails = Methods.getOrdinalIndicatorOfNextDay() +
                         " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
-                        "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
-                Main.report.logPass("The trigger details display the correct date: " + triggerDetailsPage.getTriggerDetails());
-
-                Assertions.assertTrue(triggerDetailsPage.checkFinishDate(Methods.getFirstDayOfNextMonth() + " 23:59"),
-                        "The 'FINISH DATE' section displays the wrong date: " + triggerDetailsPage.getFinishDate());
-                Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + triggerDetailsPage.getFinishDate());
                 break;
             case "never":
                 triggerDetails = "At "+ Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
-                Assertions.assertTrue(triggerDetailsPage.checkTriggerDetails(triggerDetails),
-                        "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
-                Main.report.logPass("The trigger details display the correct date: " + triggerDetailsPage.getTriggerDetails());
+                finishDate = "N/A";
                 break;
         }
     }
@@ -210,6 +170,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         obj.put("executionFrequency", executionFrequency);
         obj.put("triggerDetails", triggerDetails);
         obj.put("nextRun", nextRun);
+        obj.put("finishDate", finishDate);
         System.setProperty("output", obj.toString());
         driver.close();
     }
