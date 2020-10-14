@@ -137,10 +137,11 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 Assertions.fail("There is a wrong value of 'executionFrequency' parameter");
         }
 
-        createJobModalWindow.clickGoToTriggerDetailsButton();
-        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+        TriggerDetailsPage triggerDetailsPage = createJobModalWindow.clickGoToTriggerDetailsButton();
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
         finishDate = Methods.getFirstDayOfNextMonth();
+        Main.report.logPass(triggerDetailsPage.getTriggerDetails());
+        Main.report.logPass(triggerDetailsPage.getFinishDate());
 
         switch (executionFrequency.toLowerCase()) {
             case "daily":
