@@ -142,6 +142,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         finishDate = Methods.getFirstDayOfNextMonth();
         Main.report.logPass(triggerDetailsPage.getTriggerDetails());
         Main.report.logPass(triggerDetailsPage.getFinishDate());
+        Main.report.logPass(LocalTime.NOON.toString());
 
         switch (executionFrequency.toLowerCase()) {
             case "daily":

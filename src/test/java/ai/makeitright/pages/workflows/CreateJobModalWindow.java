@@ -157,6 +157,7 @@ public class CreateJobModalWindow extends BasePage {
     public CreateJobModalWindow setExecutionTimeInput(String time) {
         waitForClickable(inpExecutionTime);
         sendText(inpExecutionTime, time,"input field (execution time)");
+        Main.report.logPass(inpExecutionTime.getAttribute("value"));
         return this;
     }
 
@@ -166,6 +167,7 @@ public class CreateJobModalWindow extends BasePage {
         waitForVisibilityOfAllElements(rowsOfDays);
         rowsOfDays.get(0).findElement(By.xpath(".//button[text()='1']")).click();
         Main.report.logPass("The first day of the next month was chosen");
+        Main.report.logPass(inpFinishDate.getAttribute("value"));
         return this;
     }
 
