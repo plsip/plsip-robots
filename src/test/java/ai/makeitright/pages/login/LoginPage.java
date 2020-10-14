@@ -47,10 +47,8 @@ public class LoginPage extends BasePage {
 
     public LeftMenu clickSignInButton() {
         click(btnSignIn, "button 'Sign in'");
-        if(url.contains("development")) {
-            OrganizationSelectionPage organizationSelectionPage = new OrganizationSelectionPage(driver);
-            organizationSelectionPage.clickSignInButton(param);
-        }
+        OrganizationSelectionPage organizationSelectionPage = new OrganizationSelectionPage(driver);
+        organizationSelectionPage.clickSignInButton(param);
         return new LeftMenu(driver);
     }
 
