@@ -138,6 +138,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         }
 
         createJobModalWindow.clickGoToTriggerDetailsButton();
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
         finishDate = Methods.getFirstDayOfNextMonth();
 
