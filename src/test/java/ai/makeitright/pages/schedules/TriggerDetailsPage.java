@@ -36,39 +36,24 @@ public class TriggerDetailsPage extends BasePage {
     @Override
     protected boolean isAt() {
         waitForBlueCircleDisappear();
+        waitForVisibilityOf(btnPauseTriggerEnabled);
         return triggerHeader.isDisplayed();
     }
 
-    public boolean checkTriggerID(String id) {
-        return triggerID.getText().equals(id);
-    }
-
-    public boolean checkTriggerDetails(String details) {
-        return triggerDetails.getText().equals(details);
+    public String getTriggerID() {
+        return triggerID.getText();
     }
 
     public String getTriggerDetails() {
         return triggerDetails.getText();
     }
 
-    public boolean checkNextRun(String date) {
-        return nextRun.getText().equals(date);
-    }
-
     public String getNextRun() {
         return nextRun.getText();
     }
 
-    public boolean checkFinishDate(String date) {
-        return finishDate.getText().equals(date);
-    }
-
     public String getFinishDate() {
         return finishDate.getText();
-    }
-
-    public boolean checkTriggerHeader(String msg) {
-        return triggerHeader.getText().equals(msg);
     }
 
     public boolean checkCreatedBy() {
