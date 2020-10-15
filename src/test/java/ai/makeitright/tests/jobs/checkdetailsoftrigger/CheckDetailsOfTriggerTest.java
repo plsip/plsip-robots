@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.io.IOException;
 import java.time.LocalTime;
 
 public class CheckDetailsOfTriggerTest extends DriverConfig {
@@ -50,7 +51,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
     }
 
     @Test
-    public void checkDetailsOfTrigger() {
+    public void checkDetailsOfTrigger() throws IOException {
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
         loginPage
@@ -65,6 +66,8 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
 
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
         Assertions.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
+
+        Methods.getWebScreenShot(driver, "schedulepage");
 
         Assertions.assertEquals(workflowName, displayedTriggers.getWorkflowName(),
                 "The name of the trigger's workflow is not right: " + displayedTriggers.getWorkflowName());
@@ -112,6 +115,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
         Main.report.logPass("The 'Next run' displays the correct date: " + nextRun);
 
         TriggerDetailsPage triggerDetailsPage = schedulePage.clickFoundTrigger(triggerID);
+        Methods.getWebScreenShot(driver, "details_of_trigger");
         Assertions.assertEquals(triggerID, triggerDetailsPage.getTriggerID(),
                 "The value of TRIGGER ID is incorrect: " + triggerDetailsPage.getTriggerID());
         Main.report.logPass("In the trigger details there is a correct trigger ID value displayed: " + triggerID);

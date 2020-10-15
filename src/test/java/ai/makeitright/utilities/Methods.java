@@ -66,7 +66,7 @@ public class Methods extends Main {
     public static String getWebScreenShot(WebDriver driver, String strFilename) throws IOException {
         WebDriver augmentedDriver = new Augmenter().augment(driver);
         File srcFile = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
-        String filePath = Main.artifactsPath + System.getProperty("file.separator");
+        String filePath = Main.screenshotsPath + System.getProperty("file.separator");
         String fileName = strFilename + ".png";
         FileUtils.copyFile(srcFile, new File(filePath + fileName));
         return fileName;

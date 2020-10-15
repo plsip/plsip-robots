@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.io.IOException;
 import java.time.LocalTime;
 
 public class CreateNewTriggerJobTest extends DriverConfig {
@@ -45,7 +46,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     }
 
     @Test
-    public void createNewJobWithTrigger() {
+    public void createNewJobWithTrigger() throws IOException {
         driver.get(powerFarmUrl);
 
         LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
@@ -98,8 +99,10 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 createJobModalWindow
                         .clickRadioBtnWeekly()
                         .clickFinishDateInput()
-                        .chooseFirstDayOfNextMonth()
-                        .clickCreateTriggerButton();
+                        .chooseFirstDayOfNextMonth();
+
+                Methods.getWebScreenShot(driver, "testtest");
+                createJobModalWindow.clickCreateTriggerButton();
 
                 triggerID = createJobModalWindow.getCreatedJobID();
                 Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
@@ -138,6 +141,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         }
 
         TriggerDetailsPage triggerDetailsPage = createJobModalWindow.clickGoToTriggerDetailsButton();
+        Methods.getWebScreenShot(driver, "details");
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
         finishDate = Methods.getFirstDayOfNextMonth();
         Main.report.logPass(triggerDetailsPage.getTriggerDetails());

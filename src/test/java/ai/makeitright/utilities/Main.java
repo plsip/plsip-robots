@@ -6,6 +6,7 @@ import org.junit.Before;
 public class Main {
     public static Reporter report;
     public static String artifactsPath = System.getProperty("ARTIFACTS_PATH");
+    public static String screenshotsPath = System.getProperty("SCREENSHOTS_PATH");
     public final static String reportName = "Report.html";
     public static String serviceName = "";
     public String finalMsg = "";
