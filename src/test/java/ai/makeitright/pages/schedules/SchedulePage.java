@@ -2,6 +2,9 @@ package ai.makeitright.pages.schedules;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -21,6 +24,9 @@ public class SchedulePage extends BasePage {
             @FindBy(xpath = "//table[@class='Polaris-DataTable__Table']/tbody/tr")
     )
     private List<WebElement> tableRows;
+
+    @FindBy(xpath = "//span[text()='Delete Trigger']")
+    private WebElement btnDeleteTrigger;
 
     @Override
     protected boolean isAt() {
@@ -45,7 +51,45 @@ public class SchedulePage extends BasePage {
 
     public TriggerDetailsPage clickFoundTrigger(final String triggerID) {
         WebElement trigger = getTriggersTable().getDesirableRow(triggerID);
-        click(trigger, "found trigger which has ID: " + triggerID);
-        return new TriggerDetailsPage(driver);
+        if (trigger != null) {
+            click(trigger, "trigger which has ID: " + triggerID);
+            return new TriggerDetailsPage(driver);
+        }
+        else {
+            Main.report.logFail("Couldn't click the trigger which has ID: " + triggerID);
+            return null;
+        }
+    }
+
+    public boolean checkIfTriggerIsDisplayed(final String triggerID) {
+        WebElement trigger = getTriggersTable().getDesirableRow(triggerID);
+        return trigger != null;
+    }
+
+    public SchedulePage clickPauseTriggerButton(final String triggerID) {
+        try {
+            WebElement btnPauseTrigger = getTriggersTable().getDesirableRow(triggerID).findElement(By.xpath(".//span[text()='Pause trigger']"));
+            click (btnPauseTrigger, "'Pause trigger' button of the trigger which has ID: " + triggerID);
+        } catch (NoSuchElementException e) {
+            Main.report.logInfo("There is no possibility to pause the trigger as it's already paused");
+        } catch (Exception e) {
+            Assertions.fail("The trigger which has ID: " + triggerID + " doesn't exist");
+        }
+        return this;
+    }
+
+    public SchedulePage clickDeleteTriggerButton(final String triggerID) {
+        WebElement btnDelete = getTriggersTable().getDesirableRow(triggerID).findElement(By.xpath(".//span[text()='Delete']"));
+        waitForClickable(btnDelete);
+        click (btnDelete, "'Delete' button of the trigger which has ID: " + triggerID);
+        waitForBlueCircleDisappear();
+        return this;
+    }
+
+    public SchedulePage confirmDeletionOfTrigger() {
+        waitForClickable(btnDeleteTrigger);
+        click (btnDeleteTrigger, "'Delete trigger' button to confirm the deletion");
+        waitForBlueCircleDisappear();
+        return this;
     }
 }
