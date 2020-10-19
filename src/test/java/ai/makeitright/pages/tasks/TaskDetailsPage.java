@@ -11,6 +11,9 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//span[text()='ASSIGNED FOLDER IN REPOSITORY']//following-sibling::div//button")
     private WebElement btnCopy;
 
+    @FindBy(xpath = "//main//button/span/span[text()='Delete Task']")
+    private WebElement btnDeleteTask;
+
     @FindBy(xpath = "//div[@id='processes-commits-panel']//div[@class='Polaris-Stack__Item']/div[@class='commits-list']")
     private WebElement lstCommits;
 
@@ -36,6 +39,11 @@ public class TaskDetailsPage extends BasePage {
 
     public TaskDetailsPage(final WebDriver driver) {
         super(driver);
+    }
+
+    public DeleteTaskModalWindow clickDeleteTaskButton() {
+        click(btnDeleteTask, "button 'Delete Task'");
+        return new DeleteTaskModalWindow(driver);
     }
 
     public boolean checkListOfCommitsIsDisplayed() {
@@ -65,5 +73,6 @@ public class TaskDetailsPage extends BasePage {
     public String getTechnology() {
         return txtTechnology.getText();
     }
+
 
 }

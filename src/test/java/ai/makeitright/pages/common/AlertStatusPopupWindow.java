@@ -14,6 +14,9 @@ public class AlertStatusPopupWindow extends BasePage {
     @FindBy(xpath = "//div[@class='Polaris-Banner__Content']/p/span")
     private WebElement txtMessageAlert;
 
+    @FindBy(xpath = "//div[@class='Polaris-Banner__Content']/p")
+    private WebElement txtMessageAlert2;
+
     @FindBy(xpath = "//p[@class='Polaris-Heading']")
     private WebElement txtStatus;
 
@@ -69,6 +72,22 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isAlertMessage(String message) {
         try {
             String messageAlert = txtMessageAlert.getText();
+            if (messageAlert.replaceAll("\\s+", "").contains(message.replaceAll("\\s+", ""))) {
+                Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
+                return true;
+            } else {
+                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "' which doesn't contains '" + message + "'");
+                return false;
+            }
+        } catch (Exception e) {
+            Main.report.logFail("There was no message on alert window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isAlertMessage2(String message) {
+        try {
+            String messageAlert = txtMessageAlert2.getText();
             if (messageAlert.replaceAll("\\s+", "").contains(message.replaceAll("\\s+", ""))) {
                 Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
                 return true;

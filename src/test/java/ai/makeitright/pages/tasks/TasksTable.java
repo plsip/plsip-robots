@@ -11,10 +11,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TasksTable extends BasePage {
 
-    @FindBy(xpath = "//button[@aria-label='Next']")
+    @FindBy(xpath = "//button[@class='Polaris-Pagination__Button Polaris-Pagination__NextButton' and not(@disabled)]")
     private WebElement btnArrowNext;
 
     @FindBy(xpath = "//table[@class='Polaris-DataTable__Table']/tbody")
@@ -24,6 +25,11 @@ public class TasksTable extends BasePage {
             @FindBy(xpath = "//table[@class='Polaris-DataTable__Table']/tbody/tr")
     )
     private List<WebElement> tableRows;
+
+    @FindAll(
+            @FindBy(xpath = "//table[@class='Polaris-DataTable__Table']/tbody/tr/th")
+    )
+    private List<WebElement> tableRowsColumns;
 
     private WebDriverWait wait = new WebDriverWait(driver, 5);
 
@@ -68,9 +74,9 @@ public class TasksTable extends BasePage {
                 }
             }
             try {
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 btnArrowNext.isDisplayed();
                 click(btnArrowNext,"arrow '->'");
-                wait.until(ExpectedConditions.stalenessOf(tableRows.get(0)));
             } catch (Exception e) {
                 Main.report.logInfo("There was no task with name ' " + taskName + "' in table 'Tasks'");
                 return null;
