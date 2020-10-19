@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,6 +18,7 @@ public class TasksPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='Filter items']")
     private WebElement inpFilterItems;
 
+    private WebDriverWait wait = new WebDriverWait(driver, 10);
     private WebDriverWait waitShort = new WebDriverWait(driver, 3);
 
     @Override
@@ -26,6 +28,18 @@ public class TasksPage extends BasePage {
 
     public TasksPage(final WebDriver driver) {
         super(driver);
+    }
+
+    public TasksPage checkIfNoneRowDisplayed() {
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//tbody/tr"),0));
+        Main.report.logPass("On the tasks table is no visible row");
+        return this;
+    }
+
+    public TasksPage checkIfOneRowDisplayed() {
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//tbody/tr"),1));
+        Main.report.logPass("On the tasks table is visible one row");
+        return this;
     }
 
     public CreateTaskModalWindow clickCreateNewTaskButton() {
@@ -57,6 +71,5 @@ public class TasksPage extends BasePage {
     public TasksTable getTasksTable() {
         return new TasksTable(driver);
     }
-
 
 }
