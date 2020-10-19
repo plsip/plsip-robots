@@ -9,6 +9,8 @@ import ai.makeitright.pages.tasks.TaskDetailsPage;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -76,6 +78,15 @@ public class DeleteTaskTest extends DriverConfig {
         tasksPage.filterTask(taskName);
         tasksPage.checkIfNoneRowDisplayed();
         Main.report.logPass("In the tasks table there is no task after search with name '" + taskName + "'");
+    }
+
+    @After
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("taskName", taskName);
+        obj.put("taskname",taskname + " || Delete task");
+        System.setProperty("output", obj.toString());
+        driver.close();
     }
 
 
