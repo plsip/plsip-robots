@@ -1,10 +1,6 @@
 package ai.makeitright.tests.jobs.checkdetailsoftrigger;
 
 import ai.makeitright.pages.common.LeftMenu;
-import ai.makeitright.pages.common.TopPanel;
-import ai.makeitright.pages.jobs.DisplayedJobs;
-import ai.makeitright.pages.jobs.JobDetailsPage;
-import ai.makeitright.pages.jobs.JobsPage;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.schedules.DisplayedTriggers;
 import ai.makeitright.pages.schedules.SchedulePage;
@@ -22,7 +18,7 @@ import java.time.LocalTime;
 
 public class CheckDetailsOfTriggerTest extends DriverConfig {
 
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -38,7 +34,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         taskname = System.getProperty("previousResult.taskname");
         workflowName = System.getProperty("previousResult.workflowName");
@@ -52,7 +48,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
     @Test
     public void checkDetailsOfTrigger() {
         driver.get(pfSignInUrl);
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);

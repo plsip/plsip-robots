@@ -16,11 +16,10 @@ import org.junit.jupiter.api.Assertions;
 
 public class CheckDetailsOfWorkflowTest extends DriverConfig {
 
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
-    private String technology;
     private String taskname;
     private String workflowName;
     private String workflowType;
@@ -30,7 +29,7 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         taskname = System.getProperty("previousResult.taskname");
         workflowName = System.getProperty("previousResult.workflowName");
@@ -40,7 +39,7 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
     @Test
     public void checkDetailsOfWorkflow() {
         driver.get(pfSignInUrl);
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);

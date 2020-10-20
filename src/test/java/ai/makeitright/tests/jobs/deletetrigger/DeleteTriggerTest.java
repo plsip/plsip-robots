@@ -1,28 +1,19 @@
 package ai.makeitright.tests.jobs.deletetrigger;
 
 import ai.makeitright.pages.common.LeftMenu;
-import ai.makeitright.pages.common.TopPanel;
-import ai.makeitright.pages.jobs.DisplayedJobs;
-import ai.makeitright.pages.jobs.JobDetailsPage;
-import ai.makeitright.pages.jobs.JobsPage;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.schedules.DisplayedTriggers;
 import ai.makeitright.pages.schedules.SchedulePage;
-import ai.makeitright.pages.schedules.TriggerDetailsPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
-import ai.makeitright.utilities.Methods;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.time.LocalTime;
-
 public class DeleteTriggerTest extends DriverConfig {
 
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -34,7 +25,7 @@ public class DeleteTriggerTest extends DriverConfig {
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         taskname = System.getProperty("previousResult.taskname");
         workflowName = System.getProperty("previousResult.workflowName");
@@ -44,7 +35,7 @@ public class DeleteTriggerTest extends DriverConfig {
     @Test
     public void deleteTrigger() {
         driver.get(pfSignInUrl);
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
@@ -59,8 +50,7 @@ public class DeleteTriggerTest extends DriverConfig {
                 .clickDeleteTriggerButton(triggerID)
                 .confirmDeletionOfTrigger();
 
-        Assertions.assertTrue(!schedulePage.checkIfTriggerIsDisplayed(triggerID),
-                "The deleted trigger is still on the trigger list");
+        Assertions.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
         Main.report.logPass("The trigger is no longer on the trigger list");
         Main.report.logPass("Test has been completed successfully!");
     }

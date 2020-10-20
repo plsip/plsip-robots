@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Assertions;
 public class CreateGlobalArgumentsTest extends DriverConfig {
 
     //from configuration:
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -27,7 +27,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
     @Before
     public void before() {
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -41,7 +41,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
         driver.get(pfSignInUrl);
 
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);

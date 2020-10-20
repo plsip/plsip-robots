@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Assertions;
 public class DetachGitLabRepositoryTest extends DriverConfig {
 
     //from configuration:
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
+    private String pfOrganizationNameUrl;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -26,7 +27,8 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
 
     @Before
     public void before() {
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
+        pfOrganizationNameUrl = System.getProperty("inputParameters.pfOrganizationNameUrl");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -40,7 +42,7 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
 
         driver.get(pfSignInUrl);
 
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
@@ -49,7 +51,7 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
 
         leftMenu.openPageBy("Repositories");
 
-        RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfCompanyName);
+        RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
         repositoryPage.clickDetachButton(repositoryAddress);

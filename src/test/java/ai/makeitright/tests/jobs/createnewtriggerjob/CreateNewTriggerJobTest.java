@@ -21,7 +21,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     //from configuration
     private String email;
     private String password;
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String powerFarmUrl;
     private String workflowName;
     private String argumentsCollection;
@@ -37,7 +37,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     public void before() {
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         workflowName = System.getProperty("inputParameters.workflowName");
         argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
@@ -48,7 +48,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     public void createNewJobWithTrigger() {
         driver.get(powerFarmUrl);
 
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(email)
                 .setPasswordInput(password);

@@ -14,13 +14,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class DeleteTaskTest extends DriverConfig {
 
     //from configuration
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -31,7 +29,7 @@ public class DeleteTaskTest extends DriverConfig {
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         taskname = System.getProperty("previousResult.taskname");
         taskName = System.getProperty("previousResult.taskName");
@@ -41,7 +39,7 @@ public class DeleteTaskTest extends DriverConfig {
     public void deleteTask() {
         driver.get(pfSignInUrl);
 
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);

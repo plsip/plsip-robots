@@ -18,7 +18,7 @@ public class AddArgumentTest extends DriverConfig {
 
     //from configuration:
     private String globalArgumentsCollection;
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -33,7 +33,7 @@ public class AddArgumentTest extends DriverConfig {
     public void before() {
         argumentName = System.getProperty("inputParameters.argumentName");
         globalArgumentsCollection = System.getProperty("previousResult.globalArgumentsCollection");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -46,7 +46,7 @@ public class AddArgumentTest extends DriverConfig {
         defaultValue = faker.funnyName().name();
 
         driver.get(pfSignInUrl);
-        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);

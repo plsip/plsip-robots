@@ -16,9 +16,9 @@ public class CreateNewTaskTest extends DriverConfig {
 
     //from configuration
     private String createdBy;
-    private String email;
-    private String password;
-    private String pfCompanyName;
+    private String pfOrganizationCardName;
+    private String pfUserEmail;
+    private String pfUserPassword;
     private String powerFarmUrl;
     private String repository;
     private String scriptDirectory;
@@ -28,9 +28,9 @@ public class CreateNewTaskTest extends DriverConfig {
     @Before
     public void before() {
         createdBy = System.getProperty("inputParameters.createdBy");
-        email = System.getProperty("inputParameters.pfUserEmail");
-        password = System.getProperty("secretParameters.pfUserPassword");
-        pfCompanyName = System.getProperty("inputParameters.pfCompanyName");
+        pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
+        pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
+        pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         repository = System.getProperty("inputParameters.repository");
         scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
@@ -43,10 +43,10 @@ public class CreateNewTaskTest extends DriverConfig {
 
         driver.get(powerFarmUrl);
 
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfCompanyName);
+        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfOrganizationCardName);
         loginPage
-                .setEmailInput(email)
-                .setPasswordInput(password);
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Tasks");
 
