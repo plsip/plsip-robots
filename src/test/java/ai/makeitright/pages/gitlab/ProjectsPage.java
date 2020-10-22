@@ -27,6 +27,7 @@ public class ProjectsPage extends BasePage {
     @FindBy(xpath = "//a[@class='gl-button btn btn-success']")
     private WebElement btnNewProject;
 
+
     @FindBy(xpath = "//*[@class='page-title']")
     private WebElement txtProject;
 
