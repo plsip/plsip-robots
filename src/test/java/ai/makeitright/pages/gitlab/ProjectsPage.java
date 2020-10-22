@@ -2,7 +2,6 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import com.sun.corba.se.impl.naming.cosnaming.NamingUtils;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +24,7 @@ public class ProjectsPage extends BasePage {
         return true;
     }
 
-    @FindBy(xpath = "//*[@class='btn btn-success']")
+    @FindBy(xpath = "//a[@class='gl-button btn btn-success']")
     private WebElement btnNewProject;
 
     @FindBy(xpath = "//*[@class='page-title']")
