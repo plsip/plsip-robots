@@ -6,7 +6,6 @@ import ai.makeitright.pages.argumentscollections.GlobalArgumentsPage;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;
-import com.github.javafaker.Faker;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +22,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
     //for reporting:
 
-    private String nameOfArgumentsCollection;
+    private String collectionName;
 
     @Before
     public void before() {
@@ -31,13 +30,11 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
+        collectionName = System.getProperty("inputParameters.collectionName");
     }
 
     @Test
     public void createAGlobalArguments() {
-
-        Faker faker = new Faker();
-        nameOfArgumentsCollection = faker.funnyName().name();
 
         driver.get(pfSignInUrl);
 
@@ -54,7 +51,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
                 globalArgumentsPage.clickCreateGlobalArgumentsButton();
 
         ArgumentsPage argumentsPage = createGlobalArgumentModalWindow
-                .setCollectionName(nameOfArgumentsCollection)
+                .setCollectionName(collectionName)
                 .clickSaveButton();
 
         argumentsPage.checkCreatedBy();
@@ -62,20 +59,20 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
         Assertions.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new gobal arguments collection shouldn't be visible");
 
-        nameOfArgumentsCollection = createGlobalArgumentModalWindow.getCollectionName();
+        collectionName = createGlobalArgumentModalWindow.getCollectionName();
 
         DisplayedGlobalArguments displayedGlobalArguments =
                 globalArgumentsPage.getGlobalArgumentsTable()
-                        .getGlobalArgumentsRowData(nameOfArgumentsCollection);
+                        .getGlobalArgumentsRowData(collectionName);
 
-        Assertions.assertNotNull(displayedGlobalArguments, "There is not global arguments collection '" + nameOfArgumentsCollection + "' on the list");
+        Assertions.assertNotNull(displayedGlobalArguments, "There is not global arguments collection '" + collectionName + "' on the list");
         Assertions.assertTrue(globalArgumentsPage.checkAuthor(displayedGlobalArguments.getAuthor()),"Author of global arguments collection is not right");
     }
 
     @After
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
-        obj.put("globalArgumentsCollection", nameOfArgumentsCollection);
+        obj.put("globalArgumentsCollection", collectionName);
         obj.put("taskname", "Create Global arguments collection");
         System.setProperty("output", obj.toString());
         driver.close();

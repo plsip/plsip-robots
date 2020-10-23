@@ -1,6 +1,7 @@
 package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -90,7 +91,7 @@ public class GlobalArgumentsPage extends BasePage {
         }
 
         public CreateGlobalArgumentModalWindow setCollectionName(String collectionName) {
-            this.collectionName = "automated" + collectionName;
+            this.collectionName = collectionName + Methods.getDateTime("yyyyMMddHHmmss");
             sendText(inpCollectionName, this.collectionName,"input element 'Collection name'");
             return this;
         }
