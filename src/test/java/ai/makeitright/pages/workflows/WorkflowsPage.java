@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WorkflowsPage extends BasePage {
 
@@ -14,6 +16,8 @@ public class WorkflowsPage extends BasePage {
 
     @FindBy(xpath = "//input[@placeholder='Filter items']")
     private WebElement inpFilterItems;
+
+    private WebDriverWait waitShort = new WebDriverWait(driver, 3);
 
     @Override
     protected boolean isAt() {
@@ -24,6 +28,11 @@ public class WorkflowsPage extends BasePage {
         super(driver);
     }
 
+    public WorkflowsPage checkIfOneRowDisplayed() {
+        waitShort.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//table[@class='Polaris-DataTable__Table']/tbody/tr"),1));
+        Main.report.logPass("On the workflows table is visible one row");
+        return this;
+    }
     public CreateNewWorkflowModalWindow clickCreateNewWorkflowButton() {
         click(btnCreateNewWorkflow, "button 'Create new workflow'");
         return new CreateNewWorkflowModalWindow(driver);

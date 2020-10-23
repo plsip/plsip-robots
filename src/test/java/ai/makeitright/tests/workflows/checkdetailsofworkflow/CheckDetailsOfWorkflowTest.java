@@ -47,7 +47,9 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
         leftMenu.openPageBy("Workflows");
 
         WorkflowsPage workflowsPage = new WorkflowsPage(driver);
-        workflowsPage.filterWorkflow(workflowName);
+        workflowsPage.filterWorkflow(workflowName)
+                .checkIfOneRowDisplayed();
+
 
         DisplayedWorkflows displayedWorkflows = workflowsPage.getWorkflowsTable().getWorkflowsFirstRowData();
         Assertions.assertNotNull(displayedWorkflows, "There is no workflow with name: '" + workflowName + "'");
