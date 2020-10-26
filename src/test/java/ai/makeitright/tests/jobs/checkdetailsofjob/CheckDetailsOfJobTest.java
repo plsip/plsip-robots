@@ -100,6 +100,7 @@ public class CheckDetailsOfJobTest extends DriverConfig {
         Assertions.assertTrue(jobDetailsPage.checkResultsButtonExist(),
                 "'Show results' button should be visible and clickable");
         Main.report.logPass("'Show results' button is visible and clickable");
+
     }
 
     @After
