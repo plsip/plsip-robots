@@ -103,6 +103,7 @@ public class CheckDetailsOfJobTest extends DriverConfig {
 
     }
 
+
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
