@@ -138,6 +138,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
             Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + finishDate);
         }
         Main.report.logPass("Test has been completed successfully!");
+
     }
 
     @After
