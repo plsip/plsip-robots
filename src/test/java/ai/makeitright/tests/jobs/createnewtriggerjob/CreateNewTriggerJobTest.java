@@ -175,6 +175,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         System.setProperty("output", obj.toString());
         driver.close();
     }
+
 }
 
 
