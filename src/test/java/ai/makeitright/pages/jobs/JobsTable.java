@@ -42,6 +42,7 @@ public class JobsTable extends BasePage {
         return displayedJobs;
     }
 
+
     private final int WORKFLOWNAME = 0;
     private final int STATUS = 4;
     private final int CREATEDBY = 5;
