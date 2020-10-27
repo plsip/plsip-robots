@@ -32,4 +32,5 @@ public class DisplayedJobs {
     public String getStatus() {
         return status;
     }
+
 }
