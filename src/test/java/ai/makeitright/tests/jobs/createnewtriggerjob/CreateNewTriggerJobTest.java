@@ -159,7 +159,6 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 finishDate = "N/A";
                 break;
         }
-
     }
 
     @After
