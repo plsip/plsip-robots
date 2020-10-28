@@ -55,7 +55,7 @@ public class WorkflowsPage extends BasePage {
 
     public CreateJobModalWindow clickCreateJobButton(final String workflowName) {
         filterWorkflow(workflowName);
-        WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/san"));
+        WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/span"));
         click(btnCreateJob, "'Create job' button");
         return new CreateJobModalWindow(driver);
     }
