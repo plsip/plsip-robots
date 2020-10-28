@@ -140,6 +140,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
         Main.report.logPass("Test has been completed successfully!");
     }
 
+
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();

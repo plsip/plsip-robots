@@ -161,6 +161,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         }
     }
 
+
     @After
     public void prepareJson() {
         JSONObject obj = new JSONObject();
