@@ -50,7 +50,7 @@ public class CreateNewWorkflowTest extends DriverConfig {
         CreateNewWorkflowModalWindow createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
 
         createNewWorkflowModalWindow
-                .setWorkflowName(workflowName)
+                .setWorkflowName(workflowName,workflowType)
                 .clickWorkflowTypeCheckbox(workflowType);
         WorkflowDetailsPage workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton();
 

@@ -57,8 +57,8 @@ public class CreateNewWorkflowModalWindow extends BasePage {
         return workflowName;
     }
 
-    public CreateNewWorkflowModalWindow setWorkflowName(String workflowName) {
-        this.workflowName = workflowName + Methods.getDateTime("yyyyMMddHHmmss");
+    public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
+        this.workflowName = workflowName + Methods.getDateTime("yyyyMMddHHmmss") + workflowType;
         sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         return this;
     }
