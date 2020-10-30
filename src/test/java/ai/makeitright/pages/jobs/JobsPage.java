@@ -2,6 +2,7 @@ package ai.makeitright.pages.jobs;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -24,7 +25,7 @@ public class JobsPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        waitForBlueCircleDisappear();
+        Assertions.assertTrue(waitForBlueCircleDisappear());
         return jobsHeader.getText().equals("Jobs");
     }
 
