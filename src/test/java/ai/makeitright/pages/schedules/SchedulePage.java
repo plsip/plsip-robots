@@ -30,7 +30,7 @@ public class SchedulePage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        waitForBlueCircleDisappear();
+        Assertions.assertTrue(waitForBlueCircleDisappear());
         return jobsHeader.getText().equals("Schedule");
     }
 
