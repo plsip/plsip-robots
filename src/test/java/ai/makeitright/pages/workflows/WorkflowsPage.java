@@ -28,10 +28,14 @@ public class WorkflowsPage extends BasePage {
         super(driver);
     }
 
-    public WorkflowsPage checkIfOneRowDisplayed() {
-        waitShort.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//table[@class='Polaris-DataTable__Table']/tbody/tr"),1));
-        Main.report.logPass("On the workflows table is visible one row");
-        return this;
+    public boolean checkIfOneRowDisplayed() {
+        try {
+            waitShort.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//table[@class='Polaris-DataTable__Table']/tbody/tr"), 1));
+            Main.report.logPass("On the workflows table is visible one row");
+        } catch (Exception e) {
+            Main.report.logFail("Error whilest check if on the workflows table is visible only one row");
+        }
+        return true;
     }
     public CreateNewWorkflowModalWindow clickCreateNewWorkflowButton() {
         click(btnCreateNewWorkflow, "button 'Create new workflow'");
