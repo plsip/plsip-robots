@@ -16,6 +16,7 @@ public class CreateNewTaskTest extends DriverConfig {
 
     //from configuration
     private String createdBy;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfUserEmail;
     private String pfUserPassword;
@@ -28,6 +29,7 @@ public class CreateNewTaskTest extends DriverConfig {
     @Before
     public void before() {
         createdBy = System.getProperty("inputParameters.createdBy");
+        pfGlossary = System.getProperty("secretParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -48,7 +50,11 @@ public class CreateNewTaskTest extends DriverConfig {
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Tasks");
+        if (pfGlossary.equals("TA")) {
+            leftMenu.openPageBy("Tests");
+        } else if(pfGlossary.equals("RPA")) {
+            leftMenu.openPageBy("Tasks");
+        }
 
         TasksPage tasksPage = new TasksPage(driver);
         CreateTaskModalWindow createTaskModalWindow = tasksPage.clickCreateNewTaskButton();
