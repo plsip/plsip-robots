@@ -32,7 +32,7 @@ public class CreateNewJobTest extends DriverConfig {
     public void before() {
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
-        pfGlossary = System.getProperty("secretParameters.pfGlossary");
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         workflowName = System.getProperty("inputParameters.workflowName");
