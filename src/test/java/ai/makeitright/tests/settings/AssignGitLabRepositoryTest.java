@@ -95,7 +95,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
         Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assertions.assertTrue(statusPopupWindow.isAlertMessage("The repository has been added successfully! Let the adventure begin"));
+        Assertions.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
         Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
     }
 
