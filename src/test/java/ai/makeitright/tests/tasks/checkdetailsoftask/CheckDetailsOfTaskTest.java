@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 public class CheckDetailsOfTaskTest extends DriverConfig {
 
     private String createdBy;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -28,6 +29,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     @Before
     public void before() {
         createdBy = System.getProperty("previousResult.createdBy");
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
@@ -46,7 +48,11 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Tasks");
+        if (pfGlossary.equals("TA")) {
+            leftMenu.openPageBy("Tests");
+        } else if(pfGlossary.equals("RPA")) {
+            leftMenu.openPageBy("Tasks");
+        }
 
         TasksPage tasksPage = new TasksPage(driver);
         tasksPage.filterTask(taskName);

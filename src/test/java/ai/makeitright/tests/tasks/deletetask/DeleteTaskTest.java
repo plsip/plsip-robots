@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Assertions;
 public class DeleteTaskTest extends DriverConfig {
 
     //from configuration
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -27,6 +28,7 @@ public class DeleteTaskTest extends DriverConfig {
 
     @Before
     public void before() {
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
@@ -44,7 +46,14 @@ public class DeleteTaskTest extends DriverConfig {
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Tasks");
+        switch(pfGlossary) {
+            case "TA":
+                leftMenu.openPageBy("Tests");
+                break;
+            case "RPA":
+                leftMenu.openPageBy("Tasks");
+                break;
+        }
 
         TasksPage tasksPage = new TasksPage(driver);
         tasksPage.filterTask(taskName);
