@@ -18,6 +18,7 @@ public class CreateNewWorkflowTest extends DriverConfig {
     //from configuration
     private String email;
     private String password;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String powerFarmUrl;
     private String workflowName;
@@ -28,6 +29,7 @@ public class CreateNewWorkflowTest extends DriverConfig {
     public void before() {
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
         workflowName = System.getProperty("inputParameters.workflowName");
@@ -44,7 +46,12 @@ public class CreateNewWorkflowTest extends DriverConfig {
                 .setEmailInput(email)
                 .setPasswordInput(password);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Workflows");
+
+        if (pfGlossary.equals("TA")) {
+            leftMenu.openPageBy("Test Plans");
+        } else if(pfGlossary.equals("RPA")) {
+            leftMenu.openPageBy("Workflows");
+        }
 
         WorkflowsPage workflowsPage = new WorkflowsPage(driver);
         CreateNewWorkflowModalWindow createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
