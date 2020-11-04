@@ -82,7 +82,9 @@ public class CheckDetailsOfJobTest extends DriverConfig {
                 "Button 'Delete' should be visible and enabled");
         Main.report.logPass("Button 'Delete' is visible and enabled");
 
-        if(!(jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Executing"))) {
+        if(!(jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Executing")) &&
+            (jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Creating")) &&
+                     (jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Pending"))) {
             Assertions.assertTrue(jobDetailsPage.checkButtonRerunJobIsEnabled(),
                     "Button 'Rerun Job' should be visible and enabled");
             Main.report.logPass("Button 'Rerun Job' is visible and enabled");
