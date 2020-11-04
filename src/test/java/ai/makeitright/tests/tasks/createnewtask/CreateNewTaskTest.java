@@ -29,7 +29,7 @@ public class CreateNewTaskTest extends DriverConfig {
     @Before
     public void before() {
         createdBy = System.getProperty("inputParameters.createdBy");
-        pfGlossary = System.getProperty("secretParameters.pfGlossary");
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
