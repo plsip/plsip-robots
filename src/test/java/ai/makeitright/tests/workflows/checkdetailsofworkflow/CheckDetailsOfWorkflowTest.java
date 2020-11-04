@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class CheckDetailsOfWorkflowTest extends DriverConfig {
 
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -27,6 +28,7 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
 
     @Before
     public void before() {
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
@@ -44,7 +46,11 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
                 .setEmailInput(pfUserEmail)
                 .setPasswordInput(pfUserPassword);
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        leftMenu.openPageBy("Workflows");
+        if (pfGlossary.equals("TA")) {
+            leftMenu.openPageBy("Test Plans");
+        } else if(pfGlossary.equals("RPA")) {
+            leftMenu.openPageBy("Workflows");
+        }
 
         WorkflowsPage workflowsPage = new WorkflowsPage(driver);
         workflowsPage.filterWorkflow(workflowName);
