@@ -53,26 +53,28 @@ public class CreateNewWorkflowTest extends DriverConfig {
             leftMenu.openPageBy("Workflows");
         }
 
-        WorkflowsPage workflowsPage = new WorkflowsPage(driver);
-        CreateNewWorkflowModalWindow createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
+        if(workflowType.equals("Parallel") || pfGlossary.equals("RPA")) {
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver);
+            CreateNewWorkflowModalWindow createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
 
-        createNewWorkflowModalWindow
-                .setWorkflowName(workflowName,workflowType)
-                .clickWorkflowTypeCheckbox(workflowType);
-        WorkflowDetailsPage workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton();
+            createNewWorkflowModalWindow
+                    .setWorkflowName(workflowName, workflowType)
+                    .clickWorkflowTypeCheckbox(workflowType);
+            WorkflowDetailsPage workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton();
 
-        workflowName = createNewWorkflowModalWindow.getWorkflowName();
+            workflowName = createNewWorkflowModalWindow.getWorkflowName();
 
-        Assertions.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
-        Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
-        Assertions.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
-        Main.report.logPass("Button 'Create Job' is visible and disabled");
-        Assertions.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
-        Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
-        Assertions.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
-        Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
-        Assertions.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
-        Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
+            Assertions.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
+            Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
+            Assertions.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
+            Main.report.logPass("Button 'Create Job' is visible and disabled");
+            Assertions.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
+            Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
+            Assertions.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
+            Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
+            Assertions.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
+            Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
+        }
 
     }
 
