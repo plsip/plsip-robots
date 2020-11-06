@@ -63,7 +63,7 @@ public class GlobalArgumentsPage extends BasePage {
         @FindBy(xpath="//h2")
         private WebElement h2;
 
-        @FindBy(xpath = "//input[@name='name']")
+        @FindBy(xpath = "//input[@name='nam']")
         private WebElement inpCollectionName;
 
         @FindBy(xpath = "//button//span[text()='Close']")
