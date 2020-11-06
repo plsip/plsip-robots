@@ -54,6 +54,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
                 .setCollectionName(collectionName)
                 .clickSaveButton();
 
+
         argumentsPage.checkCreatedBy();
         argumentsPage.clickGlobalArgumentsLnk();
 
