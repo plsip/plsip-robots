@@ -92,6 +92,7 @@ public class CreateJobModalWindow extends BasePage {
     }
 
     public CreateJobModalWindow chooseGlobalArgumentsCollection(String collection) {
+        waitShortForVisibilityOf(inpGlobalArguments);
         sendText(inpGlobalArguments, collection,"input for filter global arguments collection");
         waitForVisibilityOfAllElements(collectionTableRows);
         if (collectionTableRows.size() == 1) {
