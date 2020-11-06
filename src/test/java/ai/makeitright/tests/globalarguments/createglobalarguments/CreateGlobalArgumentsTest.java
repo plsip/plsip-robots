@@ -7,10 +7,10 @@ import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CreateGlobalArgumentsTest extends DriverConfig {
 
@@ -24,7 +24,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
     private String collectionName;
 
-    @Before
+    @BeforeTest
     public void before() {
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
@@ -57,7 +57,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         argumentsPage.checkCreatedBy();
         argumentsPage.clickGlobalArgumentsLnk();
 
-        Assertions.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new gobal arguments collection shouldn't be visible");
+        Assert.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new gobal arguments collection shouldn't be visible");
 
         collectionName = createGlobalArgumentModalWindow.getCollectionName();
 
@@ -65,17 +65,16 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
                 globalArgumentsPage.getGlobalArgumentsTable()
                         .getGlobalArgumentsRowData(collectionName);
 
-        Assertions.assertNotNull(displayedGlobalArguments, "There is not global arguments collection '" + collectionName + "' on the list");
-        Assertions.assertTrue(globalArgumentsPage.checkAuthor(displayedGlobalArguments.getAuthor()),"Author of global arguments collection is not right");
+        Assert.assertNotNull(displayedGlobalArguments, "There is not global arguments collection '" + collectionName + "' on the list");
+        Assert.assertTrue(globalArgumentsPage.checkAuthor(displayedGlobalArguments.getAuthor()),"Author of global arguments collection is not right");
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
         obj.put("globalArgumentsCollection", collectionName);
         obj.put("taskname", "Create Global arguments collection");
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

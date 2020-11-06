@@ -6,10 +6,10 @@ import ai.makeitright.pages.users.UsersPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class DisplayUserListTest extends DriverConfig {
 
@@ -18,7 +18,7 @@ public class DisplayUserListTest extends DriverConfig {
     private String pfUserEmail;
     private String pfUserPassword;
 
-    @Before
+    @BeforeTest
     public void before() {
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
@@ -37,23 +37,22 @@ public class DisplayUserListTest extends DriverConfig {
         leftMenu.openPageBy("Users");
 
         UsersPage usersPage = new UsersPage(driver);
-        Assertions.assertTrue(usersPage.checkButtonInviteNewUserIsEnabled(), "Button 'Invite new user' should be visible and enable!");
+        Assert.assertTrue(usersPage.checkButtonInviteNewUserIsEnabled(), "Button 'Invite new user' should be visible and enable!");
         Main.report.logPass("Button 'Invite new user' is visible and enabled");
 
-        Assertions.assertTrue(usersPage.isUsersTextDisplayed(), "There is not header text 'Users' on the page");
+        Assert.assertTrue(usersPage.isUsersTextDisplayed(), "There is not header text 'Users' on the page");
         Main.report.logPass("On the page is header text 'Users'");
 
-        Assertions.assertTrue(usersPage.isUserRowDisplayed(), "There is no visible any row with user");
+        Assert.assertTrue(usersPage.isUserRowDisplayed(), "There is no visible any row with user");
         Main.report.logPass("On the page is table with at least one user row");
 
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname","Display user list");
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 

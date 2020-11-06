@@ -8,10 +8,10 @@ import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CreateNewWorkflowTest extends DriverConfig {
 
@@ -25,7 +25,7 @@ public class CreateNewWorkflowTest extends DriverConfig {
     private String workflowType;
 
 
-    @Before
+    @BeforeTest
     public void before() {
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
@@ -64,21 +64,21 @@ public class CreateNewWorkflowTest extends DriverConfig {
 
             workflowName = createNewWorkflowModalWindow.getWorkflowName();
 
-            Assertions.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
             Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
-            Assertions.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
+            Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
             Main.report.logPass("Button 'Create Job' is visible and disabled");
-            Assertions.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
+            Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
             Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
-            Assertions.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
             Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
-            Assertions.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
+            Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
             Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
         }
 
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         String taskname = "Create new " + workflowType + " workflow";
         JSONObject obj = new JSONObject();
@@ -86,6 +86,5 @@ public class CreateNewWorkflowTest extends DriverConfig {
         obj.put("workflowType", workflowType);
         obj.put("taskname", taskname);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 }

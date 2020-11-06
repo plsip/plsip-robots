@@ -3,10 +3,10 @@ package ai.makeitright.tests.settings.deleterepo;
 import ai.makeitright.pages.gitlab.*;
 import org.json.JSONObject;
 import ai.makeitright.utilities.DriverConfig;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class DeleteGitLabRepositoryTest extends DriverConfig {
 
@@ -20,7 +20,7 @@ public class DeleteGitLabRepositoryTest extends DriverConfig {
     //for reporting:
     private String taskname;
 
-    @Before
+    @BeforeTest
     public void before() {
         gitLabAccessToken = System.getProperty("secretParameters.gitLabAccessToken");
         gitLabSignInUrl = System.getProperty("inputParameters.gitLabSignInUrl");
@@ -50,19 +50,18 @@ public class DeleteGitLabRepositoryTest extends DriverConfig {
                 .confirmDeleteRepo();
 
         AlertStatusGitPopupWindow alertStatusGitPopupWindow = new AlertStatusGitPopupWindow(driver);
-        Assertions.assertTrue(alertStatusGitPopupWindow.isAlertStatus(projectName));
+        Assert.assertTrue(alertStatusGitPopupWindow.isAlertStatus(projectName));
 
         projectsPage.clickUserPanel();
         projectsPage.clickOptionSignOut();
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", taskname + " || Delete project repository on the GitLab platform");
         obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

@@ -7,10 +7,10 @@ import ai.makeitright.pages.tasks.TaskDetailsPage;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CreateNewTaskTest extends DriverConfig {
 
@@ -26,7 +26,7 @@ public class CreateNewTaskTest extends DriverConfig {
     private String taskName;
     private String technology;
 
-    @Before
+    @BeforeTest
     public void before() {
         createdBy = System.getProperty("inputParameters.createdBy");
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
@@ -65,12 +65,12 @@ public class CreateNewTaskTest extends DriverConfig {
                 .setScriptDirectory(scriptDirectory);
         TaskDetailsPage taskDetailsPage = createTaskModalWindow.clickCreateTaskButton();
 
-        Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
+        Assert.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
 
         taskName = createTaskModalWindow.getName();
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
@@ -79,7 +79,6 @@ public class CreateNewTaskTest extends DriverConfig {
         obj.put("scriptDirectory",repository + "tree/master/" + scriptDirectory);
         obj.put("taskname","Create new task");
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

@@ -6,9 +6,9 @@ import ai.makeitright.utilities.slack.*;
 import ai.makeitright.utilities.slack.attachment.Attachment;
 import ai.makeitright.utilities.slack.attachment.AttachmentBuilder;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class SendSlackMessageTest extends DriverConfig {
 
@@ -17,7 +17,7 @@ public class SendSlackMessageTest extends DriverConfig {
     private String taskname;
     private String pfSignInUrl;
 
-    @Before
+    @BeforeTest
     public void before() {
         channel = System.getProperty("inputParameters.channel");
         hookUrl = System.getProperty("secretParameters.hookUrl");
@@ -46,11 +46,10 @@ public class SendSlackMessageTest extends DriverConfig {
         return attachmentBuilder.build();
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", taskname);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 }

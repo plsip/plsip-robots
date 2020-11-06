@@ -9,10 +9,10 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
@@ -34,7 +34,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     private String nextRun;
     private String finishDate;
 
-    @Before
+    @BeforeTest
     public void before() {
         email = System.getProperty("inputParameters.pfUserEmail");
         password = System.getProperty("secretParameters.pfUserPassword");
@@ -69,7 +69,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 .clickSaveAndGoToCollectionButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
                 .clickSaveAndGoToValuesButton();
-        Assertions.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
+        Assert.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
                 "An incorrect collection was selected.");
         Main.report.logPass("The correct collection was chosen: " + argumentsCollection);
 
@@ -80,7 +80,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTimeInput(LocalTime.NOON.toString());
 
-        Assertions.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
+        Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
                 workflowName + "\n" + "workflow"), "The modal window has incorrect header");
 
         switch (executionFrequency.toLowerCase()) {
@@ -93,7 +93,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                         .clickCreateTriggerButton();
 
                 triggerID = createJobModalWindow.getCreatedJobID();
-                Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " workflow everyday at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                                 "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
@@ -108,7 +108,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                         .clickCreateTriggerButton();
 
                 triggerID = createJobModalWindow.getCreatedJobID();
-                Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " workflow every " + Methods.getNameOfNextDay() + " at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                                 "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
@@ -123,7 +123,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                         .clickCreateTriggerButton();
 
                 triggerID = createJobModalWindow.getCreatedJobID();
-                Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " workflow " + Methods.getOrdinalIndicatorOfNextDay() +
                                 " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                                 "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
@@ -133,14 +133,14 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 Main.report.logInfo("Option 'Never' of execution frequency has been selected");
                 createJobModalWindow.clickCreateTriggerButton();
                 triggerID = createJobModalWindow.getCreatedJobID();
-                Assertions.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " workflow at " + Methods.getDateOfNextDay("dd/MM/YYYY") +
                                 " " + LocalTime.NOON.toString() + "."),
                                 "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
                 Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
                 break;
             default:
-                Assertions.fail("There is a wrong value of 'executionFrequency' parameter");
+                Assert.fail("There is a wrong value of 'executionFrequency' parameter");
         }
 
         createJobModalWindow.clickGoToTriggerDetailsButton();
@@ -168,7 +168,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     }
 
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", "Create a new job with a trigger");
@@ -179,7 +179,6 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         obj.put("nextRun", nextRun);
         obj.put("finishDate", finishDate);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

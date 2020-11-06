@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 
@@ -60,7 +59,7 @@ public class Methods extends Main {
     }
 
     public static String getWebScreenShot(WebDriver driver) throws IOException {
-        return getWebScreenShot(driver, "screenshot" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new GregorianCalendar().getTime()));
+        return getWebScreenShot(driver, "screenshot" + getDateTime("yyyy-MM-dd_HH-mm-ss"));
     }
 
     public static String getWebScreenShot(WebDriver driver, String strFilename) throws IOException {

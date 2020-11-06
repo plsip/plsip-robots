@@ -3,11 +3,11 @@ package ai.makeitright.pages.tasks;
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Action;
 import ai.makeitright.utilities.Methods;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class CreateTaskModalWindow extends BasePage {
     }
 
     public TaskDetailsPage clickCreateTaskButton() {
-        Assertions.assertTrue(waitForVisibilityOf(btnCreateTask), "Button 'Create task' is not visible");
+        Assert.assertTrue(waitForVisibilityOf(btnCreateTask), "Button 'Create task' is not visible");
         click(btnCreateTask, "button 'Create task'");
         return new TaskDetailsPage(driver);
     }

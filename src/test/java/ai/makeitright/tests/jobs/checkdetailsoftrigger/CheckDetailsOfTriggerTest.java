@@ -9,10 +9,10 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
@@ -30,7 +30,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
     private String nextRun;
     private String finishDate;
 
-    @Before
+    @BeforeTest
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -60,80 +60,80 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
         schedulePage.filterTrigger(workflowName);
 
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
-        Assertions.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
+        Assert.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
 
-        Assertions.assertEquals(workflowName, displayedTriggers.getWorkflowName(),
+        Assert.assertEquals(displayedTriggers.getWorkflowName(),workflowName,
                 "The name of the trigger's workflow is not right: " + displayedTriggers.getWorkflowName());
         Main.report.logPass("Trigger's workflow name has right value: " + workflowName);
 
         switch (executionFrequency.toLowerCase()) {
             case "daily":
                 String trgDetailsInScheduleTable = "Everyday at " + LocalTime.NOON.toString() + ",";
-                Assertions.assertEquals(trgDetailsInScheduleTable, displayedTriggers.getTriggerDetails(),
+                Assert.assertEquals(displayedTriggers.getTriggerDetails(),trgDetailsInScheduleTable,
                         "The 'Trigger details' in the Schedule table displays the wrong date: " + displayedTriggers.getTriggerDetails());
                 Main.report.logPass("The 'Trigger details' in the Schedule table displays the correct date: " + trgDetailsInScheduleTable);
                 break;
             case "weekly":
                 trgDetailsInScheduleTable = "Every " + Methods.getNameOfNextDay() + " at " + LocalTime.NOON.toString() + ",";
-                Assertions.assertEquals(trgDetailsInScheduleTable, displayedTriggers.getTriggerDetails(),
+                Assert.assertEquals(displayedTriggers.getTriggerDetails(),trgDetailsInScheduleTable,
                         "The 'Trigger details' in the Schedule table displays the wrong date: " + displayedTriggers.getTriggerDetails());
                 Main.report.logPass("The 'Trigger details' in the Schedule table displays the correct date: " + trgDetailsInScheduleTable);
                 break;
             case "monthly":
                 trgDetailsInScheduleTable = Methods.getOrdinalIndicatorOfNextDay() + " of every month at " + LocalTime.NOON.toString() + ",";
-                Assertions.assertEquals(trgDetailsInScheduleTable, displayedTriggers.getTriggerDetails(),
+                Assert.assertEquals(displayedTriggers.getTriggerDetails(),trgDetailsInScheduleTable,
                         "The 'Trigger details' in the Schedule table displays the wrong date: " + displayedTriggers.getTriggerDetails());
                 Main.report.logPass("The 'Trigger details' in the Schedule table displays the correct date: " + trgDetailsInScheduleTable);
                 break;
             case "never":
-                Assertions.assertEquals(triggerDetails + ",", displayedTriggers.getTriggerDetails(),
+                Assert.assertEquals(displayedTriggers.getTriggerDetails(),triggerDetails + ",",
                         "The 'Trigger details' in the Schedule table displays the wrong date: " + displayedTriggers.getTriggerDetails());
                 Main.report.logPass("The 'Trigger details' in the Schedule table displays the correct date: " + triggerDetails);
                 break;
         }
 
         if (executionFrequency.toLowerCase().equals("never")) {
-            Assertions.assertEquals("N/A", displayedTriggers.getFinishDate(),
+            Assert.assertEquals(displayedTriggers.getFinishDate(),"N/A",
                     "The 'FINISH DATE' section displays the wrong date: " + displayedTriggers.getFinishDate());
             Main.report.logPass("The 'FINISH DATE' section displays the correct value: N/A");
         }
         else {
-            Assertions.assertEquals(finishDate, displayedTriggers.getFinishDate(),
+            Assert.assertEquals(displayedTriggers.getFinishDate(),finishDate,
                     "The 'FINISH DATE' section displays the wrong date: " + displayedTriggers.getFinishDate());
             Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + finishDate);
         }
 
-        Assertions.assertEquals(nextRun, displayedTriggers.getNextRun(),
+        Assert.assertEquals(displayedTriggers.getNextRun(),nextRun,
                 "The 'Next run' displays the wrong date: " + displayedTriggers.getNextRun());
         Main.report.logPass("The 'Next run' displays the correct date: " + nextRun);
 
         TriggerDetailsPage triggerDetailsPage = schedulePage.clickFoundTrigger(triggerID);
-        Assertions.assertEquals(triggerID, triggerDetailsPage.getTriggerID(),
+        Assert.assertEquals(triggerDetailsPage.getTriggerID(),triggerID,
                 "The value of TRIGGER ID is incorrect: " + triggerDetailsPage.getTriggerID());
         Main.report.logPass("In the trigger details there is a correct trigger ID value displayed: " + triggerID);
 
-        Assertions.assertEquals(workflowName, triggerDetailsPage.getTriggerHeader(),
+        Assert.assertEquals(triggerDetailsPage.getTriggerHeader(),workflowName,
                 "The trigger header is not correct: " + triggerDetailsPage.getTriggerHeader());
         Main.report.logPass("In the trigger details there is a correct trigger header displayed: " + workflowName);
 
-        Assertions.assertTrue(triggerDetailsPage.checkCreatedBy(),
+        Assert.assertTrue(triggerDetailsPage.checkCreatedBy(),
                 "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
         Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel: " + triggerDetailsPage.getCreatedBy());
 
-        Assertions.assertTrue(triggerDetailsPage.checkButtonPauseTriggerIsEnabled(),
+        Assert.assertTrue(triggerDetailsPage.checkButtonPauseTriggerIsEnabled(),
                 "Button 'Pause trigger' should be visible and enabled");
         Main.report.logPass("Button 'Pause trigger' is visible and enabled");
 
-        Assertions.assertEquals(nextRun, triggerDetailsPage.getNextRun(),
+        Assert.assertEquals(triggerDetailsPage.getNextRun(),nextRun,
                 "The 'Next run' section displays the wrong date: " + triggerDetailsPage.getNextRun());
         Main.report.logPass("The 'NEXT RUN' section displays the correct date: " + nextRun);
 
-        Assertions.assertEquals(triggerDetails, triggerDetailsPage.getTriggerDetails(),
+        Assert.assertEquals(triggerDetailsPage.getTriggerDetails(),triggerDetails,
                 "The trigger details display the wrong date: " + triggerDetailsPage.getTriggerDetails());
         Main.report.logPass("The trigger details display the correct date: " + triggerDetails);
 
         if (!executionFrequency.toLowerCase().equals("never")) {
-            Assertions.assertEquals(finishDate + " 23:59", triggerDetailsPage.getFinishDate(),
+            Assert.assertEquals(triggerDetailsPage.getFinishDate(),finishDate + " 23:59",
                     "The 'FINISH DATE' section displays the wrong date: " + triggerDetailsPage.getFinishDate());
             Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + finishDate);
         }
@@ -141,7 +141,7 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
     }
 
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", taskname + " || Check details of trigger");
@@ -151,6 +151,5 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
         obj.put("triggerDetails", triggerDetails);
         obj.put("nextRun", nextRun);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 }

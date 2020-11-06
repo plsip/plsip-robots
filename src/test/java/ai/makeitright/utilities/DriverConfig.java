@@ -1,16 +1,15 @@
 package ai.makeitright.utilities;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeSuite;
 
 public class DriverConfig extends Main {
 
-    public static WebDriver driver;
+//    WebDriverWait wait = new WebDriverWait(Main.driver, 15);
 
-    @BeforeClass
+    @BeforeSuite
     public static void setupTest() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1400,600");
@@ -23,13 +22,6 @@ public class DriverConfig extends Main {
         options.addArguments("--no-zygote");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-    }
-
-    @AfterClass
-    public static void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
 }

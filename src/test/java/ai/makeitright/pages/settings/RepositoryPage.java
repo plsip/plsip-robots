@@ -3,12 +3,12 @@ package ai.makeitright.pages.settings;
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -93,7 +93,7 @@ public class RepositoryPage extends BasePage {
     public boolean checkIfRepositoryAddressIsDisplayed(final String repositoryAddress) {
         Main.report.logInfo("Check if repository with address " + repositoryAddress + " is on the list");
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
-        Assertions.assertNotNull(displayedCodeRepositoryAddress);
+        Assert.assertNotNull(displayedCodeRepositoryAddress);
         return true;
     }
 

@@ -8,10 +8,10 @@ import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CheckDetailsOfTaskTest extends DriverConfig {
 
@@ -26,7 +26,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
     private String taskName;
     private String technology;
 
-    @Before
+    @BeforeTest
     public void before() {
         createdBy = System.getProperty("previousResult.createdBy");
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
@@ -58,34 +58,33 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         tasksPage.filterTask(taskName);
 
         DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
-        Assertions.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
-        Assertions.assertEquals(taskName,displayedTasks.getName(),"The name of task is not right");
+        Assert.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
+        Assert.assertEquals(displayedTasks.getName(),taskName,"The name of task is not right");
         Main.report.logPass("Task has right value for 'Name'");
-        Assertions.assertEquals(createdBy,displayedTasks.getCreatedBy(),"The value 'Created by' for task " + taskName + " is not like expected");
+        Assert.assertEquals(displayedTasks.getCreatedBy(),createdBy,"The value 'Created by' for task " + taskName + " is not like expected");
         Main.report.logPass("Task has right value for 'Created by'");
-        Assertions.assertEquals(technology,displayedTasks.getTechnology(),"The value 'Technology' for task " + taskName + " is not like expected");
+        Assert.assertEquals(displayedTasks.getTechnology(),technology,"The value 'Technology' for task " + taskName + " is not like expected");
         Main.report.logPass("Task has right value for 'Technology'");
 
         TaskDetailsPage taskDetailsPage = tasksPage.clickTaskNameLink(displayedTasks.getLnkName(), taskName);
-        Assertions.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
+        Assert.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
         Main.report.logPass("Task has right name");
-        Assertions.assertEquals(taskDetailsPage.getCreatedBy(),createdBy,"The value for 'CREATED BY' on Details page is not right");
+        Assert.assertEquals(taskDetailsPage.getCreatedBy(),createdBy,"The value for 'CREATED BY' on Details page is not right");
         Main.report.logPass("Task has right value for 'CREATED BY'");
-        Assertions.assertEquals(taskDetailsPage.getTechnology(),technology,"The value for 'TECHNOLOGY' on Details page is not right");
+        Assert.assertEquals(taskDetailsPage.getTechnology(),technology,"The value for 'TECHNOLOGY' on Details page is not right");
         Main.report.logPass("Task has right value for 'TECHNOLOGY'");
-        Assertions.assertEquals(taskDetailsPage.getAssignedFolderInRepository(),scriptDirectory,"The value for 'ASSIGNED FOLDER IN REPOSITORY' on Details page is not right");
+        Assert.assertEquals(taskDetailsPage.getAssignedFolderInRepository(),scriptDirectory,"The value for 'ASSIGNED FOLDER IN REPOSITORY' on Details page is not right");
         Main.report.logPass("Task has right value for 'ASSIGNED FOLDER IN REPOSITORY'");
-        Assertions.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
+        Assert.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
 
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskName", taskName);
         obj.put("taskname",taskname + " || Check details of task");
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

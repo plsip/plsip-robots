@@ -2,10 +2,10 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class ProjectDetailsPage extends BasePage {
 
@@ -18,7 +18,7 @@ public class ProjectDetailsPage extends BasePage {
         if(!waitForVisibilityOf(projectName)) {
             Main.report.logFail("Project name is not visible");
         }
-        Assertions.assertTrue(waitForVisibilityOf(projectName), "Project name is not visible");
+        Assert.assertTrue(waitForVisibilityOf(projectName), "Project name is not visible");
         return true;
     }
 

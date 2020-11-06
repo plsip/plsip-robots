@@ -6,10 +6,10 @@ import ai.makeitright.pages.schedules.SchedulePage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class DeleteTriggerTest extends DriverConfig {
 
@@ -21,7 +21,7 @@ public class DeleteTriggerTest extends DriverConfig {
     private String workflowName;
     private String triggerID;
 
-    @Before
+    @BeforeTest
     public void before() {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
@@ -50,18 +50,17 @@ public class DeleteTriggerTest extends DriverConfig {
                 .clickDeleteTriggerButton(triggerID)
                 .confirmDeletionOfTrigger();
 
-        Assertions.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
+        Assert.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
         Main.report.logPass("The trigger is no longer on the trigger list");
         Main.report.logPass("Test has been completed successfully!");
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("taskname", taskname + " || Delete created trigger");
         obj.put("triggerID", triggerID);
         obj.put("workflowName", workflowName);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 }

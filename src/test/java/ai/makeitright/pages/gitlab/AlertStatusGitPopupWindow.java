@@ -2,11 +2,11 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class AlertStatusGitPopupWindow extends BasePage {
 
@@ -20,7 +20,7 @@ public class AlertStatusGitPopupWindow extends BasePage {
     @Override
     protected boolean isAt() {
         try {
-            Assertions.assertTrue(waitForVisibilityOf(alertStatus));
+            Assert.assertTrue(waitForVisibilityOf(alertStatus));
             return true;
         } catch (Exception e) {
             Main.report.logFail("There is no visible alert status on popup window");

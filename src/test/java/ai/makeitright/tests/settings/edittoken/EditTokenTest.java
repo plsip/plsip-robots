@@ -6,10 +6,10 @@ import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settings.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class EditTokenTest extends DriverConfig {
 
@@ -26,7 +26,7 @@ public class EditTokenTest extends DriverConfig {
     //for reporting:
     private String taskname;
 
-    @Before
+    @BeforeTest
     public void before() {
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfOrganizationNameUrl = System.getProperty("inputParameters.pfOrganizationNameUrl");
@@ -54,19 +54,19 @@ public class EditTokenTest extends DriverConfig {
         leftMenu.openPageBy("Repositories");
 
         RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
-        Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
+        Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
         repositoryPage
                 .clickEditTokenButton(repositoryAddress)
                 .setAccessTokenInput(newGitLabAccessToken);
 
         AlertStatusPopupWindow statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
-        Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
-        Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assertions.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated! You can keep on rockin'\uD83D\uDE46\u200D"));
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated! You can keep on rockin'\uD83D\uDE46\u200D"));
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         JSONObject objResult = new JSONObject();
@@ -75,7 +75,6 @@ public class EditTokenTest extends DriverConfig {
         objResult.put("repositoryaddress", repositoryAddress);
         obj.put("result", objResult);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

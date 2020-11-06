@@ -1,32 +1,24 @@
 package ai.makeitright.tests.users.createnewuser;
 
 import ai.makeitright.utilities.DriverConfig;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.fail;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CreateNewUser extends DriverConfig {
 
-    private String URL;
+    private String url;
 
-    @BeforeClass
-    public static void beforeClass() {
-        System.setProperty("inputParameters.url", "http://frontend-mvp-dev.s3-website-us-east-1.amazonaws.com/signin");
-
-    }
-
-    @Before
+    @BeforeTest
     public void before() {
-        URL = System.getProperty("inputParameters.url");
+        url = System.getProperty("inputParameters.url");
     }
 
     @Test
     public void createNewUser() {
-        driver.get(URL);
+        driver.get(url);
         driver.manage().window().maximize();
-        fail("writing of this automated test has not been finished");
+        Assert.fail("writing of this automated test has not been finished");
     }
 
 }

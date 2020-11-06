@@ -118,14 +118,22 @@ public class Reporter extends DriverConfig {
         }
     }
 
-    public void logScreenShot() {
-        logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+    public void logScreenShot(String imagePath) {
+        logScreenShot(imagePath, LogStatus.INFO);
     }
 
     public void logScreenShot(String imagePath, LogStatus status) {
         if (reporter != null) {
             reporter.log(status, reporter.addScreenCapture(imagePath));
         }
+    }
+
+    public String logTechnicalFail(String msg) {
+        if (loggingOn) {
+            listResult.add("[FAIL]" + clearHtml(msg));
+            writeTechnicalLog("[FAIL] :  " + msg);
+        }
+        return msg;
     }
 
     public String writeTechnicalLog(String msg) {

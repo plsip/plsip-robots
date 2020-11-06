@@ -2,9 +2,9 @@ package ai.makeitright.pages.gitlab;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class GeneralSettingsPage extends BasePage {
 
@@ -17,7 +17,7 @@ public class GeneralSettingsPage extends BasePage {
         if(!waitForVisibilityOf(subTitle) && !subTitle.findElement(By.xpath(".//a")).getText().equals("General Settings")) {
             Main.report.logFail("Subtitle of the page isn't 'General Settings'");
         }
-        Assertions.assertTrue(waitForVisibilityOf(subTitle), "Subtitle of the page isn't 'General Settings'");
+        Assert.assertTrue(waitForVisibilityOf(subTitle), "Subtitle of the page isn't 'General Settings'");
         return true;
     }
 

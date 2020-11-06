@@ -9,10 +9,10 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.utilities.DriverConfig;
 import com.github.javafaker.Faker;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class AddArgumentTest extends DriverConfig {
 
@@ -29,7 +29,7 @@ public class AddArgumentTest extends DriverConfig {
     private String defaultValue;
     private String taskname;
 
-    @Before
+    @BeforeTest
     public void before() {
         argumentName = System.getProperty("inputParameters.argumentName");
         globalArgumentsCollection = System.getProperty("previousResult.globalArgumentsCollection");
@@ -73,26 +73,25 @@ public class AddArgumentTest extends DriverConfig {
         argumentName = addArgumentModalWindow.getArgumentName();
 
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
-        Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"),"Banner ribbon on popup window is not dark green");
-        Assertions.assertTrue(statusPopupWindow.isAlertStatus("Good Job!"),"There is no right status on popup window");
-        Assertions.assertTrue(statusPopupWindow.isAlertMessage("Your argument has been added to the Collection. Keep on"),"There is no right alert message");
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"),"Banner ribbon on popup window is not dark green");
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("Good Job!"),"There is no right status on popup window");
+        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your argument has been added to the Collection. Keep on"),"There is no right alert message");
 
-        Assertions.assertTrue(argumentsPage.checkIfOneArgumentIsDisplayed(),"There is no only one argument displayed");
-        Assertions.assertTrue(
+        Assert.assertTrue(argumentsPage.checkIfOneArgumentIsDisplayed(),"There is no only one argument displayed");
+        Assert.assertTrue(
                 argumentsPage.checkIfArgumentWithValueIsDisplayed(argumentName, defaultValue),
                 "There is no visible argument with name '" + argumentName + "' and value '" + defaultValue + "'");
 
 
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         final JSONObject obj = new JSONObject();
         obj.put("argumentName", argumentName);
         obj.put("argumentValue", defaultValue);
         obj.put("taskname",taskname + " || Add argument");
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }

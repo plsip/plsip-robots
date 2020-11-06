@@ -1,14 +1,12 @@
 package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
-import ai.makeitright.pages.tasks.DisplayedTasks;
 import ai.makeitright.utilities.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 

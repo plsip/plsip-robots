@@ -4,15 +4,14 @@ import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.jobs.JobDetailsPage;
 import ai.makeitright.pages.schedules.TriggerDetailsPage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class CreateJobModalWindow extends BasePage {
@@ -82,7 +81,7 @@ public class CreateJobModalWindow extends BasePage {
     @Override
     protected boolean isAt() {
         waitForVisibilityOf(windowHeader);
-        Assertions.assertTrue(windowHeader.getText().contains("Create new job"));
+        Assert.assertTrue(windowHeader.getText().contains("Create new job"));
         return true;
     }
 

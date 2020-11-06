@@ -2,13 +2,13 @@ package ai.makeitright.pages.schedules;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class SchedulePage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        Assertions.assertTrue(waitForBlueCircleDisappear());
+        Assert.assertTrue(waitForBlueCircleDisappear());
         return jobsHeader.getText().equals("Schedule");
     }
 
@@ -73,7 +73,7 @@ public class SchedulePage extends BasePage {
         } catch (NoSuchElementException e) {
             Main.report.logInfo("There is no possibility to pause the trigger as it's already paused");
         } catch (Exception e) {
-            Assertions.fail("The trigger which has ID: " + triggerID + " doesn't exist");
+            Assert.fail("The trigger which has ID: " + triggerID + " doesn't exist");
         }
         return this;
     }

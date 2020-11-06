@@ -2,10 +2,10 @@ package ai.makeitright.pages.common;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class AlertStatusPopupWindow extends BasePage {
     @FindBy(xpath = "//div[@class='Polaris-Banner__Ribbon']/span")
@@ -27,7 +27,7 @@ public class AlertStatusPopupWindow extends BasePage {
     @Override
     protected boolean isAt() {
         try {
-            Assertions.assertTrue(waitForVisibilityOf(txtStatus));
+            Assert.assertTrue(waitForVisibilityOf(txtStatus));
             return true;
         } catch (Exception e) {
             Main.report.logFail("There is no visible alert status on popup window");

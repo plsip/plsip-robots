@@ -4,8 +4,8 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Methods;
 import ai.makeitright.utilities.slack.MessageBuilder;
 import ai.makeitright.utilities.slack.Webhook;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class SendSlackNotificationAtTheBeginningTest extends DriverConfig {
 
@@ -13,7 +13,7 @@ public class SendSlackNotificationAtTheBeginningTest extends DriverConfig {
     private String hookUrl;
     private String pfSignInUrl;
 
-    @Before
+    @BeforeTest
     public void before() {
         channel = System.getProperty("inputParameters.channel");
         hookUrl = System.getProperty("secretParameters.hookUrl");

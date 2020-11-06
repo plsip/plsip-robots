@@ -10,10 +10,10 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settings.RepositoryPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class AssignGitLabRepositoryTest extends DriverConfig {
 
@@ -34,7 +34,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     private String repositoryAddress;
     private String allProjectName;
 
-    @Before
+    @BeforeTest
     public void before() {
         gitLabAccessToken = System.getProperty("secretParameters.gitLabAccessToken");
         gitLabSignInUrl = System.getProperty("inputParameters.gitLabSignInUrl");
@@ -93,13 +93,13 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .selectYourMainScriptRepository(allProjectName)
                 .clickSaveButton();
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
-        Assertions.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
-        Assertions.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assertions.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
-        Assertions.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
+        Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
     }
 
-    @After
+    @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         JSONObject objResult = new JSONObject();
@@ -108,7 +108,6 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         objResult.put("repositoryaddress", repositoryAddress);
         obj.put("result",objResult);
         System.setProperty("output", obj.toString());
-        driver.close();
     }
 
 }
