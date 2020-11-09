@@ -54,6 +54,7 @@ public class ArgumentsPage extends BasePage {
     }
 
     public AddArgumentModalWindow clickButtonAddArgument() {
+        waitForClickable(btnAddArgument);
         click(btnAddArgument,"button Add Argument");
         return new AddArgumentModalWindow(driver);
     }

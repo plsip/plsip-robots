@@ -1,5 +1,6 @@
 package ai.makeitright.utilities;
 
+import ai.makeitright.utilities.slack.SlackHandle;
 import org.json.JSONException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +23,11 @@ public abstract class Main {
     public final static String reportName = "Report.html";
     public static WebDriverWait wait;
 
+    public static String hookUrl;
+    public static String channel;
+    public static String pfSignInUrl;
+    public static String taskname;
+
     @BeforeSuite
     public void tearUp() throws JSONException {
         report = new Reporter(artifactsPath + System.getProperty("file.separator") + reportName);
@@ -29,17 +35,19 @@ public abstract class Main {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
             report.logFail(result.getThrowable().toString());
             report.logScreenShot(screenshotsPath);
             Methods.getWebScreenShot(driver);
             report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+        } else if(result.getStatus() == ITestResult.SUCCESS) {
+            SlackHandle.sendSuccessSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
         }
     }
 
     @AfterSuite
-    public void tearDown(ITestContext context) throws JSONException, IOException, Exception {
+    public void tearDown(ITestContext context) {
         if (driver != null)
             driver.quit();
         report.closeRaport();

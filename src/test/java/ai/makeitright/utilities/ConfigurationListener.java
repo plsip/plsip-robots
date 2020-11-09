@@ -1,16 +1,12 @@
 package ai.makeitright.utilities;
 
-import org.json.JSONException;
+import ai.makeitright.utilities.slack.SlackHandle;
 import org.testng.IConfigurationListener;
-import org.testng.IConfigurationListener2;
 import org.testng.ITestResult;
-
-import java.io.IOException;
 
 public class ConfigurationListener implements IConfigurationListener {
     @Override
     public void onConfigurationSuccess(ITestResult itr) {
-        // TODO
     }
 
 
@@ -22,11 +18,11 @@ public class ConfigurationListener implements IConfigurationListener {
                 Main.driver.quit();
             }
             Main.report.logTechnicalFail(itr.getThrowable().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
