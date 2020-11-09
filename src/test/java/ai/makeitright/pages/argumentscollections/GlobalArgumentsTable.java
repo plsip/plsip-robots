@@ -44,7 +44,7 @@ public class GlobalArgumentsTable extends BasePage {
                 return displayedGlobalArguments;
             }
         }
-        Main.report.logInfo("There was no global arguments collection with name ' " + globalArgumentsCollection + "' in table 'Global arguments'");
+        Main.report.logInfo("There was no global arguments collection with name '" + globalArgumentsCollection + "' in table 'Global arguments'");
         return null;
     }
 
