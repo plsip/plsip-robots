@@ -25,6 +25,7 @@ public class AddArgumentTest extends DriverConfig {
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
+    private String slackFlag;
 
     //for reporting:
     private String argumentName;
@@ -45,6 +46,7 @@ public class AddArgumentTest extends DriverConfig {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         Main.taskname = "TC - Global arguments - Add argument [P20Ct-71]";
+        Main.slackFlag = System.getProperty("inputParameters.slackFlag");
     }
 
     @Test

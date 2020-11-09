@@ -18,7 +18,9 @@ public class ConfigurationListener implements IConfigurationListener {
                 Main.driver.quit();
             }
             Main.report.logTechnicalFail(itr.getThrowable().toString());
-            SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
+            if(Main.slackFlag.equals("true")) {
+                SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -26,6 +26,7 @@ public abstract class Main {
     public static String hookUrl;
     public static String channel;
     public static String pfSignInUrl;
+    public static String slackFlag;
     public static String taskname;
 
     @BeforeSuite
@@ -41,7 +42,7 @@ public abstract class Main {
             report.logScreenShot(screenshotsPath);
             Methods.getWebScreenShot(driver);
             report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
-        } else if(result.getStatus() == ITestResult.SUCCESS) {
+        } else if(result.getStatus() == ITestResult.SUCCESS && Main.slackFlag.equals("true")) {
             SlackHandle.sendSuccessSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
         }
     }
