@@ -32,7 +32,7 @@ public class SlackHandle extends Main {
 
     public static Attachment generateFailedMessageAttachment(String taskname) {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
-                .setTitle("Task: " + taskname)
+                .setTitle(taskname)
                 .setColor("#ff0000");
 
         return attachmentBuilder.build();
@@ -40,7 +40,7 @@ public class SlackHandle extends Main {
 
     public static Attachment generateSuccessMessageAttachment(String taskname) {
         AttachmentBuilder attachmentBuilder = new AttachmentBuilder()
-                .setTitle("Task: " + taskname)
+                .setTitle(taskname)
                 .setColor("#228b22");
 
         return attachmentBuilder.build();
