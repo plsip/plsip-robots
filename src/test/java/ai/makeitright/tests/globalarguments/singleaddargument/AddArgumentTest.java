@@ -21,6 +21,7 @@ public class AddArgumentTest extends DriverConfig {
     private String channel;
     private String globalArgumentsCollection;
     private String hookUrl;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -40,12 +41,13 @@ public class AddArgumentTest extends DriverConfig {
         globalArgumentsCollection = System.getProperty("inputParameters.globalArgumentsCollection");
         hookUrl = System.getProperty("secretParameters.hookUrl");
         Main.hookUrl = this.hookUrl;
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = "TC - Global arguments - Add argument [P20Ct-71]";
+        Main.taskname = pfGlossary + ": TC - Global arguments - Add argument [P20Ct-71]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
     }
 

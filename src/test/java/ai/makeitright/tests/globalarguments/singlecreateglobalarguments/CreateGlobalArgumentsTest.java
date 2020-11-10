@@ -18,6 +18,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
     //from configuration:
     private String channel;
     private String hookUrl;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -34,13 +35,14 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         collectionName = System.getProperty("inputParameters.beginningCollectionName");
         hookUrl = System.getProperty("secretParameters.hookUrl");
         Main.hookUrl = this.hookUrl;
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
-        Main.taskname = "TC - Global arguments - Create Global arguments collection [P20Ct-49]";
+        Main.taskname = pfGlossary + ": TC - Global arguments - Create Global arguments collection [P20Ct-49]";
     }
 
     @Test
