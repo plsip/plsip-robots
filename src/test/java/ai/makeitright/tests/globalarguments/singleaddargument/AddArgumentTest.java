@@ -71,6 +71,7 @@ public class AddArgumentTest extends DriverConfig {
                 globalArgumentsPage.getGlobalArgumentsTable()
                         .getGlobalArgumentsRowData(globalArgumentsCollection);
 
+        Assert.assertNotNull("There was no global arguments collection with name '" + globalArgumentsCollection + "' in table 'Global arguments'");
         ArgumentsPage argumentsPage = globalArgumentsPage
                 .clickGlobalArgumentsCollectionNameButton(displayedGlobalArguments
                                 .getBtnArgumentsCollectionName(),

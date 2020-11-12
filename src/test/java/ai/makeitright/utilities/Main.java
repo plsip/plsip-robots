@@ -40,8 +40,8 @@ public abstract class Main {
         if (result.getStatus() == ITestResult.FAILURE) {
             report.logFail(result.getThrowable().toString());
             report.logScreenShot(screenshotsPath);
-            Methods.getWebScreenShot(driver);
-            report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
+//            Methods.getWebScreenShot(driver);
+//            report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
         } else if(result.getStatus() == ITestResult.SUCCESS && Main.slackFlag.equals("true")) {
             SlackHandle.sendSuccessSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
