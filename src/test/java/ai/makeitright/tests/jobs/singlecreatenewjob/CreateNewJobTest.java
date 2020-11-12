@@ -16,11 +16,15 @@ import org.testng.annotations.Test;
 public class CreateNewJobTest extends DriverConfig {
 
     //from configuration
-    private String email;
-    private String password;
+    private String channel;
+    private String hookUrl;
     private String pfGlossary;
     private String pfOrganizationCardName;
-    private String powerFarmUrl;
+    private String pfSignInUrl;
+    private String pfUserEmail;
+    private String pfUserPassword;
+    private String slackFlag;
+    private String taskname;
     private String workflowName;
     private String argumentsCollection;
 
@@ -30,23 +34,30 @@ public class CreateNewJobTest extends DriverConfig {
 
     @BeforeTest
     public void before() {
-        email = System.getProperty("inputParameters.pfUserEmail");
-        password = System.getProperty("secretParameters.pfUserPassword");
+        argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
+        channel = System.getProperty("inputParameters.channel");
+        Main.channel = this.channel;
+        hookUrl = System.getProperty("secretParameters.hookUrl");
+        Main.hookUrl = this.hookUrl;
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
-        powerFarmUrl = System.getProperty("inputParameters.pfSignInUrl");
+        pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
+        Main.pfSignInUrl = this.pfSignInUrl;
+        pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
+        pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
+        Main.taskname = pfGlossary + ": TC - Global arguments - Add argument [P20Ct-71]";
+        Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowName = System.getProperty("inputParameters.workflowName");
-        argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
     }
 
     @Test
     public void createNewJob() {
-        driver.get(powerFarmUrl);
+        driver.get(pfSignInUrl);
 
-        LoginPage loginPage = new LoginPage(driver, powerFarmUrl, pfOrganizationCardName);
+        LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
-                .setEmailInput(email)
-                .setPasswordInput(password);
+                .setEmailInput(pfUserEmail)
+                .setPasswordInput(pfUserPassword);
 
         LeftMenu leftMenu = loginPage.clickSignInButton();
         if (pfGlossary.equals("TA")) {

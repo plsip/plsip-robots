@@ -1,6 +1,7 @@
 package ai.makeitright.tests.tasksneededbyautomats;
 
 import ai.makeitright.utilities.DriverConfig;
+import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,14 +10,18 @@ import org.testng.annotations.Test;
 
 public class ReadTitleOfPage extends DriverConfig {
 
+    private String channel;
     private String expectedTitle;
+    private String slackFlag;
     private String title;
     private String url;
 
     @BeforeTest
     public void before() {
-        url = System.getProperty("inputParameters.url");
+        Main.channel = this.channel;
         expectedTitle = System.getProperty("inputParameters.expectedTitle");
+        Main.slackFlag = System.getProperty("inputParameters.slackFlag");
+        url = System.getProperty("inputParameters.url");
     }
 
     @Test
