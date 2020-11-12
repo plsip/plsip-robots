@@ -37,6 +37,14 @@ public class WorkflowsPage extends BasePage {
         }
         return true;
     }
+
+    public CreateJobModalWindow clickCreateJobButton(final String workflowName) {
+        filterWorkflow(workflowName);
+        WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/span"));
+        click(btnCreateJob, "'Create job' button");
+        return new CreateJobModalWindow(driver);
+    }
+
     public CreateNewWorkflowModalWindow clickCreateNewWorkflowButton() {
         click(btnCreateNewWorkflow, "button 'Create new workflow'");
         return new CreateNewWorkflowModalWindow(driver);
@@ -57,10 +65,5 @@ public class WorkflowsPage extends BasePage {
         return new WorkflowsTable(driver);
     }
 
-    public CreateJobModalWindow clickCreateJobButton(final String workflowName) {
-        filterWorkflow(workflowName);
-        WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/span"));
-        click(btnCreateJob, "'Create job' button");
-        return new CreateJobModalWindow(driver);
-    }
+
 }
