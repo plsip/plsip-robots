@@ -52,7 +52,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         Main.taskname = pfGlossary + ": TC - Jobs - Create job with trigger [P20Ct-85]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
-        workflowName = System.getProperty("inputParameters.workflowName");
+        workflowName = System.getProperty("inputParameters.workflowOrTestPlanName");
     }
 
     @Test
