@@ -39,7 +39,7 @@ public abstract class Main {
     public void afterMethod(ITestResult result) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
             report.logFail(result.getThrowable().toString());
-            report.logScreenShot(screenshotsPath);
+//            report.logScreenShot(screenshotsPath);
 //            Methods.getWebScreenShot(driver);
 //            report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);

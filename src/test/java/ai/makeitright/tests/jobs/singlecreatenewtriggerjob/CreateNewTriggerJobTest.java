@@ -91,10 +91,13 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTimeInput(LocalTime.NOON.toString());
-
-        Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
-                workflowName + "\n" + "workflow/test plan"), "The modal window has incorrect header");
-
+        if (pfGlossary.equals("TA")) {
+            Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
+                    workflowName + "\n" + "test plan"), "The modal window has incorrect header");
+        } else if (pfGlossary.equals("RPA")) {
+            Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
+                    workflowName + "\n" + "workflow"), "The modal window has incorrect header");
+        }
         switch (executionFrequency.toLowerCase()) {
             case "daily":
                 Main.report.logInfo("'Daily' execution frequency has been selected");
