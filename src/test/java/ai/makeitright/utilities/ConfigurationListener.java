@@ -14,10 +14,10 @@ public class ConfigurationListener implements IConfigurationListener {
     public void onConfigurationFailure(ITestResult itr) {
         try {
             if (Main.driver != null) {
-                Methods.getWebScreenShot(Main.driver);
+//                Methods.getWebScreenShot(Main.driver);
                 Main.driver.quit();
             }
-            Main.report.logTechnicalFail(itr.getThrowable().toString());
+//            Main.report.logTechnicalFail(itr.getThrowable().toString());
             if(Main.slackFlag.equals("true")) {
                 SlackHandle.sendFailedSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
             }
