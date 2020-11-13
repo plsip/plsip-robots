@@ -3,7 +3,6 @@ package ai.makeitright.tests.jobs.createnewjob;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.jobs.JobDetailsPage;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.testplans.TestPlansPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
@@ -50,17 +49,14 @@ public class CreateNewJobTest extends DriverConfig {
                 .setPasswordInput(password);
 
         LeftMenu leftMenu = loginPage.clickSignInButton();
-        CreateJobModalWindow createJobModalWindow = null;
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
-            TestPlansPage testPlandPage = new TestPlansPage(driver);
-            createJobModalWindow = testPlandPage.clickCreateJobButton(workflowName);
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
-            WorkflowsPage workflowsPage = new WorkflowsPage(driver);
-            createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
         }
 
+        WorkflowsPage workflowsPage = new WorkflowsPage(driver);
+        CreateJobModalWindow createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
         createJobModalWindow
                 .clickSaveAndGoToCollectionButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)

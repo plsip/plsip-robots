@@ -3,6 +3,7 @@ package ai.makeitright.tests.jobs.singlecreatenewjob;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.jobs.JobDetailsPage;
 import ai.makeitright.pages.login.LoginPage;
+import ai.makeitright.pages.testplans.TestPlansPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
@@ -45,9 +46,9 @@ public class CreateNewJobTest extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Global arguments - Add argument [P20Ct-71]";
+        Main.taskname = pfGlossary + ": TC - Jobs - Create job immediately [P20Ct-83]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
-        workflowName = System.getProperty("inputParameters.workflowName");
+        workflowName = System.getProperty("inputParameters.workflowOrTestPlanName");
     }
 
     @Test
@@ -60,15 +61,17 @@ public class CreateNewJobTest extends DriverConfig {
                 .setPasswordInput(pfUserPassword);
 
         LeftMenu leftMenu = loginPage.clickSignInButton();
+        CreateJobModalWindow createJobModalWindow = null;
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
+            TestPlansPage testPlandPage = new TestPlansPage(driver);
+            createJobModalWindow = testPlandPage.clickCreateJobButton(workflowName);
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver);
+            createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
         }
-
-        WorkflowsPage workflowsPage = new WorkflowsPage(driver);
-
-        CreateJobModalWindow createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
+        Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
         createJobModalWindow
                 .clickSaveAndGoToCollectionButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
