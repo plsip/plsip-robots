@@ -66,14 +66,17 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
         LeftMenu leftMenu = loginPage.clickSignInButton();
         CreateJobModalWindow createJobModalWindow = null;
+        String workflowOrTestPlan = "";
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
             TestPlansPage testPlandPage = new TestPlansPage(driver);
             createJobModalWindow = testPlandPage.clickCreateJobButton(workflowName);
+            workflowOrTestPlan = "test plan";
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
             WorkflowsPage workflowsPage = new WorkflowsPage(driver);
             createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
+            workflowOrTestPlan = "workflow";
         }
 
         Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
@@ -91,13 +94,10 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTimeInput(LocalTime.NOON.toString());
-        if (pfGlossary.equals("TA")) {
-            Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
-                    workflowName + "\n" + "test plan"), "The modal window has incorrect header");
-        } else if (pfGlossary.equals("RPA")) {
-            Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
-                    workflowName + "\n" + "workflow"), "The modal window has incorrect header");
-        }
+
+        Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
+                    workflowName + "\n" + workflowOrTestPlan), "The modal window has incorrect header");
+
         switch (executionFrequency.toLowerCase()) {
             case "daily":
                 Main.report.logInfo("'Daily' execution frequency has been selected");
@@ -109,10 +109,13 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
                 triggerID = createJobModalWindow.getCreatedJobID();
                 Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " workflow everyday at " +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" everyday at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
-                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
-                Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
+                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of\n" +
+                        "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" everyday at " +
+                                LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
+
                 break;
             case "weekly":
                 Main.report.logInfo("'Weekly' execution frequency has been selected");
@@ -124,10 +127,14 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
                 triggerID = createJobModalWindow.getCreatedJobID();
                 Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " workflow every " + Methods.getNameOfNextDay() + " at " +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" every " + Methods.getNameOfNextDay() + " at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
-                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
-                Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
+                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of\n" +
+                                "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                        "It will create job with " + workflowName + " " + workflowOrTestPlan +" every " + Methods.getNameOfNextDay() + " at " +
+                LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
+
+
                 break;
             case "monthly":
                 Main.report.logInfo("'Monthly' execution frequency has been selected");
@@ -139,24 +146,30 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
                 triggerID = createJobModalWindow.getCreatedJobID();
                 Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " workflow " + Methods.getOrdinalIndicatorOfNextDay() +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan + Methods.getOrdinalIndicatorOfNextDay() +
                                 " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
-                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
-                Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
+                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of \n" + "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan + Methods.getOrdinalIndicatorOfNextDay() +
+                                " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
+
                 break;
             case "never":
                 Main.report.logInfo("Option 'Never' of execution frequency has been selected");
                 createJobModalWindow.clickCreateTriggerButton();
                 triggerID = createJobModalWindow.getCreatedJobID();
                 Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " workflow at " + Methods.getDateOfNextDay("dd/MM/YYYY") +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" at " + Methods.getDateOfNextDay("dd/MM/YYYY") +
                                 " " + LocalTime.NOON.toString() + "."),
-                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue());
-                Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
+                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of\n" + "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" at " + Methods.getDateOfNextDay("dd/MM/YYYY") +
+                                " " + LocalTime.NOON.toString() + ".");
+
                 break;
             default:
                 Assert.fail("There is a wrong value of 'executionFrequency' parameter");
         }
+
+        Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
 
         createJobModalWindow.clickGoToTriggerDetailsButton();
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
