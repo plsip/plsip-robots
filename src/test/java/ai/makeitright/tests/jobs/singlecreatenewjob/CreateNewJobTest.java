@@ -103,10 +103,7 @@ public class CreateNewJobTest extends DriverConfig {
     @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        obj.put("taskname", "Create a new job");
         obj.put("jobID", jobID);
-        obj.put("workflowName", workflowName);
-        obj.put("jobHeader", jobHeader);
         System.setProperty("output", obj.toString());
     }
 }
