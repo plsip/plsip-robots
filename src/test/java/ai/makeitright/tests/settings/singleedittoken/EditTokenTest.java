@@ -100,8 +100,6 @@ public class EditTokenTest extends DriverConfig {
         Main.report.logPass("******************************\nStart test\n");
         driver.get(pfSignInUrl);
 
-        leftMenu = loginPage.clickSignInButton();
-
         leftMenu.openPageBy("Repositories");
 
         repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
@@ -114,7 +112,7 @@ public class EditTokenTest extends DriverConfig {
         AlertStatusPopupWindow statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
         Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated! You can keep on rockin'\uD83D\uDE46\u200D"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated!\nYou can keep on rockin'\uD83D\uDE46\u200D"));
 
         Main.report.logPass("******************************\n******************************\nTest ended with success\n******************************\nNow repository will be detach on the PF platform");
         driver.get(pfSignInUrl);
