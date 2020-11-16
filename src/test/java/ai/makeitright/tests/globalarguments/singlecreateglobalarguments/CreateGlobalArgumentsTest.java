@@ -16,9 +16,6 @@ import org.testng.annotations.Test;
 public class CreateGlobalArgumentsTest extends DriverConfig {
 
     //from configuration:
-    private String channel;
-    private String hookUrl;
-    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
@@ -30,12 +27,10 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
 
     @BeforeTest
     public void before() {
-        channel = System.getProperty("inputParameters.channel");
-        Main.channel = this.channel;
+        Main.channel = System.getProperty("inputParameters.channel");
         collectionName = System.getProperty("inputParameters.beginningCollectionName");
-        hookUrl = System.getProperty("secretParameters.hookUrl");
-        Main.hookUrl = this.hookUrl;
-        pfGlossary = System.getProperty("inputParameters.pfGlossary");
+        Main.hookUrl = System.getProperty("secretParameters.hookUrl");
+        String pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         Main.pfSignInUrl = this.pfSignInUrl;
@@ -69,7 +64,7 @@ public class CreateGlobalArgumentsTest extends DriverConfig {
         argumentsPage.checkCreatedBy();
         argumentsPage.clickGlobalArgumentsLnk();
 
-        Assert.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new gobal arguments collection shouldn't be visible");
+        Assert.assertFalse(globalArgumentsPage.isNotVisibleModalWindow(),"Modal window for adding new global arguments collection shouldn't be visible");
 
         collectionName = createGlobalArgumentModalWindow.getCollectionName();
 

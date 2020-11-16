@@ -17,29 +17,22 @@ import org.testng.annotations.Test;
 public class CreateNewJobTest extends DriverConfig {
 
     //from configuration
-    private String channel;
-    private String hookUrl;
     private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
-    private String slackFlag;
-    private String taskname;
     private String workflowName;
     private String argumentsCollection;
 
     //for reporting:
     private String jobID;
-    private String jobHeader;
 
     @BeforeTest
     public void before() {
         argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
-        channel = System.getProperty("inputParameters.channel");
-        Main.channel = this.channel;
-        hookUrl = System.getProperty("secretParameters.hookUrl");
-        Main.hookUrl = this.hookUrl;
+        Main.channel = System.getProperty("inputParameters.channel");
+        Main.hookUrl = System.getProperty("secretParameters.hookUrl");
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
@@ -94,7 +87,7 @@ public class CreateNewJobTest extends DriverConfig {
                 "The value of JOB ID is incorrect: " + jobDetailsPage.getJobID());
         Main.report.logPass("In the job details there is a correct job ID value displayed: " + jobID);
 
-        jobHeader = "Job " + jobID + " - " + workflowName;
+        String jobHeader = "Job " + jobID + " - " + workflowName;
         Assert.assertEquals(jobDetailsPage.getJobHeader(),jobHeader,
                 "The job header is not correct: " + jobDetailsPage.getJobHeader());
         Main.report.logPass("In the job details there is a correct job header displayed: " + jobHeader);

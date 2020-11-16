@@ -18,30 +18,23 @@ import org.testng.annotations.Test;
 public class AddArgumentTest extends DriverConfig {
 
     //from configuration:
-    private String channel;
     private String globalArgumentsCollection;
-    private String hookUrl;
-    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
-    private String slackFlag;
 
     //for reporting:
     private String argumentName;
     private String defaultValue;
-    private String taskname;
 
     @BeforeTest
     public void before() {
         argumentName = System.getProperty("inputParameters.beginningArgumentName");
-        channel = System.getProperty("inputParameters.channel");
-        Main.channel = this.channel;
+        Main.channel = System.getProperty("inputParameters.channel");
         globalArgumentsCollection = System.getProperty("inputParameters.globalArgumentsCollection");
-        hookUrl = System.getProperty("secretParameters.hookUrl");
-        Main.hookUrl = this.hookUrl;
-        pfGlossary = System.getProperty("inputParameters.pfGlossary");
+        Main.hookUrl = System.getProperty("secretParameters.hookUrl");
+        String pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         Main.pfSignInUrl = this.pfSignInUrl;
@@ -87,7 +80,7 @@ public class AddArgumentTest extends DriverConfig {
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
         Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"),"Banner ribbon on popup window is not dark green");
         Assert.assertTrue(statusPopupWindow.isAlertStatus("Good Job!"),"There is no right status on popup window");
-        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your argument has been added to the Collection. Keep on"),"There is no right alert message");
+        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your argument has been added to the Collection.\nKeep on \uD83E\uDD84\uD83E\uDD84\uD83E\uDD84"),"There is no right alert message");
 
 //        Assert.assertTrue(argumentsPage.checkIfOneArgumentIsDisplayed(),"There is no only one argument displayed");
         Assert.assertTrue(

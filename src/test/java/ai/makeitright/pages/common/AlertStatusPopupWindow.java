@@ -72,11 +72,18 @@ public class AlertStatusPopupWindow extends BasePage {
     public boolean isAlertMessage(String message) {
         try {
             String messageAlert = txtMessageAlert.getText();
-            if (messageAlert.replaceAll("\\s+", "").contains(message.replaceAll("\\s+", ""))) {
+//            if (messageAlert.replaceAll("\\s+", "").contains(message.replaceAll("\\s+", ""))) {
+//                Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
+//                return true;
+//            } else {
+//                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "' which doesn't contains '" + message + "'");
+//                return false;
+//            }
+            if (messageAlert.equals(message)) {
                 Main.report.logPass("Popup window has expected alert message: '" + messageAlert + "'");
                 return true;
             } else {
-                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "' which doesn't contains '" + message + "'");
+                Main.report.logFail("Popup window has not expected alert message: '" + messageAlert + "', which doesn't contain: '" + message + "'");
                 return false;
             }
         } catch (Exception e) {

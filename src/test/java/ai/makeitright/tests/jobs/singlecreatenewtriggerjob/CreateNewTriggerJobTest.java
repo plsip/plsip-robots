@@ -20,9 +20,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
     //from configuration
     private String argumentsCollection;
-    private String channel;
     private String executionFrequency;
-    private String hookUrl;
     private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
@@ -39,11 +37,9 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     @BeforeTest
     public void before() {
         argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
-        channel = System.getProperty("inputParameters.channel");
-        Main.channel = this.channel;
+        Main.channel = System.getProperty("inputParameters.channel");
         executionFrequency = System.getProperty("inputParameters.executionFrequency");
-        hookUrl = System.getProperty("secretParameters.hookUrl");
-        Main.hookUrl = this.hookUrl;
+        Main.hookUrl = System.getProperty("secretParameters.hookUrl");
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
