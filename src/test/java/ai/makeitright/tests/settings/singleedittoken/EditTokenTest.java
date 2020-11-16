@@ -21,7 +21,6 @@ public class EditTokenTest extends DriverConfig {
     private String gitLabSignInUrl;
     private String gitLabUsername;
     private String gitLabUserPassword;
-    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfOrganizationNameUrl;
     private String pfSignInUrl;
@@ -40,7 +39,7 @@ public class EditTokenTest extends DriverConfig {
         gitLabUserPassword = System.getProperty("secretParameters.gitLabUserPassword");
         Main.hookUrl = System.getProperty("secretParameters.hookUrl");
         newGitLabAccessToken = System.getProperty("secretParameters.newGitLabAccessToken");
-        pfGlossary = System.getProperty("inputParameters.pfGlossary");
+        String pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfOrganizationNameUrl = System.getProperty("inputParameters.pfOrganizationNameUrl");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
