@@ -1,4 +1,4 @@
-package ai.makeitright.tests.settings.singleassigngitlabrepository;
+package ai.makeitright.tests.settings.singledetachgitlabrepository;
 
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.pages.common.LeftMenu;
@@ -13,7 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class AssignGitLabRepositoryTest extends DriverConfig {
+public class DetachGitLabRepositoryTest extends DriverConfig {
 
     //from configuration:
     private String gitLabAccessToken;
@@ -30,7 +30,6 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     private String repositoryToCopy;
 
     //for reporting:
-    private String repositoryAddress;
     private String allProjectName;
 
     @BeforeTest
@@ -55,8 +54,8 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     }
 
     @Test
-    public void assignGitLabRepository() {
-        Main.report.logPass("******************************\nBefore test create repository in GitLab:\n");
+    public void detachGitLabRepository() {
+        Main.report.logPass("******************************\nBefore test create repository on GitLab:\n");
         driver.get(gitLabSignInUrl);
 
         LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
@@ -71,7 +70,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         newProjectPage.clickButtonRepoByURL();
         newProjectPage.setGitRepositoryURL(repositoryToCopy);
         allProjectName = newProjectPage.setProjectName(projectName);
-        repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName + "/";
+        String repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName + "/";
         Main.report.logPass("Created project '" + allProjectName + "'");
         newProjectPage.clickPublicCheckbox();
         newProjectPage.clickCreateProjectButton();
@@ -79,7 +78,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         newProjectPage.clickUserPanel();
         newProjectPage.clickOptionSignOut();
 
-        Main.report.logPass("******************************\nRepository on GitLab was created\nStart test");
+        Main.report.logPass("******************************\nBefore test attach repository on PF platform:\n");
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
@@ -98,15 +97,9 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .clickSaveButton()
                 .selectYourMainScriptRepository(allProjectName)
                 .clickSaveButton();
-        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
-        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
-        Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assert.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
-        Main.report.logPass("******************************\n******************************\nTest ended with success\n******************************\nNow repository will be detach on the PF platform");
-
-
+        Main.report.logInfo("******************************\nRepository was created on GitLab, assigned on the PF platform\nStart test\n******************************");
         driver.get(pfSignInUrl);
 
         leftMenu.openPageBy("Repositories");
@@ -117,7 +110,12 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
         repositoryPage.clickDetachButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
 
-        Main.report.logPass("******************************\nNow repository will be delete on the GitLab platform");
+        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("You did it! \uD83D\uDE4C"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage(repositoryAddress));
+
+        Main.report.logPass("******************************\n******************************\nTest ended with success\n******************************\nNow repository will be deleted GitLab platform");
         driver.get(gitLabSignInUrl);
 
         loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
@@ -125,7 +123,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
                 .setUsernameField(gitLabUsername)
                 .setPasswordField(gitLabUserPassword);
         projectsPage = loginGitLabPage.clickSignInButton();
-
+        projectsPage.filterProjects(allProjectName);
         ProjectDetailsPage projectDetailsPage = projectsPage.chooseProjectToDelete(allProjectName);
 
         GeneralSettingsPage generalSettingsPage = projectDetailsPage.chooseGeneralInSettings();
@@ -144,10 +142,7 @@ public class AssignGitLabRepositoryTest extends DriverConfig {
     @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        JSONObject objResult = new JSONObject();
-        obj.put("projectName", allProjectName);
-        objResult.put("repositoryaddress", repositoryAddress);
-        obj.put("result",objResult);
+        obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
     }
 }

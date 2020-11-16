@@ -27,20 +27,22 @@ public class ProjectsPage extends BasePage {
     @FindBy(xpath = "//a[@class='gl-button btn btn-success']")
     private WebElement btnNewProject;
 
+    @FindBy(xpath = "//img[@alt='Katarzyna Raczkowska']")
+    private WebElement img_GitLabUser;
 
-    @FindBy(xpath = "//*[@class='page-title']")
-    private WebElement txtProject;
+    @FindBy(xpath = "//*[@id='project-filter-form-field']")
+    private WebElement inpFilterByName;
+
+    @FindBy(xpath = "//a[@class='sign-out-link']")
+    private WebElement optionSignOut;
 
     @FindAll(
             @FindBy(xpath = "//span[@class = 'project-name']")
     )
     private List<WebElement> projects;
 
-    @FindBy(xpath = "//img[@alt='Katarzyna Raczkowska']")
-    private WebElement img_GitLabUser;
-
-    @FindBy(xpath = "//a[@class='sign-out-link']")
-    private WebElement optionSignOut;
+    @FindBy(xpath = "//*[@class='page-title']")
+    private WebElement txtProject;
 
     public NewProjectPage clickNewProjectButton() {
         click(btnNewProject, "button 'New Project'");
@@ -50,7 +52,7 @@ public class ProjectsPage extends BasePage {
     public ProjectDetailsPage chooseProjectToDelete(String name) {
         try {
             for (WebElement project : projects) {
-                if (project.getText().equals(name)) {
+                if (project.getText().contains(name)) {
                     click(project, "project: " + name + " to see details");
                     break;
                 }
@@ -70,5 +72,9 @@ public class ProjectsPage extends BasePage {
 
     public void clickOptionSignOut() {
         click(optionSignOut, "option 'Sign out'");
+    }
+
+    public void filterProjects(String filterByName) {
+        sendText(inpFilterByName,filterByName,"input element 'Filter by name...'");
     }
 }

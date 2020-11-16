@@ -18,7 +18,7 @@ public class ProjectDetailsPage extends BasePage {
         if(!waitForVisibilityOf(projectName)) {
             Main.report.logFail("Project name is not visible");
         }
-        Assert.assertTrue(waitForVisibilityOf(projectName), "Project name is not visible");
+        Assert.assertTrue(waitForVisibilityOf(projectName), "Project named: '" + projectName + "' is not visible");
         return true;
     }
 
@@ -32,6 +32,7 @@ public class ProjectDetailsPage extends BasePage {
     private WebElement btnGeneral;
 
     public GeneralSettingsPage chooseGeneralInSettings() {
+        hoverMouseOver(settingsIcon);
         click(settingsIcon, "'Settings' icon on the right panel");
         click(btnGeneral, "'General' button in Settings section");
         return new GeneralSettingsPage(driver);

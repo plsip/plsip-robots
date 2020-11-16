@@ -34,7 +34,7 @@ public class LoginGitLabPage extends BasePage {
     }
 
     public LoginGitLabPage setUsernameField(final String username) {
-        waitForVisibilityOf(inpUsername);
+        waitLongForVisibilityOf(inpUsername);
         sendText(inpUsername, username, "input element 'Username or email'");
         return this;
     }

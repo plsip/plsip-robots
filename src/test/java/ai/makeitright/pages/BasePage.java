@@ -19,6 +19,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected String param;
     protected String url;
+    private Action action;
 
     public BasePage(final WebDriver driver) {
         this.driver = driver;
@@ -72,6 +73,11 @@ public abstract class BasePage {
         }
     }
 
+    public void hoverMouseOver(WebElement element) {
+        action = new Action(this.driver);
+        action.hoverMouseOver(element);
+    }
+
     public void sendText(final WebElement element, final String text, final String elementDescription) {
         Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
         element.sendKeys(text);
@@ -123,6 +129,15 @@ public abstract class BasePage {
     public boolean waitForVisibilityOf(final WebElement element) {
         try {
             new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean waitLongForVisibilityOf(final WebElement element) {
+        try {
+            new WebDriverWait(driver, 120).until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (Exception e) {
             return false;

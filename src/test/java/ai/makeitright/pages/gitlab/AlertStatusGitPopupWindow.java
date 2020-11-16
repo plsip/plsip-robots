@@ -31,11 +31,11 @@ public class AlertStatusGitPopupWindow extends BasePage {
     public boolean isAlertStatus(String expectedStatus) {
         try {
             String statusAlert = alertStatus.findElement(By.xpath(".//div/span")).getText();
-            if (statusAlert.contains(expectedStatus + "' is in the process of being deleted")) {
+            if (statusAlert.equals(expectedStatus)) {
                 Main.report.logPass("Popup window has alert status: '" + statusAlert + "'");
                 return true;
             } else {
-                Main.report.logFail("Popup window has not expected alert status: '" + statusAlert);
+                Main.report.logFail("Popup window has alert status: '" + statusAlert +"'\nnot like expected\n" + expectedStatus);
                 return false;
             }
 
