@@ -47,7 +47,7 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Repositories - Assign GitLab repository [P20Ct-114]";
+        Main.taskname = pfGlossary + ": TC - Repositories - Detach GitLab repository that is not connected with any task or workflow [P20Ct-37]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         projectName = System.getProperty("inputParameters.projectName");
         repositoryToCopy = System.getProperty("inputParameters.repositoryToCopy");
@@ -142,7 +142,7 @@ public class DetachGitLabRepositoryTest extends DriverConfig {
     @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        obj.put("projectName", projectName);
+        obj.put("projectName", allProjectName);
         System.setProperty("output", obj.toString());
     }
 }
