@@ -12,7 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TasksPage extends BasePage {
 
     @FindBy(xpath = "//button//span[text()='Create new task']")
-    private WebElement btnCreateNewTask;
+    private WebElement btnCreateNewTaskRPA;
+
+    @FindBy(xpath = "//button//span[text()='Create new test']")
+    private WebElement btnCreateNewTaskTA;
 
     @FindBy(xpath = "//input[@placeholder='Filter items']")
     private WebElement inpFilterItems;
@@ -22,11 +25,19 @@ public class TasksPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return btnCreateNewTask.isDisplayed();
+        if (urlOrParam.equals("TA")) {
+            return btnCreateNewTaskTA.isDisplayed();
+        } else {
+            return btnCreateNewTaskRPA.isDisplayed();
+        }
     }
 
     public TasksPage(final WebDriver driver) {
         super(driver);
+    }
+
+    public TasksPage(final WebDriver driver, final String param) {
+        super(driver, param);
     }
 
     public TasksPage checkIfNoneRowDisplayed() {
@@ -42,7 +53,12 @@ public class TasksPage extends BasePage {
     }
 
     public CreateTaskModalWindow clickCreateNewTaskButton() {
-        click(btnCreateNewTask, "button 'Create new task'");
+        click(btnCreateNewTaskRPA, "button 'Create new task'");
+        return new CreateTaskModalWindow(driver);
+    }
+
+    public CreateTaskModalWindow clickCreateNewTestButton() {
+        click(btnCreateNewTaskTA, "button 'Create new test'");
         return new CreateTaskModalWindow(driver);
     }
 

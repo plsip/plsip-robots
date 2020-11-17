@@ -16,6 +16,9 @@ public class CreateTaskModalWindow extends BasePage {
     @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']//span[text()='Create task']")
     private WebElement btnCreateTask;
 
+    @FindBy(xpath = "//button[@class='Polaris-Button Polaris-Button--primary']//span[text()='Create test']")
+    private WebElement btnCreateTest;
+
     @FindBy(xpath = "//select[@name='repositoryID']")
     private WebElement dropdownScriptDirectory;
 
@@ -52,6 +55,12 @@ public class CreateTaskModalWindow extends BasePage {
     public TaskDetailsPage clickCreateTaskButton() {
         Assert.assertTrue(waitForVisibilityOf(btnCreateTask), "Button 'Create task' is not visible");
         click(btnCreateTask, "button 'Create task'");
+        return new TaskDetailsPage(driver);
+    }
+
+    public TaskDetailsPage clickCreateTestButton() {
+        Assert.assertTrue(waitForVisibilityOf(btnCreateTest), "Button 'Create test' is not visible");
+        click(btnCreateTest, "button 'Create test'");
         return new TaskDetailsPage(driver);
     }
 

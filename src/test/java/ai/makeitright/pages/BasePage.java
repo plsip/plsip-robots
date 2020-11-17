@@ -18,7 +18,7 @@ public abstract class BasePage {
 
     protected WebDriver driver;
     protected String param;
-    protected String url;
+    protected String urlOrParam;
     private Action action;
 
     public BasePage(final WebDriver driver) {
@@ -33,7 +33,7 @@ public abstract class BasePage {
     //todo this method, then do we need this method?
     public BasePage(final WebDriver driver, final String url) {
         this.driver = driver;
-        this.url = url;
+        this.urlOrParam = url;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");
         Assert.assertTrue(isAt());
@@ -42,7 +42,7 @@ public abstract class BasePage {
 
     public BasePage(final WebDriver driver, final String url, final String param) {
         this.driver = driver;
-        this.url = url;
+        this.urlOrParam = url;
         this.param = param;
         PageFactory.initElements(this.driver, this);
         Main.report.logInfo("Checking if '" + this.getClass().getSimpleName() + " Page'  is open");

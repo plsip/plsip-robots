@@ -44,9 +44,9 @@ public class RepositoryPage extends BasePage {
     @Override
     protected boolean isAt() {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
-        url = url.substring(0, url.lastIndexOf("/signin")) + "/" + param + "/settings/repositories";
-        if (!(driver.getCurrentUrl().contains(url))) {
-            Main.report.logFail("Current URL doesn't contain  " + url);
+        urlOrParam = urlOrParam.substring(0, urlOrParam.lastIndexOf("/signin")) + "/" + param + "/settings/repositories";
+        if (!(driver.getCurrentUrl().contains(urlOrParam))) {
+            Main.report.logFail("Current URL doesn't contain  " + urlOrParam);
             return false;
         }
         return true;

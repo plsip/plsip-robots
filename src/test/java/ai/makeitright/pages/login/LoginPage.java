@@ -26,11 +26,11 @@ public class LoginPage extends BasePage {
     @Override
     protected boolean isAt() {
         Main.report.logInfo("Current URL address: " + driver.getCurrentUrl());
-        if (!url.equals(driver.getCurrentUrl())) {
-            Main.report.logFail("Current URL is not like expected " + url);
+        if (!urlOrParam.equals(driver.getCurrentUrl())) {
+            Main.report.logFail("Current URL is not like expected " + urlOrParam);
         }
-        Assert.assertEquals(url, driver.getCurrentUrl(),
-                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + url + "'");
+        Assert.assertEquals(urlOrParam, driver.getCurrentUrl(),
+                "Current URL address '" + driver.getCurrentUrl() + "' is not like expected '" + urlOrParam + "'");
         return true;
     }
 
