@@ -126,6 +126,15 @@ public abstract class BasePage {
         }
     }
 
+    public boolean wait10ForClickable(final WebElement element) {
+        try {
+            new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean waitForVisibilityOf(final WebElement element) {
         try {
             new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(element));
