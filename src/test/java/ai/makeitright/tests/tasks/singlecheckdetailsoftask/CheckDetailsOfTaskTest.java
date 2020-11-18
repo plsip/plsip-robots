@@ -40,7 +40,7 @@ public class CheckDetailsOfTaskTest extends DriverConfig {
         repository = System.getProperty("inputParameters.repository");
         scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
-        Main.taskname = pfGlossary + ": TC - Tasks/Tests - Check details of task/test [P20Ct-32]";
+        Main.taskname = pfGlossary + ": TC - Tests/Tasks - Check details of test/task [P20Ct-32]";
         taskName = System.getProperty("inputParameters.beginningOfTaskName");
         technology = System.getProperty("inputParameters.technology");
     }
