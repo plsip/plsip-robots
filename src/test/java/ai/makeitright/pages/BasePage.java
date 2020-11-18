@@ -29,8 +29,6 @@ public abstract class BasePage {
         Main.report.logPass("'" + this.getClass().getSimpleName() + "' is open");
     }
 
-    //todo we should use BasePage method with one parater inside this one, but I see that this.url is not being used in
-    //todo this method, then do we need this method?
     public BasePage(final WebDriver driver, final String url) {
         this.driver = driver;
         this.urlOrParam = url;

@@ -97,7 +97,7 @@ public class EditTokenTest extends DriverConfig {
                 .selectYourMainScriptRepository(allProjectName)
                 .clickSaveButton();
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
-        Main.report.logPass("******************************\nStart test\n");
+        Main.report.logPass("******************************\nStart test");
         driver.get(pfSignInUrl);
 
         leftMenu.openPageBy("Repositories");

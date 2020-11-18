@@ -2,12 +2,9 @@ package ai.makeitright.utilities;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
 
 public class DriverConfig extends Main {
-
-//    WebDriverWait wait = new WebDriverWait(Main.driver, 15);
 
     @BeforeSuite
     public static void setupTest() {
