@@ -19,7 +19,6 @@ public abstract class Main {
     public static WebDriver driver;
     public static Reporter report;
     public static String artifactsPath = System.getProperty("ARTIFACTS_PATH");
-    public static String screenshotsPath = System.getProperty("SCREENSHOTS_PATH");
     public final static String reportName = "Report.html";
     public static WebDriverWait wait;
 
