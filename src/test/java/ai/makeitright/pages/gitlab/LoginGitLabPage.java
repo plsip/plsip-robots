@@ -34,7 +34,7 @@ public class LoginGitLabPage extends BasePage {
     }
 
     public LoginGitLabPage setUsernameField(final String username) {
-        waitLongForVisibilityOf(inpUsername);
+        Assert.assertTrue(waitLongForVisibilityOf(inpUsername),"There is no visible input element for entering username");
         sendText(inpUsername, username, "input element 'Username or email'");
         return this;
     }

@@ -144,7 +144,7 @@ public abstract class BasePage {
 
     public boolean waitLongForVisibilityOf(final WebElement element) {
         try {
-            new WebDriverWait(driver, 120).until(ExpectedConditions.visibilityOf(element));
+            new WebDriverWait(driver, 300).until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (Exception e) {
             return false;
