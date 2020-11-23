@@ -145,7 +145,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                                 "It will create job with " + workflowName + " " + workflowOrTestPlan + Methods.getOrdinalIndicatorOfNextDay() +
                                 " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                         "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of \n" + "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " " + workflowOrTestPlan + Methods.getOrdinalIndicatorOfNextDay() +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan + " " + Methods.getOrdinalIndicatorOfNextDay() +
                                 " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
 
                 break;
