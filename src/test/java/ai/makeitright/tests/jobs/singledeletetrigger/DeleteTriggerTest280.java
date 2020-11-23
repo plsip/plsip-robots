@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
-public class DeleteTriggerTest extends DriverConfig {
+public class DeleteTriggerTest280 extends DriverConfig {
 
     private String argumentsCollection;
     private String executionFrequency;
@@ -39,7 +39,7 @@ public class DeleteTriggerTest extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Schedule - Check details of the trigger [P20Ct-106]";
+        Main.taskname = pfGlossary + ": TC - Schedule - Delete created trigger (unfinished scheduled job) [P20Ct-280]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowName = System.getProperty("inputParameters.workflowOrTestPlanName");
     }
