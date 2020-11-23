@@ -9,7 +9,9 @@ import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
+import org.json.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -177,5 +179,13 @@ public class DeleteTriggerTest280 extends DriverConfig {
         Assert.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
         Main.report.logPass("The trigger is no longer on the trigger list");
         Main.report.logPass("**********Test has been completed successfully!");
+    }
+
+    @AfterTest
+    public void prepareJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("triggerID", triggerID);
+        obj.put("workflowName", workflowName);
+        System.setProperty("output", obj.toString());
     }
 }
