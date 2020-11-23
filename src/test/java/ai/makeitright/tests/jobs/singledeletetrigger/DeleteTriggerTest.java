@@ -1,4 +1,4 @@
-package ai.makeitright.tests.jobs.singlecreatenewtriggerjob;
+package ai.makeitright.tests.jobs.singledeletetrigger;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
@@ -9,17 +9,14 @@ import ai.makeitright.pages.workflows.WorkflowsPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
-import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
-public class CreateNewTriggerJobTest extends DriverConfig {
+public class DeleteTriggerTest extends DriverConfig {
 
-    //from configuration
     private String argumentsCollection;
     private String executionFrequency;
     private String pfGlossary;
@@ -27,13 +24,8 @@ public class CreateNewTriggerJobTest extends DriverConfig {
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
-    private String workflowName;
-
-    //for reporting:
-    private String finishDate;
-    private String nextRun;
-    private String triggerDetails;
     private String triggerID;
+    private String workflowName;
 
     @BeforeTest
     public void before() {
@@ -47,13 +39,14 @@ public class CreateNewTriggerJobTest extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Jobs - Create job with trigger [P20Ct-85]";
+        Main.taskname = pfGlossary + ": TC - Schedule - Check details of the trigger [P20Ct-106]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowName = System.getProperty("inputParameters.workflowOrTestPlanName");
     }
 
     @Test
-    public void createNewJobWithTrigger() {
+    public void deleteTrigger() {
+        Main.report.logInfo("********Before test - create new triggered job");
         driver.get(pfSignInUrl);
 
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
@@ -93,7 +86,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                 .setExecutionTimeInput(LocalTime.NOON.toString());
 
         Assert.assertTrue(createJobModalWindow.checkModalWindowHeader("Create new job based on\n" +
-                    workflowName + "\n" + workflowOrTestPlan), "The modal window has incorrect header");
+                workflowName + "\n" + workflowOrTestPlan), "The modal window has incorrect header");
 
         switch (executionFrequency.toLowerCase()) {
             case "daily":
@@ -109,7 +102,7 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                                 "It will create job with " + workflowName + " " + workflowOrTestPlan +" everyday at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                         "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of\n" +
-                        "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " " + workflowOrTestPlan +" everyday at " +
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
 
@@ -128,8 +121,8 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                                 LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
                         "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of\n" +
                                 "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                        "It will create job with " + workflowName + " " + workflowOrTestPlan +" every " + Methods.getNameOfNextDay() + " at " +
-                LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan +" every " + Methods.getNameOfNextDay() + " at " +
+                                LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
 
 
                 break;
@@ -142,10 +135,10 @@ public class CreateNewTriggerJobTest extends DriverConfig {
                         .clickCreateTriggerButton();
 
                 triggerID = createJobModalWindow.getCreatedJobID();
-                Assert.assertTrue(createJobModalWindow.checkPopUpValue("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
-                                "It will create job with " + workflowName + " " + workflowOrTestPlan + Methods.getOrdinalIndicatorOfNextDay() +
-                                " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + "."),
-                        "The popup after creating the trigger has incorrect text: " + createJobModalWindow.getPopUpValue() + "\ninstead of \n" + "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                Assert.assertTrue(createJobModalWindow.checkPopUpValue(("Your trigger (ID: " + triggerID + ") was successfully created!\n" +
+                                "It will create job with " + workflowName + " " + workflowOrTestPlan + " " + Methods.getOrdinalIndicatorOfNextDay() +
+                                " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".")),
+                        "The popup after creating the trigger has incorrect text:\n" + createJobModalWindow.getPopUpValue() + "\ninstead of \n" + "Your trigger (ID: " + triggerID + ") was successfully created!\n" +
                                 "It will create job with " + workflowName + " " + workflowOrTestPlan + " " + Methods.getOrdinalIndicatorOfNextDay() +
                                 " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth() + ".");
 
@@ -168,30 +161,9 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
         Main.report.logPass("The popup after creating the trigger has the correct text: " + createJobModalWindow.getPopUpValue());
 
-        createJobModalWindow.clickGoToTriggerDetailsButton();
-        nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
-        finishDate = Methods.getFirstDayOfNextMonth();
 
-        switch (executionFrequency.toLowerCase()) {
-            case "daily":
-                triggerDetails = "Everyday at " +
-                        LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                break;
-            case "weekly":
-                triggerDetails = "Every " + Methods.getNameOfNextDay() + " at " +
-                        LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                break;
-            case "monthly":
-                triggerDetails = Methods.getOrdinalIndicatorOfNextDay() +
-                        " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
-                break;
-            case "never":
-                triggerDetails = "At "+ Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
-                finishDate = "N/A";
-                break;
-        }
-        Main.report.logPass("**********Test has been completed successfully!");
-        Main.report.logInfo("*********Delete trigger");
+        Main.report.logPass("*********Job was created");
+        Main.report.logInfo("*********Start test");
         driver.get(pfSignInUrl);
         leftMenu.openPageBy("Schedule");
 
@@ -204,17 +176,6 @@ public class CreateNewTriggerJobTest extends DriverConfig {
 
         Assert.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
         Main.report.logPass("The trigger is no longer on the trigger list");
+        Main.report.logPass("**********Test has been completed successfully!");
     }
-
-
-    @AfterTest
-    public void prepareJson() {
-        JSONObject obj = new JSONObject();
-        obj.put("triggerID", triggerID);
-        obj.put("triggerDetails", triggerDetails);
-        obj.put("nextRun", nextRun);
-        obj.put("finishDate", finishDate);
-        System.setProperty("output", obj.toString());
-    }
-
 }

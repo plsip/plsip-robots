@@ -277,6 +277,18 @@ public class CheckDetailsOfTriggerTest extends DriverConfig {
             Main.report.logPass("The 'FINISH DATE' section displays the correct date: " + finishDate);
         }
         Main.report.logPass("**********Test has been completed successfully!");
+        Main.report.logInfo("*********Delete trigger");
+        driver.get(pfSignInUrl);
+        leftMenu.openPageBy("Schedule");
+
+        schedulePage
+                .filterTrigger(workflowName)
+                .clickPauseTriggerButton(triggerID)
+                .clickDeleteTriggerButton(triggerID)
+                .confirmDeletionOfTrigger();
+
+        Assert.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
+        Main.report.logPass("The trigger is no longer on the trigger list");
     }
 
 
