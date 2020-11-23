@@ -13,7 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class CreateNewTaskTest extends DriverConfig {
+public class CreateNewTask31Test extends DriverConfig {
 
     private String pfGlossary;
     private String pfOrganizationCardName;

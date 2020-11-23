@@ -13,7 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class CreateGlobalArgumentsTest extends DriverConfig {
+public class CreateGlobalArguments49Test extends DriverConfig {
 
     //from configuration:
     private String pfOrganizationCardName;

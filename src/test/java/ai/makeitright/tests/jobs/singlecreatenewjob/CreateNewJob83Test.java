@@ -14,7 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class CreateNewJobTest extends DriverConfig {
+public class CreateNewJob83Test extends DriverConfig {
 
     //from configuration
     private String pfGlossary;

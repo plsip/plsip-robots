@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
-public class DeleteTriggerTest280 extends DriverConfig {
+public class DeleteTrigger280Test extends DriverConfig {
 
     private String argumentsCollection;
     private String executionFrequency;

@@ -15,7 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class AddArgumentTest extends DriverConfig {
+public class AddArgument71Test extends DriverConfig {
 
     //from configuration:
     private String globalArgumentsCollection;

@@ -13,7 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class EditTokenTest extends DriverConfig {
+public class EditToken36Test extends DriverConfig {
 
     //from configuration:
     private String allProjectName;
