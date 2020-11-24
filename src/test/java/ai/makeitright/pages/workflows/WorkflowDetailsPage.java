@@ -11,6 +11,12 @@ public class WorkflowDetailsPage extends BasePage {
     @FindBy(xpath = "//button//span[text()='Add tasks to the workflow']")
     private WebElement btnAddTasksToTheWorkflow;
 
+    @FindBy(xpath = "//button//span[text()='Add tests to the test plan']")
+    private WebElement btnAddTestsToTheTestPlan;
+
+    @FindBy(xpath = "//button//span[text()='Delete Test Plan']")
+    private WebElement btnDeleteTestPlan;
+
     @FindBy(xpath = "//button//span[text()='Delete Workflow']")
     private WebElement btnDeleteWorkflow;
 
@@ -30,13 +36,25 @@ public class WorkflowDetailsPage extends BasePage {
         super(driver);
     }
 
+    public WorkflowDetailsPage(final WebDriver driver, String pfGlossary) {
+        super(driver, pfGlossary);
+    }
+
     @Override
     protected boolean isAt() {
-        return btnDeleteWorkflow.isDisplayed();
+        if(urlOrParam.equals("TA")) {
+            return btnDeleteTestPlan.isDisplayed();
+        } else {
+            return btnDeleteWorkflow.isDisplayed();
+        }
     }
 
     public boolean checkButtonAddTasksToTheWorkflowIsDisplayed() {
         return btnAddTasksToTheWorkflow.isDisplayed();
+    }
+
+    public boolean checkButtonAddTestsToTheTestPlanIsDisplayed() {
+        return btnAddTestsToTheTestPlan.isDisplayed();
     }
 
     public boolean checkButtonCreateJobIsEnabled() {

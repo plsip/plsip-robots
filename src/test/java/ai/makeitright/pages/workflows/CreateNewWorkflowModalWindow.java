@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreateNewWorkflowModalWindow extends BasePage {
 
+    @FindBy(xpath = "//button//span[text()='Create test plan']")
+    private WebElement btnCreateTestPlan;
+
     @FindBy(xpath = "//button//span[text()='Create workflow']")
     private WebElement btnCreateWorkflow;
 
@@ -33,9 +36,14 @@ public class CreateNewWorkflowModalWindow extends BasePage {
         return waitShortForVisibilityOf(inpWorkflowName);
     }
 
-    public WorkflowDetailsPage clickCreateWorkflowButton() {
-        click(btnCreateWorkflow, "button 'Create workflow'");
-        return new WorkflowDetailsPage(driver);
+    public WorkflowDetailsPage clickCreateTestPlanButton(String pfGlossary) {
+        click(btnCreateTestPlan, "'Create test plan' button");
+        return new WorkflowDetailsPage(driver, pfGlossary);
+    }
+
+    public WorkflowDetailsPage clickCreateWorkflowButton(String pfGlossary) {
+        click(btnCreateWorkflow, "'Create workflow' button");
+        return new WorkflowDetailsPage(driver, pfGlossary);
     }
 
     public CreateNewWorkflowModalWindow clickWorkflowTypeCheckbox(String workflowType) {

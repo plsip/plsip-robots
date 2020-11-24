@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WorkflowsPage extends BasePage {
 
+    @FindBy(xpath = "//button//span[text()='Create new test plan']")
+    private WebElement btnCreateNewTestPlan;
+
     @FindBy(xpath = "//button//span[text()='Create new workflow']")
     private WebElement btnCreateNewWorkflow;
 
@@ -21,11 +24,19 @@ public class WorkflowsPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return btnCreateNewWorkflow.isDisplayed();
+        if (urlOrParam.equals("TA")) {
+            return btnCreateNewTestPlan.isDisplayed();
+        } else {
+            return btnCreateNewWorkflow.isDisplayed();
+        }
     }
 
     public WorkflowsPage(final WebDriver driver) {
         super(driver);
+    }
+
+    public WorkflowsPage(final WebDriver driver, String pfGlossary) {
+        super(driver, pfGlossary);
     }
 
     public boolean checkIfOneRowDisplayed() {
@@ -43,6 +54,11 @@ public class WorkflowsPage extends BasePage {
         WebElement btnCreateJob = getWorkflowsTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/span"));
         click(btnCreateJob, "'Create job' button");
         return new CreateJobModalWindow(driver);
+    }
+
+    public CreateNewWorkflowModalWindow clickCreateNewTestPlanButton() {
+        click(btnCreateNewTestPlan, "button 'Create new test plan'");
+        return new CreateNewWorkflowModalWindow(driver);
     }
 
     public CreateNewWorkflowModalWindow clickCreateNewWorkflowButton() {

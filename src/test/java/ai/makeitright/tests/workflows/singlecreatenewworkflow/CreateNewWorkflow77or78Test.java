@@ -13,7 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class CreateNewWorkflowTest extends DriverConfig {
+public class CreateNewWorkflow77or78Test extends DriverConfig {
 
     private String pfGlossary;
     private String pfOrganizationCardName;
@@ -81,12 +81,6 @@ public class CreateNewWorkflowTest extends DriverConfig {
                     .clickWorkflowTypeCheckbox(workflowType);
             workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton(pfGlossary);
         }
-
-
-
-
-
-
 
         workflowName = createNewWorkflowModalWindow.getWorkflowName();
 
