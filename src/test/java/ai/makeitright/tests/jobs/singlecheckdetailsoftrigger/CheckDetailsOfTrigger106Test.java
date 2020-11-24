@@ -196,7 +196,7 @@ public class CheckDetailsOfTrigger106Test extends DriverConfig {
         leftMenu.openPageBy("Schedule");
 
         SchedulePage schedulePage = new SchedulePage(driver);
-        schedulePage.filterTrigger(workflowName);
+        schedulePage.filterTrigger(triggerID);
 
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
         Assert.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
