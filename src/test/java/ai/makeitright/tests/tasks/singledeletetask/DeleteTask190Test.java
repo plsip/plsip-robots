@@ -12,7 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class DeleteTaskTest extends DriverConfig {
+public class DeleteTask190Test extends DriverConfig {
 
     private String pfGlossary;
     private String pfOrganizationCardName;
