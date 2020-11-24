@@ -1,10 +1,9 @@
 package ai.makeitright.tests.tasks.singlecreatenewtask;
 
+import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.tasks.CreateTaskModalWindow;
-import ai.makeitright.pages.tasks.TaskDetailsPage;
-import ai.makeitright.pages.tasks.TasksPage;
+import ai.makeitright.pages.tasks.*;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
@@ -82,6 +81,56 @@ public class CreateNewTask31Test extends DriverConfig {
         Assert.assertTrue(taskDetailsPage.checkListOfCommitsIsDisplayed(),"The list of commits wasn't loaded");
 
         taskName = createTaskModalWindow.getName();
+        Main.report.logPass("**********Test has been completed successfully!");
+        Main.report.logInfo("**********Now delete task");
+        driver.get(pfSignInUrl);
+
+        String taskOrTest;
+        if (pfGlossary.equals("TA")) {
+            leftMenu.openPageBy("Tests");
+            tasksPage = new TasksPage(driver, pfGlossary);
+            taskOrTest = "test";
+        } else {
+            leftMenu.openPageBy("Tasks");
+            tasksPage = new TasksPage(driver, pfGlossary);
+            taskOrTest = "task";
+        }
+
+        tasksPage.filterTask(taskName);
+
+        tasksPage.checkIfOneRowDisplayed();
+
+        DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
+        Assert.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");
+        Assert.assertEquals(displayedTasks.getName(),taskName,"The name of filtered task is not right");
+        Main.report.logPass("Task with name " + taskName + " was found");
+
+        taskDetailsPage = tasksPage.clickTaskNameLink(displayedTasks.getLnkName(), taskName);
+        Assert.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
+
+        DeleteTaskModalWindow deleteTaskModalWindow;
+        if (pfGlossary.equals("TA")) {
+            deleteTaskModalWindow = taskDetailsPage.clickDeleteTestButton(pfGlossary);
+        } else {
+            deleteTaskModalWindow = taskDetailsPage.clickDeleteTaskButton(pfGlossary);
+        }
+
+        Assert.assertTrue(deleteTaskModalWindow.checkTaskNameToDelete(taskName, pfGlossary));
+        Main.report.logPass("Task name on modal window is right");
+
+        tasksPage = deleteTaskModalWindow.clickDeleteTask(pfGlossary);
+        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"),"Banner ribbon on popup window is not dark green");
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("Yesss!"),"There is no right status on popup window");
+        Assert.assertTrue(statusPopupWindow.isAlertMessage2("The game's over for the " + taskOrTest + " " + taskName + "\n" +
+                "You can move on \uD83C\uDFC3\u200D♂️"),"There is no right alert message");
+
+        displayedTasks = tasksPage.getTasksTable().getTasksRowData(taskName);
+        Assert.assertNull(displayedTasks, "In the table is task/test with name '" + taskName + "'");
+
+        tasksPage.filterTask(taskName);
+        tasksPage.checkIfNoneRowDisplayed();
+        Main.report.logPass("In the tasks table there is no task/test after search with name '" + taskName + "'");
     }
 
     @AfterTest
