@@ -171,12 +171,12 @@ public class DeleteTrigger280Test extends DriverConfig {
 
         SchedulePage schedulePage = new SchedulePage(driver);
         schedulePage
-                .filterTrigger(workflowName)
+                .filterTrigger(triggerID)
                 .clickPauseTriggerButton(triggerID)
                 .clickDeleteTriggerButton(triggerID)
                 .confirmDeletionOfTrigger();
 
-        Assert.assertFalse(schedulePage.checkIfTriggerIsDisplayed(triggerID));
+        Assert.assertFalse(schedulePage.checkIfScheduleTableIsDisplayed());
         Main.report.logPass("The trigger is no longer on the trigger list");
         Main.report.logPass("**********Test has been completed successfully!");
     }
