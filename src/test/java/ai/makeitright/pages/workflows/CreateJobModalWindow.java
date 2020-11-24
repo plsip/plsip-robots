@@ -192,6 +192,7 @@ public class CreateJobModalWindow extends BasePage {
     public CreateJobModalWindow clickCreateTriggerButton() {
         waitForClickable(btnSaveAndGo);
         click(btnSaveAndGo, "'Create trigger' button");
+        waitForBlueCircleDisappear();
         return this;
     }
 
