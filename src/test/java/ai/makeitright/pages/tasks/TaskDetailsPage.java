@@ -14,6 +14,9 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//main//button/span/span[text()='Delete Task']")
     private WebElement btnDeleteTask;
 
+    @FindBy(xpath = "//main//button/span/span[text()='Delete Test']")
+    private WebElement btnDeleteTest;
+
     @FindBy(xpath = "//div[@id='processes-commits-panel']//div[@class='Polaris-Stack__Item']/div[@class='commits-list']")
     private WebElement lstCommits;
 
@@ -41,9 +44,14 @@ public class TaskDetailsPage extends BasePage {
         super(driver);
     }
 
-    public DeleteTaskModalWindow clickDeleteTaskButton() {
+    public DeleteTaskModalWindow clickDeleteTaskButton(String param) {
         click(btnDeleteTask, "button 'Delete Task'");
-        return new DeleteTaskModalWindow(driver);
+        return new DeleteTaskModalWindow(driver, param);
+    }
+
+    public DeleteTaskModalWindow clickDeleteTestButton(String param) {
+        click(btnDeleteTest, "button 'Delete Test'");
+        return new DeleteTaskModalWindow(driver, param);
     }
 
     public boolean checkListOfCommitsIsDisplayed() {
