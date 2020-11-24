@@ -37,7 +37,7 @@ public class DeleteTaskTest extends DriverConfig {
         repository = System.getProperty("inputParameters.repository");
         scriptDirectory = System.getProperty("inputParameters.scriptDirectory");
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
-        Main.taskname = pfGlossary + ": TC - Tasks/Tests - Create new task/test [P20Ct-31]";
+        Main.taskname = pfGlossary + ": TC - Tasks/Tests - Delete task [P20Ct-190]";
         taskName = System.getProperty("inputParameters.beginningOfTaskName");
         technology = System.getProperty("inputParameters.technology");
     }

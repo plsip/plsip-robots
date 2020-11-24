@@ -14,7 +14,7 @@ public class DeleteTaskModalWindow extends BasePage {
     @FindBy(xpath = "//div[@class='Polaris-Modal-Dialog']//button/span/span[text()='Delete Test']")
     private WebElement btnDeleteTest;
 
-    @FindBy(xpath = "//span[text()='delete the task']/b/span/span")
+    @FindBy(xpath = "//span[text()='delete the task ']/span[@style='font-weight: bold; max-width: 20ch; display: inline;']")
     private WebElement txtTaskName;
 
     @FindBy(xpath = "//span[text()='delete the test ']/span[@style='font-weight: bold; max-width: 20ch; display: inline;']")
