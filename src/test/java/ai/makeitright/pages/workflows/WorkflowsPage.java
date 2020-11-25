@@ -66,9 +66,9 @@ public class WorkflowsPage extends BasePage {
         return new CreateNewWorkflowModalWindow(driver);
     }
 
-    public WorkflowDetailsPage clickWorkflowNameLink(WebElement element, String workflowName) {
+    public WorkflowDetailsPage clickWorkflowNameLink(WebElement element, String workflowName, String pfGlossary) {
         click(element, "link with name of workflow '" + workflowName + "'");
-        return new WorkflowDetailsPage(driver);
+        return new WorkflowDetailsPage(driver,pfGlossary);
     }
 
     public WorkflowsPage filterWorkflow(String workflowName) {

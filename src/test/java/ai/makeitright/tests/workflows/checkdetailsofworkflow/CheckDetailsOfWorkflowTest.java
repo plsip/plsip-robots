@@ -65,7 +65,7 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
         Assert.assertEquals(displayedWorkflows.getType(),workflowType, "The value 'Type' for workflow " + workflowName + " is not like expected");
         Main.report.logPass("Worklfow has right value for 'Type'");
 
-        WorkflowDetailsPage workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName);
+        WorkflowDetailsPage workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName, pfGlossary);
         Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
         Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
         Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
