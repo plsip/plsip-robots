@@ -45,7 +45,7 @@ public class CheckDetailsOfTask32Test extends DriverConfig {
 
     @Test
     public void checkDetailsOfTask() {
-        Main.report.logPass("******************************\nBefore test - create new task/test:\n");
+        Main.report.logInfo("******************************\nBefore test - create new task/test:\n");
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage

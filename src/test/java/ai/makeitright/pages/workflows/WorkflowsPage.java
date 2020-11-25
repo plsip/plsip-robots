@@ -74,6 +74,7 @@ public class WorkflowsPage extends BasePage {
     public WorkflowsPage filterWorkflow(String workflowName) {
         Main.report.logInfo("Search workflow named: '" + workflowName + "'");
         sendText(inpFilterItems, workflowName, "input element 'Filter items'");
+        waitForBlueCircleDisappear();
         return this;
     }
 

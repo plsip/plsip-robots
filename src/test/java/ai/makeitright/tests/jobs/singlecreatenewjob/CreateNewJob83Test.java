@@ -61,7 +61,7 @@ public class CreateNewJob83Test extends DriverConfig {
             createJobModalWindow = testPlandPage.clickCreateJobButton(workflowName);
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
-            WorkflowsPage workflowsPage = new WorkflowsPage(driver);
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
             createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
         }
         Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
