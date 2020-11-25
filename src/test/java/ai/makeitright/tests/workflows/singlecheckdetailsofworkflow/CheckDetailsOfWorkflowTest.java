@@ -91,35 +91,61 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
         driver.get(pfSignInUrl);
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
+            workflowsPage.filterWorkflow(workflowName);
+            Assert.assertTrue(workflowsPage.checkIfOneRowDisplayed(),"After filtering tes plan table by name should be visible only one row");
+
+            DisplayedWorkflows displayedWorkflows = workflowsPage.getWorkflowsTable().getWorkflowsFirstRowData();
+            Assert.assertNotNull(displayedWorkflows, "There is no test plan with name: '" + workflowName + "'");
+            Assert.assertEquals(displayedWorkflows.getName(),workflowName, "The name of test plan is not right");
+            Main.report.logPass("Test plan has right value for 'Name'");
+            Assert.assertEquals(displayedWorkflows.getCreatedBy(),new TopPanel(driver).getCreatedBy(), "The value 'Created by' wor test plan " + workflowName + " is not like expected");
+            Main.report.logPass("Test plan has right value for 'Created by'");
+            Assert.assertEquals(displayedWorkflows.getType(),workflowType, "The value 'Type' for test plan " + workflowName + " is not like expected");
+            Main.report.logPass("Test plan has right value for 'Type'");
+
+            workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName, pfGlossary);
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new test plan, name of test plan has wrong value");
+            Main.report.logPass("In the details of test plan, name of test plan is right: '" + workflowName + "'");
+            Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
+            Main.report.logPass("Button 'Create Job' is visible and disabled");
+            Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
+            Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
+            Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
+            Assert.assertTrue(workflowDetailsPage.checkButtonAddTestsToTheTestPlanIsDisplayed(), "Button 'Add tests to the test plan' is not displaying");
+            Main.report.logPass("Button 'Add tests to the test plan' is displaying");
+            Main.report.logPass("**********Test has been completed successfully!");
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
+            workflowsPage.filterWorkflow(workflowName);
+            Assert.assertTrue(workflowsPage.checkIfOneRowDisplayed(),"After filtering workflow table by name should be visible only one row");
+
+            DisplayedWorkflows displayedWorkflows = workflowsPage.getWorkflowsTable().getWorkflowsFirstRowData();
+            Assert.assertNotNull(displayedWorkflows, "There is no workflow with name: '" + workflowName + "'");
+            Assert.assertEquals(displayedWorkflows.getName(),workflowName, "The name of workflow is not right");
+            Main.report.logPass("Workflow has right value for 'Name'");
+            Assert.assertEquals(displayedWorkflows.getCreatedBy(),new TopPanel(driver).getCreatedBy(), "The value 'Created by' wor workflow " + workflowName + " is not like expected");
+            Main.report.logPass("Workflow has right value for 'Created by'");
+            Assert.assertEquals(displayedWorkflows.getType(),workflowType, "The value 'Type' for workflow " + workflowName + " is not like expected");
+            Main.report.logPass("Worklfow has right value for 'Type'");
+
+            workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName, pfGlossary);
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
+            Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
+            Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
+            Main.report.logPass("Button 'Create Job' is visible and disabled");
+            Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
+            Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
+            Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
+            Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
+            Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
+            Main.report.logPass("**********Test has been completed successfully!");
         }
 
-        WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
-        workflowsPage.filterWorkflow(workflowName);
-        Assert.assertTrue(workflowsPage.checkIfOneRowDisplayed(),"After filtering workflow table by name should be visible only one row");
 
-        DisplayedWorkflows displayedWorkflows = workflowsPage.getWorkflowsTable().getWorkflowsFirstRowData();
-        Assert.assertNotNull(displayedWorkflows, "There is no workflow with name: '" + workflowName + "'");
-        Assert.assertEquals(displayedWorkflows.getName(),workflowName, "The name of workflow is not right");
-        Main.report.logPass("Workflow has right value for 'Name'");
-        Assert.assertEquals(displayedWorkflows.getCreatedBy(),new TopPanel(driver).getCreatedBy(), "The value 'Created by' wor workflow " + workflowName + " is not like expected");
-        Main.report.logPass("Workflow has right value for 'Created by'");
-        Assert.assertEquals(displayedWorkflows.getType(),workflowType, "The value 'Type' for workflow " + workflowName + " is not like expected");
-        Main.report.logPass("Worklfow has right value for 'Type'");
-
-        workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName, pfGlossary);
-        Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
-        Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
-        Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");
-        Main.report.logPass("Button 'Create Job' is visible and disabled");
-        Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
-        Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
-        Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
-        Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
-        Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
-        Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
-        Main.report.logPass("**********Test has been completed successfully!");
 
     }
 }
