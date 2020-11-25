@@ -66,7 +66,7 @@ public class DeleteTrigger280Test extends DriverConfig {
             workflowOrTestPlan = "test plan";
         } else if(pfGlossary.equals("RPA")) {
             leftMenu.openPageBy("Workflows");
-            WorkflowsPage workflowsPage = new WorkflowsPage(driver);
+            WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
             createJobModalWindow = workflowsPage.clickCreateJobButton(workflowName);
             workflowOrTestPlan = "workflow";
         }
