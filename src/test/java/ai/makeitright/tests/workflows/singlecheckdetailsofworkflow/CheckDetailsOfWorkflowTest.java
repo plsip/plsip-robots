@@ -39,9 +39,9 @@ public class CheckDetailsOfWorkflowTest extends DriverConfig {
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowType = System.getProperty("inputParameters.workflowType");
         if(pfGlossary.equals("TA")) {
-            Main.taskname = pfGlossary + ": TC - Test Plans - Check details of " + workflowType + " test plan [P20Ct-77]";
+            Main.taskname = pfGlossary + ": TC - Test Plans - Check details of " + workflowType + " test plan [P20Ct-76]";
         } else {
-            Main.taskname = pfGlossary + ": TC - Workflows - Check details of " + workflowType + " workflow [P20Ct-78]";
+            Main.taskname = pfGlossary + ": TC - Workflows - Check details of " + workflowType + " workflow [P20Ct-76]";
         }
         workflowName = System.getProperty("inputParameters.workflowName");
     }
