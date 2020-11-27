@@ -17,7 +17,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class CheckDetailsOfJobTest extends DriverConfig {
+public class CheckDetailsOfJob5Test extends DriverConfig {
 
     //from configuration
     private String pfGlossary;
@@ -42,7 +42,7 @@ public class CheckDetailsOfJobTest extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Jobs - Create job immediately [P20Ct-83]";
+        Main.taskname = pfGlossary + ": TC - Jobs - Check details of job [P20Ct-5]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowName = System.getProperty("inputParameters.workflowOrTestPlanName");
     }
