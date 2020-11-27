@@ -93,8 +93,7 @@ public class RepositoryPage extends BasePage {
     public boolean checkIfRepositoryAddressIsDisplayed(final String repositoryAddress) {
         Main.report.logInfo("Check if repository with address " + repositoryAddress + " is on the list");
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
-        Assert.assertNotNull(displayedCodeRepositoryAddress);
-        return true;
+        return displayedCodeRepositoryAddress != null;
     }
 
     public RepositoryPage clickDetachButton(final String repositoryAddress) {
