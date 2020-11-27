@@ -20,6 +20,9 @@ public class JobDetailsPage extends BasePage {
     @FindBy(xpath = "//h2[text()='Execution']/../..//span[text()='CREATED BY']/following-sibling::p")
     private WebElement txtJobCreatedBy;
 
+    @FindBy(xpath = "//div[text()='Test plan information ']")
+    private WebElement sectionTestPlanInformation;
+
     @FindBy(xpath = "//div[text()='Workflow information ']")
     private WebElement sectionWorkflowInformation;
 
@@ -62,6 +65,10 @@ public class JobDetailsPage extends BasePage {
 
     public boolean checkCreatedBy() {
         return (new TopPanel(driver).getCreatedBy()).equals(txtJobCreatedBy.getText());
+    }
+
+    public boolean checkTestPlanInformationIsVisible() {
+        return sectionTestPlanInformation.isDisplayed();
     }
 
     public boolean checkWorkflowInformationIsVisible() {
