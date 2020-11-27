@@ -15,11 +15,8 @@ import org.testng.annotations.Test;
 
 public class AssignGitLabRepository114Test extends DriverConfig {
 
-    //from configuration:
     private String gitLabAccessToken;
-    private String gitLabSignInUrl;
     private String gitLabUsername;
-    private String gitLabUserPassword;
     private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfOrganizationNameUrl;

@@ -15,69 +15,41 @@ import org.testng.annotations.Test;
 
 public class EditToken36Test extends DriverConfig {
 
-    //from configuration:
-    private String allProjectName;
     private String gitLabAccessToken;
-    private String gitLabSignInUrl;
     private String gitLabUsername;
-    private String gitLabUserPassword;
+    private String newGitLabAccessToken;
+    private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfOrganizationNameUrl;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
     private String projectName;
-    private String repositoryToCopy;
-    private String newGitLabAccessToken;
+    private String repositoryAddress;
 
     @BeforeTest
     public void before() {
         Main.channel = System.getProperty("inputParameters.channel");
         gitLabAccessToken = System.getProperty("secretParameters.gitLabAccessToken");
-        gitLabSignInUrl = System.getProperty("inputParameters.gitLabSignInUrl");
         gitLabUsername = System.getProperty("inputParameters.gitLabUsername");
-        gitLabUserPassword = System.getProperty("secretParameters.gitLabUserPassword");
         Main.hookUrl = System.getProperty("secretParameters.hookUrl");
         newGitLabAccessToken = System.getProperty("secretParameters.newGitLabAccessToken");
-        String pfGlossary = System.getProperty("inputParameters.pfGlossary");
+        pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfOrganizationNameUrl = System.getProperty("inputParameters.pfOrganizationNameUrl");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Repositories - Edit Gitlab Token [P20Ct-36]";
+        Main.taskname = pfGlossary + ": TC - Repositories - Edit GitLab token [P20Ct-36]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         projectName = System.getProperty("inputParameters.projectName");
-        repositoryToCopy = System.getProperty("inputParameters.repositoryToCopy");
     }
 
     @Test
-    public void editRepositoryToken() {
-        Main.report.logPass("******************************\nBefore test create repository on GitLab:\n");
-        driver.get(gitLabSignInUrl);
-
-        LoginGitLabPage loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
-        loginGitLabPage
-                .setUsernameField(gitLabUsername)
-                .setPasswordField(gitLabUserPassword);
-        ProjectsPage projectsPage = loginGitLabPage.clickSignInButton();
-
-        NewProjectPage newProjectPage = projectsPage.clickNewProjectButton();
-
-        newProjectPage.chooseOption("CI/CD for external repo");
-        newProjectPage.clickButtonRepoByURL();
-        newProjectPage.setGitRepositoryURL(repositoryToCopy);
-        allProjectName = newProjectPage.setProjectName(projectName);
-        String repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + allProjectName + "/";
-        Main.report.logPass("Created project '" + allProjectName + "'");
-        newProjectPage.clickPublicCheckbox();
-        newProjectPage.clickCreateProjectButton();
-
-        newProjectPage.clickUserPanel();
-        newProjectPage.clickOptionSignOut();
-
-        Main.report.logPass("******************************\nBefore test attach repository on PF platform:\n");
+    public void editGitLabToken() {
+        repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + projectName + "/";
+        Main.report.logPass("******************************\nBefore test: if repository which we want to assing already exist on the platform, dettach it\n");
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
@@ -87,17 +59,32 @@ public class EditToken36Test extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
 
         leftMenu.openPageBy("Repositories");
-
         RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
+        if(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress)) {
+            repositoryPage.clickDetachButton(repositoryAddress);
+            repositoryPage.confirmDetachButton();
+            Assert.assertFalse(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress),"Repository "+repositoryAddress+" is still visible after detach");
+        }
+
+        Main.report.logPass("******************************\nRepository "+repositoryAddress+" is not attach now\nAttach repository");
+        driver.get(pfSignInUrl);
+        leftMenu.openPageBy("Repositories");
+
+        repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         repositoryPage
                 .clickAssignRepositoryButton()
                 .clickAssignGitLabRepositoryButton()
                 .setAccessTokenInput(gitLabAccessToken)
                 .clickSaveButton()
-                .selectYourMainScriptRepository(allProjectName)
+                .selectYourMainScriptRepository(projectName)
                 .clickSaveButton();
+        AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
+        Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
+        Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
-        Main.report.logPass("******************************\nStart test");
+
+        Main.report.logPass("******************************\nRepository is attached\n******************************\nStart test");
         driver.get(pfSignInUrl);
 
         leftMenu.openPageBy("Repositories");
@@ -109,7 +96,7 @@ public class EditToken36Test extends DriverConfig {
                 .clickEditTokenButton(repositoryAddress)
                 .setAccessTokenInput(newGitLabAccessToken);
 
-        AlertStatusPopupWindow statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
+        statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
         Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
         Assert.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated!\nYou can keep on rockin'\uD83D\uDE46\u200D"));
@@ -124,34 +111,12 @@ public class EditToken36Test extends DriverConfig {
 
         repositoryPage.clickDetachButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
-        Main.report.logPass("******************************\nNow repository will be delete on the GitLab platform");
-        driver.get(gitLabSignInUrl);
-
-        loginGitLabPage = new LoginGitLabPage(driver, gitLabSignInUrl);
-        loginGitLabPage
-                .setUsernameField(gitLabUsername)
-                .setPasswordField(gitLabUserPassword);
-        projectsPage = loginGitLabPage.clickSignInButton();
-
-        ProjectDetailsPage projectDetailsPage = projectsPage.chooseProjectToDelete(allProjectName);
-
-        GeneralSettingsPage generalSettingsPage = projectDetailsPage.chooseGeneralInSettings();
-        generalSettingsPage
-                .clickExpandInAdvancedSection()
-                .clickDeleteProjectButton()
-                .confirmDeleteRepo();
-
-        AlertStatusGitPopupWindow alertStatusGitPopupWindow = new AlertStatusGitPopupWindow(driver);
-        Assert.assertTrue(alertStatusGitPopupWindow.isAlertStatus("Project 'Katarzyna Raczkowska / " + allProjectName + "' is in the process of being deleted."));
-
-        projectsPage.clickUserPanel();
-        projectsPage.clickOptionSignOut();
     }
 
     @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
-        obj.put("projectName", allProjectName);
+        obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
     }
 
