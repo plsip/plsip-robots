@@ -38,7 +38,7 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
         if(workflowType.equals("Parallel")) {
             Main.taskname = pfGlossary + ": TC - Workflows/Test Plans - Create new " + workflowType + " workflow/test plan [P20Ct-77]";
         } else {
-            Main.taskname = pfGlossary + ": TC - Workflows/Test Plans - Create new " + workflowType + " workflow/test plan [P20Ct-78]";
+            Main.taskname = pfGlossary + ": TC - Workflows - Create new " + workflowType + " workflow [P20Ct-78]";
         }
         workflowName = System.getProperty("inputParameters.workflowName");
     }
