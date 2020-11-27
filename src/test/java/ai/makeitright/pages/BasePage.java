@@ -57,7 +57,7 @@ public abstract class BasePage {
     }
 
     public void sendSecretlyText(final WebElement element, final String text, final String elementDescription) {
-        Main.report.logInfo("Enter secret text to " + element.getTagName());
+        Main.report.logInfo("Enter secret text to " + elementDescription);
         element.sendKeys(text);
         Main.report.logPass("Text was entered");
     }
