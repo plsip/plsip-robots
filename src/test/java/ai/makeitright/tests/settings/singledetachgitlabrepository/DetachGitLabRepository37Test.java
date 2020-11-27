@@ -39,7 +39,7 @@ public class DetachGitLabRepository37Test extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Repositories - Assign GitLab repository [P20Ct-114]";
+        Main.taskname = pfGlossary + ": TC - Repositories - Detach GitLab repository that is not connected with any task or workflow [P20Ct-37]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         projectName = System.getProperty("inputParameters.projectName");
     }
