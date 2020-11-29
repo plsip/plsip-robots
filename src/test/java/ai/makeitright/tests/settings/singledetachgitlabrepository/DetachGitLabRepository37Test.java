@@ -71,25 +71,26 @@ public class DetachGitLabRepository37Test extends DriverConfig {
             Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
             Assert.assertTrue(statusPopupWindow.isAlertMessage2("The repository has been added successfully! Let the adventure begin \uD83D\uDE46\u200D"));
             Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
+            driver.get(pfSignInUrl);
+
+            leftMenu.openPageBy("Repositories");
         }
 
         Main.report.logPass("******************************\nRepository "+repositoryAddress+" is attached\nStart test");
-        driver.get(pfSignInUrl);
-        leftMenu.openPageBy("Repositories");
-
         repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
-        repositoryPage.clickDetachButton(repositoryAddress);
+        repositoryPage.clickDetachRepositoryButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
 
         AlertStatusPopupWindow statusPopupWindow = new AlertStatusPopupWindow(driver);
         Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assert.assertTrue(statusPopupWindow.isAlertStatus("You did it! \uD83D\uDE4C"));
-        Assert.assertTrue(statusPopupWindow.isAlertMessage(repositoryAddress));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage2(repositoryAddress));
 
         Assert.assertFalse(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
+        Main.report.logPass("******************************\n******************************\nTest ended with success");
     }
 
     @AfterTest

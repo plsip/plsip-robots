@@ -47,7 +47,7 @@ public class AssignGitLabRepository114Test extends DriverConfig {
     @Test
     public void assignGitLabRepository() {
         repositoryAddress = "https://gitlab.com/" + gitLabUsername + "/" + projectName + "/";
-        Main.report.logPass("******************************\nBefore test: if repository which we want to assing already exist on the platform, dettach it\n");
+        Main.report.logPass("******************************\nBefore test: if repository which we want to assing already exist on the platform, detach it\n");
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
@@ -59,12 +59,13 @@ public class AssignGitLabRepository114Test extends DriverConfig {
         leftMenu.openPageBy("Repositories");
         RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         if(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress)) {
-            repositoryPage.clickDetachButton(repositoryAddress);
+            repositoryPage.clickDetachRepositoryButton(repositoryAddress);
             repositoryPage.confirmDetachButton();
             Assert.assertFalse(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress),"Repository "+repositoryAddress+" is still visible after detach");
         }
 
-        Main.report.logPass("******************************\nRepository "+repositoryAddress+" is not attach now\nStart test");
+        Main.report.logPass("******************************\nRepository "+repositoryAddress+" is not attach now");
+        Main.report.logInfo("******************************Start test");
         driver.get(pfSignInUrl);
         leftMenu.openPageBy("Repositories");
 
@@ -92,7 +93,7 @@ public class AssignGitLabRepository114Test extends DriverConfig {
         repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
-        repositoryPage.clickDetachButton(repositoryAddress);
+        repositoryPage.clickDetachRepositoryButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
 
 

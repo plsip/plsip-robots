@@ -4,6 +4,7 @@ import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.utilities.Main;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -92,12 +93,14 @@ public class RepositoryPage extends BasePage {
 
     public boolean checkIfRepositoryAddressIsDisplayed(final String repositoryAddress) {
         Main.report.logInfo("Check if repository with address " + repositoryAddress + " is on the list");
+        clickPaginationNumber(1);
         DisplayedCodeRepositoryAddress displayedCodeRepositoryAddress = getRepositoriesAddressesTable().getAllRepositoriesAddressesRowData(repositoryAddress);
         return displayedCodeRepositoryAddress != null;
     }
 
-    public RepositoryPage clickDetachButton(final String repositoryAddress) {
+    public RepositoryPage clickDetachRepositoryButton(final String repositoryAddress) {
         WebElement btnDetach = getRepositoriesAddressesTable().getDesirableRow(repositoryAddress).findElement(By.xpath(".//td/a[contains(@href,'detach')]"));
+        moveScrollToELement(btnDetach);
         click(btnDetach, "'Detach Repository' button");
         return this;
     }

@@ -61,7 +61,7 @@ public class EditToken36Test extends DriverConfig {
         leftMenu.openPageBy("Repositories");
         RepositoryPage repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         if(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress)) {
-            repositoryPage.clickDetachButton(repositoryAddress);
+            repositoryPage.clickDetachRepositoryButton(repositoryAddress);
             repositoryPage.confirmDetachButton();
             Assert.assertFalse(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress),"Repository "+repositoryAddress+" is still visible after detach");
         }
@@ -99,7 +99,7 @@ public class EditToken36Test extends DriverConfig {
         statusPopupWindow = repositoryPage.clickSaveButtonWhenEditingToken();
         Assert.assertTrue(statusPopupWindow.isBannerRibbon("GreenDark"));
         Assert.assertTrue(statusPopupWindow.isAlertStatus("High five!!"));
-        Assert.assertTrue(statusPopupWindow.isAlertMessage("Your token has been updated!\nYou can keep on rockin'\uD83D\uDE46\u200D"));
+        Assert.assertTrue(statusPopupWindow.isAlertMessage2("Your token has been updated!\nYou can keep on rockin'\uD83D\uDE46\u200D"));
 
         Main.report.logPass("******************************\n******************************\nTest ended with success\n******************************\nNow repository will be detach on the PF platform");
         driver.get(pfSignInUrl);
@@ -109,7 +109,7 @@ public class EditToken36Test extends DriverConfig {
         repositoryPage = new RepositoryPage(driver, pfSignInUrl, pfOrganizationNameUrl);
         Assert.assertTrue(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress));
 
-        repositoryPage.clickDetachButton(repositoryAddress);
+        repositoryPage.clickDetachRepositoryButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
     }
 

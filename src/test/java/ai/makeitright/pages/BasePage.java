@@ -56,6 +56,11 @@ public abstract class BasePage {
         Main.report.logPass("Element was clicked");
     }
 
+    public void clickPaginationNumber(int i) {
+        WebElement element = driver.findElement(By.xpath("//li[@title='" + i + "']"));
+        click(element, "on the pagination number "+i);
+    }
+
     public void sendSecretlyText(final WebElement element, final String text, final String elementDescription) {
         Main.report.logInfo("Enter secret text to " + elementDescription);
         element.sendKeys(text);
@@ -74,6 +79,11 @@ public abstract class BasePage {
     public void hoverMouseOver(WebElement element) {
         action = new Action(this.driver);
         action.hoverMouseOver(element);
+    }
+
+    public void moveScrollToELement(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].scrollIntoView(false);", element);
     }
 
     public void sendText(final WebElement element, final String text, final String elementDescription) {
