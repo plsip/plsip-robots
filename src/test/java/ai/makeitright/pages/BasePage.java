@@ -179,6 +179,15 @@ public abstract class BasePage {
         }
     }
 
+    public boolean wait8ForVisibilityOf(final WebElement element) {
+        try {
+            new WebDriverWait(driver, 8).until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean waitForVisibilityOfAllElements(List<WebElement> elements) {
         try {
             new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(elements));

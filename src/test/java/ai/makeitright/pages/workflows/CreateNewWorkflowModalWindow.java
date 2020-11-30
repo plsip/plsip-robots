@@ -33,7 +33,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return waitShortForVisibilityOf(inpWorkflowName);
+        return wait8ForVisibilityOf(inpWorkflowName);
     }
 
     public WorkflowDetailsPage clickCreateTestPlanButton(String pfGlossary) {
