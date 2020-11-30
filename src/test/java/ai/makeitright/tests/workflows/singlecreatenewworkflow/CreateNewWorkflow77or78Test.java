@@ -35,8 +35,12 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
         workflowType = System.getProperty("inputParameters.workflowType");
-        if(workflowType.equals("Parallel")) {
-            Main.taskname = pfGlossary + ": TC - Workflows/Test Plans - Create new " + workflowType + " workflow/test plan [P20Ct-77]";
+        if (workflowType.equals("Parallel")) {
+            if (pfGlossary.equals("TA")) {
+                Main.taskname = pfGlossary + ": TC - Test Plans - Create new " + workflowType + " test plan [P20Ct-77]";
+            } else {
+                Main.taskname = pfGlossary + ": TC - Workflows - Create new " + workflowType + " workflow [P20Ct-77]";
+            }
         } else {
             Main.taskname = pfGlossary + ": TC - Workflows - Create new " + workflowType + " workflow [P20Ct-78]";
         }
