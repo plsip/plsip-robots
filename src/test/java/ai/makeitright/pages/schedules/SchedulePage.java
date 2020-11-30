@@ -25,7 +25,7 @@ public class SchedulePage extends BasePage {
     )
     private List<WebElement> tableRows;
 
-    @FindBy(xpath = "//span[text()='Delete Trigger']")
+    @FindBy(xpath = "//span[text()='Delete trigger']")
     private WebElement btnDeleteTrigger;
 
     @Override
