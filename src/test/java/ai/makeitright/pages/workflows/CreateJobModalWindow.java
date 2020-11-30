@@ -16,8 +16,8 @@ import java.util.List;
 
 public class CreateJobModalWindow extends BasePage {
 
-    @FindBy(xpath = "//div[@class='flex']/span[1]")
-    private WebElement windowHeader;
+    @FindBy(xpath = "//button[contains(@aria-label, 'Show next month')]/span")
+    private WebElement btnNextMonth;
 
     @FindBy(xpath = "//div[@class='Polaris-ButtonGroup']/div/button[@class='Polaris-Button Polaris-Button--primary']")
     private WebElement btnSaveAndGo;
@@ -68,11 +68,11 @@ public class CreateJobModalWindow extends BasePage {
     )
     private List<WebElement> rowsOfDays;
 
-    @FindBy(xpath = "//button[contains(@aria-label, 'Show next month')]/span")
-    private WebElement btnNextMonth;
-
     @FindBy(xpath = "//div[@class='flex']")
     private WebElement modalWindowHeader;
+
+    @FindBy(xpath = "//div[@class='flex']/span[1]")
+    private WebElement windowHeader;
 
     public CreateJobModalWindow(final WebDriver driver) {
         super(driver);
@@ -162,7 +162,7 @@ public class CreateJobModalWindow extends BasePage {
 
     public CreateJobModalWindow chooseFirstDayOfNextMonth() {
         waitForVisibilityOfAllElements(rowsOfDays);
-        click(btnNextMonth, "'Next month' arrow'");
+        click(btnNextMonth, "'Next month arrow'");
         waitForVisibilityOfAllElements(rowsOfDays);
         rowsOfDays.get(0).findElement(By.xpath(".//button[text()='1']")).click();
         Main.report.logPass("The first day of the next month was chosen");
@@ -170,6 +170,10 @@ public class CreateJobModalWindow extends BasePage {
     }
 
     public CreateJobModalWindow chooseTheNextDay(String day) {
+        waitForVisibilityOfAllElements(rowsOfDays);
+        if (day.equals("1")) {
+            click(btnNextMonth, "'Next month arrow'");
+        }
         waitForVisibilityOfAllElements(rowsOfDays);
         for (WebElement row : rowsOfDays) {
             try {
