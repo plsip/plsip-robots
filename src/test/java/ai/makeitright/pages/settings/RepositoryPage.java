@@ -108,6 +108,7 @@ public class RepositoryPage extends BasePage {
     public RepositoryPage confirmDetachButton() {
         waitForClickable(btnConfirmDetachRepo);
         click(btnConfirmDetachRepo, "confirm 'Detach repository' button");
+        waitForBlueCircleDisappear();
         return this;
     }
 
