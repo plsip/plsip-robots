@@ -22,6 +22,7 @@ public class Methods extends Main {
     public static String getFirstDayOfNextMonth() {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        Main.report.logInfo("Miesiąc:" + currentDate.getMonth().toString());
         if (currentDate.getMonth().toString().equals("DECEMBER")) {
             return formatter.format(currentDate.plusYears(1).plusMonths(1).withDayOfMonth(1));
         } else {
