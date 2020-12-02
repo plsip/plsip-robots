@@ -23,11 +23,11 @@ public class Methods extends Main {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         Main.report.logInfo("Miesiąc:" + currentDate.getMonth().toString());
-        if (currentDate.getMonth().toString().equals("DECEMBER")) {
-            return formatter.format(currentDate.plusYears(1).plusMonths(1).withDayOfMonth(1));
-        } else {
+//        if (currentDate.getMonth().toString().equals("DECEMBER")) {
+//            return formatter.format(currentDate.plusYears(1).plusMonths(1).withDayOfMonth(1));
+//        } else {
             return formatter.format(currentDate.plusMonths(1).withDayOfMonth(1));
-        }
+//        }
     }
 
     public static String getOrdinalIndicatorOfNextDay() {
