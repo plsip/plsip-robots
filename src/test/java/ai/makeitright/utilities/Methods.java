@@ -22,7 +22,11 @@ public class Methods extends Main {
     public static String getFirstDayOfNextMonth() {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-        return formatter.format(currentDate.plusMonths(1).withDayOfMonth(1));
+        if (currentDate.getMonth().toString().equals("DECEMBER")) {
+            return formatter.format(currentDate.plusYears(1).plusMonths(1).withDayOfMonth(1));
+        } else {
+            return formatter.format(currentDate.plusMonths(1).withDayOfMonth(1));
+        }
     }
 
     public static String getOrdinalIndicatorOfNextDay() {
