@@ -114,6 +114,7 @@ public class RepositoryPage extends BasePage {
 
     public RepositoryPage clickEditTokenButton(final String repositoryAddress) {
         WebElement btnEdit = getRepositoriesAddressesTable().getDesirableRow(repositoryAddress).findElement(By.xpath(".//td/a[contains(@href,'edit')]"));
+        moveScrollToELement(btnEdit);
         click(btnEdit, "'Edit Token' button");
         return this;
     }
