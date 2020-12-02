@@ -21,7 +21,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     @FindBy(xpath = "//label[@for='type-sequential']")
     private WebElement chboxSequential;
 
-    @FindBy(xpath = "//input[@name='name']")
+    @FindBy(xpath = "//input[@name='name' and @aria-invalid='false']")
     private WebElement inpWorkflowName;
 
     private String workflowName;
@@ -67,6 +67,8 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
         this.workflowName = workflowName + Methods.getDateTime("yyyyMMddHHmmss") + workflowType;
+//        sendTextWithJavascriptExecutor(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
+       // sendTextToValue(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         return this;
     }

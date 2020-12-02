@@ -65,7 +65,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             createNewWorkflowModalWindow = workflowsPage.clickCreateNewTestPlanButton();
             createNewWorkflowModalWindow
                     .setWorkflowName(workflowName, workflowType);
-            if (!(workflowType.equals("Parallel") || pfGlossary.equals("RPA"))) {
+            if ((workflowType.equals("Sequential") && pfGlossary.equals("TA"))) {
                 Main.report.logFail("For organization TA you can't create sequential test plan");
             }
             createNewWorkflowModalWindow
@@ -77,7 +77,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             createNewWorkflowModalWindow = workflowsPage.clickCreateNewWorkflowButton();
             createNewWorkflowModalWindow
                     .setWorkflowName(workflowName, workflowType);
-            if (!(workflowType.equals("Parallel") || pfGlossary.equals("RPA"))) {
+            if ((workflowType.equals("Sequential") && pfGlossary.equals("TA"))) {
                 Main.report.logFail("For organization TA you can't create sequential test plan");
             }
             createNewWorkflowModalWindow

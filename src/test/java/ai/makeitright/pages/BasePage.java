@@ -92,6 +92,12 @@ public abstract class BasePage {
         Main.report.logPass("Text was entered");
     }
 
+    public void sendTextToValue(final WebElement element, final String text, final String elementDescription) {
+        Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
+        element.sendKeys("value",text);
+        Main.report.logPass("Text was entered");
+    }
+
     public void sendTextWithJavascriptExecutor(final WebElement element, final String text, final String elementDescription) {
         Main.report.logInfo("Enter text '" + text + "' to " + elementDescription);
         JavascriptExecutor jse = (JavascriptExecutor)driver;
