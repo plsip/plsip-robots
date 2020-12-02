@@ -30,6 +30,7 @@ public class TestPlansPage extends BasePage {
     public CreateJobModalWindow clickCreateJobButton(final String workflowName) {
         filterTestPlan(workflowName);
         WebElement btnCreateJob = getTestPlansTable().getDesirableRow(workflowName).findElement(By.xpath(".//td/button/span"));
+        waitForClickable(btnCreateJob);
         click(btnCreateJob, "'Create job' button");
         return new CreateJobModalWindow(driver);
     }
