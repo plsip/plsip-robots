@@ -2,6 +2,7 @@ package ai.makeitright.pages.jobs;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -19,9 +20,18 @@ public class JobsPage extends BasePage {
     private WebElement inpFilterItems;
 
     @FindAll(
+            @FindBy(xpath = "//tbody/tr")
+    )
+    private List<WebElement> lstJobRow;
+
+    @FindAll(
             @FindBy(xpath = "//table[@class='Polaris-DataTable__Table']/tbody/tr")
     )
     private List<WebElement> tableRows;
+
+    private By getHeadersName(int headerNumber) {
+        return new By.ByXPath("//thead/tr/th[" + headerNumber + "]/button");
+    }
 
     @Override
     protected boolean isAt() {
@@ -31,6 +41,27 @@ public class JobsPage extends BasePage {
 
     public JobsPage(final WebDriver driver) {
         super(driver);
+    }
+
+    public boolean checkHeaderWithNumberHasValue(int headerNumber, String expectedHeaderName) {
+        String headersName = driver.findElement(getHeadersName(headerNumber)).getText();
+        return headersName.equals(expectedHeaderName);
+    }
+
+    public boolean checkJobsFromFirstPaginationPageContainValuesInColumns() {
+        for (WebElement row : lstJobRow) {
+            Assert.assertNotEquals(row.findElement(By.xpath("./th/a")).getText(),"","In first column row doesn't contain value");
+            for (int i=1;i<7;i++) {
+                Assert.assertNotEquals(row.findElement(By.xpath("./td["+i+"]")).getText(),"","In " + i + " column row doesn't contain value");
+            }
+        }
+        return true;
+    }
+
+    public JobDetailsPage clickFoundJob(final String jobID) {
+        WebElement job = getJobsTable().getDesirableRow(jobID);
+        click(job, "found job");
+        return new JobDetailsPage(driver);
     }
 
     public JobsPage filterJob(String jobID) {
@@ -44,9 +75,8 @@ public class JobsPage extends BasePage {
         return new JobsTable(driver);
     }
 
-    public JobDetailsPage clickFoundJob(final String jobID) {
-        WebElement job = getJobsTable().getDesirableRow(jobID);
-        click(job, "found job");
-        return new JobDetailsPage(driver);
+    public boolean isJobRowDisplayed() {
+        return lstJobRow.size() > 0;
     }
+
 }
