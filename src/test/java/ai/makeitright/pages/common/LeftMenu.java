@@ -40,7 +40,7 @@ public class LeftMenu extends BasePage {
 
     public boolean checkListOfOption(String[] leftMenuOptionsArray) {
         for (int i=0;i<leftMenuOptionsArray.length;i++) {
-            Assert.assertEquals(leftMenuText.get(i).getText(),leftMenuOptionsArray[i],"There is not expected option on left menu on position " + i + ". Should be " + leftMenuOptionsArray[i] + "but was: " + leftMenuText.get(i).getText());
+            Assert.assertEquals(leftMenuText.get(i).getText(),leftMenuOptionsArray[i],"There is not expected option on left menu on position " + (i+1) + ". Should be '" + leftMenuOptionsArray[i] + "', but was: '" + leftMenuText.get(i).getText() + "'");
         }
         return true;
     }
