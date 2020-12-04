@@ -65,6 +65,10 @@ public class JobsPage extends BasePage {
         return new JobDetailsPage(driver);
     }
 
+    public void clickJobsText() {
+        click(jobsHeader,"header 'Jobs'");
+    }
+
     public JobsPage filterJob(String jobID) {
         Main.report.logInfo("Search job which has ID: '" + jobID + "'");
         sendText(inpFilterItems, jobID, "input element 'Filter items'");
