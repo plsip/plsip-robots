@@ -35,7 +35,7 @@ public class LandingPage1Test extends DriverConfig {
     }
 
     @Test
-    public void landingPage() throws AWTException {
+    public void landingPage() {
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
         loginPage
@@ -73,19 +73,19 @@ public class LandingPage1Test extends DriverConfig {
         Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(7,"Created by"),"7th column header should be 'Created by'");
         Main.report.logPass("7th column header is right 'Created by'");
 
-        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_F12);
-        robot.keyRelease(KeyEvent.VK_F12);
-        jobsPage.clickJobsText();
-        robot.keyPress(KeyEvent.VK_F8);
-        robot.keyRelease(KeyEvent.VK_F8);
-        Assert.assertTrue(jobsPage.checkJobsFromFirstPaginationPageContainValuesInColumns(),"First row job contains value in column 1");
-        robot.keyPress(KeyEvent.VK_F8);
-        robot.keyRelease(KeyEvent.VK_F8);
-        robot.keyPress(KeyEvent.VK_F12);
-        robot.keyRelease(KeyEvent.VK_F12);
-        Main.report.logPass("All rows on the page contain values in every columns");
+//        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
+//        Robot robot = new Robot();
+//        robot.keyPress(KeyEvent.VK_F12);
+//        robot.keyRelease(KeyEvent.VK_F12);
+//        jobsPage.clickJobsText();
+//        robot.keyPress(KeyEvent.VK_F8);
+//        robot.keyRelease(KeyEvent.VK_F8);
+//        Assert.assertTrue(jobsPage.checkJobsFromFirstPaginationPageContainValuesInColumns(),"First row job contains value in column 1");
+//        robot.keyPress(KeyEvent.VK_F8);
+//        robot.keyRelease(KeyEvent.VK_F8);
+//        robot.keyPress(KeyEvent.VK_F12);
+//        robot.keyRelease(KeyEvent.VK_F12);
+//        Main.report.logPass("All rows on the page contain values in every columns");
 
         Main.report.logInfo("Check left menu content");
         leftMenu = new LeftMenu(driver);
