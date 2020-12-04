@@ -47,10 +47,11 @@ public class LandingPage1Test extends DriverConfig {
         JobsPage jobsPage = new JobsPage(driver);
         Main.report.logPass("On the page is header text 'Jobs'");
 
+        Main.report.logInfo("Chcek if on the page is table with at least one row");
         Assert.assertTrue(jobsPage.isJobRowDisplayed(), "There is no visible any row with job");
-        Main.report.logPass("On the page is table with at least one job row");
+        Main.report.logPass("On the page is table with at least one row");
 
-        Main.report.logInfo("We will check headers on the jobs' table");
+        Main.report.logInfo("Check all headers on the jobs' table are right");
         Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(1,"ID"),"First column header should be 'ID'");
         Main.report.logPass("1st column header is right 'ID'");
 
@@ -72,10 +73,6 @@ public class LandingPage1Test extends DriverConfig {
         Main.report.logPass("6th column header is right 'Status'");
         Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(7,"Created by"),"7th column header should be 'Created by'");
         Main.report.logPass("7th column header is right 'Created by'");
-
-        Main.report.logInfo("Check if is displayed any row in th e Jobs table");
-        Assert.assertTrue(jobsPage.isJobRowDisplayed(), "There is no visible any row with job");
-        Main.report.logPass("On the page is table with at least one row");
 
 //        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
 //        Robot robot = new Robot();
