@@ -73,7 +73,9 @@ public class LandingPage1Test extends DriverConfig {
         Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(7,"Created by"),"7th column header should be 'Created by'");
         Main.report.logPass("7th column header is right 'Created by'");
 
+        Main.report.logInfo("Check if is displayed any row in th e Jobs table");
         Assert.assertTrue(jobsPage.isJobRowDisplayed(), "There is no visible any row with job");
+        Main.report.logPass("On the page is table with at least one row");
 
 //        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
 //        Robot robot = new Robot();
