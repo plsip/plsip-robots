@@ -1,6 +1,7 @@
 package ai.makeitright.pages.workflows;
 
 import ai.makeitright.pages.BasePage;
+import ai.makeitright.utilities.Action;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.WebDriver;
@@ -67,9 +68,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
         this.workflowName = workflowName + Methods.getDateTime("yyyyMMddHHmmss") + workflowType;
-//        sendTextWithJavascriptExecutor(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
-       // sendTextToValue(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
-        sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
+        new Action(driver).sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         return this;
     }
 }
