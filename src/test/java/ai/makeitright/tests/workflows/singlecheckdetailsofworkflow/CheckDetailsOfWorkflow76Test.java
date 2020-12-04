@@ -58,7 +58,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
 
         CreateNewWorkflowModalWindow createNewWorkflowModalWindow;
-        WorkflowDetailsPage workflowDetailsPage;
+
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
             WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
@@ -70,7 +70,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             }
             createNewWorkflowModalWindow
                     .clickWorkflowTypeCheckbox(workflowType);
-            workflowDetailsPage = createNewWorkflowModalWindow.clickCreateTestPlanButton(pfGlossary);
+            createNewWorkflowModalWindow.clickCreateTestPlanButton(pfGlossary);
         } else {
             leftMenu.openPageBy("Workflows");
             WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
@@ -82,9 +82,9 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             }
             createNewWorkflowModalWindow
                     .clickWorkflowTypeCheckbox(workflowType);
-            workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton(pfGlossary);
+            createNewWorkflowModalWindow.clickCreateWorkflowButton(pfGlossary);
         }
-
+        WorkflowDetailsPage workflowDetailsPage = new WorkflowDetailsPage(driver,pfGlossary);
         workflowName = createNewWorkflowModalWindow.getWorkflowName();
         Main.report.logPass("******************************\nWorkflow was created");
         Main.report.logInfo("******************************\nStart test");

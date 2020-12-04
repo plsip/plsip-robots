@@ -59,7 +59,6 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
 
         CreateNewWorkflowModalWindow createNewWorkflowModalWindow;
-        WorkflowDetailsPage workflowDetailsPage;
         if (pfGlossary.equals("TA")) {
             leftMenu.openPageBy("Test Plans");
             WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
@@ -71,7 +70,7 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
             }
             createNewWorkflowModalWindow
                     .clickWorkflowTypeCheckbox(workflowType);
-            workflowDetailsPage = createNewWorkflowModalWindow.clickCreateTestPlanButton(pfGlossary);
+            createNewWorkflowModalWindow.clickCreateTestPlanButton(pfGlossary);
         } else {
             leftMenu.openPageBy("Workflows");
             WorkflowsPage workflowsPage = new WorkflowsPage(driver,pfGlossary);
@@ -83,11 +82,12 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
             }
             createNewWorkflowModalWindow
                     .clickWorkflowTypeCheckbox(workflowType);
-            workflowDetailsPage = createNewWorkflowModalWindow.clickCreateWorkflowButton(pfGlossary);
+            createNewWorkflowModalWindow.clickCreateWorkflowButton(pfGlossary);
         }
-
+        Assert.assertFalse(createNewWorkflowModalWindow.isFormDisplayedAgain(),"Empty form was displaying again");
         workflowName = createNewWorkflowModalWindow.getWorkflowName();
 
+        WorkflowDetailsPage workflowDetailsPage = new WorkflowDetailsPage(driver,pfGlossary);
         Assert.assertTrue(workflowDetailsPage.checkWorkflowName(workflowName), "In the details of new workflow name of workflow has wrong value");
         Main.report.logPass("In the details of workflow name of workflow is right: '" + workflowName + "'");
         Assert.assertTrue(workflowDetailsPage.checkButtonCreateJobIsEnabled(), "Button 'Create Job' should be visible and not enable");

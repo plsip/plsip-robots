@@ -7,6 +7,8 @@ import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CreateNewWorkflowModalWindow extends BasePage {
 
@@ -28,6 +30,8 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     private String workflowName;
     private String workflowType;
 
+    WebDriverWait wait = new WebDriverWait(driver, 3);
+
     public CreateNewWorkflowModalWindow(final WebDriver driver) {
         super(driver);
     }
@@ -37,9 +41,8 @@ public class CreateNewWorkflowModalWindow extends BasePage {
         return wait8ForVisibilityOf(inpWorkflowName);
     }
 
-    public WorkflowDetailsPage clickCreateTestPlanButton(String pfGlossary) {
+    public void clickCreateTestPlanButton(String pfGlossary) {
         click(btnCreateTestPlan, "'Create test plan' button");
-        return new WorkflowDetailsPage(driver, pfGlossary);
     }
 
     public WorkflowDetailsPage clickCreateWorkflowButton(String pfGlossary) {
@@ -64,6 +67,16 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public String getWorkflowName() {
         return workflowName;
+    }
+
+    public boolean isFormDisplayedAgain() {
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
+            return true;
+        } catch (Exception e) {
+            Main.report.logInfo(e.getMessage());
+            return false;
+        }
     }
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
