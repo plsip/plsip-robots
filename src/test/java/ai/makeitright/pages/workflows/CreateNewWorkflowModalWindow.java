@@ -43,11 +43,12 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public void clickCreateTestPlanButton(String pfGlossary) {
         click(btnCreateTestPlan, "'Create test plan' button");
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
     }
 
-    public WorkflowDetailsPage clickCreateWorkflowButton(String pfGlossary) {
+    public void clickCreateWorkflowButton(String pfGlossary) {
         click(btnCreateWorkflow, "'Create workflow' button");
-        return new WorkflowDetailsPage(driver, pfGlossary);
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
     }
 
     public CreateNewWorkflowModalWindow clickWorkflowTypeCheckbox(String workflowType) {
@@ -72,7 +73,6 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     public boolean isFormDisplayedAgain() {
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
-            Main.report.logFail("Empty form was visible");
             return true;
         } catch (Exception e) {
             Main.report.logInfo(e.getMessage());
