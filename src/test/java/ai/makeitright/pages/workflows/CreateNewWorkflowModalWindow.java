@@ -72,6 +72,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     public boolean isFormDisplayedAgain() {
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
+            Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             return true;
         } catch (Exception e) {
             Main.report.logInfo(e.getMessage());
