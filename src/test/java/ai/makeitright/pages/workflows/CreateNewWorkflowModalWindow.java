@@ -43,12 +43,10 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public void clickCreateTestPlanButton(String pfGlossary) {
         click(btnCreateTestPlan, "'Create test plan' button");
-        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
     }
 
     public void clickCreateWorkflowButton(String pfGlossary) {
         click(btnCreateWorkflow, "'Create workflow' button");
-        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
     }
 
     public CreateNewWorkflowModalWindow clickWorkflowTypeCheckbox(String workflowType) {
@@ -75,7 +73,6 @@ public class CreateNewWorkflowModalWindow extends BasePage {
             wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
             return true;
         } catch (Exception e) {
-            Main.report.logInfo(e.getMessage());
             return false;
         }
     }
