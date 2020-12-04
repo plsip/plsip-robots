@@ -72,7 +72,6 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     public boolean isFormDisplayedAgain() {
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
-            Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             Main.report.logFail("Empty form was visible");
             return true;
         } catch (Exception e) {
