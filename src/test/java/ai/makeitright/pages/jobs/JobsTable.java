@@ -36,6 +36,8 @@ public class JobsTable extends BasePage {
         WebElement row = tableRows.get(0);
         List<WebElement> rowColumns = row.findElements(By.xpath(".//td"));
         DisplayedJobs displayedJobs = new DisplayedJobs()
+                .setID(row.findElement(By.xpath("./th/a")).getText())
+                .setLnkID(row.findElement(By.xpath("./th/a")))
                 .setWorkflowName(rowColumns.get(WORKFLOWNAME).getText())
                 .setStatus(rowColumns.get(STATUS).getText().replace("\n", " "))
                 .setCreatedBy(rowColumns.get(CREATEDBY).getText());

@@ -2,6 +2,7 @@ package ai.makeitright.pages.jobs;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.TopPanel;
+import ai.makeitright.pages.tasks.TaskDetailsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,6 +50,15 @@ public class JobDetailsPage extends BasePage {
     protected boolean isAt() {
         waitForBlueCircleDisappear();
         return jobHeader.isDisplayed();
+    }
+
+    public TaskDetailsPage clickLnkName(WebElement lnkName, String name) {
+        click(lnkName, "link of task/test with name '" + name + "'");
+        return new TaskDetailsPage(driver);
+    }
+
+    public JobsDetailsTasksTable getJobsDetailsTasksTable() {
+        return new JobsDetailsTasksTable(driver);
     }
 
     public String getJobStatus() {

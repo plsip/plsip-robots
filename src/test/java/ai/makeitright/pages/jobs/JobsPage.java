@@ -49,6 +49,10 @@ public class JobsPage extends BasePage {
         return headersName.equals(expectedHeaderName);
     }
 
+    public boolean checkIfOneJobIsDisplayed() {
+        return tableRows.size() == 1;
+    }
+
     public boolean checkJobsFromFirstPaginationPageContainValuesInColumns() {
         for (WebElement row : lstJobRow) {
             Assert.assertNotEquals(row.findElement(By.xpath("./th/a")).getText(),"","In first column row doesn't contain value");
@@ -62,6 +66,11 @@ public class JobsPage extends BasePage {
     public JobDetailsPage clickFoundJob(final String jobID) {
         WebElement job = getJobsTable().getDesirableRow(jobID);
         click(job, "found job");
+        return new JobDetailsPage(driver);
+    }
+
+    public JobDetailsPage clickJobID(WebElement lnkID, String jobID) {
+        click(lnkID,"ID of job '" + jobID + "'");
         return new JobDetailsPage(driver);
     }
 
