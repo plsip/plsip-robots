@@ -26,7 +26,7 @@ public class DisplayDetailsOfTaskIncludedInJob6 extends DriverConfig {
     public void before() {
         Main.channel = System.getProperty("inputParameters.channel");
         Main.hookUrl = System.getProperty("secretParameters.hookUrl");
-        jobID = System.getProperty("inputParameters.jobID");
+        jobID = System.getProperty("inputParameters.6jobID");
         pfGlossary = System.getProperty("inputParameters.pfGlossary");
         pfOrganizationCardName = System.getProperty("inputParameters.pfOrganizationCardName");
         pfSignInUrl = System.getProperty("inputParameters.pfSignInUrl");
