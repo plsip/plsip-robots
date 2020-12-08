@@ -5,10 +5,13 @@ import org.openqa.selenium.WebElement;
 public class DisplayedJobs {
 
     private String createdBy;
+    private String dateCreated;
+    private String endDate;
     private String ID;
     private WebElement lnkID;
-    private String workflowName;
+    private String startDate;
     private String status;
+    private String workflowName;
 
     public String getCreatedBy() {
         return createdBy;
@@ -31,6 +34,16 @@ public class DisplayedJobs {
         return this;
     }
 
+    public DisplayedJobs setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+        return this;
+    }
+
+    public DisplayedJobs setEndDate(String endDate) {
+        this.endDate = endDate;
+        return this;
+    }
+
     public DisplayedJobs setID(String ID) {
         this.ID = ID;
         return this;
@@ -41,13 +54,18 @@ public class DisplayedJobs {
         return this;
     }
 
-    public DisplayedJobs setWorkflowName(String name) {
-        this.workflowName = name;
+    public DisplayedJobs setStartDate(String startDate) {
+        this.startDate = startDate;
         return this;
     }
 
     public DisplayedJobs setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    public DisplayedJobs setWorkflowName(String name) {
+        this.workflowName = name;
         return this;
     }
 

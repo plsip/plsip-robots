@@ -39,6 +39,9 @@ public class JobsTable extends BasePage {
                 .setID(row.findElement(By.xpath("./th/a")).getText())
                 .setLnkID(row.findElement(By.xpath("./th/a")))
                 .setWorkflowName(rowColumns.get(WORKFLOWNAME).getText())
+                .setDateCreated(rowColumns.get(DATECREATED).getText())
+                .setStartDate(rowColumns.get(STARTDATE).getText())
+                .setEndDate(rowColumns.get(ENDDATE).getText())
                 .setStatus(rowColumns.get(STATUS).getText().replace("\n", " "))
                 .setCreatedBy(rowColumns.get(CREATEDBY).getText());
         return displayedJobs;
@@ -46,6 +49,9 @@ public class JobsTable extends BasePage {
 
 
     private final int WORKFLOWNAME = 0;
+    private final int DATECREATED = 1;
+    private final int STARTDATE = 2;
+    private final int ENDDATE = 3;
     private final int STATUS = 4;
     private final int CREATEDBY = 5;
 
