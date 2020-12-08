@@ -158,6 +158,19 @@ public abstract class BasePage {
         }
     }
 
+    public boolean waitForWhiteSmallCircleDisappear() {
+        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        Main.report.logInfo("Wait max 20s until white small rounding circle disappears...");
+        try {
+            new WebDriverWait(driver, 5).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[@class='Polaris-Spinner Polaris-Spinner--colorWhite Polaris-Spinner--sizeSmall']")));
+        } catch (Exception e) {
+            Main.report.logFail("Blue rounding circle was still displayed");
+            return false;
+        }
+        Main.report.logPass("No white small rounding circle is displaying");
+        return true;
+    }
+
     public boolean waitLongForVisibilityOf(final WebElement element) {
         try {
             new WebDriverWait(driver, 300).until(ExpectedConditions.visibilityOf(element));

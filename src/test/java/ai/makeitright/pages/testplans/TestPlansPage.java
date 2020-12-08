@@ -43,6 +43,7 @@ public class TestPlansPage extends BasePage {
     public TestPlansPage filterTestPlan(String workflowName) {
         Main.report.logInfo("Search workflow named: '" + workflowName + "'");
         sendText(inpFilterItems, workflowName, "input element 'Filter items'");
+        waitForWhiteSmallCircleDisappear();
         return this;
     }
 
