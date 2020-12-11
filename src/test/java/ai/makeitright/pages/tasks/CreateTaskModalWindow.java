@@ -69,7 +69,7 @@ public class CreateTaskModalWindow extends BasePage {
     }
 
     public CreateTaskModalWindow setName(String taskName) {
-        this.taskName = taskName + Methods.getDateTime("yyyyMMddHHmmss");
+        this.taskName = Methods.getDateTime("yyyyMMddHHmmss") + taskName;
         sendText(inpName, this.taskName, "input element 'Name'");
         return this;
     }
