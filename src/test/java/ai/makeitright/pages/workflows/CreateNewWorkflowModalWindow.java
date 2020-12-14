@@ -30,7 +30,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     private String workflowName;
     private String workflowType;
 
-    WebDriverWait wait = new WebDriverWait(driver, 3);
+    WebDriverWait wait = new WebDriverWait(driver, 4);
 
     public CreateNewWorkflowModalWindow(final WebDriver driver) {
         super(driver);
