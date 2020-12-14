@@ -9,6 +9,7 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.testplans.TestPlansPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;
+import ai.makeitright.utilities.ApiMethods;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
@@ -19,20 +20,28 @@ import org.testng.annotations.Test;
 
 public class CheckDetailsOfJob5Test extends DriverConfig {
 
-    //from configuration
+    private String apiCodeVersion;
+    private String apiProcessID;
+    private String apiTokenPassword;
+    private String apiTokenServer;
+    private String apiWorkflowID;
+    private String argumentsCollection;
+    private String jobID;
     private String pfGlossary;
     private String pfOrganizationCardName;
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
     private String workflowName;
-    private String argumentsCollection;
 
-    //for reporting:
-    private String jobID;
 
     @BeforeTest
     public void before() {
+        apiCodeVersion = System.getProperty("inputParameters.apiCodeVersion");
+        apiProcessID = System.getProperty("inputParameters.apiProcessID");
+        apiTokenPassword = System.getProperty("secretParameters.apiTokenPassword");
+        apiTokenServer = System.getProperty("inputParameters.apiTokenServer");
+        apiWorkflowID = System.getProperty("inputParameters.apiWorkflowID");
         argumentsCollection = System.getProperty("inputParameters.argumentsCollection");
         Main.channel = System.getProperty("inputParameters.channel");
         Main.hookUrl = System.getProperty("secretParameters.hookUrl");
@@ -50,6 +59,7 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
     @Test
     public void checkDetailsOfJob() {
         Main.report.logInfo("********Before test - create new job");
+        ApiMethods.createNewJob(apiWorkflowID,apiCodeVersion, apiProcessID, apiTokenPassword, apiTokenServer);
         driver.get(pfSignInUrl);
 
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
