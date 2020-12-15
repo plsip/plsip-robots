@@ -1,9 +1,7 @@
 package ai.makeitright.tests.tasks.landingpage19;
 
 import ai.makeitright.pages.common.LeftMenu;
-import ai.makeitright.pages.jobs.JobsPage;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.tasks.CreateTaskModalWindow;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
