@@ -43,7 +43,7 @@ public class JobsPage extends BasePage {
         super(driver);
     }
 
-    public boolean checkHeaderWithNumberHasValue(int headerNumber, String expectedHeaderName) {
+    public boolean checkForColumnNumberHeaderHasValue(int headerNumber, String expectedHeaderName) {
         String headersName = driver.findElement(getHeadersName(headerNumber)).getText();
         Main.report.logInfo("Actual headers name is '" + headersName + "'");
         return headersName.equals(expectedHeaderName);

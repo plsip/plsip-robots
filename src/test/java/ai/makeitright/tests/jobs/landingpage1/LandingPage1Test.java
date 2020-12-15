@@ -47,46 +47,46 @@ public class LandingPage1Test extends DriverConfig {
         JobsPage jobsPage = new JobsPage(driver);
         Main.report.logPass("On the page is header text 'Jobs'");
 
-        Main.report.logInfo("Chcek if on the page is table with at least one row");
+        Main.report.logInfo("Check if on the page is table with at least one row");
         Assert.assertTrue(jobsPage.isJobRowDisplayed(), "There is no visible any row with job");
         Main.report.logPass("On the page is table with at least one row");
 
-        Main.report.logInfo("Check all headers on the jobs' table are right");
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(1,"ID"),"First column header should be 'ID'");
+        Main.report.logInfo("Check all column headings in the table are right");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(1,"ID"),"First column header should be 'ID'");
         Main.report.logPass("1st column header is right 'ID'");
 
         if (pfGlossary.equals("TA")) {
-            Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(2, "Test Plan name"), "2nd column header should be 'Test Plan name'");
+            Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(2, "Test Plan name"), "2nd column header should be 'Test Plan name'");
             Main.report.logPass("2nd column header is right 'Test Plan name'");
         } else {
-            Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(2, "Workflow name"), "2nd column header should be 'Workflow name'");
+            Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(2, "Workflow name"), "2nd column header should be 'Workflow name'");
             Main.report.logPass("2nd column header is right 'Workflow name'");
         }
 
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(3,"Date created"),"3rd column header should be 'Date created'");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(3,"Date created"),"3rd column header should be 'Date created'");
         Main.report.logPass("3rd column header is right 'Date created'");
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(4,"Start date"),"4th column header should be 'Start date'");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(4,"Start date"),"4th column header should be 'Start date'");
         Main.report.logPass("4th column header is right 'Start date'");
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(5,"End date"),"5th column header should be 'End date'");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(5,"End date"),"5th column header should be 'End date'");
         Main.report.logPass("5th column header is right 'End date'");
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(6,"Status"),"6th column header should be 'Status'");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(6,"Status"),"6th column header should be 'Status'");
         Main.report.logPass("6th column header is right 'Status'");
-        Assert.assertTrue(jobsPage.checkHeaderWithNumberHasValue(7,"Created by"),"7th column header should be 'Created by'");
+        Assert.assertTrue(jobsPage.checkForColumnNumberHeaderHasValue(7,"Created by"),"7th column header should be 'Created by'");
         Main.report.logPass("7th column header is right 'Created by'");
 
-//        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
+        Main.report.logInfo("Check if jobs from first pagination page contain values in all columns");
 //        Robot robot = new Robot();
 //        robot.keyPress(KeyEvent.VK_F12);
 //        robot.keyRelease(KeyEvent.VK_F12);
 //        jobsPage.clickJobsText();
 //        robot.keyPress(KeyEvent.VK_F8);
 //        robot.keyRelease(KeyEvent.VK_F8);
-//        Assert.assertTrue(jobsPage.checkJobsFromFirstPaginationPageContainValuesInColumns(),"First row job contains value in column 1");
+        Assert.assertTrue(jobsPage.checkJobsFromFirstPaginationPageContainValuesInColumns(),"First row job contains value in column 1");
 //        robot.keyPress(KeyEvent.VK_F8);
 //        robot.keyRelease(KeyEvent.VK_F8);
 //        robot.keyPress(KeyEvent.VK_F12);
 //        robot.keyRelease(KeyEvent.VK_F12);
-//        Main.report.logPass("All rows on the page contain values in every columns");
+        Main.report.logPass("All rows on the page contain values in every columns");
 
         Main.report.logInfo("Check left menu content");
         leftMenu = new LeftMenu(driver);
