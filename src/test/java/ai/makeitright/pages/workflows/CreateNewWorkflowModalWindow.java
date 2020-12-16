@@ -70,8 +70,13 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public boolean isFormDisplayedAgain() {
         try {
-            wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""));
-            return true;
+            String a = inpWorkflowName.getText();
+            if (wait.until(ExpectedConditions.textToBePresentInElement(inpWorkflowName, ""))) {
+                Main.report.logFail("There was input element for 'Workflow'/'Test name' without text in it");
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }

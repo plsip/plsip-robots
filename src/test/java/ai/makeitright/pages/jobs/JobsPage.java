@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
@@ -32,6 +34,8 @@ public class JobsPage extends BasePage {
     private By getHeadersName(int headerNumber) {
         return new By.ByXPath("//thead/tr/th[" + headerNumber + "]/button");
     }
+
+    private WebDriverWait wait = new WebDriverWait(driver, 10);
 
     @Override
     protected boolean isAt() {
@@ -82,6 +86,13 @@ public class JobsPage extends BasePage {
         Main.report.logInfo("Search job which has ID: '" + jobID + "'");
         sendText(inpFilterItems, jobID, "input element 'Filter items'");
         waitForBlueCircleDisappear();
+        return this;
+    }
+
+    public JobsPage filterOneJob(String jobID) {
+        Main.report.logInfo("Search job which has ID: '" + jobID + "'");
+        sendText(inpFilterItems, jobID, "input element 'Filter items'");
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//tbody/tr"),1));
         return this;
     }
 
