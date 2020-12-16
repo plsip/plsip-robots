@@ -59,7 +59,7 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
     @Test
     public void checkDetailsOfJob() {
         Main.report.logInfo("********Before test - create new job");
-        ApiMethods.createNewJob(apiWorkflowID,apiCodeVersion, apiProcessID, apiTokenPassword, apiTokenServer);
+//        ApiMethods.createNewJob(apiWorkflowID,apiCodeVersion, apiProcessID, apiTokenPassword, apiTokenServer);
         driver.get(pfSignInUrl);
 
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);
