@@ -54,6 +54,7 @@ public class RepositoryPage extends BasePage {
     }
 
     public RepositoryPage clickAssignRepositoryButton() {
+        moveScrollToELement(btnAssignRepository);
         click(btnAssignRepository, "button 'Assign Repository'");
         return this;
     }
