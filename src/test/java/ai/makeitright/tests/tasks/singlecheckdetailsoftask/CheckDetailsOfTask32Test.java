@@ -86,7 +86,7 @@ public class CheckDetailsOfTask32Test extends DriverConfig {
             tasksPage = new TasksPage(driver, pfGlossary);
         }
 
-        tasksPage.filterTask(taskName);
+        tasksPage.filterOneTask(taskName);
 
         DisplayedTasks displayedTasks = tasksPage.getTasksTable().getTasksFirstRowData();
         Assert.assertNotNull(displayedTasks,"There is no task with name: '" + taskName + "'");

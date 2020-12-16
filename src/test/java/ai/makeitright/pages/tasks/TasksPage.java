@@ -113,6 +113,13 @@ public class TasksPage extends BasePage {
         return true;
     }
 
+    public TasksPage filterOneTask(String taskName) {
+        Main.report.logInfo("Search task named: '" + taskName + "'");
+        sendText(inpFilterItems, taskName, "input element 'Filter items'");
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//tbody/tr"),1));
+        return this;
+    }
+
     public TasksPage filterTask(String taskName) {
         Main.report.logInfo("Search task named: '" + taskName + "'");
         sendText(inpFilterItems, taskName, "input element 'Filter items'");
