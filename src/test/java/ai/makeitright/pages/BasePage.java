@@ -50,6 +50,13 @@ public abstract class BasePage {
 
     protected abstract boolean isAt();
 
+    public void clearAndSendText(final WebElement element, final String text, final String elementDescription) {
+        Main.report.logInfo("Clear element and enter text '" + text + "' to " + elementDescription);
+        element.clear();
+        element.sendKeys(text);
+        Main.report.logPass("Text was entered");
+    }
+
     public void click(final WebElement element, final String elementDescription) {
         Main.report.logInfo("Click " + elementDescription);
         element.click();
