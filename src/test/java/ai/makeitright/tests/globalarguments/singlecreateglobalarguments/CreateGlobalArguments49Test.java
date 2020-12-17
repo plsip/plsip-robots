@@ -1,6 +1,7 @@
 package ai.makeitright.tests.globalarguments.singlecreateglobalarguments;
 
 import ai.makeitright.pages.argumentscollections.ArgumentsPage;
+import ai.makeitright.pages.argumentscollections.CreateGlobalArgumentModalWindow;
 import ai.makeitright.pages.argumentscollections.DisplayedGlobalArguments;
 import ai.makeitright.pages.argumentscollections.GlobalArgumentsPage;
 import ai.makeitright.pages.common.LeftMenu;
@@ -54,7 +55,7 @@ public class CreateGlobalArguments49Test extends DriverConfig {
 
         final GlobalArgumentsPage globalArgumentsPage =
                 new GlobalArgumentsPage(driver, pfSignInUrl);
-        final GlobalArgumentsPage.CreateGlobalArgumentModalWindow createGlobalArgumentModalWindow =
+        CreateGlobalArgumentModalWindow createGlobalArgumentModalWindow =
                 globalArgumentsPage.clickCreateGlobalArgumentsButton();
 
         ArgumentsPage argumentsPage = createGlobalArgumentModalWindow

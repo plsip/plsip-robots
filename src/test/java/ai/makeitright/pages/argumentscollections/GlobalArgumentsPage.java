@@ -1,11 +1,14 @@
 package ai.makeitright.pages.argumentscollections;
 
 import ai.makeitright.pages.BasePage;
-import ai.makeitright.utilities.Methods;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class GlobalArgumentsPage extends BasePage {
 
@@ -16,7 +19,15 @@ public class GlobalArgumentsPage extends BasePage {
     private WebElement inpCollectionName;
 
     @FindBy(xpath = "//button//span[text()='Create Global arguments']")
-    private WebElement createGlobalArgumentsButton;
+    private WebElement btnCreateGlobalArguments;
+
+    @FindAll(
+            @FindBy(xpath = "//ul[@class='Polaris-ResourceList']/li")
+    )
+    private List<WebElement> lstArgumentsCollections;
+
+    @FindBy(xpath = "//div[contains(@class,'HeaderTitleWrapper')]")
+    private WebElement txtTableHeading;
 
     @FindBy(xpath = "//span[@class='Polaris-TopBar-UserMenu__Details']/p[1]")
     private WebElement txtTopPanelCreatedBy_Value;
@@ -34,8 +45,18 @@ public class GlobalArgumentsPage extends BasePage {
         return txtTopPanelCreatedBy_Value.getText().equals(author);
     }
 
+    public boolean checkGlobalArgumentsTableContainValuesInAllColumns() {
+        for (WebElement row : lstArgumentsCollections) {
+            Assert.assertNotEquals(row.findElement(By.xpath("./div/div/div/div/div/div[1]/span")).getText(),"","Arguments collection row doesn't have name");
+            Assert.assertNotEquals((row.findElement(By.xpath("./div/div/div/div/div/div[2]")).getText()).replace("Author: ",""),"","Arguments collection '" + row.findElement(By.xpath("./div/div/div/div/div/div[1]/span")).getText() + "' row doesn't have value for 'Author'");
+            Assert.assertNotEquals((row.findElement(By.xpath("./div/div/div/div/div/div[3]")).getText()).replace("Created: ",""),"","Arguments collection '" + row.findElement(By.xpath("./div/div/div/div/div/div[1]/span")).getText() + "' row doesn't have value for 'Creted'");
+            Assert.assertNotNull(row.findElement(By.xpath("./div/div/div/div/div/div[4]//button/span/span[text()='Delete']")),"Arguments collection '" + row.findElement(By.xpath("./div/div/div/div/div/div[1]/span")).getText() + "' row doesn't contain button 'Delete'");
+        }
+        return true;
+    }
+
     public CreateGlobalArgumentModalWindow clickCreateGlobalArgumentsButton() {
-        click(createGlobalArgumentsButton,"button 'Create Global arguments'");
+        click(btnCreateGlobalArguments,"button 'Create Global arguments'");
         return new CreateGlobalArgumentModalWindow(driver);
     }
 
@@ -45,8 +66,20 @@ public class GlobalArgumentsPage extends BasePage {
         return new ArgumentsPage(driver);
     }
 
+    public int getArgumentsCollectionHeaderNumber() {
+        return Integer.parseInt(txtTableHeading.getText().replaceAll("\\D+",""));
+    }
+
+    public int getArgumentsCollectionNumber() {
+        return lstArgumentsCollections.size();
+    }
+
     public GlobalArgumentsTable getGlobalArgumentsTable() {
         return new GlobalArgumentsTable(driver);
+    }
+
+    public boolean isArgumentsCollectionRowDisplayed() {
+        return lstArgumentsCollections.size() > 0;
     }
 
     public boolean isNotVisibleModalWindow() {
@@ -58,48 +91,7 @@ public class GlobalArgumentsPage extends BasePage {
         }
     }
 
-    public class CreateGlobalArgumentModalWindow extends BasePage {
-
-        @FindBy(xpath="//h2")
-        private WebElement h2;
-
-        @FindBy(xpath = "//input[@name='name']")
-        private WebElement inpCollectionName;
-
-        @FindBy(xpath = "//button//span[text()='Close']")
-        private WebElement btnClose;
-
-        @FindBy(xpath = "//button//span[text()='Save']")
-        private WebElement btnSave;
-
-        private String collectionName;
-
-        public CreateGlobalArgumentModalWindow(final WebDriver driver) {
-            super(driver);
-        }
-
-        @Override
-        protected boolean isAt() {
-            waitForVisibilityOf(h2);
-            return h2.getText().equals("Create Global argument");
-        }
-
-        public String getCollectionName() {
-            return collectionName;
-        }
-
-        public CreateGlobalArgumentModalWindow setCollectionName(String collectionName) {
-            this.collectionName = collectionName + Methods.getDateTime("yyyyMMddHHmmss");
-            sendText(inpCollectionName, this.collectionName,"input element 'Collection name'");
-            return this;
-        }
-
-        public ArgumentsPage clickSaveButton() {
-            click(btnSave,"button 'Save'");
-            return new ArgumentsPage(driver);
-        }
-
+    public boolean isVisibleButtonCreateGlobalArguments() {
+        return btnCreateGlobalArguments.isDisplayed();
     }
-
-
 }
