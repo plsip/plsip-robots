@@ -83,7 +83,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
         waitForVisibilityOf(inpWorkflowName);
-        this.workflowName = workflowName + Methods.getDateTime("yyyyMMddHHmmss") + workflowType;
+        this.workflowName = Methods.getDateTime("yyyyMMddHHmmss") + workflowType + workflowName;
         click(inpWorkflowName,"input element 'Workflow name'");
         clearAndSendText(inpWorkflowName,this.workflowName,"input element 'Workflow name'");
         //new Action(driver).sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
