@@ -61,6 +61,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
             default:
                 Main.report.logFail("Argument for workflow type must be 'Parallel' or 'Sequential'");
         }
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return this;
     }
 
