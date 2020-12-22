@@ -1,4 +1,6 @@
 package ai.makeitright.tests.workflows.newtest;
 
-public class NewTest {
+import ai.makeitright.utilities.DriverConfig;
+
+public class NewTest extends DriverConfig {
 }
