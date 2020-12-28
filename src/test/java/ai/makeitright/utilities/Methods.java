@@ -47,6 +47,7 @@ public class Methods extends Main {
         LocalDate currentDate = LocalDate.now();
         Main.report.logInfo("Today is: " + currentDate);
         Main.report.logInfo("Next day will be: " + DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1)));
+        Main.report.logInfo("Or use: " + currentDate.plusDays(1));
         return DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1));
     }
 
