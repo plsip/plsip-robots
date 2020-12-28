@@ -78,9 +78,9 @@ public class CreateNewTriggerJob85Test extends DriverConfig {
 
         Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
         createJobModalWindow
-                .clickSaveAndGoToCollectionButton()
+                .clickSaveAndGoToArgumentsCollectionsAndTagsButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
-                .clickSaveAndGoToValuesButton();
+                .clickSaveAndGoToArgumentsValuesButton();
         Assert.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
                 "An incorrect collection was selected.");
         Main.report.logPass("The correct collection was chosen: " + argumentsCollection);
