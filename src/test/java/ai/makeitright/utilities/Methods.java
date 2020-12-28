@@ -45,6 +45,8 @@ public class Methods extends Main {
 
     public static String getDateOfNextDay(String format) {
         LocalDate currentDate = LocalDate.now();
+        Main.report.logInfo("Today is: " + currentDate);
+        Main.report.logInfo("Next day will be: " + DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1)));
         return DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1));
     }
 
