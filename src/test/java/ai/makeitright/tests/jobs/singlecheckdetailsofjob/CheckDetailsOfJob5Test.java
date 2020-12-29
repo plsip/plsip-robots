@@ -87,9 +87,7 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
                 "An incorrect collection was selected.");
         Main.report.logPass("The correct collection was chosen: " + argumentsCollection);
 
-        createJobModalWindow
-                .clickSaveAndGoToScheduleButton()
-                .clickCreateJobButton();
+        createJobModalWindow.clickCreateJobButton();
 
         jobID = createJobModalWindow.getCreatedJobID();
         Assert.assertEquals(createJobModalWindow.getPopUpValue(),"Your job (ID: " + jobID + ") was successfully created!",
