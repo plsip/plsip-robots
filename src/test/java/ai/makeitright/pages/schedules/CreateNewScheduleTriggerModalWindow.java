@@ -1,7 +1,6 @@
 package ai.makeitright.pages.schedules;
 
 import ai.makeitright.pages.BasePage;
-import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.utilities.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -36,6 +35,9 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
 
     @FindBy(xpath = "//label[@for='orderRepeatRate-multiple_times_a_day']/span/span")
     private WebElement radioBtnMultipleTimesADay;
+
+    @FindBy(xpath = "//label[@for='orderRepeatRate-never']/span/span")
+    private WebElement radioBtnNever;
 
     @FindBy(xpath = "//label[@for='orderRepeatRate-weekly']/span/span")
     private WebElement radioBtnWeekly;
@@ -88,11 +90,11 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
         return this;
     }
 
-    public ScheduleDetailsPage clickCreateTriggerButton() {
+    public ScheduleDetailsPage clickCreateTriggerButton(String scheduleName) {
         waitForClickable(btnCreateTrigger);
         click(btnCreateTrigger, "'Create trigger' button");
         waitForBlueCircleDisappear();
-        return new ScheduleDetailsPage(driver);
+        return new ScheduleDetailsPage(driver, scheduleName);
     }
 
     public CreateNewScheduleTriggerModalWindow clickExecutionDateInput() {
@@ -122,6 +124,11 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
         return this;
     }
 
+    public CreateNewScheduleTriggerModalWindow clickRadioBtnNever() {
+        click(radioBtnNever, "radio button 'Never'");
+        return this;
+    }
+
     public CreateNewScheduleTriggerModalWindow clickRadioBtnWeekly() {
         click(radioBtnWeekly, "radio button 'Weekly'");
         return this;
@@ -133,8 +140,8 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
         return this;
     }
 
-    public CreateNewScheduleTriggerModalWindow setScheduleTriggerName() {
-        sendText(inpScheduleTriggerName,"Automation's schedule name", "input element 'Schedule Trigger Name'");
+    public CreateNewScheduleTriggerModalWindow setScheduleTriggerName(String scheduleName) {
+        sendText(inpScheduleTriggerName,scheduleName, "input element 'Schedule Trigger Name'");
         return this;
     }
 }

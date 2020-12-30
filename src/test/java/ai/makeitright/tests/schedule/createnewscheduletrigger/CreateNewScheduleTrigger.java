@@ -5,7 +5,6 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.schedules.CreateNewScheduleTriggerModalWindow;
 import ai.makeitright.pages.schedules.ScheduleDetailsPage;
 import ai.makeitright.pages.schedules.SchedulePage;
-import ai.makeitright.pages.users.UsersPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
@@ -26,6 +25,7 @@ public class CreateNewScheduleTrigger extends DriverConfig {
     private String pfSignInUrl;
     private String pfUserEmail;
     private String pfUserPassword;
+    private String scheduleName;
 
     //for reporting:
     private String finishDate;
@@ -44,7 +44,8 @@ public class CreateNewScheduleTrigger extends DriverConfig {
         Main.pfSignInUrl = this.pfSignInUrl;
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
-        Main.taskname = pfGlossary + ": TC - Schedule - Create new Schedule Trigger [P20Ct-85]";
+        scheduleName = System.getProperty("inputParameters.scheduleName");
+        Main.taskname = pfGlossary + ": TC - Schedule - Create new Schedule Trigger [P20Ct-xxx]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
     }
     @Test
@@ -63,7 +64,7 @@ public class CreateNewScheduleTrigger extends DriverConfig {
         CreateNewScheduleTriggerModalWindow createNewScheduleTriggerModalWindow = schedulePage.clickCreateNewScheduleTriggerButton();
 
         createNewScheduleTriggerModalWindow = createNewScheduleTriggerModalWindow
-                .setScheduleTriggerName()
+                .setScheduleTriggerName(scheduleName)
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTime(LocalTime.NOON.toString());
@@ -83,7 +84,7 @@ public class CreateNewScheduleTrigger extends DriverConfig {
                 break;
             case "never":
                 Main.report.logInfo("Option 'Never' of execution frequency has been selected");
-                createNewScheduleTriggerModalWindow.clickCreateTriggerButton();
+                createNewScheduleTriggerModalWindow.clickRadioBtnNever();
                 break;
             default:
                 Assert.fail("There is a wrong value of 'executionFrequency' parameter");
@@ -91,7 +92,7 @@ public class CreateNewScheduleTrigger extends DriverConfig {
 
         createNewScheduleTriggerModalWindow.clickFinishDateInput()
                 .chooseFirstDayOfNextMonth();
-        ScheduleDetailsPage scheduleDetailsPage = createNewScheduleTriggerModalWindow.clickCreateTriggerButton();
+        ScheduleDetailsPage scheduleDetailsPage = createNewScheduleTriggerModalWindow.clickCreateTriggerButton(scheduleName);
 
         triggerID = scheduleDetailsPage.getCreatedScheduleID();
 
