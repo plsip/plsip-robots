@@ -128,4 +128,5 @@ public class CreateNewScheduleTrigger extends DriverConfig {
         obj.put("finishDate", finishDate);
         System.setProperty("output", obj.toString());
     }
+
 }
