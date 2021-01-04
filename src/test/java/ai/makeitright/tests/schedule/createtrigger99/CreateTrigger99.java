@@ -95,7 +95,9 @@ public class CreateTrigger99 extends DriverConfig {
                 .chooseFirstDayOfNextMonth();
         ScheduleDetailsPage scheduleDetailsPage = createNewScheduleTriggerModalWindow.clickCreateTriggerButton(scheduleName);
 
+        Main.report.logInfo("Read triggerID of new schedule trigger");
         triggerID = scheduleDetailsPage.getCreatedScheduleID();
+        Main.report.logPass("TriggerID: '" + triggerID + "'");
 
         nextRun = Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
         finishDate = Methods.getFirstDayOfNextMonth();
