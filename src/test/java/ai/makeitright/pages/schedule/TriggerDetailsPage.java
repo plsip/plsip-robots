@@ -1,4 +1,4 @@
-package ai.makeitright.pages.schedules;
+package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.TopPanel;

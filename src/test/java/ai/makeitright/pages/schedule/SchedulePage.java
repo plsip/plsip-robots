@@ -1,4 +1,4 @@
-package ai.makeitright.pages.schedules;
+package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
@@ -34,7 +34,7 @@ public class SchedulePage extends BasePage {
     @Override
     protected boolean isAt() {
         Assert.assertTrue(waitForBlueCircleDisappear());
-        return jobsHeader.getText().equals("Schedules");
+        return jobsHeader.getText().equals("Schedule");
     }
 
     public SchedulePage(final WebDriver driver) {

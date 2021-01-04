@@ -2,9 +2,9 @@ package ai.makeitright.tests.jobs.singlecheckdetailsoftrigger;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.schedules.DisplayedTriggers;
-import ai.makeitright.pages.schedules.SchedulePage;
-import ai.makeitright.pages.schedules.TriggerDetailsPage;
+import ai.makeitright.pages.schedule.DisplayedTriggers;
+import ai.makeitright.pages.schedule.SchedulePage;
+import ai.makeitright.pages.schedule.TriggerDetailsPage;
 import ai.makeitright.pages.testplans.TestPlansPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;

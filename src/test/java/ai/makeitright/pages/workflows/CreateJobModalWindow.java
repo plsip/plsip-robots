@@ -2,7 +2,7 @@ package ai.makeitright.pages.workflows;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.jobs.JobDetailsPage;
-import ai.makeitright.pages.schedules.TriggerDetailsPage;
+import ai.makeitright.pages.schedule.TriggerDetailsPage;
 import ai.makeitright.utilities.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

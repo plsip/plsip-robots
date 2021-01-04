@@ -2,9 +2,9 @@ package ai.makeitright.tests.schedule.createnewscheduletrigger;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.schedules.CreateNewScheduleTriggerModalWindow;
-import ai.makeitright.pages.schedules.ScheduleDetailsPage;
-import ai.makeitright.pages.schedules.SchedulePage;
+import ai.makeitright.pages.schedule.CreateNewScheduleTriggerModalWindow;
+import ai.makeitright.pages.schedule.ScheduleDetailsPage;
+import ai.makeitright.pages.schedule.SchedulePage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;

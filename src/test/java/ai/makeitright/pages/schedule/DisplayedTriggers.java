@@ -1,4 +1,4 @@
-package ai.makeitright.pages.schedules;
+package ai.makeitright.pages.schedule;
 
 public class DisplayedTriggers {
 
