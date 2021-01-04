@@ -1,19 +1,39 @@
 package ai.makeitright.pages.schedule;
 
+import org.openqa.selenium.WebElement;
+
 public class DisplayedTriggers {
 
-    private String workflowName;
+    private WebElement btnDelete;
+    private WebElement btnPause;
+    private WebElement btnResume;
+    private String scheduleTriggerName;
     private String triggerDetails;
     private String nextRun;
     private String finishDate;
+
+    public DisplayedTriggers setBtnDelete(WebElement btnDelete) {
+        this.btnDelete = btnDelete;
+        return this;
+    }
+
+    public DisplayedTriggers setBtnPause(WebElement btnPause) {
+        this.btnPause = btnPause;
+        return this;
+    }
+
+    public DisplayedTriggers setBtnResume(WebElement btnResume) {
+        this.btnResume = btnResume;
+        return this;
+    }
 
     public DisplayedTriggers setTriggerDetails(String details) {
         this.triggerDetails = details;
         return this;
     }
 
-    public DisplayedTriggers setWorkflowName(String name) {
-        this.workflowName = name;
+    public DisplayedTriggers setScheduleTriggerName(String name) {
+        this.scheduleTriggerName = name;
         return this;
     }
 
@@ -31,8 +51,8 @@ public class DisplayedTriggers {
         return triggerDetails;
     }
 
-    public String getWorkflowName() {
-        return workflowName;
+    public String getScheduleTriggerName() {
+        return scheduleTriggerName;
     }
 
     public String getNextRun() {

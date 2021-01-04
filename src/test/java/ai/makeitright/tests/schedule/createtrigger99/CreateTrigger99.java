@@ -3,6 +3,7 @@ package ai.makeitright.tests.schedule.createtrigger99;
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.schedule.CreateNewScheduleTriggerModalWindow;
+import ai.makeitright.pages.schedule.DisplayedTriggers;
 import ai.makeitright.pages.schedule.ScheduleDetailsPage;
 import ai.makeitright.pages.schedule.SchedulePage;
 import ai.makeitright.utilities.DriverConfig;
@@ -102,21 +103,31 @@ public class CreateTrigger99 extends DriverConfig {
         switch (executionFrequency.toLowerCase()) {
             case "daily":
                 triggerDetails = "Everyday at " +
-                        LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
+                        LocalTime.NOON.toString();
                 break;
             case "weekly":
                 triggerDetails = "Every " + Methods.getNameOfNextDay() + " at " +
-                        LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
+                        LocalTime.NOON.toString();
                 break;
             case "monthly":
                 triggerDetails = Methods.getOrdinalIndicatorOfNextDay() +
-                        " of every month at " + LocalTime.NOON.toString() + " till " + Methods.getFirstDayOfNextMonth();
+                        " of every month at " + LocalTime.NOON.toString();
                 break;
             case "never":
                 triggerDetails = "At "+ Methods.getDateOfNextDay("dd/MM/YYYY") + " " + LocalTime.NOON.toString();
                 finishDate = "N/A";
                 break;
         }
+
+        leftMenu.openPageBy("Schedule");
+
+        DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
+        Assert.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
+
+        Assert.assertEquals(scheduleName,displayedTriggers.getScheduleTriggerName(),"'Schedule Trigger Name' has not right value");
+        Assert.assertEquals(triggerDetails,displayedTriggers.getTriggerDetails(),"Value for 'Trigger details' columns is not right");
+        Assert.assertEquals(nextRun, displayedTriggers.getNextRun(),"Value for 'Next run' column is not right");
+        Assert.assertEquals(finishDate, displayedTriggers.getFinishDate(),"Value for 'Finish date' column is not right");
     }
 
     @AfterTest
