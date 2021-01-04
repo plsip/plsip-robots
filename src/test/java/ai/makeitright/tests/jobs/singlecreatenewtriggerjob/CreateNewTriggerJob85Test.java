@@ -2,7 +2,7 @@ package ai.makeitright.tests.jobs.singlecreatenewtriggerjob;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
-import ai.makeitright.pages.schedules.SchedulePage;
+import ai.makeitright.pages.schedule.SchedulePage;
 import ai.makeitright.pages.testplans.TestPlansPage;
 import ai.makeitright.pages.workflows.CreateJobModalWindow;
 import ai.makeitright.pages.workflows.WorkflowsPage;
@@ -78,9 +78,9 @@ public class CreateNewTriggerJob85Test extends DriverConfig {
 
         Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
         createJobModalWindow
-                .clickSaveAndGoToCollectionButton()
+                .clickSaveAndGoToArgumentsCollectionsAndTagsButton()
                 .chooseGlobalArgumentsCollection(argumentsCollection)
-                .clickSaveAndGoToValuesButton();
+                .clickSaveAndGoToArgumentsValuesButton();
         Assert.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
                 "An incorrect collection was selected.");
         Main.report.logPass("The correct collection was chosen: " + argumentsCollection);

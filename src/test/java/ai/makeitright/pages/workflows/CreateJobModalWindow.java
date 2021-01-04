@@ -2,7 +2,7 @@ package ai.makeitright.pages.workflows;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.jobs.JobDetailsPage;
-import ai.makeitright.pages.schedules.TriggerDetailsPage;
+import ai.makeitright.pages.schedule.TriggerDetailsPage;
 import ai.makeitright.utilities.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -20,7 +20,7 @@ public class CreateJobModalWindow extends BasePage {
     private WebElement btnNextMonth;
 
     @FindBy(xpath = "//div[@class='Polaris-ButtonGroup']/div/button[@class='Polaris-Button Polaris-Button--primary']")
-    private WebElement btnSaveAndGo;
+    private WebElement btnCreateJob, btnSaveAndGo, btnSaveAndGoToArgumentsValues, btnSaveAndGoToSchedule, btnSaveAndGoToArgumentsCollectionsAndTags;
 
     @FindBy(xpath = "//input[@name='SearchArgument']")
     private WebElement inpGlobalArguments;
@@ -85,9 +85,9 @@ public class CreateJobModalWindow extends BasePage {
         return true;
     }
 
-    public CreateJobModalWindow clickSaveAndGoToCollectionButton() {
-        waitForVisibilityOf(btnSaveAndGo);
-        click(btnSaveAndGo, "'Save and go to Arguments collection' button");
+    public CreateJobModalWindow clickSaveAndGoToArgumentsCollectionsAndTagsButton() {
+        waitForVisibilityOf(btnSaveAndGoToArgumentsCollectionsAndTags);
+        click(btnSaveAndGoToArgumentsCollectionsAndTags, "'Save and go to Arguments collections and tags' button");
         return this;
     }
 
@@ -106,18 +106,19 @@ public class CreateJobModalWindow extends BasePage {
     }
 
     public boolean checkIfCorrectCollectionIsDisplayed(String name) {
+        Main.report.logInfo("Check if correct collection is displayed");
         return collectionName.getText().equals(name);
     }
 
-    public CreateJobModalWindow clickSaveAndGoToValuesButton() {
-        waitForVisibilityOf(btnSaveAndGo);
-        click(btnSaveAndGo, "'Save and go to Arguments values' button");
+    public CreateJobModalWindow clickSaveAndGoToArgumentsValuesButton() {
+        waitForVisibilityOf(btnSaveAndGoToArgumentsValues);
+        click(btnSaveAndGoToArgumentsValues, "'Save and go to Arguments values' button");
         return this;
     }
 
     public CreateJobModalWindow clickSaveAndGoToScheduleButton() {
-        waitForVisibilityOf(btnSaveAndGo);
-        click(btnSaveAndGo, "'Save and go to Schedule' button");
+        waitForVisibilityOf(btnSaveAndGoToSchedule);
+        click(btnSaveAndGoToSchedule, "'Save and go to Schedule' button");
         return this;
     }
 
@@ -188,8 +189,8 @@ public class CreateJobModalWindow extends BasePage {
     }
 
     public CreateJobModalWindow clickCreateJobButton() {
-        waitForVisibilityOf(btnSaveAndGo);
-        click(btnSaveAndGo, "'Create job' button");
+        waitForVisibilityOf(btnCreateJob);
+        click(btnCreateJob, "'Create job' button");
         return this;
     }
 

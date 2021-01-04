@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.GregorianCalendar;
 
 public class Methods extends Main {
@@ -21,12 +22,8 @@ public class Methods extends Main {
 
     public static String getFirstDayOfNextMonth() {
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-//        if (currentDate.getMonth().toString().equals("DECEMBER")) {
-//            return formatter.format(currentDate.plusYears(1).plusMonths(1).withDayOfMonth(1));
-//        } else {
-            return formatter.format(currentDate.plusMonths(1).withDayOfMonth(1));
-//        }
+        LocalDate firstDayOfNextMonth = currentDate.with(TemporalAdjusters.firstDayOfNextMonth());
+        return firstDayOfNextMonth.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public static String getOrdinalIndicatorOfNextDay() {
@@ -48,6 +45,9 @@ public class Methods extends Main {
 
     public static String getDateOfNextDay(String format) {
         LocalDate currentDate = LocalDate.now();
+        Main.report.logInfo("Today is: " + currentDate);
+        Main.report.logInfo("Next day will be: " + DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1)));
+        Main.report.logInfo("Use: " + currentDate.plusDays(1));
         return DateTimeFormatter.ofPattern(format).format(currentDate.plusDays(1));
     }
 

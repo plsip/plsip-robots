@@ -1,4 +1,4 @@
-package ai.makeitright.pages.schedules;
+package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
@@ -39,17 +39,13 @@ public class ScheduleTable extends BasePage {
         WebElement row = getDesirableRow(triggerID);
         List<WebElement> rowColumns = row.findElements(By.xpath(".//td"));
         DisplayedTriggers displayedTriggers = new DisplayedTriggers()
-                .setWorkflowName(rowColumns.get(WORKFLOW_NAME).getText())
+                .setScheduleTriggerName(rowColumns.get(SCHEDULETRIGGER_NAME).getText())
                 .setTriggerDetails(rowColumns.get(TRIGGER_DETAILS).getText())
                 .setNextRun(rowColumns.get(NEXT_RUN).getText())
-                .setFinishDate(rowColumns.get(FINISH_DATE).getText());
+                .setFinishDate(rowColumns.get(FINISH_DATE).getText())
+                .setBtnPause(rowColumns.get(BUTTONS).findElement(By.xpath(".//button")));
         return displayedTriggers;
     }
-
-    private final int WORKFLOW_NAME = 0;
-    private final int TRIGGER_DETAILS = 1;
-    private final int NEXT_RUN = 2;
-    private final int FINISH_DATE = 3;
 
     public WebElement getDesirableRow(final String triggerID) {
         do {
@@ -75,4 +71,10 @@ public class ScheduleTable extends BasePage {
             }
         } while (true);
     }
+
+    private final int SCHEDULETRIGGER_NAME = 0;
+    private final int TRIGGER_DETAILS = 1;
+    private final int NEXT_RUN = 2;
+    private final int FINISH_DATE = 3;
+    private final int BUTTONS = 4;
 }
