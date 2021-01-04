@@ -1,4 +1,4 @@
-package ai.makeitright.tests.schedule.createnewscheduletrigger;
+package ai.makeitright.tests.schedule.createnewscheduletrigger99;
 
 import ai.makeitright.pages.common.LeftMenu;
 import ai.makeitright.pages.login.LoginPage;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalTime;
 
-public class CreateNewScheduleTrigger extends DriverConfig {
+public class CreateNewScheduleTrigger99 extends DriverConfig {
 
     //from configuration
     private String executionFrequency;
