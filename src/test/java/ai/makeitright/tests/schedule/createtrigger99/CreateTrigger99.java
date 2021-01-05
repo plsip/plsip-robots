@@ -61,7 +61,7 @@ public class CreateTrigger99 extends DriverConfig {
         LeftMenu leftMenu = loginPage.clickSignInButton();
         leftMenu.openPageBy("Schedule");
 
-        SchedulePage schedulePage = new SchedulePage(driver);
+        SchedulePage schedulePage = new SchedulePage(driver,pfSignInUrl);
         CreateNewScheduleTriggerModalWindow createNewScheduleTriggerModalWindow = schedulePage.clickCreateNewScheduleTriggerButton();
 
         createNewScheduleTriggerModalWindow = createNewScheduleTriggerModalWindow
