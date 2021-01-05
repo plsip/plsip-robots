@@ -2,6 +2,7 @@ package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +35,12 @@ public class SchedulePage extends BasePage {
     @Override
     protected boolean isAt() {
         Assert.assertTrue(waitForBlueCircleDisappear());
-        return jobsHeader.getText().equals("Schedule");
+        if(Methods.returnEnvironment(urlOrParam).equals("STAGING")) {
+            return jobsHeader.getText().equals("Schedules");
+        }
+        else {
+            return jobsHeader.getText().equals("Schedule");
+        }
     }
 
     public SchedulePage(final WebDriver driver) {
