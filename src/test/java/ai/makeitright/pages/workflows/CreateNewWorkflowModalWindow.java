@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class CreateNewWorkflowModalWindow extends BasePage {
 
@@ -83,7 +84,8 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     }
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
-        waitForVisibilityOf(inpWorkflowName);
+        Assert.assertTrue(waitForVisibilityOf(inpWorkflowName),"There was no visible input element 'Workflow name'");
+        Assert.assertTrue(waitForClickable(inpWorkflowName),"There was no clickable input element 'Workflow name'");
         this.workflowName = Methods.getDateTime("yyyyMMddHHmmss") + workflowType + workflowName;
         click(inpWorkflowName, "input element 'Workflow name'");
         new Action(driver).sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
