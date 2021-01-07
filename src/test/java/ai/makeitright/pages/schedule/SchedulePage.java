@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SchedulePage extends BasePage {
 
-    @FindBy(xpath = "//span[text()='Create new Schedule Trigger']")
+    @FindBy(xpath = "//span[text()='Create New Schedule Trigger']")
     private WebElement btnCreateNewScheduleTrigger;
 
     @FindBy(xpath = "//span[text()='Delete trigger']")
