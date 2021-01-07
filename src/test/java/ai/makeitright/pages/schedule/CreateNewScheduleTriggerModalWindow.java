@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateNewScheduleTriggerModalWindow extends BasePage {
 
-    @FindBy(xpath = "//button//span[text()='Create trigger']")
+    @FindBy(xpath = "//button//span[text()='Create Schedule Trigger']")
     private WebElement btnCreateTrigger;
 
     @FindBy(xpath = "//button[contains(@aria-label, 'Show next month')]/span")
@@ -59,8 +59,7 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
-        //return txtHeaderTitle.isDisplayed();
-        return btnCreateTrigger.isDisplayed();
+        return txtHeaderTitle.isDisplayed();
     }
 
     public CreateNewScheduleTriggerModalWindow chooseFirstDayOfNextMonth() {
