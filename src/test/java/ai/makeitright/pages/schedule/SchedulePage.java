@@ -35,12 +35,7 @@ public class SchedulePage extends BasePage {
     @Override
     protected boolean isAt() {
         Assert.assertTrue(waitForBlueCircleDisappear());
-        if(Methods.returnEnvironment(urlOrParam).equals("STAGING")) {
-            return jobsHeader.getText().equals("Schedules");
-        }
-        else {
-            return jobsHeader.getText().equals("Schedule");
-        }
+        return jobsHeader.getText().equals("Schedule");
     }
 
     public SchedulePage(final WebDriver driver) {
