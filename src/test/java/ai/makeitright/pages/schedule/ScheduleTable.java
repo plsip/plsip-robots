@@ -53,6 +53,7 @@ public class ScheduleTable extends BasePage {
             if (tableRows.size() > 0) {
                 for (WebElement row : tableRows) {
                     String name = row.findElement(By.xpath(".//th/a")).getText();
+                    Main.report.logInfo("Check trigger ID :" + name + " equals: " + triggerID);
                     if (name.contains(triggerID)) {
                         Main.report.logPass("The trigger '" + triggerID + "' was found on the platform's 'Schedule' list");
                         return row;
