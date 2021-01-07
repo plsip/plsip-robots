@@ -7,10 +7,15 @@ public class DisplayedTriggers {
     private WebElement btnDelete;
     private WebElement btnPause;
     private WebElement btnResume;
+    private String finishDate;
+    private String nextRun;
+    private WebElement row;
     private String scheduleTriggerName;
     private String triggerDetails;
-    private String nextRun;
-    private String finishDate;
+
+    public WebElement getRow() {
+        return row;
+    }
 
     public DisplayedTriggers setBtnDelete(WebElement btnDelete) {
         this.btnDelete = btnDelete;
@@ -24,6 +29,11 @@ public class DisplayedTriggers {
 
     public DisplayedTriggers setBtnResume(WebElement btnResume) {
         this.btnResume = btnResume;
+        return this;
+    }
+
+    public DisplayedTriggers setRow(WebElement row) {
+        this.row = row;
         return this;
     }
 

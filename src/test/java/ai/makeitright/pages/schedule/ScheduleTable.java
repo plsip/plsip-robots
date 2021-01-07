@@ -43,7 +43,8 @@ public class ScheduleTable extends BasePage {
                 .setTriggerDetails(rowColumns.get(TRIGGER_DETAILS).getText())
                 .setNextRun(rowColumns.get(NEXT_RUN).getText())
                 .setFinishDate(rowColumns.get(FINISH_DATE).getText())
-                .setBtnPause(rowColumns.get(BUTTONS).findElement(By.xpath(".//button")));
+                .setBtnPause(rowColumns.get(BUTTONS).findElement(By.xpath(".//button")))
+                .setRow(row);
         return displayedTriggers;
     }
 

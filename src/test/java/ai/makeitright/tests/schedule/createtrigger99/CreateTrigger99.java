@@ -126,10 +126,11 @@ public class CreateTrigger99 extends DriverConfig {
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
         Assert.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
 
-        Assert.assertEquals(scheduleName,displayedTriggers.getScheduleTriggerName(),"'Schedule Trigger Name' has not right value");
-        Assert.assertEquals(triggerDetails,displayedTriggers.getTriggerDetails(),"Value for 'Trigger details' columns is not right");
-        Assert.assertEquals(nextRun, displayedTriggers.getNextRun(),"Value for 'Next run' column is not right");
-        Assert.assertEquals(finishDate, displayedTriggers.getFinishDate(),"Value for 'Finish date' column is not right");
+        schedulePage.moveScrollToELement(displayedTriggers.getRow());
+        Assert.assertEquals(displayedTriggers.getScheduleTriggerName(),scheduleName,"'Schedule Trigger Name' has not right value");
+        Assert.assertEquals(displayedTriggers.getTriggerDetails(),triggerDetails,"Value for 'Trigger details' columns is not right");
+        Assert.assertEquals(displayedTriggers.getNextRun(),nextRun,"Value for 'Next run' column is not right: ");
+        Assert.assertEquals(displayedTriggers.getFinishDate(),finishDate,"Value for 'Finish date' column is not right");
     }
 
     @AfterTest
