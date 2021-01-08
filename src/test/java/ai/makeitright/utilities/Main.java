@@ -11,6 +11,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import java.io.File;
 import java.io.IOException;
 
 @Listeners({ConfigurationListener.class})
@@ -47,6 +48,7 @@ public abstract class Main {
         } else if(result.getStatus() == ITestResult.SUCCESS && Main.slackFlag.equals("true")) {
             SlackHandle.sendSuccessSlackMessage(Main.hookUrl, Main.channel, Main.pfSignInUrl, Main.taskname);
         }
+
     }
 
     @AfterSuite
@@ -54,5 +56,18 @@ public abstract class Main {
         if (driver != null)
             driver.quit();
         report.closeRaport();
+        try {
+            File folder = new File(Main.artifactsPath);
+            File[] listOfFiles = folder.listFiles();
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    System.out.println("File " + listOfFiles[i].getName());
+                } else if (listOfFiles[i].isDirectory()) {
+                    System.out.println("Directory " + listOfFiles[i].getName());
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
