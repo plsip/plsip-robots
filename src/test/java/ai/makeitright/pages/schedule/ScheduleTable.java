@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class ScheduleTable extends BasePage {
 
     public DisplayedTriggers getTriggersRowData(String triggerID) {
         WebElement row = getDesirableRow(triggerID);
+        Assert.assertNotNull(row,"Can't read values for trigger, which was not found");
         List<WebElement> rowColumns = row.findElements(By.xpath(".//td"));
         DisplayedTriggers displayedTriggers = new DisplayedTriggers()
                 .setScheduleTriggerName(rowColumns.get(SCHEDULETRIGGER_NAME).getText())

@@ -122,6 +122,7 @@ public class CreateTrigger99 extends DriverConfig {
         }
 
         leftMenu.openPageBy("Schedule");
+        leftMenu.openPageBy("Schedule");
 
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);
         Assert.assertNotNull(displayedTriggers, "There is no trigger with ID: '" + triggerID + "'");
