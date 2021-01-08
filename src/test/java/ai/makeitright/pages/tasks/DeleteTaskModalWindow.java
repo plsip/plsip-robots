@@ -8,11 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class DeleteTaskModalWindow extends BasePage {
 
-    @FindBy(xpath = "//div[@class='Polaris-Modal-Dialog']//button/span/span[text()='Delete Task']")
-    private WebElement btnDeleteTask;
-
-    @FindBy(xpath = "//div[@class='Polaris-Modal-Dialog']//button/span/span[text()='Delete Test']")
-    private WebElement btnDeleteTest;
+    @FindBy(xpath = "//div[@class='Polaris-Modal-Dialog']//button/span/span[text()='Delete']")
+    private WebElement btnDelete;
 
     @FindBy(xpath = "//span[text()='delete the task ']/span[@style='font-weight: bold; max-width: 20ch; display: inline;']")
     private WebElement txtTaskName;
@@ -30,12 +27,7 @@ public class DeleteTaskModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
-        if (urlOrParam.equals("TA")) {
-            return btnDeleteTest.isDisplayed();
-        } else {
-            return btnDeleteTask.isDisplayed();
-        }
-
+        return btnDelete.isDisplayed();
     }
 
 
@@ -52,9 +44,9 @@ public class DeleteTaskModalWindow extends BasePage {
 
     public TasksPage clickDeleteTask(String pfGlossary) {
         if (pfGlossary.equals("TA")) {
-            click(btnDeleteTest, "button 'Delete Test'");
+            click(btnDelete, "button 'Delete'");
         } else {
-            click(btnDeleteTask, "button 'Delete Task'");
+            click(btnDelete, "button 'Delete'");
         }
         return new TasksPage(driver, pfGlossary);
     }

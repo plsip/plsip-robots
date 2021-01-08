@@ -14,8 +14,8 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//main//button/span/span[text()='Delete Task']")
     private WebElement btnDeleteTask;
 
-    @FindBy(xpath = "//main//button/span/span[text()='Delete Test']")
-    private WebElement btnDeleteTest;
+    @FindBy(xpath = "//main//button/span/span[text()='Delete']")
+    private WebElement btnDelete;
 
     @FindBy(xpath = "//div[@id='processes-commits-panel']//div[@class='Polaris-Stack__Item']/div[@class='commits-list']")
     private WebElement lstCommits;
@@ -50,7 +50,7 @@ public class TaskDetailsPage extends BasePage {
     }
 
     public DeleteTaskModalWindow clickDeleteTestButton(String param) {
-        click(btnDeleteTest, "button 'Delete Test'");
+        click(btnDelete, "button 'Delete'");
         return new DeleteTaskModalWindow(driver, param);
     }
 
