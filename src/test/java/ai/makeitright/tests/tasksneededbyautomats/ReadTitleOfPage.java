@@ -39,5 +39,4 @@ public class ReadTitleOfPage extends DriverConfig {
         obj.put("title", title);
         System.setProperty("output", obj.toString());
     }
-
 }

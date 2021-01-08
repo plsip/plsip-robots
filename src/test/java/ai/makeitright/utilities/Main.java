@@ -56,17 +56,19 @@ public abstract class Main {
         if (driver != null)
             driver.quit();
         report.closeRaport();
-        System.out.println("&&&&&& KASIA &&&&&&&&");
+        System.out.println("&&&&&& START KASIA &&&&&&&&");
+        System.out.println("Check contains of folder: " + Main.artifactsPath);
         try {
             File folder = new File(Main.artifactsPath);
             File[] listOfFiles = folder.listFiles();
             for (int i = 0; i < listOfFiles.length; i++) {
                 if (listOfFiles[i].isFile()) {
-                    System.out.println("File " + listOfFiles[i].getName());
+                    System.out.println("&&& File " + listOfFiles[i].getName());
                 } else if (listOfFiles[i].isDirectory()) {
                     System.out.println("Directory " + listOfFiles[i].getName());
                 }
             }
+            System.out.println("&&&&&& END KASIA &&&&&&&&");
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
