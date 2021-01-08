@@ -26,9 +26,9 @@ public class ReadTitleOfPage extends DriverConfig {
         url = System.getProperty("inputParameters.url");
         System.out.println("CHeck at the beginning if there is something in directory");
         System.out.println("&&&&&& BEFORE TEST START KASIA &&&&&&&&");
-        System.out.println("Check contains of folder: " + Main.artifactsPath);
+        System.out.println("Check contains of folder: " + System.getProperty("ARTIFACTS_PATH"));
         try {
-            File folder = new File(Main.artifactsPath);
+            File folder = new File(System.getProperty("ARTIFACTS_PATH"));
             File[] listOfFiles = folder.listFiles();
             for (int i = 0; i < listOfFiles.length; i++) {
                 if (listOfFiles[i].isFile()) {

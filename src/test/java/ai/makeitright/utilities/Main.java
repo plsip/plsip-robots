@@ -19,7 +19,7 @@ public abstract class Main {
 
     public static WebDriver driver;
     public static Reporter report;
-    public static String artifactsPath = System.getProperty("ARTIFACTS_PATH");
+    public String artifactsPath = System.getProperty("ARTIFACTS_PATH");
     public final static String reportName = "Report.html";
     public static WebDriverWait wait;
 
@@ -57,9 +57,8 @@ public abstract class Main {
             driver.quit();
         report.closeRaport();
         System.out.println("&&&&&& START KASIA &&&&&&&&");
-        System.out.println("Check contains of folder: " + Main.artifactsPath);
         try {
-            File folder = new File(Main.artifactsPath);
+            File folder = new File(System.getProperty("ARTIFACTS_PATH"));
             File[] listOfFiles = folder.listFiles();
             for (int i = 0; i < listOfFiles.length; i++) {
                 if (listOfFiles[i].isFile()) {
