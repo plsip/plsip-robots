@@ -48,6 +48,7 @@ public class ReadTitleOfPage extends DriverConfig {
         driver.get(url);
         title = driver.getTitle();
         Assert.assertEquals(title, expectedTitle, "The title of page is not like expected");
+
     }
 
     @AfterTest
