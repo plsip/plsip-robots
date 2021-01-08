@@ -56,6 +56,7 @@ public abstract class Main {
         if (driver != null)
             driver.quit();
         report.closeRaport();
+        System.out.println("&&&&&& KASIA &&&&&&&&");
         try {
             File folder = new File(Main.artifactsPath);
             File[] listOfFiles = folder.listFiles();
