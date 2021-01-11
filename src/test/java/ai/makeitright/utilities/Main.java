@@ -56,7 +56,7 @@ public abstract class Main {
         if (driver != null)
             driver.quit();
         report.closeRaport();
-        System.out.println("&&&&&& START KASIA &&&&&&&&");
+        System.out.println("&&&&&& START checking artifacts path &&&&&&&&");
         try {
             File folder = new File(System.getProperty("ARTIFACTS_PATH"));
             File[] listOfFiles = folder.listFiles();
@@ -67,7 +67,7 @@ public abstract class Main {
                     System.out.println("Directory " + listOfFiles[i].getName());
                 }
             }
-            System.out.println("&&&&&& END KASIA &&&&&&&&");
+            System.out.println("&&&&&& END checking artifacts path &&&&&&&&");
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }

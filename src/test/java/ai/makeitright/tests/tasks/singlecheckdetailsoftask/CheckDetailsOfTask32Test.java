@@ -135,12 +135,8 @@ public class CheckDetailsOfTask32Test extends DriverConfig {
         taskDetailsPage = tasksPage.clickTaskNameLink(displayedTasks.getLnkName(), taskName);
         Assert.assertEquals(taskDetailsPage.getName(),taskName,"Name of task on details page is not right");
 
-        DeleteTaskModalWindow deleteTaskModalWindow;
-        if (pfGlossary.equals("TA")) {
-            deleteTaskModalWindow = taskDetailsPage.clickDeleteTestButton(pfGlossary);
-        } else {
-            deleteTaskModalWindow = taskDetailsPage.clickDeleteTaskButton(pfGlossary);
-        }
+        DeleteTaskModalWindow deleteTaskModalWindow = taskDetailsPage.clickDeleteButton(pfGlossary);
+
 
         Assert.assertTrue(deleteTaskModalWindow.checkTaskNameToDelete(taskName, pfGlossary));
         Main.report.logPass("Task name on modal window is right");

@@ -11,9 +11,6 @@ public class TaskDetailsPage extends BasePage {
     @FindBy(xpath = "//span[text()='ASSIGNED FOLDER IN REPOSITORY']//following-sibling::div//button")
     private WebElement btnCopy;
 
-    @FindBy(xpath = "//main//button/span/span[text()='Delete Task']")
-    private WebElement btnDeleteTask;
-
     @FindBy(xpath = "//main//button/span/span[text()='Delete']")
     private WebElement btnDelete;
 
@@ -44,12 +41,7 @@ public class TaskDetailsPage extends BasePage {
         super(driver);
     }
 
-    public DeleteTaskModalWindow clickDeleteTaskButton(String param) {
-        click(btnDeleteTask, "button 'Delete Task'");
-        return new DeleteTaskModalWindow(driver, param);
-    }
-
-    public DeleteTaskModalWindow clickDeleteTestButton(String param) {
+    public DeleteTaskModalWindow clickDeleteButton(String param) {
         click(btnDelete, "button 'Delete'");
         return new DeleteTaskModalWindow(driver, param);
     }
