@@ -5,6 +5,7 @@ import ai.makeitright.utilities.Main;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class DeleteTaskModalWindow extends BasePage {
 
@@ -27,6 +28,8 @@ public class DeleteTaskModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
+        waitForBlueCircleDisappear();
+        Assert.assertTrue(waitForVisibilityOf(btnDelete));
         return btnDelete.isDisplayed();
     }
 

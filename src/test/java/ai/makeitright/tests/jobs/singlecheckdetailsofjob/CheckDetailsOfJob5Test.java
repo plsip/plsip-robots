@@ -112,6 +112,10 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
         JobsPage jobsPage = new JobsPage(driver);
         jobsPage.filterJob(jobID);
 
+        Main.report.logInfo("Check if only one row was searched");
+        Assert.assertTrue(jobsPage.checkIfOneJobIsDisplayed(),"There's not visible only one row of job with the specified ID");
+        Main.report.logPass("One row is displayed in the Users table");
+
         DisplayedJobs displayedJobs = jobsPage.getJobsTable().getJobsFirstRowData();
         Assert.assertNotNull(displayedJobs, "There is no job with ID: '" + jobID + "'");
 
@@ -168,10 +172,18 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
                 "The 'Jira integration' section should be present");
         Main.report.logPass("The 'Jira integration' section is displayed");
 
-        Assert.assertTrue(jobDetailsPage.checkResultsButtonExist(),
-                "'Show results' button should be visible and clickable");
-        Main.report.logPass("'Show results' button is visible and clickable");
-        Main.report.logPass("**********Test has been completed successfully!");
+
+        if(!(jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Executing")) &&
+                (jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Creating")) &&
+                (jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Pending")) &&
+                (jobDetailsPage.getJobStatus().substring(jobDetailsPage.getJobStatus().lastIndexOf(" ")+1).equals("Building"))){
+            Assert.assertTrue(jobDetailsPage.checkResultsButtonExist(),
+                    "'Show results' button should be visible and clickable");
+            Main.report.logPass("'Show results' button is visible and clickable");
+        } else {
+            Main.report.logFail("The status of job was 'Executing', 'Creating', 'Pending' or 'Building', so there is no check for displaying 'Show result' button");
+        }
+
     }
 
     @AfterTest
@@ -179,5 +191,8 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
         JSONObject obj = new JSONObject();
         obj.put("jobID", jobID);
         System.setProperty("output", obj.toString());
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 }

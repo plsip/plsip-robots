@@ -1,6 +1,7 @@
 package ai.makeitright.tests.users.displayuserdetails15;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.users.DisplayedUsers;
 import ai.makeitright.pages.users.UserDetailsPage;
@@ -9,6 +10,7 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -104,6 +106,13 @@ public class DisplayUserDetails15Test extends DriverConfig {
         Main.report.logInfo("Check there is date for 'CREATED'");
         Assert.assertNotEquals(userDetailsPage.getCreatedDate(),"","Created date is empty");
         Main.report.logPass("Created date: '" + userDetailsPage.getCreatedDate() + "'");
+    }
+
+    @AfterTest
+    public void after() {
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 
 }

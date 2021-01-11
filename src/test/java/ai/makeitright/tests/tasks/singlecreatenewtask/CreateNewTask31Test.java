@@ -2,6 +2,7 @@ package ai.makeitright.tests.tasks.singlecreatenewtask;
 
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.tasks.*;
 import ai.makeitright.utilities.DriverConfig;
@@ -135,5 +136,8 @@ public class CreateNewTask31Test extends DriverConfig {
         obj.put("technology",technology);
         obj.put("scriptDirectory",repository + "tree/master/" + scriptDirectory);
         System.setProperty("output", obj.toString());
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 }

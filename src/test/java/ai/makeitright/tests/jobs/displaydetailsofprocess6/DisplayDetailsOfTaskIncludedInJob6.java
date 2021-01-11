@@ -1,6 +1,7 @@
 package ai.makeitright.tests.jobs.displaydetailsofprocess6;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.jobs.DisplayedJobs;
 import ai.makeitright.pages.jobs.DisplayedTasks;
 import ai.makeitright.pages.jobs.JobDetailsPage;
@@ -9,7 +10,9 @@ import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.tasks.TaskDetailsPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.json.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -55,7 +58,7 @@ public class DisplayDetailsOfTaskIncludedInJob6 extends DriverConfig {
         jobsPage.filterJob(jobID);
 
         Main.report.logInfo("Check if only one row was searched");
-        Assert.assertTrue(jobsPage.checkIfOneJobIsDisplayed(),"There's not one row visible");
+        Assert.assertTrue(jobsPage.checkIfOneJobIsDisplayed(),"There's not visible only one row of job with the specified ID");
         Main.report.logPass("One row is displayed in the Users table");
 
         DisplayedJobs displayedJobs = jobsPage.getJobsTable().getJobsFirstRowData();
@@ -68,6 +71,12 @@ public class DisplayDetailsOfTaskIncludedInJob6 extends DriverConfig {
 
         Assert.assertEquals(taskDetailsPage.getName(),displayedTasks.getName(),"The name of task is not was expected");
 
+    }
 
+    @AfterTest
+    public void after() {
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 }

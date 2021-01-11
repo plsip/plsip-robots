@@ -42,14 +42,15 @@ public class TaskDetailsPage extends BasePage {
     }
 
     public DeleteTaskModalWindow clickDeleteButton(String param) {
+        waitForClickable(btnDelete);
         click(btnDelete, "button 'Delete'");
         return new DeleteTaskModalWindow(driver, param);
     }
 
     public boolean checkListOfCommitsIsDisplayed() {
-        waitForBlueCircleDisappear();
         Main.report.logInfo("Check if list of commits is displayed");
         try {
+            waitLongForVisibilityOf(lstCommits);
             lstCommits.isDisplayed();
             Main.report.logPass("List of commits is displayed");
             return true;

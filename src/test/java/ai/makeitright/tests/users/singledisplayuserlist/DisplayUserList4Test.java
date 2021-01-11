@@ -1,11 +1,14 @@
 package ai.makeitright.tests.users.singledisplayuserlist;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.users.UsersPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.json.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -50,6 +53,13 @@ public class DisplayUserList4Test extends DriverConfig {
         Assert.assertTrue(usersPage.isUserRowDisplayed(), "There is no visible any row with user");
         Main.report.logPass("On the page is table with at least one user row");
 
+    }
+
+    @AfterTest
+    public void after() {
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 
 }

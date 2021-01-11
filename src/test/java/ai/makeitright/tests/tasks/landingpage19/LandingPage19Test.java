@@ -1,11 +1,14 @@
 package ai.makeitright.tests.tasks.landingpage19;
 
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.tasks.TasksPage;
 import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
+import org.json.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -96,5 +99,10 @@ public class LandingPage19Test extends DriverConfig {
         Main.report.logPass("Left menu options are right");
     }
 
-
+    @AfterTest
+    public void after() {
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
+    }
 }
