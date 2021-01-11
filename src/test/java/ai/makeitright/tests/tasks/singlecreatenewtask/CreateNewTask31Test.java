@@ -44,7 +44,7 @@ public class CreateNewTask31Test extends DriverConfig {
     }
 
     @Test
-    public void createNewTask() {
+    public void createNewTask() throws InterruptedException {
 
         driver.get(pfSignInUrl);
 

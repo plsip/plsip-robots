@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.sql.Time;
+
 public class TaskDetailsPage extends BasePage {
 
     @FindBy(xpath = "//span[text()='ASSIGNED FOLDER IN REPOSITORY']//following-sibling::div//button")
@@ -41,8 +43,9 @@ public class TaskDetailsPage extends BasePage {
         super(driver);
     }
 
-    public DeleteTaskModalWindow clickDeleteButton(String param) {
+    public DeleteTaskModalWindow clickDeleteButton(String param) throws InterruptedException {
         waitForClickable(btnDelete);
+        Thread.sleep(1000);
         click(btnDelete, "button 'Delete'");
         return new DeleteTaskModalWindow(driver, param);
     }

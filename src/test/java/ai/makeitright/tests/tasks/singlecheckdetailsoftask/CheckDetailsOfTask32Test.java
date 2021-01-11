@@ -44,7 +44,7 @@ public class CheckDetailsOfTask32Test extends DriverConfig {
     }
 
     @Test
-    public void checkDetailsOfTask() {
+    public void checkDetailsOfTask() throws InterruptedException {
         Main.report.logInfo("******************************\nBefore test - create new task/test:\n");
         driver.get(pfSignInUrl);
         LoginPage loginPage = new LoginPage(driver, pfSignInUrl, pfOrganizationCardName);

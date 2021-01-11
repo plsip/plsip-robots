@@ -43,7 +43,7 @@ public class DeleteTask190Test extends DriverConfig {
     }
 
     @Test
-    public void deleteTask() {
+    public void deleteTask() throws InterruptedException {
         Main.report.logInfo("********Before test - create new task");
         driver.get(pfSignInUrl);
 
