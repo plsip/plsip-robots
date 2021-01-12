@@ -115,9 +115,7 @@ public class EditToken36Test extends DriverConfig {
 
         AlertStatusPopupWindow alertStatusPopupWindow = new AlertStatusPopupWindow(driver);
         alertStatusPopupWindow.waitForAlertWindowDisappear();
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
+
     }
 
     @AfterTest
@@ -125,7 +123,9 @@ public class EditToken36Test extends DriverConfig {
         JSONObject obj = new JSONObject();
         obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
-
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 
 }

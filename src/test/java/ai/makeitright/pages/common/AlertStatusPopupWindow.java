@@ -2,6 +2,7 @@ package ai.makeitright.pages.common;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -112,6 +113,6 @@ public class AlertStatusPopupWindow extends BasePage {
         }
     }
     public boolean waitForAlertWindowDisappear() {
-        return wait.until(ExpectedConditions.invisibilityOf(txtStatus));
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//p[@class='Polaris-Heading']")));
     }
 }
