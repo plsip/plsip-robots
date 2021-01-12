@@ -45,7 +45,6 @@ public class TaskDetailsPage extends BasePage {
 
     public DeleteTaskModalWindow clickDeleteButton(String param) throws InterruptedException {
         waitForClickable(btnDelete);
-        Thread.sleep(1000);
         click(btnDelete, "button 'Delete'");
         return new DeleteTaskModalWindow(driver, param);
     }

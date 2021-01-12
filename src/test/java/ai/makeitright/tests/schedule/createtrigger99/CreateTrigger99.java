@@ -121,7 +121,7 @@ public class CreateTrigger99 extends DriverConfig {
                 break;
         }
 
-        leftMenu.openPageBy("Schedule");
+//        leftMenu.openPageBy("Schedule");
         leftMenu.openPageBy("Schedule");
 
         DisplayedTriggers displayedTriggers = schedulePage.getTriggersTable().getTriggersRowData(triggerID);

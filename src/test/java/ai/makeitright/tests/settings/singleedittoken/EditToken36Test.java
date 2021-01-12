@@ -2,6 +2,7 @@ package ai.makeitright.tests.settings.singleedittoken;
 
 import ai.makeitright.pages.common.AlertStatusPopupWindow;
 import ai.makeitright.pages.common.LeftMenu;
+import ai.makeitright.pages.common.TopPanel;
 import ai.makeitright.pages.gitlab.*;
 import ai.makeitright.pages.login.LoginPage;
 import ai.makeitright.pages.settings.RepositoryPage;
@@ -111,6 +112,9 @@ public class EditToken36Test extends DriverConfig {
 
         repositoryPage.clickDetachRepositoryButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
+        TopPanel topPanel = new TopPanel(driver);
+        topPanel.clickTopPanelButton()
+                .clickLogOutLink();
     }
 
     @AfterTest
@@ -118,6 +122,7 @@ public class EditToken36Test extends DriverConfig {
         JSONObject obj = new JSONObject();
         obj.put("projectName", projectName);
         System.setProperty("output", obj.toString());
+
     }
 
 }

@@ -29,7 +29,6 @@ public class DeleteTaskModalWindow extends BasePage {
     @Override
     protected boolean isAt() {
         waitForBlueCircleDisappear();
-        Assert.assertTrue(waitForVisibilityOf(btnDelete));
         return btnDelete.isDisplayed();
     }
 
@@ -46,11 +45,7 @@ public class DeleteTaskModalWindow extends BasePage {
     }
 
     public TasksPage clickDeleteTask(String pfGlossary) {
-        if (pfGlossary.equals("TA")) {
-            click(btnDelete, "button 'Delete'");
-        } else {
-            click(btnDelete, "button 'Delete'");
-        }
+        click(btnDelete, "button 'Delete'");
         return new TasksPage(driver, pfGlossary);
     }
 }
