@@ -112,6 +112,9 @@ public class EditToken36Test extends DriverConfig {
 
         repositoryPage.clickDetachRepositoryButton(repositoryAddress);
         repositoryPage.confirmDetachButton();
+
+        AlertStatusPopupWindow alertStatusPopupWindow = new AlertStatusPopupWindow(driver);
+        alertStatusPopupWindow.waitForAlertWindowDisappear();
         TopPanel topPanel = new TopPanel(driver);
         topPanel.clickTopPanelButton()
                 .clickLogOutLink();

@@ -5,6 +5,8 @@ import ai.makeitright.utilities.Main;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class AlertStatusPopupWindow extends BasePage {
@@ -19,6 +21,8 @@ public class AlertStatusPopupWindow extends BasePage {
 
     @FindBy(xpath = "//p[@class='Polaris-Heading']")
     private WebElement txtStatus;
+
+    private WebDriverWait wait = new WebDriverWait(driver, 50);
 
     public AlertStatusPopupWindow(final WebDriver driver) {
         super(driver);
@@ -106,5 +110,8 @@ public class AlertStatusPopupWindow extends BasePage {
             Main.report.logFail("There was no message on alert window: " + e.getMessage());
             return false;
         }
+    }
+    public boolean waitForAlertWindowDisappear() {
+        return wait.until(ExpectedConditions.invisibilityOf(txtStatus));
     }
 }
