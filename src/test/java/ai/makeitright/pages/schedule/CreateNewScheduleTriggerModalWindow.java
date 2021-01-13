@@ -2,6 +2,7 @@ package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -50,8 +51,11 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
     )
     private List<WebElement> rowsOfDays;
 
+    private String scheduleName;
+
     @FindBy(xpath = "//div[@class='Polaris-Modal-Header']//*[text()='Create Schedule Trigger']")
     private WebElement txtHeaderTitle;
+
 
     public CreateNewScheduleTriggerModalWindow(final WebDriver driver) {
         super(driver);
@@ -139,8 +143,9 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
         return this;
     }
 
-    public CreateNewScheduleTriggerModalWindow setScheduleTriggerName(String scheduleName) {
-        sendText(inpScheduleTriggerName,scheduleName, "input element 'Schedule Trigger Name'");
-        return this;
+    public String setScheduleTriggerName(String scheduleName) {
+        this.scheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
+        sendText(inpScheduleTriggerName,this.scheduleName, "input element 'Schedule Trigger Name'");
+        return this.scheduleName;
     }
 }

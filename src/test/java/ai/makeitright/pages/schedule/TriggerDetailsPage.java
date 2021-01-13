@@ -2,6 +2,7 @@ package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.pages.common.TopPanel;
+import ai.makeitright.utilities.Main;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,7 +58,11 @@ public class TriggerDetailsPage extends BasePage {
     }
 
     public boolean checkCreatedBy() {
-        return (new TopPanel(driver).getCreatedBy()).equals(txtCreatedBy.getText());
+        String createdBy = txtCreatedBy.getText();
+        Main.report.logInfo("Actual value for 'Created by' in details is: " + createdBy);
+        String user = new TopPanel(driver).getCreatedBy();
+        Main.report.logInfo("User on TC are made: " + user);
+        return user.equals(createdBy);
     }
 
     public String getCreatedBy() {

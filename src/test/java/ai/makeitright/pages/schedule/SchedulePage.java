@@ -50,6 +50,10 @@ public class SchedulePage extends BasePage {
         return driver.findElement(By.xpath("//table[@class='Polaris-DataTable__Table']/tbody")) == null;
     }
 
+    public boolean checkIfOneTriggerIsDisplayed() {
+        return tableRows.size() == 1;
+    }
+
     public boolean checkIfTriggerIsDisplayed(final String triggerID) {
         WebElement trigger = getTriggersTable().getDesirableRow(triggerID);
         return trigger != null;

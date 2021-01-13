@@ -114,7 +114,7 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
 
         Main.report.logInfo("Check if only one row was searched");
         Assert.assertTrue(jobsPage.checkIfOneJobIsDisplayed(),"There's not visible only one row of job with the specified ID");
-        Main.report.logPass("One row is displayed in the Users table");
+        Main.report.logPass("One row is displayed in the Jobs table");
 
         DisplayedJobs displayedJobs = jobsPage.getJobsTable().getJobsFirstRowData();
         Assert.assertNotNull(displayedJobs, "There is no job with ID: '" + jobID + "'");

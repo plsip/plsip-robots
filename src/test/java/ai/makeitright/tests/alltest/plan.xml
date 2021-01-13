@@ -31,21 +31,21 @@
 <!--        <class name="ai.makeitright.tests.tasks.landingpage19.LandingPage19Test"> </class>-->
 <!--    </classes>-->
 <!--    </test>-->
-<!--    <test name="31">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.tasks.singlecreatenewtask.CreateNewTask31Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="31">
+        <classes>
+            <class name="ai.makeitright.tests.tasks.singlecreatenewtask.CreateNewTask31Test"> </class>
+        </classes>
+    </test>
 <!--    <test name="32">-->
 <!--        <classes>-->
 <!--            <class name="ai.makeitright.tests.tasks.singlecheckdetailsoftask.CheckDetailsOfTask32Test"> </class>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="36">
-        <classes>
-            <class name="ai.makeitright.tests.settings.singleedittoken.EditToken36Test"> </class>
-        </classes>
-    </test>
+<!--    <test name="36">-->
+<!--        <classes>-->
+<!--            <class name="ai.makeitright.tests.settings.singleedittoken.EditToken36Test"> </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 <!--    <test name="37">-->
 <!--        <classes>-->
 <!--            <class name="ai.makeitright.tests.settings.singledetachgitlabrepository.DetachGitLabRepository37Test"> </class>-->
