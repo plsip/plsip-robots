@@ -61,7 +61,7 @@ public class TriggerDetailsPage extends BasePage {
         String createdBy = txtCreatedBy.getText();
         Main.report.logInfo("Actual value for 'Created by' in details is: " + createdBy);
         String user = new TopPanel(driver).getCreatedBy();
-        Main.report.logInfo("User on TC are made: " + user);
+        Main.report.logInfo("User from top panel: " + user);
         moveScrollToELement(txtCreatedBy);
         return user.equals(createdBy);
     }
