@@ -139,10 +139,13 @@ public abstract class BasePage {
     }
 
     public boolean waitForClickable(final WebElement element) {
+        Main.report.logInfo("Wait for clickable element ");
         try {
             new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(element));
+            Main.report.logInfo("Element is clickable");
             return true;
         } catch (Exception e) {
+            Main.report.logFail("Element was not clickable");
             return false;
         }
     }
