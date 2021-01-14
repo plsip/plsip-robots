@@ -65,9 +65,9 @@ public class CreateTrigger99 extends DriverConfig {
         SchedulePage schedulePage = new SchedulePage(driver,pfSignInUrl);
         CreateNewScheduleTriggerModalWindow createNewScheduleTriggerModalWindow = schedulePage.clickCreateNewScheduleTriggerButton();
 
-        String allScheduleName = createNewScheduleTriggerModalWindow
-                .setScheduleTriggerName(scheduleName);
+        String allScheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
         createNewScheduleTriggerModalWindow = createNewScheduleTriggerModalWindow
+                .setScheduleTriggerName(scheduleName)
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTime(LocalTime.NOON.toString());
