@@ -224,10 +224,13 @@ public abstract class BasePage {
     }
 
     public boolean waitForVisibilityOfAllElements(List<WebElement> elements) {
+        Main.report.logInfo("Wait for visibility of all elements");
         try {
             new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(elements));
+            Main.report.logPass("All elements are visible");
             return true;
         } catch (Exception e) {
+            Main.report.logFail("All Element aren't visible");
             return false;
         }
     }
