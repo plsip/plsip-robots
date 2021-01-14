@@ -83,6 +83,7 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
         waitForVisibilityOfAllElements(rowsOfDays);
         for (WebElement row : rowsOfDays) {
             try {
+                waitForClickable(row.findElement(By.xpath(".//button[text()='" + day + "']")));
                 row.findElement(By.xpath(".//button[text()='" + day + "']")).click();
                 Main.report.logPass("The following day was found in calendar: " + day);
                 return this;
