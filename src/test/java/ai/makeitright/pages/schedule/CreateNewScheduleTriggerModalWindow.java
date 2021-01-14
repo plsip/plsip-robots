@@ -63,7 +63,7 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return txtHeaderTitle.isDisplayed();
+        return waitShortForVisibilityOf(txtHeaderTitle);
     }
 
     public CreateNewScheduleTriggerModalWindow chooseFirstDayOfNextMonth() {

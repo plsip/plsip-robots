@@ -16,14 +16,14 @@ public class ScheduleDetailsPage extends BasePage {
 
     @Override
     protected boolean isAt() {
-        return txtHeader.getText().equals(urlOrParam);
+        return waitShortForTextToBePresentInElement(txtHeader,urlOrParam);
     }
 
     public ScheduleDetailsPage(final WebDriver driver) {
         super(driver);
     }
 
-    public ScheduleDetailsPage(final WebDriver driver, String header) {
+    public ScheduleDetailsPage(WebDriver driver, String header) {
         super(driver, header);
     }
 

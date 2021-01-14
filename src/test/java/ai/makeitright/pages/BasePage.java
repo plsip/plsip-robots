@@ -187,6 +187,15 @@ public abstract class BasePage {
         }
     }
 
+    public boolean waitShortForTextToBePresentInElement(WebElement element, String text) {
+        try {
+            new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(element,text));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean waitShortForVisibilityOf(final WebElement element) {
         try {
             new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(element));
