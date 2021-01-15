@@ -128,7 +128,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             Main.report.logPass("Workflow has right value for 'Name'");
             Assert.assertEquals(displayedWorkflows.getCreatedBy(),new TopPanel(driver).getCreatedBy(), "The value 'Created by' wor workflow " + workflowName + " is not like expected");
             Main.report.logPass("Workflow has right value for 'Created by'");
-            Assert.assertEquals(displayedWorkflows.getType(),workflowType, "The value 'Type' for workflow " + workflowName + " is not like expected");
+            Assert.assertEquals(displayedWorkflows.getType(),workflowType.replaceAll("^\\d+",""), "The value 'Type' for workflow " + workflowType.replaceAll("\\d+","") + " is not like expected.");
             Main.report.logPass("Worklfow has right value for 'Type'");
 
             workflowDetailsPage = workflowsPage.clickWorkflowNameLink(displayedWorkflows.getLnkName(), workflowName, pfGlossary);
@@ -138,7 +138,7 @@ public class CheckDetailsOfWorkflow76Test extends DriverConfig {
             Main.report.logPass("Button 'Create Job' is visible and disabled");
             Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
             Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
-            Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be '" + workflowType + "'");
+            Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType.replaceAll("^\\d+","")), "Value for 'TYPE' is section 'Information' should be '" + workflowType.replaceAll("^\\d+","") + "'");
             Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType + "'");
             Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
             Main.report.logPass("Button 'Add tasks to the workflow' is displaying");

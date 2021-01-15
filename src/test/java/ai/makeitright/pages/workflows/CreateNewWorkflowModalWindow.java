@@ -56,7 +56,7 @@ public class CreateNewWorkflowModalWindow extends BasePage {
             case "77Parallel": case "Parallel":
                 click(chboxParallel, "checkbox 'Parallel'");
                 break;
-            case "78Sequential": case "Sequential":
+            case "78Sequential": case "Sequential": case "76Sequential":
                 click(chboxSequential, "checkbox 'Sequential'");
                 break;
             default:

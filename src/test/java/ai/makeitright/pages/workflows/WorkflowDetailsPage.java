@@ -70,15 +70,7 @@ public class WorkflowDetailsPage extends BasePage {
     }
 
     public boolean checkWorkflowType(String workflowType) {
-        switch(workflowType) {
-            case "78Sequential": case "Sequential":
-                return "Sequential".equals(txtType.getText());
-            case "77Parallel": case "Parallel":
-                return "Parallel".equals(txtType.getText());
-            default:
-                return workflowType.equals(txtType.getText());
-        }
-
+        return workflowType.equals(txtType.getText());
     }
 
 }

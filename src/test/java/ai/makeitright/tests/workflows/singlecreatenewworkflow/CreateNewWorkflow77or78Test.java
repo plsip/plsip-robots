@@ -94,8 +94,8 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
         Main.report.logPass("Button 'Create Job' is visible and disabled");
         Assert.assertTrue(workflowDetailsPage.checkCreatedBy(), "Value for 'CREATED BY' in section 'Information' should be the same as on the top of page");
         Main.report.logPass("Value for 'CREATED BY' in section 'Information' is the same as in top panel");
-        Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType), "Value for 'TYPE' is section 'Information' should be as in word without number: '" + workflowType + "'");
-        Main.report.logPass("Value for 'TYPE' is section 'Information' is right: word from '" + workflowType+ "' but without number");
+        Assert.assertTrue(workflowDetailsPage.checkWorkflowType(workflowType.replaceAll("^\\d+","")), "Value for 'TYPE' is section 'Information' should be as in word without number: '" + workflowType + "'");
+        Main.report.logPass("Value for 'TYPE' is section 'Information' is right: '" + workflowType.replaceAll("^\\d+","")+ "'");
         if(pfGlossary.equals("TA")) {
             Assert.assertTrue(workflowDetailsPage.checkButtonAddTestsToTheTestPlanIsDisplayed(), "Button 'Add tests to the test plan' is not displaying");
             Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
