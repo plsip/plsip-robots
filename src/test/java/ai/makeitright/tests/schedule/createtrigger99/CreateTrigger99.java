@@ -10,6 +10,7 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import ai.makeitright.utilities.Methods;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -133,7 +134,7 @@ public class CreateTrigger99 extends DriverConfig {
         Assert.assertEquals(displayedTriggers.getScheduleTriggerName(),allScheduleName,"'Schedule Trigger Name' has not right value");
         Main.report.logPass("Trigger's name has right value: " + allScheduleName);
         Assert.assertEquals(displayedTriggers.getTriggerDetails(),triggerDetails,"Value for 'Trigger details' columns is not right");
-        Assert.assertEquals(displayedTriggers.getNextRun(),nextRun,"Value for 'Next run' column is not right: ");
+        Assert.assertEquals(displayedTriggers.getRow().findElement(By.xpath(".//td[3]")).getText(),nextRun,"Value for 'Next run' column is not right: ");
         Assert.assertEquals(displayedTriggers.getFinishDate(),finishDate,"Value for 'Finish date' column is not right");
 
         Main.report.logPass("**********Test has been completed successfully!");
