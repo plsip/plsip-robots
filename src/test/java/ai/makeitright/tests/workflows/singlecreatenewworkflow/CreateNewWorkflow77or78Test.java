@@ -100,7 +100,7 @@ public class CreateNewWorkflow77or78Test extends DriverConfig {
             Assert.assertTrue(workflowDetailsPage.checkButtonAddTestsToTheTestPlanIsDisplayed(), "Button 'Add tests to the test plan' is not displaying");
             Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
         } else {
-            Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks/tests to the workflow' is not displaying");
+            Assert.assertTrue(workflowDetailsPage.checkButtonAddTasksToTheWorkflowIsDisplayed(), "Button 'Add tasks to the workflow' is not displaying");
             Main.report.logPass("Button 'Add tasks to the workflow' is displaying");
         }
 
