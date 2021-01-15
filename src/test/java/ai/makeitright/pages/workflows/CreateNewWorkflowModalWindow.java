@@ -97,8 +97,9 @@ public class CreateNewWorkflowModalWindow extends BasePage {
             Main.report.logInfo("Entered: " + inpWorkflowName.getAttribute("value"));
             click(inpWorkflowName, "input element 'Workflow name'");
             clearAndSendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
+            Main.report.logInfo("Entered: " + inpWorkflowName.getAttribute("value"));
+            Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         }
-        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return this;
     }
 }
