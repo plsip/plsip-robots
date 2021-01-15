@@ -63,7 +63,7 @@ public class CheckDetailsOfTrigger106Test extends DriverConfig {
 
         String allScheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
         createNewScheduleTriggerModalWindow = createNewScheduleTriggerModalWindow
-                .setScheduleTriggerName(scheduleName)
+                .setScheduleTriggerName(allScheduleName)
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTime(LocalTime.NOON.toString());

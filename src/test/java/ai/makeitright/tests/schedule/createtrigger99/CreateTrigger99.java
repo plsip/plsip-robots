@@ -67,7 +67,7 @@ public class CreateTrigger99 extends DriverConfig {
 
         String allScheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
         createNewScheduleTriggerModalWindow = createNewScheduleTriggerModalWindow
-                .setScheduleTriggerName(scheduleName)
+                .setScheduleTriggerName(allScheduleName)
                 .clickExecutionDateInput()
                 .chooseTheNextDay(Methods.getNextDayOfMonth())
                 .setExecutionTime(LocalTime.NOON.toString());
