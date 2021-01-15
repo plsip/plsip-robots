@@ -53,10 +53,10 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     public CreateNewWorkflowModalWindow clickWorkflowTypeCheckbox(String workflowType) {
         this.workflowType = workflowType;
         switch(workflowType) {
-            case "Parallel":
+            case "77Parallel": case "Parallel":
                 click(chboxParallel, "checkbox 'Parallel'");
                 break;
-            case "Sequential":
+            case "78Sequential": case "Sequential":
                 click(chboxSequential, "checkbox 'Sequential'");
                 break;
             default:
