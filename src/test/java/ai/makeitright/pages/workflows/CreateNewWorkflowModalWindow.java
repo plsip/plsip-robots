@@ -84,18 +84,20 @@ public class CreateNewWorkflowModalWindow extends BasePage {
     }
 
     public CreateNewWorkflowModalWindow setWorkflowName(String workflowName, String workflowType) {
-        Assert.assertTrue(waitForVisibilityOf(inpWorkflowName),"There was no visible input element 'Workflow name'");
+//        Assert.assertTrue(waitForVisibilityOf(inpWorkflowName),"There was no visible input element 'Workflow name'");
         Assert.assertTrue(waitForClickable(inpWorkflowName),"There was no clickable input element 'Workflow name'");
         this.workflowName = Methods.getDateTime("yyyyMMddHHmmss") + workflowType + workflowName;
-        click(inpWorkflowName, "input element 'Workflow name'");
+//        click(inpWorkflowName, "input element 'Workflow name'");
         new Action(driver).sendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         Main.report.logInfo("Entered: " + inpWorkflowName.getAttribute("value"));
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         if(inpWorkflowName.getAttribute("value").equals("")) {
+            Main.report.logFail("Value was empty. Enter again.");
+            Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
             Main.report.logInfo("Entered: " + inpWorkflowName.getAttribute("value"));
             click(inpWorkflowName, "input element 'Workflow name'");
             clearAndSendText(inpWorkflowName, this.workflowName, "input element 'Workflow name'");
         }
-        Main.report.logInfo("Entered: " + inpWorkflowName.getAttribute("value"));
         Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return this;
     }
