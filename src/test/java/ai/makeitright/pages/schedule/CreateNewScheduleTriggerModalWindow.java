@@ -145,11 +145,6 @@ public class CreateNewScheduleTriggerModalWindow extends BasePage {
     }
 
     public CreateNewScheduleTriggerModalWindow setScheduleTriggerName(String scheduleName) {
-//        this.scheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
-//        sendText(inpScheduleTriggerName,this.scheduleName, "input element 'Schedule Trigger Name'");
-//        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
-//        return this.scheduleName;
-//        this.scheduleName = Methods.getDateTime("yyyyMMddHHmmss") + scheduleName;
         sendText(inpScheduleTriggerName,scheduleName, "input element 'Schedule Trigger Name'");
         Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return this;

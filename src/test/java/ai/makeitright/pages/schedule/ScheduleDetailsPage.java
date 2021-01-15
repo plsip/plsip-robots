@@ -1,6 +1,8 @@
 package ai.makeitright.pages.schedule;
 
 import ai.makeitright.pages.BasePage;
+import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +30,7 @@ public class ScheduleDetailsPage extends BasePage {
     }
 
     public String getCreatedScheduleID() {
+        Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
         return txtTriggerID.getText();
     }
 }
