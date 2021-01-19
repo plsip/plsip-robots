@@ -67,7 +67,7 @@ public class EditToken36Test extends DriverConfig {
             Assert.assertFalse(repositoryPage.checkIfRepositoryAddressIsDisplayed(repositoryAddress),"Repository "+repositoryAddress+" is still visible after detach");
         }
 
-        Main.report.logPass("******************************\nRepository "+repositoryAddress+" is not attach now\nAttach repository");
+        Main.report.logPass("******************************\nRepository "+repositoryAddress+" is not attach now\n - Attach repository");
         driver.get(pfSignInUrl);
         leftMenu.openPageBy("Repositories");
 

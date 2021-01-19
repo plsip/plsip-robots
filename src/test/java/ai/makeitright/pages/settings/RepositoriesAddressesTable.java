@@ -55,12 +55,12 @@ public class RepositoriesAddressesTable extends BasePage {
                     btnRightArrowPagination.isDisplayed();
                     click(btnRightArrowPagination, "button with right arrow to go to the next page");
                 } catch (Exception e) {
-                    Main.report.logFail("There was no repository address '" + repositoryAddress + "'");
+                    Main.report.logInfoWithScreenCapture("There was no repository address '" + repositoryAddress + "'");
                     return null;
                 }
             }
             else {
-                Main.report.logInfo("There was no repository address '" + repositoryAddress + "'");
+                Main.report.logInfoWithScreenCapture("There was no repository address '" + repositoryAddress + "'");
                 return null;
             }
         } while(true);
@@ -81,7 +81,7 @@ public class RepositoriesAddressesTable extends BasePage {
                     btnRightArrowPagination.isDisplayed();
                     click(btnRightArrowPagination, "button with right arrow to go to the next page");
                 } catch (Exception e) {
-                    Main.report.logFail("There was no repository address '" + repositoryAddress + "'");
+                    Main.report.logInfoWithScreenCapture("There was no repository address '" + repositoryAddress + "'");
                     return null;
                 }
             }

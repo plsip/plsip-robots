@@ -84,8 +84,8 @@ public class LandingPage19Test extends DriverConfig {
         Assert.assertTrue(tasksPage.checkForColumnNumberHeaderHasValue(5,"Last commit"),"5th column header should be 'Last commit'");
         Main.report.logPass("5th column header is right 'Last commit'");
 
-        Main.report.logInfo("Check if jobs from first pagination page contain values in first four columns");
-        Assert.assertTrue(tasksPage.checkTasksFromFirstPaginationPageContainValuesInFirstFourColumns(),"First row job contains value in column 1");
+        Main.report.logInfo("Check if tasks from first pagination page contain values in first four columns");
+        Assert.assertTrue(tasksPage.checkTasksFromFirstPaginationPageContainValuesInFirstFourColumns(),"First four columns on first page pagination task don't contain values");
         Main.report.logPass("All rows on the page contain values in first four columns");
 
         Main.report.logInfo("Check left menu content");
