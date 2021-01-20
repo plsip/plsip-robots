@@ -78,17 +78,17 @@ public class LandingPage60Test extends DriverConfig {
         Main.report.logPass("3rd column header is right 'Date created'");
 
         Assert.assertTrue(workflowsPage.checkForColumnNumberHeaderHasValue(4, "Type"), "4th column header should be 'Type'");
-        Main.report.logPass("4th column header is right 'Technology'");
+        Main.report.logPass("4th column header is right 'Type'");
 
         Main.report.logInfo("Check if workflows from first pagination page contain values in first four columns");
         Assert.assertTrue(workflowsPage.checkWorkflowsFromFirstPaginationPageContainValuesInFirstFourColumns(), "First row job contains value in column 1");
         Main.report.logPass("All rows on the page contain values in first four columns");
 
-        Main.report.logInfo("Check if on first pagination page every workflow row contains 'Create job' button");
+        Main.report.logInfo("Check if on first pagination page every workflow row contain 'Create job' button");
         Assert.assertTrue(workflowsPage.checkWorkflowsFromFirstPaginationPageContainCreateJobButton(), "First row job contains value in column 1");
         Main.report.logPass("All rows on the page contain values in first four columns");
 
-        Main.report.logInfo("Check left menu content");
+        Main.report.logInfo("Check left menu contents");
         leftMenu = new LeftMenu(driver);
         String[] leftMenuOptionsArray = {"Dashboard", "Jobs", "Schedule", "Tests", "Test Plans", "Global arguments", "Files", "Repositories", "Users", "Access Token", "Application Settings", "Personal Settings"};
         if (pfGlossary.equals("RPA")) {
