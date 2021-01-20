@@ -32,7 +32,7 @@ public abstract class Main {
     @BeforeSuite
     public void tearUp() throws JSONException {
         report = new Reporter(artifactsPath + System.getProperty("file.separator") + reportName);
-        report.startTest("PF Cloud test");
+        report.startTest(taskname);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -53,23 +53,24 @@ public abstract class Main {
 
     @AfterSuite
     public void tearDown(ITestContext context) {
+        System.out.println("Tear down");
         if (driver != null)
             driver.quit();
         report.closeRaport();
-        System.out.println("&&&&&& START checking artifacts path &&&&&&&&");
-        try {
-            File folder = new File(System.getProperty("ARTIFACTS_PATH"));
-            File[] listOfFiles = folder.listFiles();
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].isFile()) {
-                    System.out.println("&&& File " + listOfFiles[i].getName());
-                } else if (listOfFiles[i].isDirectory()) {
-                    System.out.println("Directory " + listOfFiles[i].getName());
-                }
-            }
-            System.out.println("&&&&&& END checking artifacts path &&&&&&&&");
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
+//        System.out.println("&&&&&& START checking artifacts path &&&&&&&&");
+//        try {
+//            File folder = new File(System.getProperty("ARTIFACTS_PATH"));
+//            File[] listOfFiles = folder.listFiles();
+//            for (int i = 0; i < listOfFiles.length; i++) {
+//                if (listOfFiles[i].isFile()) {
+//                    System.out.println("&&& File " + listOfFiles[i].getName());
+//                } else if (listOfFiles[i].isDirectory()) {
+//                    System.out.println("Directory " + listOfFiles[i].getName());
+//                }
+//            }
+//            System.out.println("&&&&&& END checking artifacts path &&&&&&&&");
+//        } catch (NullPointerException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 }

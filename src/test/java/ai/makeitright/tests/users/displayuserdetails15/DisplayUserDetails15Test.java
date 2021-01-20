@@ -108,11 +108,11 @@ public class DisplayUserDetails15Test extends DriverConfig {
         Main.report.logPass("Created date: '" + userDetailsPage.getCreatedDate() + "'");
     }
 
-    @AfterTest
-    public void after() {
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
-    }
+//    @AfterTest
+//    public void after() {
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
+//    }
 
 }

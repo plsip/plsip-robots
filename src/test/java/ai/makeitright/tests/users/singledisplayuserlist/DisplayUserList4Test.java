@@ -55,11 +55,11 @@ public class DisplayUserList4Test extends DriverConfig {
 
     }
 
-    @AfterTest
-    public void after() {
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
-    }
+//    @AfterTest
+//    public void after() {
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
+//    }
 
 }

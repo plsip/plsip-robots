@@ -136,8 +136,8 @@ public class CreateNewTask31Test extends DriverConfig {
         obj.put("technology",technology);
         obj.put("scriptDirectory",repository + "tree/master/" + scriptDirectory);
         System.setProperty("output", obj.toString());
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
     }
 }

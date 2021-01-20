@@ -14,9 +14,7 @@ import ai.makeitright.utilities.DriverConfig;
 import ai.makeitright.utilities.Main;
 import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class CheckDetailsOfJob5Test extends DriverConfig {
 
@@ -80,8 +78,8 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
         }
         Assert.assertNotNull(createJobModalWindow,"Modal window for creating job was not open");
         createJobModalWindow
-                .clickSaveAndGoToArgumentsCollectionsAndTagsButton()
-                .chooseGlobalArgumentsCollection(argumentsCollection)
+                .clickSaveAndGoToArgumentsCollectionsAndTagsButton();
+        createJobModalWindow.chooseGlobalArgumentsCollection(argumentsCollection)
                 .clickSaveAndGoToArgumentsValuesButton();
         Assert.assertTrue(createJobModalWindow.checkIfCorrectCollectionIsDisplayed(argumentsCollection),
                 "An incorrect collection was selected.");
@@ -191,8 +189,5 @@ public class CheckDetailsOfJob5Test extends DriverConfig {
         JSONObject obj = new JSONObject();
         obj.put("jobID", jobID);
         System.setProperty("output", obj.toString());
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
     }
 }

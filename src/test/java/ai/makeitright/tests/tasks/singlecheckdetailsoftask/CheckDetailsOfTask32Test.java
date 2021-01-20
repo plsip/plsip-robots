@@ -161,9 +161,9 @@ public class CheckDetailsOfTask32Test extends DriverConfig {
         JSONObject obj = new JSONObject();
         obj.put("taskTestName", taskName);
         System.setProperty("output", obj.toString());
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
     }
 
 }

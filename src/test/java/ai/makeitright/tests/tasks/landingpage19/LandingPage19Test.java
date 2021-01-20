@@ -99,10 +99,10 @@ public class LandingPage19Test extends DriverConfig {
         Main.report.logPass("Left menu options are right");
     }
 
-    @AfterTest
-    public void after() {
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
-    }
+//    @AfterTest
+//    public void after() {
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
+//    }
 }

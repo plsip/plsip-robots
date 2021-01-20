@@ -73,10 +73,10 @@ public class DisplayDetailsOfTaskIncludedInJob6 extends DriverConfig {
 
     }
 
-    @AfterTest
-    public void after() {
-        TopPanel topPanel = new TopPanel(driver);
-        topPanel.clickTopPanelButton()
-                .clickLogOutLink();
-    }
+//    @AfterTest
+//    public void after() {
+//        TopPanel topPanel = new TopPanel(driver);
+//        topPanel.clickTopPanelButton()
+//                .clickLogOutLink();
+//    }
 }

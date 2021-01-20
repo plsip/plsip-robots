@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="MyTestSuite" preserve-order="true">
-<!--    <test name="1">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.jobs.landingpage1.LandingPage1Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="4">-->
-<!--    <classes>-->
-<!--        <class name="ai.makeitright.tests.users.singledisplayuserlist.DisplayUserList4Test"> </class>-->
-<!--    </classes>-->
-<!--    </test>-->
-<!--    <test name="5">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.jobs.singlecheckdetailsofjob.CheckDetailsOfJob5Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="6">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.jobs.displaydetailsofprocess6.DisplayDetailsOfTaskIncludedInJob6"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="15">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.users.displayuserdetails15.DisplayUserDetails15Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="19">-->
-<!--    <classes>-->
-<!--        <class name="ai.makeitright.tests.tasks.landingpage19.LandingPage19Test"> </class>-->
-<!--    </classes>-->
-<!--    </test>-->
+    <test name="1">
+        <classes>
+            <class name="ai.makeitright.tests.jobs.landingpage1.LandingPage1Test"> </class>
+        </classes>
+    </test>
+    <test name="4">
+    <classes>
+        <class name="ai.makeitright.tests.users.singledisplayuserlist.DisplayUserList4Test"> </class>
+    </classes>
+    </test>
+    <test name="5">
+        <classes>
+            <class name="ai.makeitright.tests.jobs.singlecheckdetailsofjob.CheckDetailsOfJob5Test"> </class>
+        </classes>
+    </test>
+    <test name="6">
+        <classes>
+            <class name="ai.makeitright.tests.jobs.displaydetailsofprocess6.DisplayDetailsOfTaskIncludedInJob6"> </class>
+        </classes>
+    </test>
+    <test name="15">
+        <classes>
+            <class name="ai.makeitright.tests.users.displayuserdetails15.DisplayUserDetails15Test"> </class>
+        </classes>
+    </test>
+    <test name="19">
+    <classes>
+        <class name="ai.makeitright.tests.tasks.landingpage19.LandingPage19Test"> </class>
+    </classes>
+    </test>
     <test name="31">
         <classes>
             <class name="ai.makeitright.tests.tasks.singlecreatenewtask.CreateNewTask31Test"> </class>
         </classes>
     </test>
-<!--    <test name="32">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.tasks.singlecheckdetailsoftask.CheckDetailsOfTask32Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="36">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.settings.singleedittoken.EditToken36Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="37">-->
-<!--        <classes>-->
-<!--            <class name="ai.makeitright.tests.settings.singledetachgitlabrepository.DetachGitLabRepository37Test"> </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="32">
+        <classes>
+            <class name="ai.makeitright.tests.tasks.singlecheckdetailsoftask.CheckDetailsOfTask32Test"> </class>
+        </classes>
+    </test>
+    <test name="36">
+        <classes>
+            <class name="ai.makeitright.tests.settings.singleedittoken.EditToken36Test"> </class>
+        </classes>
+    </test>
+    <test name="37">
+        <classes>
+            <class name="ai.makeitright.tests.settings.singledetachgitlabrepository.DetachGitLabRepository37Test"> </class>
+        </classes>
+    </test>
+    <test name="60">
+        <classes>
+            <class name="ai.makeitright.tests.workflows.landingpage60.LandingPage60Test"> </class>
+        </classes>
+    </test>
 </suite>
