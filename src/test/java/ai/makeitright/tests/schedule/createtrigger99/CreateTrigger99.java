@@ -51,6 +51,7 @@ public class CreateTrigger99 extends DriverConfig {
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
     }
 
+
     @Test
     public void createNewJobWithTrigger() {
         driver.get(pfSignInUrl);
