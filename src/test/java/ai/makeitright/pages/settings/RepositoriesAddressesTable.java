@@ -2,6 +2,7 @@ package ai.makeitright.pages.settings;
 
 import ai.makeitright.pages.BasePage;
 import ai.makeitright.utilities.Main;
+import ai.makeitright.utilities.Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -53,14 +55,17 @@ public class RepositoriesAddressesTable extends BasePage {
                 }
                 try {
                     btnRightArrowPagination.isDisplayed();
+                    Assert.assertTrue(waitForClickable(btnRightArrowPagination));
                     click(btnRightArrowPagination, "button with right arrow to go to the next page");
                 } catch (Exception e) {
-                    Main.report.logInfoWithScreenCapture("There was no repository address '" + repositoryAddress + "'");
+                    Main.report.logInfo("There was no repository address '" + repositoryAddress + "'");
+                    Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
                     return null;
                 }
             }
             else {
-                Main.report.logInfoWithScreenCapture("There was no repository address '" + repositoryAddress + "'");
+                Main.report.logInfo("There was no repository address '" + repositoryAddress + "'");
+                Main.report.logInfoWithScreenCapture(Methods.getScreenShotAsBase64(driver));
                 return null;
             }
         } while(true);
