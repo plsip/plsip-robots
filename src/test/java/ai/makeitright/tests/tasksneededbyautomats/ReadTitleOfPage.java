@@ -34,10 +34,12 @@ public class ReadTitleOfPage extends DriverConfig {
 
     }
 
+
     @AfterTest
     public void prepareJson() {
         JSONObject obj = new JSONObject();
         obj.put("title", title);
         System.setProperty("output", obj.toString());
     }
+
 }
