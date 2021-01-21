@@ -41,7 +41,7 @@ public class CheckDetailsOfTrigger106Test extends DriverConfig {
         pfUserEmail = System.getProperty("inputParameters.pfUserEmail");
         pfUserPassword = System.getProperty("secretParameters.pfUserPassword");
         scheduleName = System.getProperty("inputParameters.scheduleName");
-        Main.taskname = pfGlossary + ": TC - Schedule - Create new Schedule Trigger [P20Ct-xxx]";
+        Main.taskname = pfGlossary + ": TC - Schedule - Create new Schedule Trigger [P20Ct-106]";
         Main.slackFlag = System.getProperty("inputParameters.slackFlag");
     }
 
