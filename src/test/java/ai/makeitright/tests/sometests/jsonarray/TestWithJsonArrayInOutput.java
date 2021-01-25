@@ -29,7 +29,7 @@ public class TestWithJsonArrayInOutput extends DriverConfig {
     public void readTitleOfPage() {
         driver.get(url);
         title = driver.getTitle();
-        Assert.assertEquals(title, expectedTitle, "The title of page is not like expected");
+        Assert.assertEquals(title, expectedTitle, "The title of page is not like expected!");
 
     }
 
