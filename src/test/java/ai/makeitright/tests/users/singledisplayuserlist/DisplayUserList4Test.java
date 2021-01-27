@@ -45,7 +45,7 @@ public class DisplayUserList4Test extends DriverConfig {
 
         UsersPage usersPage = new UsersPage(driver);
         Assert.assertTrue(usersPage.checkButtonInviteNewUserIsEnabled(), "Button 'Invite new user' should be visible and enable!");
-        Main.report.logPass("Button 'Invite new user' is visible and enabled");
+        Main.report.logPass("Button 'Invite new user' is visible and enabled!");
 
         Assert.assertTrue(usersPage.isUsersTextDisplayed(), "There is not header text 'Users' on the page");
         Main.report.logPass("On the page is header text 'Users'");
